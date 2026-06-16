@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COPLITELE-IA - Codiseño, Personalización y Tecnología</title>
+  <meta name="description" content="Prototipo web de COPLITELE-IA: Proyecto de investigación sobre codiseño, personalización y tecnología educativa con Inteligencia Artificial.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%231D5BFE'/></svg>" />
+</head>
+<body>
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Header / Nav Bar -->
+  <header>
+    <a href="#/inicio" class="imagotype-container" aria-label="COPLITELE-IA Inicio">
+      <div class="logo-wrapper" id="header-logo-container">
+        <!-- Logo SVG rendered by JS -->
+      </div>
+    </a>
+    <!-- Desktop Navigation Links -->
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#/inicio" class="nav-link active" data-i18n="menu_inicio">Inicio</a></li>
+        <li><a href="#/proyecto" class="nav-link" data-i18n="menu_proyecto">Proyecto</a></li>
+        <li><a href="#/transferencia" class="nav-link" data-i18n="menu_transferencia">Transferencia</a></li>
+        <li><a href="#/publicaciones" class="nav-link" data-i18n="menu_publicaciones">Producción Científica</a></li>
+        <li><a href="#/recursos" class="nav-link" data-i18n="menu_recursos">Recursos</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Controls (Lang, Theme, Socials) -->
+    <div class="header-controls">
+      <!-- Custom Language Dropdown with Flags -->
+      <div class="custom-lang-dropdown" id="lang-dropdown-container">
+        <button class="lang-dropdown-btn" id="lang-dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span class="flag-icon" id="current-lang-flag">🇪🇸</span>
+          <span class="lang-text" id="current-lang-text">ES</span>
+        </button>
+        <ul class="lang-dropdown-list" id="lang-dropdown-list" role="listbox">
+          <li class="lang-option" data-value="es" role="option" aria-selected="true">
+            <span class="flag-icon">🇪🇸</span>
+            <span class="lang-name">ES</span>
+          </li>
+          <li class="lang-option" data-value="ca" role="option" aria-selected="false">
+            <span class="flag-icon ca-flag-icon">
+              <svg viewBox="0 0 9 6" width="16" height="11">
+                <rect width="9" height="6" fill="#f1d413"/>
+                <rect width="9" height="0.67" y="0.67" fill="#d31a1a"/>
+                <rect width="9" height="0.67" y="2" fill="#d31a1a"/>
+                <rect width="9" height="0.67" y="3.33" fill="#d31a1a"/>
+                <rect width="9" height="0.67" y="4.67" fill="#d31a1a"/>
+              </svg>
+            </span>
+            <span class="lang-name">CA</span>
+          </li>
+          <li class="lang-option" data-value="en" role="option" aria-selected="false">
+            <span class="flag-icon">🇬🇧</span>
+            <span class="lang-name">EN</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Networks -->
+      <div class="header-socials">
+        <a href="https://facebook.com" target="_blank" class="header-social-link" title="Facebook" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+        </a>
+        <a href="https://bsky.app" target="_blank" class="header-social-link" title="Bluesky" aria-label="Bluesky">
+          <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.2-1.8-2.6-3.8-4-5.3-2.1-2.2-4.5-3.5-6.5-1.5S1.2 8.5 3.4 10.6c1.5 1.4 3.5 2.8 5.3 4 1.2.8 2.3 1.5 3.3 2.2-1 .7-2.1 1.4-3.3 2.2-1.8 1.2-3.8 2.6-5.3 4-2.2 2.1-3.5 4.5-1.5 6.5s4.5.6 6.5-1.5c1.4-1.5 2.8-3.5 4-5.3.8-1.2 1.5-2.3 2.2-3.3.7 1 1.4 2.1 2.2 3.3 1.2 1.8 2.6 3.8 4 5.3 2.1 2.2 4.5 3.5 6.5 1.5s.6-4.5-1.5-6.5c-1.5-1.4-3.5-2.8-5.3-4-1.2-.8-2.3-1.5-3.3-2.2 1-.7 2.1-1.4 3.3-2.2 1.8-1.2 3.8-2.6 5.3-4 2.2-2.1 3.5-4.5 1.5-6.5s-4.5-.6-6.5 1.5c-1.4 1.5-2.8 3.5-4 5.3-.8 1.2-1.5 2.3-2.2 3.3z"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="header-social-link" title="Instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0 3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Mobile toggler -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <ul class="mobile-menu">
+      <li><a href="#/inicio" class="mobile-menu-link">Inicio</a></li>
+      <li><a href="#/proyecto" class="mobile-menu-link">Proyecto</a></li>
+      <li><a href="#/transferencia" class="mobile-menu-link">Transferencia</a></li>
+      <li><a href="#/publicaciones" class="mobile-menu-link">Publicación Científica</a></li>
+      <li><a href="#/recursos" class="mobile-menu-link">Recursos</a></li>
+    </ul>
+  </div>
+
+  <!-- SPA View: Inicio -->
+  <div id="view-inicio" class="spa-view active">
+    <!-- Hero Intro (Sección A - Pantalla completa) -->
+    <section class="hero-intro">
+      <div class="hero-intro-container">
+        <!-- Big Logo Showcase -->
+        <div class="logo-large-wrapper">
+          <div class="logo-radial-glow"></div>
+          <div class="logo-big-container" id="hero-logo-container">
+            <!-- Dynamic Infographic Logo rendered by JS -->
+          </div>
+        </div>
+        <div class="hero-intro-brand-wrapper">
+          <div class="brand-title-group">
+            <h2 class="hero-intro-brand-title">
+              <span class="copli">COPLI</span><span class="tele">TELE</span><span class="dash">-</span><span class="ia">IA</span>
+            </h2>
+            <div class="brand-divider-line"></div>
+          </div>
+          <p class="hero-intro-tagline"><span class="word-highlight blue">Codiseño</span>, <span class="word-highlight teal">Personalización</span> y <span class="word-highlight green">Tecnología</span></p>
+        </div>
+        <a href="#hero-details-anchor" class="scroll-down-arrow" id="scroll-down-arrow" aria-label="Desplazarse hacia abajo">
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Anchor for scroll -->
+    <div id="hero-details-anchor"></div>
+
+    <!-- Hero Body (Sección B) -->
+    <section class="hero-body page-section">
+      <div class="hero-body-container">
+        <div class="hero-content">
+          <span class="hero-pill-tag" data-i18n="hero_tag">Proyecto de Investigación Activo</span>
+          <h1 id="hero-main-title">
+            <span class="h1-row-black">Copresencia y Aprendizaje</span>
+            <span class="h1-row-colored"><span class="blue-highlight">Lingüístico</span> con <span class="green-highlight">Inteligencia Artificial</span></span>
+          </h1>
+          
+          <p class="hero-desc" data-i18n="hero_desc">
+            El proyecto <strong>COPLITELE-IA</strong> investiga el codiseño, la personalización y la integración de tecnologías de inteligencia artificial en contextos de telecolaboración para el aprendizaje de lenguas. Un enfoque innovador que une tecnología, lingüística y pedagogía.
+          </p>
+          
+          <div class="btn-group">
+            <a href="#/proyecto" class="btn-primary" data-i18n="btn_conocer">Conocer el Proyecto</a>
+            <a href="#/publicaciones" class="btn-secondary" data-i18n="btn_publicaciones">Publicaciones</a>
+          </div>
+        </div>
+        
+        <!-- Stat Counters Row (Clickable links to sections) -->
+        <div class="hero-stats-row">
+          <a href="#/proyecto" class="stat-item">
+            <div class="stat-icon-circle">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.5L12 15.82l6.11-3.32v2.32L12 18.16l-6.11-3.32v-2.32z"/></svg>
+            </div>
+            <span class="stat-number">3+</span>
+            <span class="stat-label" data-i18n="stats_years">Años de investigación</span>
+          </a>
+          
+          <a href="#/proyecto" class="stat-item">
+            <div class="stat-icon-circle">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            </div>
+            <span class="stat-number">12</span>
+            <span class="stat-label" data-i18n="stats_investigadores">Investigadores</span>
+          </a>
+          
+          <a href="#/publicaciones" class="stat-item">
+            <div class="stat-icon-circle">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+            </div>
+            <span class="stat-number">25+</span>
+            <span class="stat-label" data-i18n="stats_publicaciones">Publicaciones</span>
+          </a>
+          
+          <a href="#/proyecto" class="stat-item">
+            <div class="stat-icon-circle">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <span class="stat-number">4</span>
+            <span class="stat-label" data-i18n="stats_instituciones">Instituciones</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest News Feed Widget (image card grid) -->
+    <section class="page-section news-section" style="padding-top: 20px; padding-bottom: 40px;">
+      <div class="section-container">
+        <div class="news-section-header">
+          <h2 class="news-section-title" data-i18n="news_title">Últimas Noticias & Actividades</h2>
+          <a href="#/transferencia" class="btn-outline-blue" style="font-size:13px;">Ver todas &rarr;</a>
+        </div>
+        <div class="news-cards-grid" id="latest-news-list">
+          <!-- Injected by JS -->
+        </div>
+        
+        <!-- Row 2: Direct access cards to sections -->
+        <div class="section-nav-grid">
+          <a href="#/transferencia" class="section-nav-card card-transferencia">
+            <div class="nav-card-icon">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H4.99c-1.11 0-1.98.89-1.98 2L3 19c0 1.1.88 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10z"/></svg>
+            </div>
+            <div class="nav-card-content">
+              <h3>Actividades de Transferencia</h3>
+              <p>Demos, talleres, seminarios y programas de formación.</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+          
+          <a href="#/publicaciones" class="section-nav-card card-publicaciones">
+            <div class="nav-card-icon">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.2 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/></svg>
+            </div>
+            <div class="nav-card-content">
+              <h3>Producción Científica</h3>
+              <p>Artículos en revistas, libros, ponencias y actas de congreso.</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+          
+          <a href="#/recursos" class="section-nav-card card-recursos">
+            <div class="nav-card-icon">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-1 11H5V8h14v9z"/></svg>
+            </div>
+            <div class="nav-card-content">
+              <h3>Recursos y Materiales</h3>
+              <p>Acceso a software, corpus, guías didácticas y herramientas.</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Home Previews Section: Transferencia -->
+    <section class="page-section scientific-section" style="padding-top: 40px; padding-bottom: 40px;">
+      <div class="section-container">
+        <div class="news-section-header" style="margin-bottom:28px;">
+          <h2 style="font-size: 24px; font-family: var(--font-primary); font-weight: 800;" data-i18n="menu_transferencia">Transferencia</h2>
+          <a href="#/transferencia" class="btn-outline-blue" style="font-size:13px;" data-i18n="trans_btn_more">Ver todas &rarr;</a>
+        </div>
+        <div class="activities-grid" id="home-activities-grid">
+          <!-- First 3 activities dynamically injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" style="padding-top: 40px; padding-bottom: 60px;">
+      <div class="section-container">
+        <div class="news-section-header" style="margin-bottom:28px;">
+          <h2 style="font-size: 24px; font-family: var(--font-primary); font-weight: 800;" data-i18n="menu_publicaciones">Producción Científica</h2>
+          <a href="#/publicaciones" class="btn-outline-blue" style="font-size:13px;">Ver todas &rarr;</a>
+        </div>
+        <div class="publications-grid" id="home-publications-grid">
+          <!-- First 2 publications dynamically injected by JS -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SPA View: Proyecto (scroll-based, no tabs) -->
+  <div id="view-proyecto" class="spa-view">
+
+    <!-- Section 1: Descripción del Proyecto -->
+    <section id="proyecto" class="page-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle" data-i18n="project_pretitle">Conoce más</span>
+          <h2 class="section-title"><span data-i18n="project_title">El Proyecto</span></h2>
+        </div>
+
+        <div class="project-desc-layout">
+          <div class="project-text-block">
+            <h3 data-i18n="project_what_is">¿Qué es COPLITELE-IA?</h3>
+            <p data-i18n="project_what_is_p1">
+              <strong>COPLITELE-IA</strong> (Codiseño, Personalización y Tecnología en la Telecolaboración para el Aprendizaje de Lenguas con IA) es un proyecto de investigación financiado por el Ministerio de Ciencia e Innovación de España (Ref. PID2021-127836NB-I00).
+            </p>
+            <p data-i18n="project_what_is_p2">
+              El proyecto examina cómo los enfoques de codiseño participativo, combinados con herramientas de inteligencia artificial, pueden transformar las experiencias de telecolaboración interlingüística, especialmente en contextos de aprendizaje de lenguas extranjeras.
+            </p>
+            <p data-i18n="project_what_is_p3">
+              Nuestro enfoque integra la comunicación mediada por ordenador (CMC), el aprendizaje de lenguas asistido por ordenador (CALL) y las tecnologías emergentes de IA, incluidos modelos de lenguaje, análisis de sentimientos y sistemas de retroalimentación automatizada.
+            </p>
+
+            <div class="project-meta-grid">
+              <div class="meta-box">
+                <span class="meta-label" data-i18n="meta_ref">Ref. Proyecto</span>
+                <span class="meta-value">PID2021-127836NB-I00</span>
+              </div>
+              <div class="meta-box">
+                <span class="meta-label" data-i18n="meta_duracion">Duración</span>
+                <span class="meta-value">2022-2025</span>
+              </div>
+              <div class="meta-box">
+                <span class="meta-label" data-i18n="meta_lider">Institución Líder</span>
+                <span class="meta-value">UIB</span>
+              </div>
+              <div class="meta-box">
+                <span class="meta-label" data-i18n="meta_financiacion">Financiación</span>
+                <span class="meta-value">MCIN / AEI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="framework-card">
+            <div class="framework-badge">
+              <h4 data-i18n="framework_header">COPLITELE-IA</h4>
+              <span data-i18n="framework_subtitle">Framework de investigación</span>
+            </div>
+            <div class="framework-tags-grid">
+              <div class="framework-tag outline-blue">Codiseño</div>
+              <div class="framework-tag outline-teal">Telecolaboración</div>
+              <div class="framework-tag outline-teal">IA & NLP</div>
+              <div class="framework-tag outline-teal">CALL</div>
+              <div class="framework-tag outline-teal">Personalización</div>
+              <div class="framework-tag outline-blue">CMC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Equipo -->
+    <section id="equipo" class="page-section scientific-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">Investigadores</span>
+          <h2 class="section-title" data-i18n="tab_equipo">Equipo</h2>
+        </div>
+        <div class="team-grid" id="team-grid">
+          <!-- Team Cards injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Objetivos -->
+    <section id="objetivos" class="page-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title" data-i18n="obj_title">Objetivos del Proyecto</h2>
+        </div>
+        <div class="objectives-grid">
+          <article class="objective-card">
+            <div class="objective-card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <h3 data-i18n="obj_1_title">Objetivo Principal</h3>
+            <p data-i18n="obj_1_desc">Investigar el impacto de la IA en la telecolaboración interlingüística, analizando cómo el codiseño mejora los procesos de aprendizaje de lenguas.</p>
+          </article>
+          <article class="objective-card">
+            <div class="objective-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 21h6v-1H9v1zm3-19C7.58 2 4 5.58 4 10c0 2.76 1.4 5.2 3.54 6.64L8 19h8l.46-2.36C18.6 15.2 20 12.76 20 10c0-4.42-3.58-8-8-8zm4.5 13.5l-.5.5-.5.5-.5.5h-4l-.5-.5-.5-.5-.5-.5C8.08 12.3 7 11.23 7 10c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.23-1.08 2.3-2.5 3.5z"/></svg>
+            </div>
+            <h3 data-i18n="obj_2_title">Innovación</h3>
+            <p data-i18n="obj_2_desc">Desarrollar herramientas de personalización adaptativa basadas en IA para entornos de aprendizaje de lenguas mediado por tecnología.</p>
+          </article>
+          <article class="objective-card">
+            <div class="objective-card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10zm-9 10h18M12 2v20"/></svg>
+            </div>
+            <h3 data-i18n="obj_3_title">Alcance Internacional</h3>
+            <p data-i18n="obj_3_desc">Colaboración con instituciones europeas y latinoamericanas para estudiar la comunicación mediada por ordenador en contextos plurilingüísticos.</p>
+          </article>
+          <article class="objective-card">
+            <div class="objective-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+            </div>
+            <h3 data-i18n="obj_4_title">Impacto Social</h3>
+            <p data-i18n="obj_4_desc">Contribuir a la inclusión digital y educativa a través de soluciones tecnológicas accesibles y personalizadas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SPA View: Transferencia -->
+  <div id="view-transferencia" class="spa-view">
+    <!-- Actividades de Transferencia -->
+    <section id="transferencia" class="page-section scientific-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle" data-i18n="trans_pretitle">Impacto y difusión</span>
+          <h2 class="section-title">Actividades de <span class="blue-highlight">Transferencia</span></h2>
+          <p class="section-subtitle" data-i18n="trans_subtitle">Actividades diseñadas para maximizar el impacto social y educativo de nuestra investigación, conectando la academia con la práctica docente y la sociedad.</p>
+        </div>
+        
+        <!-- Activities Grid (Dynamically rendered via JS) -->
+        <div class="activities-grid" id="activities-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SPA View: Producción Científica -->
+  <div id="view-publicaciones" class="spa-view">
+    <section id="publicaciones" class="page-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle" data-i18n="pub_pretitle">Biblioteca Científica</span>
+          <h2 class="section-title" data-i18n="pub_title">Producción Científica</h2>
+          <p class="section-subtitle" data-i18n="pub_subtitle">Accede a las publicaciones del proyecto sincronizadas con nuestra biblioteca de referencias de Zotero.</p>
+        </div>
+        
+        <!-- Filter and Search Bar -->
+        <div class="filter-bar">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="all" data-i18n="tab_all">Todas</button>
+            <button class="tab-btn" data-tab="revista" data-i18n="tab_revistas">Revistas (Zotero)</button>
+            <button class="tab-btn" data-tab="libro" data-i18n="tab_libros">Libros (Zotero)</button>
+            <button class="tab-btn" data-tab="ponencia" data-i18n="tab_ponencias">Ponencias y Congresos</button>
+          </div>
+          
+          <div class="search-wrapper">
+            <span class="search-icon">
+              <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </span>
+            <input type="text" id="publications-search" class="search-input" placeholder="Buscar por título, autor o tag...">
+          </div>
+        </div>
+        
+        <!-- Publications Grid -->
+        <div class="publications-grid" id="publications-grid">
+          <!-- Injected by JS -->
+        </div>
+        
+        <!-- Conferences showcase -->
+        <div class="grid-2" style="margin-top: 60px; align-items: center; background: rgba(29, 91, 254, 0.02); border-radius: 28px; padding: 40px; border: 1px dashed var(--color-border-light);">
+          <div>
+            <span class="hero-tag" style="background: rgba(29, 91, 254, 0.04); color: var(--color-blue); border-color: rgba(29, 91, 254, 0.1);">Divulgación Académica</span>
+            <h3 style="font-size: 24px; margin-bottom: 16px; font-family: var(--font-primary);">Ponencias y Seminarios</h3>
+            <p style="color: var(--color-text-muted-light); margin-bottom: 24px; font-size: 14.5px;">
+              Participamos activamente en congresos nacionales e internacionales compartiendo nuestros hallazgos sobre la parametrización ética de sistemas inteligentes con la comunidad educativa global.
+            </p>
+            <a href="#/inicio" class="btn-secondary" style="font-size: 13px; padding: 10px 20px;">Ver Calendario de Eventos</a>
+          </div>
+          <div class="image-showcase" style="aspect-ratio: 16 / 10;">
+            <img src="/src/assets/images/congresos.png" alt="Investigadora presentando en congreso internacional">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SPA View: Recursos -->
+  <div id="view-recursos" class="spa-view">
+    <section id="recursos" class="page-section scientific-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle" data-i18n="rec_pretitle">Repositorio Abierto</span>
+          <h2 class="section-title" data-i18n="rec_title">Recursos del Proyecto</h2>
+          <p class="section-subtitle" data-i18n="rec_subtitle">Descarga materiales pedagógicos y herramientas de codiseño desarrolladas durante la investigación.</p>
+        </div>
+        
+        <div class="resources-grid">
+          <!-- Resource Card 1 -->
+          <article class="resource-card">
+            <div class="resource-image">
+              <img src="/src/assets/images/recursos.png" alt="Guía metodológica para codiseño educativo">
+            </div>
+            <div class="resource-info">
+              <span class="resource-tag">Manual Metodológico</span>
+              <h3 class="resource-title">Guía de Codiseño en Tecnología Educativa</h3>
+              <p class="resource-desc">Un compendio de dinámicas, fichas imprimibles y directrices prácticas para planificar y llevar a cabo talleres de codiseño tecnológico con profesorado y estudiantes.</p>
+              <button class="btn-secondary" style="padding: 10px 20px; font-size: 13px; margin-top: auto; justify-content: center;" data-i18n="rec_btn_pdf">Descargar PDF (4.8 MB)</button>
+            </div>
+          </article>
+          
+          <!-- Resource Card 2 -->
+          <article class="resource-card">
+            <div class="resource-image">
+              <img src="/src/assets/images/recursos.png" alt="Fichas didácticas de apoyo algorítmico">
+            </div>
+            <div class="resource-info">
+              <span class="resource-tag">Plantillas Didácticas</span>
+              <h3 class="resource-title">Fichas de Explicabilidad Algorítmica</h3>
+              <p class="resource-desc">Materiales didácticos de apoyo para trabajar la soberanía y comprensión del dato escolar con alumnos de secundaria y bachillerato en sesiones presenciales.</p>
+              <button class="btn-secondary" style="padding: 10px 20px; font-size: 13px; margin-top: auto; justify-content: center;" data-i18n="rec_btn_zip">Descargar Plantillas (Zip, 12 MB)</button>
+            </div>
+          </article>
+          
+          <!-- Resource Card 3 -->
+          <article class="resource-card">
+            <div class="resource-image">
+              <img src="/src/assets/images/recursos.png" alt="Código abierto de personalización adaptativa">
+            </div>
+            <div class="resource-info">
+              <span class="resource-tag">Código Abierto</span>
+              <h3 class="resource-title">Módulo de Personalización Soberana</h3>
+              <p class="resource-desc">Accede al repositorio público del prototipo funcional que integra las librerías de personalización algorítmica parametrizable con interfaces web adaptables.</p>
+              <button class="btn-secondary" style="padding: 10px 20px; font-size: 13px; margin-top: auto; justify-content: center;" data-i18n="rec_btn_git">Ver Repositorio GitHub</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SPA View: Detalle de Actividad -->
+  <div id="view-actividad-detalle" class="spa-view page-section">
+    <!-- Contenido inyectado dinámicamente -->
+  </div>
+
+  <!-- Dark Footer with Collaborator Logos and Social Media -->
+  <footer>
+    <div class="footer-container">
+      
+      <!-- Collaborators Section with dynamic grayscale vector SVG logos -->
+      <div class="collaborators-wrapper">
+        <h4 class="collaborators-title" data-i18n="colab_title">Con la colaboración y financiación de:</h4>
+        <div class="collaborators-logos">
+          
+          <!-- Logo 1: Ministerio de Ciencia e Innovación de España -->
+          <div class="colab-logo" title="Ministerio de Ciencia e Innovación - Gobierno de España">
+            <svg viewBox="0 0 280 50" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <rect x="10" y="12" width="22" height="24" rx="2" />
+                <path d="M10 24h22M21 12v24M10 18h22M10 30h22" />
+                <path d="M14 6l3 3h10l3-3-2 6H16z" fill="currentColor" opacity="0.3" />
+                <path d="M5 10v28M39 10v28M3 10h4M37 10h4M3 38h4M37 38h4" />
+              </g>
+              <text x="52" y="22" font-family="'Outfit', sans-serif" font-weight="800" font-size="12" fill="currentColor" letter-spacing="0.08em">GOBIERNO DE ESPAÑA</text>
+              <text x="52" y="38" font-family="'Outfit', sans-serif" font-weight="500" font-size="9" fill="currentColor" opacity="0.8" letter-spacing="0.04em">MINISTERIO DE CIENCIA E INNOVACIÓN</text>
+            </svg>
+          </div>
+          
+          <!-- Logo 2: IRIE de la UIB -->
+          <div class="colab-logo" title="Institut de Recerca i Innovació Educativa - UIB">
+            <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg">
+              <g fill="currentColor">
+                <path d="M10 10h10v30H10zM25 10c0 5 4 9 9 9h6v21h10V10H25z" opacity="0.8" />
+                <circle cx="15" cy="5" r="3" />
+                <path d="M10 42h40v2H10z" />
+              </g>
+              <text x="58" y="24" font-family="'Outfit', sans-serif" font-weight="800" font-size="16" fill="currentColor" letter-spacing="0.05em">IRIE</text>
+              <text x="58" y="38" font-family="'Inter', sans-serif" font-weight="500" font-size="9" fill="currentColor" opacity="0.6" letter-spacing="0.02em">UIB Research</text>
+            </svg>
+          </div>
+          
+          <!-- Logo 3: GTE de la UIB -->
+          <div class="colab-logo" title="Grupo de Tecnología Educativa - UIB">
+            <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                <polygon points="20,10 35,38 8,38" opacity="0.5" />
+                <circle cx="20" cy="10" r="3" fill="currentColor" />
+                <circle cx="35" cy="38" r="3" fill="currentColor" />
+                <circle cx="8" cy="38" r="3" fill="currentColor" />
+                <circle cx="21" cy="28" r="4" fill="currentColor" stroke="none" />
+                <line x1="21" y1="28" x2="20" y2="10" />
+                <line x1="21" y1="28" x2="35" y2="38" />
+                <line x1="21" y1="28" x2="8" y2="38" />
+              </g>
+              <text x="48" y="24" font-family="'Outfit', sans-serif" font-weight="800" font-size="16" fill="currentColor" letter-spacing="0.05em">GTE</text>
+              <text x="48" y="38" font-family="'Inter', sans-serif" font-weight="500" font-size="9" fill="currentColor" opacity="0.6" letter-spacing="0.02em">Tecnología Educativa</text>
+            </svg>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <!-- Footer Bottom row -->
+      <div class="footer-bottom">
+        <span class="footer-copyright" data-i18n="footer_copy">
+          &copy; 2026 COPLITELE-IA. Proyecto financiado por el Ministerio español de Ciencia e Innovación, desarrollado por el GTE de la UIB y el IRIE.
+        </span>
+        
+        <!-- Social links -->
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" class="social-link" title="Facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+          </a>
+          <a href="https://bsky.app" target="_blank" class="social-link" title="Bluesky" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.2-1.8-2.6-3.8-4-5.3-2.1-2.2-4.5-3.5-6.5-1.5S1.2 8.5 3.4 10.6c1.5 1.4 3.5 2.8 5.3 4 1.2.8 2.3 1.5 3.3 2.2-1 .7-2.1 1.4-3.3 2.2-1.8 1.2-3.8 2.6-5.3 4-2.2 2.1-3.5 4.5-1.5 6.5s4.5.6 6.5-1.5c1.4-1.5 2.8-3.5 4-5.3.8-1.2 1.5-2.3 2.2-3.3.7 1 1.4 2.1 2.2 3.3 1.2 1.8 2.6 3.8 4 5.3 2.1 2.2 4.5 3.5 6.5 1.5s.6-4.5-1.5-6.5c-1.5-1.4-3.5-2.8-5.3-4-1.2-.8-2.3-1.5-3.3-2.2 1-.7 2.1-1.4 3.3-2.2 1.8-1.2 3.8-2.6 5.3-4 2.2-2.1 3.5-4.5 1.5-6.5s-4.5-.6-6.5 1.5c-1.4 1.5-2.8 3.5-4 5.3-.8 1.2-1.5 2.3-2.2 3.3z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- Details Dialog Modal Overlay -->
+  <dialog id="details-modal">
+    <div class="modal-content-placeholder">
+      <!-- Injected by JS depending on member/publication selection -->
+    </div>
+  </dialog>
+
+  <!-- Script Injection -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
