@@ -617,25 +617,24 @@ function clearLogoPulseAnimations() {
 let currentRotation = 0;
 const rotationSpeed = 0.055; // Very slow and smooth (approx 3.3 degrees per second)
 let isRotating = true;
+let isInnerRotating = false;
 let rotationRequestFrame = null;
 
 function animateRotation() {
-  if (isRotating) {
-    currentRotation = (currentRotation + rotationSpeed) % 360;
-  } else {
-    // Easing deceleration to 0
-    if (currentRotation > 0.15 || currentRotation < -0.15) {
-      let target = currentRotation > 180 ? 360 : 0;
-      currentRotation += (target - currentRotation) * 0.06;
-      if (currentRotation >= 359.85) currentRotation = 0;
-    } else {
-      currentRotation = 0;
-    }
-  }
+  currentRotation = (currentRotation + rotationSpeed) % 360;
   
   const rotatingGroups = document.querySelectorAll('.logo-rotating-group');
   rotatingGroups.forEach(g => {
     g.style.transform = `rotate(${currentRotation}deg)`;
+  });
+  
+  const innerRotatingGroups = document.querySelectorAll('.logo-inner-rotating-group');
+  innerRotatingGroups.forEach(g => {
+    if (isInnerRotating) {
+      g.style.transform = `rotate(${currentRotation}deg)`;
+    } else {
+      g.style.transform = `rotate(0deg)`;
+    }
   });
   
   rotationRequestFrame = requestAnimationFrame(animateRotation);
@@ -666,7 +665,7 @@ function updateHeroSubtitle(color) {
 }
 
 function activateCenterDots() {
-  isRotating = true; // Start rotation
+  isInnerRotating = true; // Start inner rotation
   
   const groups = document.querySelectorAll('.logo-center-dot-group');
   groups.forEach(group => {
@@ -684,7 +683,7 @@ function activateCenterDots() {
 }
 
 function deactivateCenterDots() {
-  isRotating = false; // Stop rotation and ease to 0
+  isInnerRotating = false; // Stop inner rotation
   
   const groups = document.querySelectorAll('.logo-center-dot-group');
   groups.forEach(group => {
@@ -1281,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // 5.3 Shrinking Fixed Header on Scroll
-  window.addEventListener('scroll', () => {
+  const handleScroll = () => {
     const header = document.querySelector('header');
     if (header) {
       if (window.scrollY > 30) {
@@ -1290,7 +1289,27 @@ document.addEventListener('DOMContentLoaded', () => {
         header.classList.remove('scrolled');
       }
     }
-  });
+    
+    // Scroll-driven logo scaling
+    const maxScroll = 250;
+    const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+    
+    const heroLogo = document.getElementById('hero-logo-container');
+    const headerLogo = document.getElementById('header-logo-container');
+    
+    if (heroLogo) {
+      heroLogo.style.transform = `scale(${1 - progress})`;
+      heroLogo.style.opacity = `${1 - progress}`;
+    }
+    if (headerLogo) {
+      headerLogo.style.transform = `scale(${progress})`;
+      headerLogo.style.opacity = `${progress}`;
+      headerLogo.style.pointerEvents = progress > 0.15 ? 'auto' : 'none';
+    }
+  };
+  
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // Run once to initialize correct scaling on reload
 
 
   // 5.3.2 Hero Intro Scroll Down Smoothly

@@ -246,6 +246,7 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
   });
   
   // 4. Center dots (sorted by size, overlapping)
+  svg += `<g class="logo-inner-rotating-group" style="transform-origin: ${center}px ${center}px; transition: transform 0.8s ease-out;">`;
   centerDots.forEach(dot => {
     svg += `
       <g 
@@ -254,7 +255,7 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
         data-dy="${dot.dy}"
         style="
           transform: translate(0px, 0px);
-          transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         "
       >
         <circle 
@@ -268,12 +269,13 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
             transform-origin: ${dot.baseX}px ${dot.baseY}px;
             opacity: 0; 
             transform: scale(0.5);
-            transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s, fill 0.9s ease;
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.8s ease;
           "
         />
       </g>
     `;
   });
+  svg += `</g>`;
   
   if (isLarge) {
     svg += `</g>`;
