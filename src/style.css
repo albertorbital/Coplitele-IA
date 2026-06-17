@@ -2582,3 +2582,12 @@ body.dark-mode .nav-card-content p {
     gap: 16px;
   }
 }
+
+/* Temporarily disabled sections */
+a[href="#/transferencia"],
+a[href="#/publicaciones"],
+a[href="#/recursos"] {
+  pointer-events: none !important;
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}

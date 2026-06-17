@@ -1570,6 +1570,13 @@ function handleRouting() {
   // Clean hash to extract route name (e.g. '#/proyecto' -> 'proyecto', '#proyecto' -> 'proyecto')
   let path = rawHash.replace(/^#\/?/, '') || 'inicio';
   
+  // Prevent access to disabled sections
+  const disabledPaths = ['transferencia', 'publicaciones', 'recursos', 'actividad-detalle'];
+  if (disabledPaths.includes(path) || path.startsWith('actividad/')) {
+    window.location.hash = '#/inicio';
+    return;
+  }
+  
   let detailId = null;
   if (path.startsWith('actividad/')) {
     detailId = path.substring('actividad/'.length);
