@@ -6,6 +6,7 @@
   <title>COPLITELE-IA - Codiseño, Personalización y Tecnología</title>
   <meta name="description" content="Prototipo web de COPLITELE-IA: Proyecto de investigación sobre codiseño, personalización y tecnología educativa con Inteligencia Artificial.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%231D5BFE'/></svg>" />
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
 <body>
 
@@ -20,6 +21,7 @@
       <div class="logo-wrapper" id="header-logo-container">
         <!-- Logo SVG rendered by JS -->
       </div>
+      <span class="header-logo-text">COPLITELE-IA</span>
     </a>
     <!-- Desktop Navigation Links -->
     <nav>
@@ -214,13 +216,12 @@
         <div class="section-nav-grid">
           <a href="#/impacto#transferencia" class="section-nav-card card-transferencia">
             <div class="nav-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="12" rx="2" />
-                <path d="M9 21h6" />
-                <path d="M12 15v6" />
-                <path d="M12 7v3" />
-                <path d="M8 10h8" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/fpipqsxp.json"
+                  trigger="hover"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:55px;height:55px">
+              </lord-icon>
             </div>
             <div class="nav-card-content">
               <h3>Actividades de Transferencia</h3>
@@ -231,13 +232,12 @@
           
           <a href="#/impacto#publicaciones" class="section-nav-card card-publicaciones">
             <div class="nav-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-                <polyline points="10 9 9 9 8 9" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/wxnxoxse.json"
+                  trigger="hover"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:55px;height:55px">
+              </lord-icon>
             </div>
             <div class="nav-card-content">
               <h3>Producción Científica</h3>
@@ -248,11 +248,12 @@
           
           <a href="#/impacto#recursos" class="section-nav-card card-recursos">
             <div class="nav-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                <line x1="12" y1="22.08" x2="12" y2="12" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/nocnwjqy.json"
+                  trigger="hover"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:55px;height:55px">
+              </lord-icon>
             </div>
             <div class="nav-card-content">
               <h3>Recursos y Materiales</h3>
@@ -325,27 +326,45 @@
     <!-- Section 2: Objetivos -->
     <section id="objetivos" class="page-section">
       <div class="section-container">
-        <div class="section-title-wrapper">
+        <div class="section-title-wrapper" style="display: none;">
           <h2 class="section-title" data-i18n="obj_title">Objetivos del Proyecto</h2>
         </div>
         <div class="objectives-grid">
           <article class="objective-card">
             <div class="objective-card-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/hursldrn.json"
+                  trigger="loop"
+                  delay="1500"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:70px;height:70px">
+              </lord-icon>
             </div>
             <h3 data-i18n="obj_1_title">Objetivo Principal</h3>
             <p data-i18n="obj_1_desc">Investigar el impacto de la IA en la telecolaboración interlingüística, analizando cómo el codiseño mejora los procesos de aprendizaje de lenguas.</p>
           </article>
           <article class="objective-card">
             <div class="objective-card-icon">
-              <svg viewBox="0 0 24 24"><path d="M9 21h6v-1H9v1zm3-19C7.58 2 4 5.58 4 10c0 2.76 1.4 5.2 3.54 6.64L8 19h8l.46-2.36C18.6 15.2 20 12.76 20 10c0-4.42-3.58-8-8-8zm4.5 13.5l-.5.5-.5.5-.5.5h-4l-.5-.5-.5-.5-.5-.5C8.08 12.3 7 11.23 7 10c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.23-1.08 2.3-2.5 3.5z"/></svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/vjndpllp.json"
+                  trigger="loop"
+                  delay="1500"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:70px;height:70px">
+              </lord-icon>
             </div>
             <h3 data-i18n="obj_2_title">Innovación</h3>
             <p data-i18n="obj_2_desc">Desarrollar herramientas de personalización adaptativa basadas en IA para entornos de aprendizaje de lenguas mediado por tecnología.</p>
           </article>
           <article class="objective-card">
             <div class="objective-card-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10zm-9 10h18M12 2v20"/></svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/yfczvyer.json"
+                  trigger="loop"
+                  delay="1500"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:70px;height:70px">
+              </lord-icon>
             </div>
             <h3 data-i18n="obj_3_title">Alcance Internacional</h3>
             <p data-i18n="obj_3_desc">Colaboración con instituciones europeas y latinoamericanas para estudiar la comunicación mediada por ordenador en contextos plurilingüísticos.</p>
@@ -468,7 +487,7 @@
           <!-- Resource Card 2 -->
           <article class="resource-card">
             <div class="resource-image">
-              <img src="/src/assets/images/recursos.png" alt="Fichas didácticas de apoyo algorítmico">
+              <img src="/src/assets/images/transferencia.png" alt="Fichas didácticas de apoyo algorítmico">
             </div>
             <div class="resource-info">
               <span class="resource-tag">Plantillas Didácticas</span>
@@ -481,7 +500,7 @@
           <!-- Resource Card 3 -->
           <article class="resource-card">
             <div class="resource-image">
-              <img src="/src/assets/images/recursos.png" alt="Código abierto de personalización adaptativa">
+              <img src="/src/assets/images/congresos.png" alt="Código abierto de personalización adaptativa">
             </div>
             <div class="resource-info">
               <span class="resource-tag">Código Abierto</span>
@@ -512,16 +531,28 @@
           <!-- Logo 1: Ministerio de Ciencia, Innovación y Universidades de España -->
           <div class="colab-logo" title="Ministerio de Ciencia, Innovación y Universidades - Gobierno de España">
             <img src="icons/ministerio_icon.png" alt="Ministerio de Ciencia, Innovación y Universidades">
+            <div class="colab-text">
+              <span class="colab-org">GOBIERNO DE ESPAÑA</span>
+              <span class="colab-dept">MINISTERIO DE CIENCIA E INNOVACIÓN</span>
+            </div>
           </div>
           
           <!-- Logo 2: IRIE de la UIB -->
           <div class="colab-logo" title="Institut de Recerca i Innovació Educativa - UIB">
             <img src="icons/irie_icon.png" alt="IRIE">
+            <div class="colab-text">
+              <span class="colab-org">IRIE</span>
+              <span class="colab-dept">UIB Research</span>
+            </div>
           </div>
           
           <!-- Logo 3: GTE de la UIB -->
           <div class="colab-logo" title="Grupo de Tecnología Educativa - UIB">
             <img src="icons/gte.png" alt="GTE">
+            <div class="colab-text">
+              <span class="colab-org">GTE</span>
+              <span class="colab-dept">Tecnología Educativa</span>
+            </div>
           </div>
           
         </div>

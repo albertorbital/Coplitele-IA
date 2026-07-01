@@ -1255,34 +1255,27 @@ function renderPublications() {
   const mapPubHTML = pub => {
     const labelColorClass = pub.type === 'revista' ? 'blue' : (pub.type === 'libro' ? 'green' : 'teal');
     const extraLabelText = pub.extraLabel[currentLang];
+    const year = pub.citation.match(/\((\d{4})\)/)?.[1] || 'Zotero';
     
     return `
-      <article class="activity-card pub-card" data-id="${pub.id}">
-        <div class="activity-image-wrapper pub-gradient-header header-${pub.type}">
-          <span class="activity-category color-${labelColorClass}">
+      <article class="pub-card" data-id="${pub.id}">
+        <div class="pub-card-header">
+          <span class="pub-badge badge-${labelColorClass}">
             ${getPubIcon(pub.type)} ${extraLabelText}
           </span>
+          <span class="pub-year-badge">${year}</span>
         </div>
-        <div class="activity-card-body">
-          <div class="activity-footer" style="margin-top: 0; margin-bottom: 8px;">
-            <div class="activity-footer-item">
-              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-              <span>${pub.citation.match(/\((\d{4})\)?/)?.[1] || 'Zotero'}</span>
-            </div>
-            ${pub.type !== 'ponencia' ? `
-            <div class="activity-footer-item">
-              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
-              <span>Zotero</span>
-            </div>
-            ` : ''}
+        <div class="pub-card-body">
+          <h3 class="pub-title">${pub.title[currentLang]}</h3>
+          <p class="pub-citation">${pub.citation}</p>
+          <div class="pub-tags">
+            ${pub.tags.map(tag => `<span class="pub-tag bg-${labelColorClass}">${tag.split(' / ')[currentLang === 'es' ? 0 : (currentLang === 'ca' ? 1 : 0)] || tag}</span>`).join('')}
           </div>
-          <h3>${pub.title[currentLang]}</h3>
-          <p class="activity-desc">${pub.citation}</p>
-          <div class="activity-pill-wrapper">
-            ${pub.tags.map(tag => `<span class="activity-pill bg-${labelColorClass}-light">${tag.split(' / ')[currentLang === 'es' ? 0 : (currentLang === 'ca' ? 1 : 0)] || tag}</span>`).join('')}
-          </div>
-          <div class="activity-footer" style="margin-top: auto; padding-top: 15px;">
-            <button class="btn-small view-pub-btn" style="width: 100%; justify-content: center;" data-id="${pub.id}">Ver Ficha Zotero</button>
+          <div class="pub-actions">
+            <button class="btn-premium ${labelColorClass} view-pub-btn" style="width: 100%; justify-content: center;" data-id="${pub.id}">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="margin-right: 6px;"><path d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
+              ${currentLang === 'en' ? 'View Zotero Sheet' : (currentLang === 'ca' ? 'Veure Fitxa Zotero' : 'Ver Ficha Zotero')}
+            </button>
           </div>
         </div>
       </article>
@@ -1324,6 +1317,13 @@ function openMemberModal(id) {
   const modalContent = modal.querySelector('.modal-content-placeholder');
   if (!modalContent) return;
   
+  modal.classList.add('modal-large');
+  
+  // Make sure we clean up the class on modal close
+  modal.addEventListener('close', () => {
+    modal.classList.remove('modal-large');
+  }, { once: true });
+  
   modalContent.innerHTML = `
     <div class="modal-header">
       <div>
@@ -1332,54 +1332,57 @@ function openMemberModal(id) {
             ${member.role[currentLang]}
           </span>
         </div>
-        <h3 style="font-size: 24px; font-weight: 850; margin: 0; color: var(--color-text-light);">${member.name}</h3>
-        <p style="font-size: 13.5px; font-weight: 550; color: var(--color-blue); margin: 4px 0 0 0;">${member.title[currentLang]}</p>
+        <h3 style="font-size: 26px; font-weight: 850; margin: 0; color: var(--color-text-light);">${member.name}</h3>
+        <p style="font-size: 14.5px; font-weight: 550; color: var(--color-blue); margin: 6px 0 0 0;">${member.title[currentLang]}</p>
       </div>
-      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal" style="font-size: 24px;">&times;</button>
+      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal" style="font-size: 28px;">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="modal-member-layout" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px; margin-bottom: 24px; align-items: start;">
-        <div class="modal-member-photo-wrapper" style="border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid var(--color-border-light);">
-          <img src="${member.photo}" alt="${member.name}" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block;">
-        </div>
-        <div>
-          <p style="margin-top: 0; margin-bottom: 16px; font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted-light);">${member.bio[currentLang]}</p>
-          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
+      <div class="modal-member-layout">
+        <div class="modal-member-left-col">
+          <div class="modal-member-photo-wrapper">
+            <img src="${member.photoHover}" alt="${member.name}">
+          </div>
+          <div class="modal-member-contacts-row">
             <a href="mailto:${member.email}" class="member-contact-link email-btn" title="Email">
-              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
             </a>
             <a href="https://orcid.org/${member.orcid}" target="_blank" class="member-contact-link orcid-btn" title="ORCID">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                 <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.541 0 .954.212 1.238.636.284.424.426.974.426 1.65 0 .67-.142 1.218-.426 1.644-.284.426-.697.639-1.238.639-.547 0-.961-.213-1.244-.639a2.766 2.766 0 0 1-.426-1.644c0-.676.142-1.226.426-1.65.283-.424.697-.636 1.244-.636zm-.437 6.136h.885v3.136h-.885V10.514zm11.393.993c0 .548-.121 1.026-.363 1.436-.242.41-.577.728-1.006.953-.428.225-.921.338-1.478.338-.642 0-1.189-.153-1.643-.459a2.723 2.723 0 0 1-1.054-1.261h-.06v1.545h-.854V4.76h2.247c.597 0 1.11.113 1.54.339.428.226.757.545.986.957.228.411.343.896.343 1.455 0 .428-.073.816-.219 1.164a2.296 2.296 0 0 1-.617.868c.287.162.528.384.723.666.195.281.338.608.428.981a5.05 5.05 0 0 1 .135 1.037l-.001.28zm-3.056-4.992c0-.404-.085-.723-.255-.956-.169-.233-.423-.349-.762-.349h-.979v2.609h.979c.339 0 .593-.116.762-.349.17-.233.255-.552.255-.955zm.406 3.655c0-.43-.092-.767-.276-1.011-.184-.244-.455-.366-.812-.366h-.979v2.756h.979c.357 0 .628-.122.812-.366.184-.244.276-.582.276-1.013z"/>
               </svg>
             </a>
             <a href="${member.researchgate}" target="_blank" class="member-contact-link rg-btn" title="ResearchGate">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                 <path d="M19.5 0h-15C2.015 0 0 2.015 0 4.5v15C0 21.985 2.015 24 4.5 24h15c2.485 0 4.5-2.015 4.5-4.5v-15C24 2.015 21.985 0 19.5 0zM8.76 16.24c-1.34 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42c.46 0 .89.13 1.25.35V9.45c-.36-.12-.74-.18-1.25-.18-2.61 0-4.73 2.12-4.73 4.73s2.12 4.73 4.73 4.73c.96 0 1.83-.29 2.56-.8v-3.05c-.65.71-1.57 1.3-2.56 1.3zm7.84-6.97c-.96 0-1.83.29-2.56.8v3.05c.65-.71 1.57-1.3 2.56-1.3 1.34 0 2.42 1.08 2.42 2.42s-1.08 2.42-2.42 2.42c-.46 0-.89-.13-1.25-.35v2.3c.36.12.74.18 1.25.18 2.61 0 4.73-2.12 4.73-4.73s-2.12-4.73-4.73-4.73z"/>
               </svg>
             </a>
           </div>
         </div>
-      </div>
-      <div style="border-top: 1px solid var(--color-border-light); padding-top: 20px;">
-        <h4 style="margin-top: 0; margin-bottom: 12px; font-family: var(--font-primary); font-size: 14.5px; font-weight: 700;">
-          ${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}
-        </h4>
-        <ul style="padding-left: 20px; font-size: 13.5px; line-height: 1.5; color: var(--color-text-muted-light); margin: 0;">
-          ${publications
-            .filter(pub => {
-              // Match author last name (robust check)
-              const lastName = member.name.split(' ').slice(-2, -1)[0] || member.name.split(' ').pop();
-              const cleanLastName = lastName.replace('í', 'i').replace('é', 'e').replace('ó', 'o').replace('á', 'a').replace('ú', 'u');
-              return pub.citation.toLowerCase().includes(lastName.toLowerCase()) || 
-                     pub.citation.toLowerCase().includes(cleanLastName.toLowerCase());
-            })
-            .map(pub => `<li style="margin-bottom: 8px;"><strong>${pub.citation.match(/\((\d{4})\)/)?.[0] || ''}</strong> ${pub.title[currentLang]}</li>`)
-            .join('') || `<li style="list-style:none; padding-left:0; margin-left:-20px;">${currentLang === 'en' ? 'No individual publications registered yet.' : (currentLang === 'ca' ? 'No s\'han registrat publicacions individuals encara.' : 'No se registraron publicaciones individuales todavía.')}</li>`}
-        </ul>
+        <div class="modal-member-right-col">
+          <p class="modal-bio-text" style="font-size: 15.5px; line-height: 1.7; margin-top: 0; margin-bottom: 24px; color: var(--color-text-muted-light);">${member.bio[currentLang]}</p>
+          <div class="modal-member-details-box" style="background: rgba(0,0,0,0.02); border: 1px solid var(--color-border-light); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; font-size: 14.5px;">
+            <div><strong>Email:</strong> <a href="mailto:${member.email}" style="color: var(--color-blue); text-decoration: none; font-weight: 600;">${member.email}</a></div>
+            <div><strong>ORCID:</strong> <a href="https://orcid.org/${member.orcid}" target="_blank" style="color: var(--color-blue); text-decoration: none; font-weight: 600; font-family: monospace; letter-spacing: 0.02em;">${member.orcid}</a></div>
+          </div>
+          <div class="modal-publications-section" style="border-top: 1px solid var(--color-border-light); padding-top: 24px;">
+            <h4 style="margin-top: 0; margin-bottom: 16px; font-family: var(--font-primary); font-size: 16px; font-weight: 750; color: var(--color-text-light);">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
+            <ul style="padding-left: 20px; font-size: 14px; line-height: 1.6; color: var(--color-text-muted-light); margin: 0;">
+              ${publications
+                .filter(pub => {
+                  const lastName = member.name.split(' ').slice(-2, -1)[0] || member.name.split(' ').pop();
+                  const cleanLastName = lastName.replace('í', 'i').replace('é', 'e').replace('ó', 'o').replace('á', 'a').replace('ú', 'u');
+                  return pub.citation.toLowerCase().includes(lastName.toLowerCase()) || 
+                         pub.citation.toLowerCase().includes(cleanLastName.toLowerCase());
+                })
+                .map(pub => `<li style="margin-bottom: 10px;"><strong>${pub.citation.match(/\((\d{4})\)/)?.[0] || ''}</strong> ${pub.title[currentLang]}</li>`)
+                .join('') || `<li style="list-style:none; padding-left:0; margin-left:-20px;">${currentLang === 'en' ? 'No individual publications registered yet.' : (currentLang === 'ca' ? 'No s\'han registrat publicacions individuals encara.' : 'No se registraron publicaciones individuales todavía.')}</li>`}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -2135,25 +2138,46 @@ function initCustomCursor() {
 }
 
 function initScrollReveal() {
+  let lastScrollY = window.scrollY;
+  let scrollDirection = 'down';
+  
+  window.addEventListener('scroll', () => {
+    scrollDirection = window.scrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = window.scrollY;
+  }, { passive: true });
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-visible');
+        // Set directional entry animations
+        if (scrollDirection === 'down') {
+          entry.target.classList.remove('reveal-out-up', 'reveal-out-down', 'reveal-from-top');
+          entry.target.classList.add('reveal-visible', 'reveal-from-bottom');
+        } else {
+          entry.target.classList.remove('reveal-out-up', 'reveal-out-down', 'reveal-from-bottom');
+          entry.target.classList.add('reveal-visible', 'reveal-from-top');
+        }
       } else {
-        const rect = entry.target.getBoundingClientRect();
-        if (rect.top > window.innerHeight || rect.bottom < 0) {
-          entry.target.classList.remove('reveal-visible');
+        // Set directional exit animations
+        entry.target.classList.remove('reveal-visible');
+        if (scrollDirection === 'down') {
+          entry.target.classList.add('reveal-out-up');
+        } else {
+          entry.target.classList.add('reveal-out-down');
         }
       }
     });
   }, {
     root: null,
-    threshold: 0.05,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.02,
+    rootMargin: '0px 0px -20px 0px'
   });
   
   const setupReveals = () => {
-    document.querySelectorAll('section, .page-section, .hero-stats-row, .section-nav-grid, .team-card, .activity-card, .objective-card, .resource-card, .framework-card').forEach(el => {
+    // Target all headings, paragraphs, and cards, excluding headers, mobile navs, cursor indicators or modals to avoid visual bugs
+    document.querySelectorAll('h1, h2, h3, h4, p, section, .page-section, .team-card, .pub-card, .objective-card, .resource-card, .framework-card, .hero-stats-row, .section-nav-grid').forEach(el => {
+      if (el.closest('header') || el.closest('#details-modal') || el.closest('.custom-cursor') || el.closest('.custom-cursor-follower') || el.closest('.custom-lang-dropdown')) return;
+      
       el.classList.add('scroll-reveal');
       revealObserver.observe(el);
     });
