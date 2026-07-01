@@ -105,9 +105,9 @@ const publications = [
     tags: ["Codiseño / Codisseny", "Inteligencia Artificial / IA", "Educación / Educació"],
     zoteroKey: "GOM2025",
     extraLabel: {
-      es: "Revistas (Zotero)",
-      ca: "Revistes (Zotero)",
-      en: "Journals (Zotero)"
+      es: "Artículos",
+      ca: "Articles",
+      en: "Articles"
     },
     zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/GOM2025"
   },
@@ -129,9 +129,9 @@ const publications = [
     tags: ["Co-creación / Co-creació", "Tecnología / Tecnologia", "Usabilidad / Usabilitat"],
     zoteroKey: "MAR2024",
     extraLabel: {
-      es: "Revistas (Zotero)",
-      ca: "Revistes (Zotero)",
-      en: "Journals (Zotero)"
+      es: "Artículos",
+      ca: "Articles",
+      en: "Articles"
     },
     zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/MAR2024"
   },
@@ -153,9 +153,9 @@ const publications = [
     tags: ["Manual", "Codiseño / Codisseny", "Aulas / Aules"],
     zoteroKey: "GOM2024b",
     extraLabel: {
-      es: "Libros (Zotero)",
-      ca: "Llibres (Zotero)",
-      en: "Books (Zotero)"
+      es: "Publicaciones",
+      ca: "Publicacions",
+      en: "Publications"
     },
     zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/GOM2024b"
   },
@@ -177,9 +177,9 @@ const publications = [
     tags: ["IA", "Docencia / Docència", "Innovación / Innovació"],
     zoteroKey: "ROD2025b",
     extraLabel: {
-      es: "Libros (Zotero)",
-      ca: "Llibres (Zotero)",
-      en: "Books (Zotero)"
+      es: "Publicaciones",
+      ca: "Publicacions",
+      en: "Publications"
     },
     zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/ROD2025b"
   },
@@ -201,9 +201,9 @@ const publications = [
     tags: ["UI", "Automation", "Agency"],
     zoteroKey: "ICET2024",
     extraLabel: {
-      es: "Ponencia",
-      ca: "Ponència",
-      en: "Presentation"
+      es: "Congresos",
+      ca: "Congressos",
+      en: "Conferences"
     },
     zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/ICET2024"
   },
@@ -225,9 +225,9 @@ const publications = [
     tags: ["Asistentes / Assistents", "Secundaria / Secundària", "Prototipado / Prototipat"],
     zoteroKey: "VID2025",
     extraLabel: {
-      es: "Ponencia",
-      ca: "Ponència",
-      en: "Presentation"
+      es: "Seminarios",
+      ca: "Seminaris",
+      en: "Seminars"
     },
     zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/VID2025"
   }
@@ -247,7 +247,7 @@ const newsFeedItems = [
   },
   {
     id: "news-2",
-    type: "news",
+    type: "transferencia",
     tag: { es: "Taller", ca: "Taller", en: "Workshop" },
     text: {
       es: "Comienzo de los talleres de co-creación de interfaces inteligentes en institutos colaboradores de Mallorca.",
@@ -258,6 +258,17 @@ const newsFeedItems = [
   },
   {
     id: "news-3",
+    type: "revista",
+    tag: { es: "Publicación", ca: "Publicació", en: "Publication" },
+    text: {
+      es: "Investigación sobre la perspectiva de la comunidad educativa y los retos prácticos de la co-creación de IA.",
+      ca: "Investigació sobre la perspectiva de la comunitat educativa i els reptes pràctics de la co-creació d'IA.",
+      en: "Research on the educational community's perspective and practical challenges in AI co-creation."
+    },
+    pubId: "pub-2"
+  },
+  {
+    id: "news-4",
     type: "transferencia",
     tag: { es: "Transferencia", ca: "Transferència", en: "Transfer" },
     text: {
@@ -266,6 +277,28 @@ const newsFeedItems = [
       en: "Technology transfer session with inspectors and directors of IRIE on digital sovereignty."
     },
     activityId: "act-6"
+  },
+  {
+    id: "news-5",
+    type: "revista",
+    tag: { es: "Publicación", ca: "Publicació", en: "Publication" },
+    text: {
+      es: "Publicación del libro 'Tecnología Educativa y Personalización: Guía Práctica para el Codiseño de Aulas Inteligentes'.",
+      ca: "Publicació del llibre 'Tecnologia Educativa i Personalització: Guia Pràctica per al Codisseny d'Aules Intel·ligents'.",
+      en: "Publication of the book 'Educational Technology and Personalization: A Practical Guide for Co-designing Smart Classrooms'."
+    },
+    pubId: "pub-3"
+  },
+  {
+    id: "news-6",
+    type: "transferencia",
+    tag: { es: "Seminario", ca: "Seminari", en: "Seminar" },
+    text: {
+      es: "Seminario Internacional sobre Inteligencia Artificial y Aprendizaje de Lenguas Asistido por Ordenador (CALL).",
+      ca: "Seminari Internacional sobre Intel·ligència Artificial i Aprenentatge de Llengües Assistit per Ordinador (CALL).",
+      en: "International Seminar on Artificial Intelligence and Computer-Assisted Language Learning (CALL)."
+    },
+    activityId: "act-2"
   }
 ];
 
@@ -420,18 +453,25 @@ const translations = {
   es: {
     menu_inicio: "Inicio",
     menu_proyecto: "Proyecto",
-    menu_transferencia: "Transferencia",
-    menu_publicaciones: "Producción Científica",
-    menu_recursos: "Recursos",
+    menu_impacto: "Impacto y Difusión",
     hero_tag: "Proyecto de Investigación Activo",
     hero_desc: "Lorem ipsum <strong>DOLOR SIT AMET</strong> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     btn_conocer: "Conocer el Proyecto",
     btn_publicaciones: "Publicaciones",
-    news_title: "Últimas Noticias & Actividades",
+    news_title: "Últimas noticias",
+    news_pretitle: "Actualidad",
     stats_years: "Años de investigación",
     stats_investigadores: "Investigadores",
     stats_publicaciones: "Publicaciones",
-    stats_instituciones: "Instituciones",
+    stats_experiencias: "Experiencias",
+    progress_label: "Progreso del Proyecto",
+    submenu_desc: "Descripción",
+    submenu_obj: "Objetivos",
+    submenu_miembros: "Miembros",
+    submenu_noticias: "Últimas noticias",
+    submenu_transferencia: "Transferencia",
+    submenu_publicaciones: "Producción científica",
+    submenu_recursos: "Recursos",
     obj_title: "Objetivos del Proyecto",
     obj_1_title: "Objetivo Principal",
     obj_1_desc: "Investigar el impacto de la IA en la telecolaboración interlingüística, analizando cómo el codiseño mejora los procesos de aprendizaje de lenguas.",
@@ -479,18 +519,25 @@ const translations = {
   ca: {
     menu_inicio: "Inici",
     menu_proyecto: "Projecte",
-    menu_transferencia: "Transferència",
-    menu_publicaciones: "Producció Científica",
-    menu_recursos: "Recursos",
+    menu_impacto: "Impacte i Difusió",
     hero_tag: "Projecte d'Investigació Actiu",
     hero_desc: "Lorem ipsum <strong>DOLOR SIT AMET</strong> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     btn_conocer: "Conèixer el Projecte",
     btn_publicaciones: "Publicacions",
-    news_title: "Últimes Notícies & Activitats",
+    news_title: "Últimes notícies",
+    news_pretitle: "Actualitat",
     stats_years: "Anys d'investigació",
     stats_investigadores: "Investigadors",
     stats_publicaciones: "Publicacions",
-    stats_instituciones: "Institucions",
+    stats_experiencias: "Experiències",
+    progress_label: "Progrés del Projecte",
+    submenu_desc: "Descripció",
+    submenu_obj: "Objectius",
+    submenu_miembros: "Membres",
+    submenu_noticias: "Últimes notícies",
+    submenu_transferencia: "Transferència",
+    submenu_publicaciones: "Producció científica",
+    submenu_recursos: "Recursos",
     obj_title: "Objectius del Projecte",
     obj_1_title: "Objectiu Principal",
     obj_1_desc: "Investigar l'impacte de la IA en la telecolaboració interlingüística, analitzant com el codisseny millora els processos d'aprenentatge de llengües.",
@@ -507,7 +554,7 @@ const translations = {
     project_what_is: "Què és COPLITELE-IA?",
     project_what_is_p1: "<strong>COPLITELE-IA</strong> (Codisseny, Personalització i Tecnologia en la Telecolaboració per a l'Aprenentatge de Llengües amb IA) és un projecte d'investigació finançat pel Ministeri de Ciència i Innovació d'Espanya (Ref. PID2021-127836NB-I00).",
     project_what_is_p2: "El projecte examina com els enfocaments de codisseny participatiu, combinats amb eines d'intel·ligència artificial, poden transformar les experiències de telecolaboració interlingüística, especialment en contextos d'aprenentatge de llengües estrangeres.",
-    project_what_is_p3: "El nostre enfocament integra la comunicació mediada per ordinador (CMC), l'aprenentatge de llengües assistit per ordinador (CALL) i les tecnologies emergents d'IA, inclosos models de llenguatge, anàlisi de sentiments i sistemes de retroalimentació automatitzada.",
+    project_what_is_p3: "El nostre enfocament integra la comunicació mediada per ordinador (CMC), l'aprenentatge de llengües assistit per ordinador (CALL) i les tecnologies emergents d'IA, inclosos models de llenguatge, anàlisi de sentiments i sistemes de retroalimentació automatizada.",
     meta_ref: "Ref. Projecte",
     meta_duracion: "Durada",
     meta_lider: "Institució Líder",
@@ -521,7 +568,7 @@ const translations = {
     pub_pretitle: "Biblioteca Científica",
     pub_title: "Producció Científica",
     pub_subtitle: "Accedeix a les publicacions del projecte sincronitzades amb la nostra biblioteca de referències de Zotero.",
-    search_placeholder: "Cercar per títol, autor o etiqueta...",
+    search_placeholder: "Cercar por títol, autor o etiqueta...",
     tab_all: "Totes",
     tab_revistas: "Revistes (Zotero)",
     tab_libros: "Llibres (Zotero)",
@@ -538,18 +585,25 @@ const translations = {
   en: {
     menu_inicio: "Home",
     menu_proyecto: "Project",
-    menu_transferencia: "Transfer",
-    menu_publicaciones: "Scientific Production",
-    menu_recursos: "Resources",
+    menu_impacto: "Impact & Dissemination",
     hero_tag: "Active Research Project",
     hero_desc: "Lorem ipsum <strong>DOLOR SIT AMET</strong> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     btn_conocer: "Explore Project",
     btn_publicaciones: "Publications",
-    news_title: "Latest News & Activities",
+    news_title: "Latest news",
+    news_pretitle: "News",
     stats_years: "Years of research",
     stats_investigadores: "Researchers",
     stats_publicaciones: "Publications",
-    stats_instituciones: "Institutions",
+    stats_experiencias: "Experiences",
+    progress_label: "Project Progress",
+    submenu_desc: "Description",
+    submenu_obj: "Objectives",
+    submenu_miembros: "Members",
+    submenu_noticias: "Latest news",
+    submenu_transferencia: "Transfer",
+    submenu_publicaciones: "Scientific production",
+    submenu_recursos: "Resources",
     obj_title: "Project Objectives",
     obj_1_title: "Main Objective",
     obj_1_desc: "Investigate the impact of AI in interlingual telecollaboration, analyzing how co-design improves language learning processes.",
@@ -856,11 +910,9 @@ function translatePage(lang) {
   // Translate menus
   const menuLinks = document.querySelectorAll('.nav-link, .mobile-menu-link');
   const idsMap = [
-    { key: 'menu_inicio', hash: '#inicio' },
-    { key: 'menu_proyecto', hash: '#proyecto' },
-    { key: 'menu_transferencia', hash: '#transferencia' },
-    { key: 'menu_publicaciones', hash: '#publicaciones' },
-    { key: 'menu_recursos', hash: '#recursos' }
+    { key: 'menu_inicio', hash: '#/inicio' },
+    { key: 'menu_proyecto', hash: '#/proyecto' },
+    { key: 'menu_impacto', hash: '#/impacto' }
   ];
   
   menuLinks.forEach(link => {
@@ -900,13 +952,14 @@ function translatePage(lang) {
 }
 
 function renderNewsFeed() {
-  const newsList = document.getElementById('latest-news-list');
-  if (!newsList) return;
+  const newsListHome = document.getElementById('latest-news-list-home');
+  const newsListImpact = document.getElementById('latest-news-list-impact');
+  if (!newsListHome && !newsListImpact) return;
   
   // Images for news cards (cycle through imported assets)
   const newsImages = [transferenciaImg, investigadoresImg, congresosImg];
   
-  newsList.innerHTML = newsFeedItems.map((item, i) => {
+  const htmlContent = newsFeedItems.map((item, i) => {
     const text = item.text[currentLang];
     const badgeText = item.tag[currentLang];
     let badgeClass = 'badge-news';
@@ -928,6 +981,13 @@ function renderNewsFeed() {
       </div>
     `;
   }).join('');
+  
+  if (newsListHome) {
+    newsListHome.innerHTML = htmlContent;
+  }
+  if (newsListImpact) {
+    newsListImpact.innerHTML = htmlContent;
+  }
   
   // Add click events
   document.querySelectorAll('.news-card').forEach(el => {
@@ -979,14 +1039,21 @@ function renderTeam() {
 let activeTab = 'all';
 let searchQuery = '';
 
+function getPubIcon(type) {
+  if (type === 'revista') {
+    return `<svg viewBox="0 0 24 24" class="tag-icon"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>`;
+  } else if (type === 'libro') {
+    return `<svg viewBox="0 0 24 24" class="tag-icon"><path fill="currentColor" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>`;
+  } else {
+    return `<svg viewBox="0 0 24 24" class="tag-icon"><path fill="currentColor" d="M19 18H5V6h3v2H6v8h12v-2h2v3c0 1.1-.9 2-2 2zM17 6H9c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 8H9V8h8v6z"/></svg>`;
+  }
+}
+
 function renderPublications() {
   const pubGrid = document.getElementById('publications-grid');
   const homePubGrid = document.getElementById('home-publications-grid');
   
-  // Filter by tab and search
   const filtered = publications.filter(pub => {
-    const matchesTab = activeTab === 'all' || pub.type === activeTab;
-    
     const titleText = pub.title[currentLang].toLowerCase();
     const citationText = pub.citation.toLowerCase();
     const abstractText = pub.abstract[currentLang].toLowerCase();
@@ -997,48 +1064,43 @@ function renderPublications() {
       abstractText.includes(searchQuery) ||
       pub.tags.some(tag => tag.toLowerCase().includes(searchQuery));
     
-    return matchesTab && matchesSearch;
+    return matchesSearch;
   });
   
   const mapPubHTML = pub => {
-    let typeIcon = '';
-    if (pub.type === 'revista') {
-      typeIcon = `<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>`;
-    } else if (pub.type === 'libro') {
-      typeIcon = `<svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>`;
-    } else {
-      typeIcon = `<svg viewBox="0 0 24 24"><path d="M19 18H5V6h3v2H6v8h12v-2h2v3c0 1.1-.9 2-2 2zM17 6H9c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 8H9V8h8v6z"/></svg>`;
-    }
-    
-    const labelColorClass = pub.type === 'revista' ? 'var(--color-blue)' : (pub.type === 'libro' ? 'var(--color-green)' : 'var(--color-teal)');
+    const labelColorClass = pub.type === 'revista' ? 'blue' : (pub.type === 'libro' ? 'green' : 'teal');
     const extraLabelText = pub.extraLabel[currentLang];
     
     return `
-      <div class="pub-card" data-id="${pub.id}">
-        <div class="pub-type-badge" style="color: ${labelColorClass}">
-          ${typeIcon}
+      <article class="activity-card pub-card" data-id="${pub.id}">
+        <div class="activity-image-wrapper pub-gradient-header header-${pub.type}">
+          <span class="activity-category color-${labelColorClass}">
+            ${getPubIcon(pub.type)} ${extraLabelText}
+          </span>
         </div>
-        <div class="pub-content">
-          <div class="pub-meta">
-            <span class="pub-tag" style="color: ${labelColorClass}">${extraLabelText}</span>
-            <span class="pub-year">${pub.citation.match(/\((\d{4})\)?/)?.[1] || 'Zotero'}</span>
+        <div class="activity-card-body">
+          <div class="activity-footer" style="margin-top: 0; margin-bottom: 8px;">
+            <div class="activity-footer-item">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+              <span>${pub.citation.match(/\((\d{4})\)?/)?.[1] || 'Zotero'}</span>
+            </div>
             ${pub.type !== 'ponencia' ? `
-              <span class="pub-zotero-tag">
-                <svg viewBox="0 0 24 24"><path d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
-                Zotero
-              </span>
+            <div class="activity-footer-item">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
+              <span>Zotero</span>
+            </div>
             ` : ''}
           </div>
-          <h4 class="pub-title">${pub.title[currentLang]}</h4>
-          <p class="pub-citation">${pub.citation}</p>
-          <div class="pub-tags">
-            ${pub.tags.map(tag => `<span class="pub-keyword">${tag.split(' / ')[currentLang === 'es' ? 0 : (currentLang === 'ca' ? 1 : 0)] || tag}</span>`).join('')}
+          <h3>${pub.title[currentLang]}</h3>
+          <p class="activity-desc">${pub.citation}</p>
+          <div class="activity-pill-wrapper">
+            ${pub.tags.map(tag => `<span class="activity-pill bg-${labelColorClass}-light">${tag.split(' / ')[currentLang === 'es' ? 0 : (currentLang === 'ca' ? 1 : 0)] || tag}</span>`).join('')}
+          </div>
+          <div class="activity-footer" style="margin-top: auto; padding-top: 15px;">
+            <button class="btn-small view-pub-btn" style="width: 100%; justify-content: center;" data-id="${pub.id}">Ver Ficha Zotero</button>
           </div>
         </div>
-        <div class="pub-actions">
-          <button class="btn-small view-pub-btn" data-id="${pub.id}">Ver Ficha Zotero</button>
-        </div>
-      </div>
+      </article>
     `;
   };
 
@@ -1066,10 +1128,6 @@ function renderPublications() {
     });
   });
 }
-
-// ----------------------------------------------------
-// 4. DIALOG MODAL CONTROLLERS (Accessibility-focused)
-// ----------------------------------------------------
 
 function openMemberModal(id) {
   const member = teamMembers.find(m => m.id === id);
@@ -1540,23 +1598,24 @@ document.addEventListener('DOMContentLoaded', () => {
     item.style.cursor = 'pointer';
     item.addEventListener('click', () => {
       const label = item.querySelector('.stat-label').getAttribute('data-i18n');
-      if (label === 'stats_years' || label === 'stats_instituciones') {
-        window.location.hash = '#/proyecto';
-        const projTabDescBtn = document.getElementById('project-tab-desc');
-        if (projTabDescBtn) projTabDescBtn.click();
+      if (label === 'stats_years') {
+        window.location.hash = '#/proyecto#proyecto';
       } else if (label === 'stats_investigadores') {
-        window.location.hash = '#/proyecto';
-        const projTabTeamBtn = document.getElementById('project-tab-team');
-        if (projTabTeamBtn) projTabTeamBtn.click();
+        window.location.hash = '#/proyecto#equipo';
+      } else if (label === 'stats_experiencias') {
+        window.location.hash = '#/impacto#transferencia';
       } else if (label === 'stats_publicaciones') {
-        window.location.hash = '#/publicaciones';
+        window.location.hash = '#/impacto#publicaciones';
       }
     });
   });
 
   // 5.13 Initialize SPA routing
   window.addEventListener('hashchange', handleRouting);
-  window.addEventListener('load', handleRouting);
+  window.addEventListener('load', () => {
+    handleRouting();
+    initSubmenuScrollObserver();
+  });
   handleRouting();
 });
 
@@ -1567,20 +1626,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleRouting() {
   const rawHash = window.location.hash || '#/';
   
-  // Clean hash to extract route name (e.g. '#/proyecto' -> 'proyecto', '#proyecto' -> 'proyecto')
-  let path = rawHash.replace(/^#\/?/, '') || 'inicio';
-  
-  // Prevent access to disabled sections
-  const disabledPaths = ['transferencia', 'publicaciones', 'recursos', 'actividad-detalle'];
-  if (disabledPaths.includes(path) || path.startsWith('actividad/')) {
-    window.location.hash = '#/inicio';
-    return;
-  }
+  // Clean hash to extract route name and anchor
+  const cleanHash = rawHash.replace(/^#\/?/, '');
+  const [routePart, anchorPart] = cleanHash.split('#');
+  let path = routePart || 'inicio';
   
   let detailId = null;
   if (path.startsWith('actividad/')) {
     detailId = path.substring('actividad/'.length);
     path = 'actividad-detalle';
+  }
+  
+  // Redirect old routes to unified #/impacto with anchors
+  if (path === 'transferencia' || path === 'publicaciones' || path === 'recursos') {
+    window.location.hash = `#/impacto#${path}`;
+    return;
   }
   
   // Hide all simulated views
@@ -1604,14 +1664,30 @@ function handleRouting() {
     const href = link.getAttribute('href');
     if (href) {
       const linkPath = href.replace(/^#\/?/, '');
-      if (path === linkPath || (path === 'inicio' && linkPath === 'inicio') || (path === 'actividad-detalle' && linkPath === 'transferencia')) {
+      if (path === linkPath || (path === 'inicio' && linkPath === 'inicio') || (path === 'actividad-detalle' && linkPath === 'impacto')) {
         link.classList.add('active');
       }
     }
   });
   
-  // Reset scroll
-  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Handle scrolling to anchor or top
+  if (anchorPart) {
+    setTimeout(() => {
+      const targetElement = document.getElementById(anchorPart);
+      if (targetElement) {
+        const headerOffset = 85;
+        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  } else {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
   
   // Load detail content dynamically if matched
   if (path === 'actividad-detalle' && detailId) {
@@ -1711,7 +1787,7 @@ function renderActivityDetail(id) {
   
   detailContainer.innerHTML = `
     <div class="section-container" style="max-width: 800px; padding: 40px 20px;">
-      <a href="#/transferencia" class="btn-outline-blue" style="margin-bottom: 30px;">
+      <a href="#/impacto#transferencia" class="btn-outline-blue" style="margin-bottom: 30px;">
         &larr; ${currentLang === 'en' ? 'Back to Transfer' : (currentLang === 'ca' ? 'Tornar a Transferència' : 'Volver a Transferencia')}
       </a>
       
@@ -1748,4 +1824,42 @@ function renderActivityDetail(id) {
       el.style.color = 'var(--color-text-light)';
     });
   }
+}
+
+
+function initSubmenuScrollObserver() {
+  const sections = [
+    document.getElementById('proyecto'),
+    document.getElementById('objetivos'),
+    document.getElementById('equipo'),
+    document.getElementById('noticias'),
+    document.getElementById('transferencia'),
+    document.getElementById('publicaciones'),
+    document.getElementById('recursos')
+  ].filter(Boolean);
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-120px 0px -50% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        const activeLinks = document.querySelectorAll(`.submenu-link`);
+        activeLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href.endsWith(`#${id}`)) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
 }

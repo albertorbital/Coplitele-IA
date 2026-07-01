@@ -26,9 +26,7 @@
       <ul class="nav-menu">
         <li><a href="#/inicio" class="nav-link active" data-i18n="menu_inicio">Inicio</a></li>
         <li><a href="#/proyecto" class="nav-link" data-i18n="menu_proyecto">Proyecto</a></li>
-        <li><a href="#/transferencia" class="nav-link" data-i18n="menu_transferencia">Transferencia</a></li>
-        <li><a href="#/publicaciones" class="nav-link" data-i18n="menu_publicaciones">Producción Científica</a></li>
-        <li><a href="#/recursos" class="nav-link" data-i18n="menu_recursos">Recursos</a></li>
+        <li><a href="#/impacto" class="nav-link" data-i18n="menu_impacto">Impacto y Difusión</a></li>
       </ul>
     </nav>
 
@@ -37,28 +35,20 @@
       <!-- Custom Language Dropdown with Flags -->
       <div class="custom-lang-dropdown" id="lang-dropdown-container">
         <button class="lang-dropdown-btn" id="lang-dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
-          <span class="flag-icon" id="current-lang-flag">🇪🇸</span>
+          <span class="flag-icon" id="current-lang-flag"><img src="flags/es.png" alt="ES" class="lang-flag-img"></span>
           <span class="lang-text" id="current-lang-text">ES</span>
         </button>
         <ul class="lang-dropdown-list" id="lang-dropdown-list" role="listbox">
           <li class="lang-option" data-value="es" role="option" aria-selected="true">
-            <span class="flag-icon">🇪🇸</span>
+            <span class="flag-icon"><img src="flags/es.png" alt="ES" class="lang-flag-img"></span>
             <span class="lang-name">ES</span>
           </li>
           <li class="lang-option" data-value="ca" role="option" aria-selected="false">
-            <span class="flag-icon ca-flag-icon">
-              <svg viewBox="0 0 9 6" width="16" height="11">
-                <rect width="9" height="6" fill="#f1d413"/>
-                <rect width="9" height="0.67" y="0.67" fill="#d31a1a"/>
-                <rect width="9" height="0.67" y="2" fill="#d31a1a"/>
-                <rect width="9" height="0.67" y="3.33" fill="#d31a1a"/>
-                <rect width="9" height="0.67" y="4.67" fill="#d31a1a"/>
-              </svg>
-            </span>
+            <span class="flag-icon"><img src="flags/ca.png" alt="CA" class="lang-flag-img"></span>
             <span class="lang-name">CA</span>
           </li>
           <li class="lang-option" data-value="en" role="option" aria-selected="false">
-            <span class="flag-icon">🇬🇧</span>
+            <span class="flag-icon"><img src="flags/en.png" alt="EN" class="lang-flag-img"></span>
             <span class="lang-name">EN</span>
           </li>
         </ul>
@@ -91,9 +81,7 @@
     <ul class="mobile-menu">
       <li><a href="#/inicio" class="mobile-menu-link">Inicio</a></li>
       <li><a href="#/proyecto" class="mobile-menu-link">Proyecto</a></li>
-      <li><a href="#/transferencia" class="mobile-menu-link">Transferencia</a></li>
-      <li><a href="#/publicaciones" class="mobile-menu-link">Publicación Científica</a></li>
-      <li><a href="#/recursos" class="mobile-menu-link">Recursos</a></li>
+      <li><a href="#/impacto" class="mobile-menu-link">Impacto y Difusión</a></li>
     </ul>
   </div>
 
@@ -112,7 +100,7 @@
         <div class="hero-intro-brand-wrapper">
           <div class="brand-title-group">
             <h2 class="hero-intro-brand-title">
-              <span class="copli">COPLI</span><span class="tele">TELE</span><span class="dash">-</span><span class="ia">IA</span>
+              <span class="co">CO</span><span class="pli">PLI</span><span class="tele">TELE</span><span class="dash">-</span><span class="ia">IA</span>
             </h2>
             <div class="brand-divider-line"></div>
           </div>
@@ -145,13 +133,23 @@
           
           <div class="btn-group">
             <a href="#/proyecto" class="btn-primary" data-i18n="btn_conocer">Conocer el Proyecto</a>
-            <a href="#/publicaciones" class="btn-secondary" data-i18n="btn_publicaciones">Publicaciones</a>
+          </div>
+        </div>
+
+        <!-- Decorative Minimal Progress Bar -->
+        <div class="decorative-progress-bar-container">
+          <div class="progress-header">
+            <div class="progress-bar-label" data-i18n="progress_label">Progreso del Proyecto</div>
+            <div class="progress-percentage">75%</div>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill"></div>
           </div>
         </div>
         
         <!-- Stat Counters Row (Clickable links to sections) -->
         <div class="hero-stats-row">
-          <a href="#/proyecto" class="stat-item">
+          <a href="#/proyecto#proyecto" class="stat-item">
             <div class="stat-icon-circle">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.5L12 15.82l6.11-3.32v2.32L12 18.16l-6.11-3.32v-2.32z"/></svg>
             </div>
@@ -159,7 +157,7 @@
             <span class="stat-label" data-i18n="stats_years">Años de investigación</span>
           </a>
           
-          <a href="#/proyecto" class="stat-item">
+          <a href="#/proyecto#equipo" class="stat-item">
             <div class="stat-icon-circle">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
             </div>
@@ -167,7 +165,7 @@
             <span class="stat-label" data-i18n="stats_investigadores">Investigadores</span>
           </a>
           
-          <a href="#/publicaciones" class="stat-item">
+          <a href="#/impacto#publicaciones" class="stat-item">
             <div class="stat-icon-circle">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
             </div>
@@ -175,12 +173,12 @@
             <span class="stat-label" data-i18n="stats_publicaciones">Publicaciones</span>
           </a>
           
-          <a href="#/proyecto" class="stat-item">
+          <a href="#/impacto#transferencia" class="stat-item">
             <div class="stat-icon-circle">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
             </div>
             <span class="stat-number">4</span>
-            <span class="stat-label" data-i18n="stats_instituciones">Instituciones</span>
+            <span class="stat-label" data-i18n="stats_experiencias">Experiencias</span>
           </a>
         </div>
       </div>
@@ -190,16 +188,16 @@
     <section class="page-section news-section" style="padding-top: 20px; padding-bottom: 40px;">
       <div class="section-container">
         <div class="news-section-header">
-          <h2 class="news-section-title" data-i18n="news_title">Últimas Noticias & Actividades</h2>
-          <a href="#/transferencia" class="btn-outline-blue" style="font-size:13px;">Ver todas &rarr;</a>
+          <h2 class="news-section-title" data-i18n="news_title">Últimas noticias</h2>
+          <a href="#/impacto" class="btn-outline-blue" style="font-size:13px;">Ver todas &rarr;</a>
         </div>
-        <div class="news-cards-grid" id="latest-news-list">
+        <div class="news-cards-grid" id="latest-news-list-home">
           <!-- Injected by JS -->
         </div>
         
         <!-- Row 2: Direct access cards to sections -->
         <div class="section-nav-grid">
-          <a href="#/transferencia" class="section-nav-card card-transferencia">
+          <a href="#/impacto#transferencia" class="section-nav-card card-transferencia">
             <div class="nav-card-icon">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H4.99c-1.11 0-1.98.89-1.98 2L3 19c0 1.1.88 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10z"/></svg>
             </div>
@@ -210,7 +208,7 @@
             <span class="nav-card-arrow">&rarr;</span>
           </a>
           
-          <a href="#/publicaciones" class="section-nav-card card-publicaciones">
+          <a href="#/impacto#publicaciones" class="section-nav-card card-publicaciones">
             <div class="nav-card-icon">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.2 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/></svg>
             </div>
@@ -221,7 +219,7 @@
             <span class="nav-card-arrow">&rarr;</span>
           </a>
           
-          <a href="#/recursos" class="section-nav-card card-recursos">
+          <a href="#/impacto#recursos" class="section-nav-card card-recursos">
             <div class="nav-card-icon">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-1 11H5V8h14v9z"/></svg>
             </div>
@@ -234,35 +232,20 @@
         </div>
       </div>
     </section>
-
-    <!-- Home Previews Section: Transferencia -->
-    <section class="page-section scientific-section" style="padding-top: 40px; padding-bottom: 40px;">
-      <div class="section-container">
-        <div class="news-section-header" style="margin-bottom:28px;">
-          <h2 style="font-size: 24px; font-family: var(--font-primary); font-weight: 800;" data-i18n="menu_transferencia">Transferencia</h2>
-          <a href="#/transferencia" class="btn-outline-blue" style="font-size:13px;" data-i18n="trans_btn_more">Ver todas &rarr;</a>
-        </div>
-        <div class="activities-grid" id="home-activities-grid">
-          <!-- First 3 activities dynamically injected by JS -->
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section" style="padding-top: 40px; padding-bottom: 60px;">
-      <div class="section-container">
-        <div class="news-section-header" style="margin-bottom:28px;">
-          <h2 style="font-size: 24px; font-family: var(--font-primary); font-weight: 800;" data-i18n="menu_publicaciones">Producción Científica</h2>
-          <a href="#/publicaciones" class="btn-outline-blue" style="font-size:13px;">Ver todas &rarr;</a>
-        </div>
-        <div class="publications-grid" id="home-publications-grid">
-          <!-- First 2 publications dynamically injected by JS -->
-        </div>
-      </div>
-    </section>
   </div>
 
   <!-- SPA View: Proyecto (scroll-based, no tabs) -->
   <div id="view-proyecto" class="spa-view">
+    <!-- Sticky Submenu -->
+    <div class="page-submenu-wrapper">
+      <div class="page-submenu-container">
+        <ul class="page-submenu">
+          <li><a href="#/proyecto#proyecto" class="submenu-link active" data-i18n="submenu_desc">Descripción</a></li>
+          <li><a href="#/proyecto#objetivos" class="submenu-link" data-i18n="submenu_obj">Objetivos</a></li>
+          <li><a href="#/proyecto#equipo" class="submenu-link" data-i18n="submenu_miembros">Miembros</a></li>
+        </ul>
+      </div>
+    </div>
 
     <!-- Section 1: Descripción del Proyecto -->
     <section id="proyecto" class="page-section">
@@ -323,20 +306,7 @@
       </div>
     </section>
 
-    <!-- Section 2: Equipo -->
-    <section id="equipo" class="page-section scientific-section">
-      <div class="section-container">
-        <div class="section-title-wrapper">
-          <span class="section-pretitle">Investigadores</span>
-          <h2 class="section-title" data-i18n="tab_equipo">Equipo</h2>
-        </div>
-        <div class="team-grid" id="team-grid">
-          <!-- Team Cards injected by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 3: Objetivos -->
+    <!-- Section 2: Objetivos -->
     <section id="objetivos" class="page-section">
       <div class="section-container">
         <div class="section-title-wrapper">
@@ -374,28 +344,64 @@
         </div>
       </div>
     </section>
+
+    <!-- Section 3: Equipo -->
+    <section id="equipo" class="page-section scientific-section">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle">Investigadores</span>
+          <h2 class="section-title" data-i18n="tab_equipo">Equipo</h2>
+        </div>
+        <div class="team-grid" id="team-grid">
+          <!-- Team Cards injected by JS -->
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- SPA View: Transferencia -->
-  <div id="view-transferencia" class="spa-view">
-    <!-- Actividades de Transferencia -->
-    <section id="transferencia" class="page-section scientific-section">
+  <!-- SPA View: Impacto y Difusión -->
+  <div id="view-impacto" class="spa-view">
+    <!-- Sticky Submenu -->
+    <div class="page-submenu-wrapper">
+      <div class="page-submenu-container">
+        <ul class="page-submenu">
+          <li><a href="#/impacto#noticias" class="submenu-link active" data-i18n="submenu_noticias">Últimas noticias</a></li>
+          <li><a href="#/impacto#transferencia" class="submenu-link" data-i18n="submenu_transferencia">Transferencia</a></li>
+          <li><a href="#/impacto#publicaciones" class="submenu-link" data-i18n="submenu_publicaciones">Producción científica</a></li>
+          <li><a href="#/impacto#recursos" class="submenu-link" data-i18n="submenu_recursos">Recursos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 1: Últimas noticias -->
+    <section id="noticias" class="page-section news-section" style="padding-top: 40px; padding-bottom: 40px;">
+      <div class="section-container">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle" data-i18n="news_pretitle">Actualidad</span>
+          <h2 class="section-title" data-i18n="news_title">Últimas noticias</h2>
+        </div>
+        <div class="news-cards-grid" id="latest-news-list-impact">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Actividades de Transferencia -->
+    <section id="transferencia" class="page-section scientific-section" style="padding-top: 40px; padding-bottom: 40px;">
       <div class="section-container">
         <div class="section-title-wrapper">
           <span class="section-pretitle" data-i18n="trans_pretitle">Impacto y difusión</span>
           <h2 class="section-title">Actividades de <span class="blue-highlight">Transferencia</span></h2>
           <p class="section-subtitle" data-i18n="trans_subtitle">Actividades diseñadas para maximizar el impacto social y educativo de nuestra investigación, conectando la academia con la práctica docente y la sociedad.</p>
         </div>
-        
         <!-- Activities Grid (Dynamically rendered via JS) -->
         <div class="activities-grid" id="activities-grid"></div>
       </div>
     </section>
-  </div>
 
-  <!-- SPA View: Producción Científica -->
-  <div id="view-publicaciones" class="spa-view">
-    <section id="publicaciones" class="page-section">
+    <!-- Section 3: Producción Científica -->
+    <section id="publicaciones" class="page-section" style="padding-top: 40px; padding-bottom: 40px;">
       <div class="section-container">
         <div class="section-title-wrapper">
           <span class="section-pretitle" data-i18n="pub_pretitle">Biblioteca Científica</span>
@@ -403,20 +409,13 @@
           <p class="section-subtitle" data-i18n="pub_subtitle">Accede a las publicaciones del proyecto sincronizadas con nuestra biblioteca de referencias de Zotero.</p>
         </div>
         
-        <!-- Filter and Search Bar -->
-        <div class="filter-bar">
-          <div class="tabs">
-            <button class="tab-btn active" data-tab="all" data-i18n="tab_all">Todas</button>
-            <button class="tab-btn" data-tab="revista" data-i18n="tab_revistas">Revistas (Zotero)</button>
-            <button class="tab-btn" data-tab="libro" data-i18n="tab_libros">Libros (Zotero)</button>
-            <button class="tab-btn" data-tab="ponencia" data-i18n="tab_ponencias">Ponencias y Congresos</button>
-          </div>
-          
-          <div class="search-wrapper">
-            <span class="search-icon">
-              <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <!-- Centered and simplified Search Bar -->
+        <div class="filter-bar-centered" style="display: flex; justify-content: center; margin-bottom: 40px; width: 100%;">
+          <div class="search-wrapper" style="max-width: 600px; width: 100%; position: relative;">
+            <span class="search-icon" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; pointer-events: none; color: var(--color-text-muted-light);">
+              <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             </span>
-            <input type="text" id="publications-search" class="search-input" placeholder="Buscar por título, autor o tag...">
+            <input type="text" id="publications-search" class="search-input" style="width: 100%; padding: 14px 20px 14px 52px; border-radius: 99px; border: 1.5px solid var(--color-border-light); background: rgba(255, 255, 255, 0.03); color: var(--color-text-light); font-family: var(--font-primary); font-size: 14.5px; transition: all 0.3s ease;" placeholder="Buscar por título, autor o tag...">
           </div>
         </div>
         
@@ -424,28 +423,11 @@
         <div class="publications-grid" id="publications-grid">
           <!-- Injected by JS -->
         </div>
-        
-        <!-- Conferences showcase -->
-        <div class="grid-2" style="margin-top: 60px; align-items: center; background: rgba(29, 91, 254, 0.02); border-radius: 28px; padding: 40px; border: 1px dashed var(--color-border-light);">
-          <div>
-            <span class="hero-tag" style="background: rgba(29, 91, 254, 0.04); color: var(--color-blue); border-color: rgba(29, 91, 254, 0.1);">Divulgación Académica</span>
-            <h3 style="font-size: 24px; margin-bottom: 16px; font-family: var(--font-primary);">Ponencias y Seminarios</h3>
-            <p style="color: var(--color-text-muted-light); margin-bottom: 24px; font-size: 14.5px;">
-              Participamos activamente en congresos nacionales e internacionales compartiendo nuestros hallazgos sobre la parametrización ética de sistemas inteligentes con la comunidad educativa global.
-            </p>
-            <a href="#/inicio" class="btn-secondary" style="font-size: 13px; padding: 10px 20px;">Ver Calendario de Eventos</a>
-          </div>
-          <div class="image-showcase" style="aspect-ratio: 16 / 10;">
-            <img src="/src/assets/images/congresos.png" alt="Investigadora presentando en congreso internacional">
-          </div>
-        </div>
       </div>
     </section>
-  </div>
 
-  <!-- SPA View: Recursos -->
-  <div id="view-recursos" class="spa-view">
-    <section id="recursos" class="page-section scientific-section">
+    <!-- Section 4: Recursos -->
+    <section id="recursos" class="page-section scientific-section" style="padding-top: 40px; padding-bottom: 40px;">
       <div class="section-container">
         <div class="section-title-wrapper">
           <span class="section-pretitle" data-i18n="rec_pretitle">Repositorio Abierto</span>

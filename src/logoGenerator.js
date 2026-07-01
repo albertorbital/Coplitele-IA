@@ -100,7 +100,7 @@ export function generateLogoConfig() {
         start: greenStart, 
         end: greenEnd, 
         length: lenGreen, 
-        color: "hsl(155, 90%, 45%)", 
+        color: "hsl(155, 55%, 58%)", 
         dotPos: dotPosGreen, 
         centerOffsetAngle: 150,
         words: ["Technology", "Inteligencia", "Artificial"]
