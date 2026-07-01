@@ -33,8 +33,8 @@ const teamMembers = [
     email: "adolfina.perez@uib.es",
     orcid: "0000-0001-9721-6548",
     researchgate: "https://www.researchgate.net/profile/Adolfina-Perez-Garcias",
-    photo: "miembros/color/adolfina_perez.png",
-    photoHover: "miembros/Hover/adolfina_perez.png"
+    photo: "miembros/Hover/adolfina_perez.png",
+    photoHover: "miembros/color/adolfina_perez.png"
   },
   {
     id: "barbara-de-benito",
@@ -57,8 +57,8 @@ const teamMembers = [
     email: "barbara.debenito@uib.es",
     orcid: "0000-0002-4589-9812",
     researchgate: "https://www.researchgate.net/profile/Barbara-De-Benito-Crosetti",
-    photo: "miembros/color/barbara_de_benito.png",
-    photoHover: "miembros/Hover/barbara_de_benito.png"
+    photo: "miembros/Hover/barbara_de_benito.png",
+    photoHover: "miembros/color/barbara_de_benito.png"
   },
   {
     id: "jesus-salinas",
@@ -81,8 +81,8 @@ const teamMembers = [
     email: "jesus.salinas@uib.es",
     orcid: "0000-0003-2415-8822",
     researchgate: "https://www.researchgate.net/profile/Jesus-Salinas-3",
-    photo: "miembros/color/jesus_salinas.png",
-    photoHover: "miembros/Hover/jesus_salinas.png"
+    photo: "miembros/Hover/jesus_salinas.png",
+    photoHover: "miembros/color/jesus_salinas.png"
   },
   {
     id: "santos-urbina",
@@ -105,8 +105,8 @@ const teamMembers = [
     email: "santos.urbina@uib.es",
     orcid: "0000-0002-3901-7788",
     researchgate: "https://www.researchgate.net/profile/Santos-Urbina",
-    photo: "miembros/color/santos_urbina.png",
-    photoHover: "miembros/Hover/santos_urbina.png"
+    photo: "miembros/Hover/santos_urbina.png",
+    photoHover: "miembros/color/santos_urbina.png"
   },
   {
     id: "francisca-negre",
@@ -129,8 +129,8 @@ const teamMembers = [
     email: "xisca.negre@uib.es",
     orcid: "0000-0002-8456-1122",
     researchgate: "https://www.researchgate.net/profile/Francisca-Negre",
-    photo: "miembros/color/francisca_negre.png",
-    photoHover: "miembros/Hover/francisca_negre.png"
+    photo: "miembros/Hover/francisca_negre.png",
+    photoHover: "miembros/color/francisca_negre.png"
   },
   {
     id: "gemma-tur",
@@ -153,8 +153,8 @@ const teamMembers = [
     email: "gemma.tur@uib.cat",
     orcid: "0000-0002-2309-8812",
     researchgate: "https://www.researchgate.net/profile/Gemma-Tur",
-    photo: "miembros/color/gemma_tur.png",
-    photoHover: "miembros/Hover/gemma_tur.png"
+    photo: "miembros/Hover/gemma_tur.png",
+    photoHover: "miembros/color/gemma_tur.png"
   },
   {
     id: "francisco-lirola",
@@ -177,8 +177,8 @@ const teamMembers = [
     email: "francisco.lirola@uib.es",
     orcid: "0000-0001-5612-4433",
     researchgate: "https://www.researchgate.net/profile/Francisco-Lirola",
-    photo: "miembros/color/francisco_lirola.png",
-    photoHover: "miembros/Hover/francisco_lirola.png"
+    photo: "miembros/Hover/francisco_lirola.png",
+    photoHover: "miembros/color/francisco_lirola.png"
   },
   {
     id: "linda-castaneda",
@@ -201,8 +201,8 @@ const teamMembers = [
     email: "lindacq@um.es",
     orcid: "0000-0002-3112-9988",
     researchgate: "https://www.researchgate.net/profile/Linda-Castaneda",
-    photo: "miembros/color/linda_castaneda.png",
-    photoHover: "miembros/Hover/linda_castaneda.png"
+    photo: "miembros/Hover/linda_castaneda.png",
+    photoHover: "miembros/color/linda_castaneda.png"
   },
   {
     id: "enric-bresco",
@@ -225,8 +225,8 @@ const teamMembers = [
     email: "enric.bresco@udl.cat",
     orcid: "0000-0003-1288-4455",
     researchgate: "https://www.researchgate.net/profile/Enric-Bresco-Baiges",
-    photo: "miembros/color/enric_bresco.png",
-    photoHover: "miembros/Hover/enric_bresco.png"
+    photo: "miembros/Hover/enric_bresco.png",
+    photoHover: "miembros/color/enric_bresco.png"
   },
   {
     id: "gustavo-angulo",
@@ -249,8 +249,8 @@ const teamMembers = [
     email: "gustavo.angulo@uib.cat",
     orcid: "0000-0002-6677-1122",
     researchgate: "https://www.researchgate.net/profile/Gustavo-Angulo-Mendoza",
-    photo: "miembros/color/gustavo_angulo.png",
-    photoHover: "miembros/Hover/gustavo_angulo.png"
+    photo: "miembros/Hover/gustavo_angulo.png",
+    photoHover: "miembros/color/gustavo_angulo.png"
   }
 ];
 
@@ -655,9 +655,9 @@ const translations = {
     tab_desc: "Descripción",
     tab_equipo: "Equipo",
     project_what_is: "¿Qué es COPLITELE-IA?",
-    project_what_is_p1: "<strong>COPLITELE-IA</strong> (Codiseño, Personalización y Tecnología en la Telecolaboración para el Aprendizaje de Lenguas con IA) es un proyecto de investigación financiado por el Ministerio de Ciencia e Innovación de España (Ref. PID2021-127836NB-I00).",
-    project_what_is_p2: "El proyecto examina cómo los enfoques de codiseño participativo, combinados con herramientas de inteligencia artificial, pueden transformar las experiencias de telecolaboración interlingüística, especialmente en contextos de aprendizaje de lenguas extranjeras.",
-    project_what_is_p3: "Nuestro enfoque integra la comunicación mediada por ordenador (CMC), el aprendizaje de lenguas asistido por ordenador (CALL) y las tecnologías emergentes de IA, incluidos modelos de lenguaje, análisis de sentimientos y sistemas de retroalimentación automatizada.",
+    project_what_is_p1: "COPLITELE-IA es un proyecto de investigación científica orientado a la transformación digital y la innovación metodológica en el ámbito de la educación superior. Su eje central consiste en estudiar, diseñar y validar escenarios y estrategias flexibles de aprendizaje que aprovechen el potencial dialógico y adaptativo de la Inteligencia Artificial Generativa (IAG). A diferencia de otros enfoques centrados únicamente en la automatización, esta propuesta sitúa la pedagogía en el centro, utilizando la tecnología como un socio estratégico para potenciar los procesos formativos en entornos virtuales conectados.",
+    project_what_is_p2: "El proyecto introduce el concepto de \"codiseño educativo\", implicando activamente a docentes y estudiantes en la toma de decisiones y en la co-construcción de itinerarios de aprendizaje personalizados y adaptados a los intereses y metas individuales. De este modo, la IAG se implementa no solo para enriquecer el aprendizaje del alumnado, sino también como una herramienta de apoyo didáctico para el profesorado. El objetivo último de COPLITELE-IA es empoderar y fortalecer tanto la agencia académica de los estudiantes como la agencia profesional de los docentes, garantizando entornos educativos inclusivos, equitativos y de alta calidad.",
+    project_what_is_p3: "",
     meta_ref: "Ref. Proyecto",
     meta_duracion: "Duración",
     meta_lider: "Institución Líder",
@@ -722,9 +722,9 @@ const translations = {
     tab_desc: "Descripció",
     tab_equipo: "Equip",
     project_what_is: "Què és COPLITELE-IA?",
-    project_what_is_p1: "<strong>COPLITELE-IA</strong> (Codisseny, Personalització i Tecnologia en la Telecolaboració per a l'Aprenentatge de Llengües amb IA) és un projecte d'investigació finançat pel Ministeri de Ciència i Innovació d'Espanya (Ref. PID2021-127836NB-I00).",
-    project_what_is_p2: "El projecte examina com els enfocaments de codisseny participatiu, combinats amb eines d'intel·ligència artificial, poden transformar les experiències de telecolaboració interlingüística, especialment en contextos d'aprenentatge de llengües estrangeres.",
-    project_what_is_p3: "El nostre enfocament integra la comunicació mediada per ordinador (CMC), l'aprenentatge de llengües assistit per ordinador (CALL) i les tecnologies emergents d'IA, inclosos models de llenguatge, anàlisi de sentiments i sistemes de retroalimentació automatizada.",
+    project_what_is_p1: "COPLITELE-IA és un projecte d'investigació científica orientat a la transformació digital i la innovació metodològica en l'àmbit de l'educació superior. El seu eix central consisteix a estudiar, dissenyar i validar escenaris i estratègies flexibles d'aprenentatge que aprofitin el potencial dialògic i adaptatiu de la Intel·ligència Artificial Generativa (IAG). A diferència d'altres enfocaments centrats únicament en l'automatització, aquesta proposta situa la pedagogia en el centre, utilitzant la tecnologia com un soci estratègic per potenciar els processos formatius en entorns virtuals connectats.",
+    project_what_is_p2: "El projecte introdueix el concepte de \"codisseny educatiu\", implicant activament docents i estudiants en la presa de decisions i en la co-construcció d'itineraris d'aprenentatge personalitzats i adaptats als interessos i metes individuals. D'aquesta manera, la IAG s'implementa no només per enriquir l'aprenentatge de l'alumnat, sinó també com una eina de suport didàctic per al professorat. L'objectiu últim de COPLITELE-IA és empoderar i enfortir tant l'agència acadèmica dels estudiants com l'agència professional dels docents, garantint entorns educatius inclusius, equitatius i d'alta qualitat.",
+    project_what_is_p3: "",
     meta_ref: "Ref. Projecte",
     meta_duracion: "Durada",
     meta_lider: "Institució Líder",
@@ -789,9 +789,9 @@ const translations = {
     tab_desc: "Description",
     tab_equipo: "Team",
     project_what_is: "What is COPLITELE-IA?",
-    project_what_is_p1: "<strong>COPLITELE-IA</strong> (Co-design, Personalization, and Technology in Telecollaboration for Language Learning with AI) is a research project funded by the Spanish Ministry of Science and Innovation (Ref. PID2021-127836NB-I00).",
-    project_what_is_p2: "The project examines how participatory co-design approaches, combined with artificial intelligence tools, can transform interlingual telecollaboration experiences, especially in foreign language learning contexts.",
-    project_what_is_p3: "Our approach integrates computer-mediated communication (CMC), computer-assisted language learning (CALL), and emerging AI technologies, including language models, sentiment analysis, and automated feedback systems.",
+    project_what_is_p1: "COPLITELE-IA is a scientific research project focused on digital transformation and methodological innovation in higher education. Its central axis consists of studying, designing, and validating flexible learning scenarios and strategies that leverage the dialogic and adaptive potential of Generative Artificial Intelligence (GAI). Unlike other approaches focused solely on automation, this proposal places pedagogy at the core, utilizing technology as a strategic partner to enhance educational processes in connected virtual environments.",
+    project_what_is_p2: "The project introduces the concept of \"educational co-design\", actively involving both teachers and students in decision-making and in the co-construction of personalized learning paths tailored to individual interests and goals. In this way, GAI is implemented not only to enrich student learning but also as a pedagogical support tool for faculty. The ultimate goal of COPLITELE-IA is to empower and strengthen both the academic agency of students and the professional agency of educators, ensuring inclusive, equitable, and high-quality educational environments.",
+    project_what_is_p3: "",
     meta_ref: "Project Ref",
     meta_duracion: "Duration",
     meta_lider: "Lead Institution",
@@ -1182,28 +1182,34 @@ function renderTeam() {
   const teamGrid = document.getElementById('team-grid');
   if (!teamGrid) return;
   
-  teamGrid.innerHTML = teamMembers.map(member => `
-    <article class="team-card" id="card-${member.id}" style="cursor: pointer;">
-      <div class="team-photo">
-        <img src="${member.photo}" class="photo-color" alt="${member.name}" loading="lazy">
-        <img src="${member.photoHover}" class="photo-hover" alt="${member.name}" loading="lazy">
-      </div>
-      <div class="team-info">
-        <span class="team-role">${member.role[currentLang]}</span>
-        <h3 class="team-name">${member.name}</h3>
-        <p class="team-bio">${member.bio[currentLang].substring(0, 100)}...</p>
-        <div class="team-links">
-          <button class="btn-small view-member-btn" data-id="${member.id}">${currentLang === 'en' ? 'View Full Profile' : (currentLang === 'ca' ? 'Veure Perfil Complet' : 'Ver Perfil Completo')}</button>
+  const colors = ['blue', 'green', 'teal'];
+  
+  teamGrid.innerHTML = teamMembers.map((member, i) => {
+    const colorClass = colors[i % colors.length];
+    const btnText = currentLang === 'en' ? 'View Full Profile' : (currentLang === 'ca' ? 'Veure Perfil Complet' : 'Ver Perfil Completo');
+    
+    return `
+      <article class="team-card color-variation-${colorClass}" id="card-${member.id}" style="cursor: pointer;">
+        <div class="team-photo">
+          <img src="${member.photo}" class="photo-color" alt="${member.name}" loading="lazy">
+          <img src="${member.photoHover}" class="photo-hover" alt="${member.name}" loading="lazy">
         </div>
-      </div>
-    </article>
-  `).join('');
+        <div class="team-info">
+          <span class="team-role">${member.role[currentLang]}</span>
+          <h3 class="team-name">${member.name}</h3>
+          <p class="team-bio">${member.bio[currentLang].substring(0, 100)}...</p>
+          <div class="team-links">
+            <button class="btn-premium ${colorClass} view-member-btn" data-id="${member.id}">${btnText}</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
   
   // Add events to details buttons and whole cards
   document.querySelectorAll('.team-card').forEach(card => {
     const memberId = card.id.replace('card-', '');
     card.addEventListener('click', (e) => {
-      // If they clicked the button specifically, we let the button click handler do it
       if (e.target.classList.contains('view-member-btn')) return;
       openMemberModal(memberId);
     });

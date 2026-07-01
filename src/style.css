@@ -3066,7 +3066,8 @@ body.custom-cursor-hover .custom-cursor-follower {
   aspect-ratio: 4/5;
   background: transparent;
   border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.dark-mode .team-photo {
@@ -3122,13 +3123,58 @@ body.dark-mode .team-photo {
    NEW BRAND DESIGN OVERRIDES (#292A44, Fills, Modals, Reveals)
    ==================================================== */
 
+/* Scrolling concentric circles background */
+.scroll-circles-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.scroll-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.2px dashed rgba(29, 91, 254, 0.05); /* very soft brand blue */
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+body.dark-mode .scroll-circle {
+  border-color: rgba(124, 228, 224, 0.04); /* very soft brand teal */
+}
+
+.circle-1 { width: 350px; height: 350px; }
+.circle-2 { width: 600px; height: 600px; }
+.circle-3 { width: 900px; height: 900px; }
+.circle-4 { width: 1250px; height: 1250px; }
+
+/* Color variations for outlines */
+.team-card.color-variation-blue .photo-color {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(91%) saturate(3133%) hue-rotate(215deg);
+}
+
+.team-card.color-variation-green .photo-color {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(74%) saturate(423%) hue-rotate(112deg);
+}
+
+.team-card.color-variation-teal .photo-color {
+  filter: brightness(0) saturate(100%) invert(79%) sepia(35%) saturate(697%) hue-rotate(130deg);
+}
+
 /* Header Logo Text visibility */
 .header-logo-text {
   font-family: var(--font-primary);
   font-weight: 850;
   font-size: 16.5px;
   letter-spacing: 0.05em;
-  color: var(--color-text-light);
   opacity: 0;
   transform: translateX(-10px);
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -3137,14 +3183,18 @@ body.dark-mode .team-photo {
   vertical-align: middle;
 }
 
-body.dark-mode .header-logo-text {
-  color: var(--color-text-dark);
-}
-
 header.scrolled .header-logo-text {
   opacity: 1;
   transform: translateX(0);
 }
+
+/* Header logo spans coloring */
+.header-logo-text .co { color: var(--color-blue); }
+.header-logo-text .pli { color: var(--color-green); }
+.header-logo-text .tele { color: var(--color-teal); }
+.header-logo-text .dash { color: #cbd5e1; margin: 0 1px; }
+body.dark-mode .header-logo-text .dash { color: #475569; }
+.header-logo-text .ia { color: var(--color-teal); }
 
 /* Premium Outlined & Gradient Flipped Action Buttons */
 .btn-premium {
@@ -3204,16 +3254,80 @@ header.scrolled .header-logo-text {
   transform: translateY(-2px);
 }
 
+/* Translucent Glassmorphism Scrolled Header (Lens effect) */
+header.scrolled {
+  height: 66px;
+  top: 6px;
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.dark-mode header.scrolled {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Page Submenu Wrapper - Floating Capsule Joined to Scrolled Header */
+.page-submenu-wrapper {
+  position: sticky;
+  top: 71px; /* Joined seamlessly below scrolled header (top 6px + height 66px - 1px border) */
+  z-index: 98;
+  width: 92%;
+  max-width: 1400px;
+  margin: 120px auto 0 auto;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+body.dark-mode .page-submenu-wrapper {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Title Stacking Layout Fix */
+.section-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.section-pretitle {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  display: block;
+  margin-top: 14px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Wide Fullscreen Overlay Dialog */
 dialog.modal-large {
-  width: 1050px;
+  width: 1150px;
   max-width: 95vw;
   height: auto;
   max-height: 90vh;
   border-radius: 28px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: none !important;
   padding: 44px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.25);
   background: #ffffff;
   display: flex;
   flex-direction: column;
@@ -3222,7 +3336,7 @@ dialog.modal-large {
 
 body.dark-mode dialog.modal-large {
   background: #292A44; /* Premium Deep Indigo background */
-  border-color: rgba(255, 255, 255, 0.08);
+  border: none !important;
 }
 
 dialog.modal-large .modal-header {
@@ -3238,8 +3352,8 @@ dialog.modal-large .modal-body {
 
 .modal-member-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 40px;
+  grid-template-columns: 380px 1fr;
+  gap: 48px;
   align-items: start;
 }
 
@@ -3844,4 +3958,5 @@ footer {
   width: 85% !important;
   background: var(--color-teal);
 }
+
 

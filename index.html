@@ -10,6 +10,14 @@
 </head>
 <body>
 
+  <!-- Concentric Scroll Circles Background -->
+  <div class="scroll-circles-bg">
+    <div class="scroll-circle circle-1"></div>
+    <div class="scroll-circle circle-2"></div>
+    <div class="scroll-circle circle-3"></div>
+    <div class="scroll-circle circle-4"></div>
+  </div>
+
   <!-- Ambient Glow Backgrounds -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
@@ -21,7 +29,7 @@
       <div class="logo-wrapper" id="header-logo-container">
         <!-- Logo SVG rendered by JS -->
       </div>
-      <span class="header-logo-text">COPLITELE-IA</span>
+      <span class="header-logo-text"><span class="co">CO</span><span class="pli">PLI</span><span class="tele">TELE</span><span class="dash">-</span><span class="ia">IA</span></span>
     </a>
     <!-- Desktop Navigation Links -->
     <nav>
@@ -32,8 +40,21 @@
       </ul>
     </nav>
 
-    <!-- Header Controls (Lang, Theme, Socials) -->
+    <!-- Header Controls (Socials, Lang, Theme) -->
     <div class="header-controls">
+      <!-- Social Networks -->
+      <div class="header-socials">
+        <a href="https://facebook.com" target="_blank" class="header-social-link" title="Facebook" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+        </a>
+        <a href="https://bsky.app" target="_blank" class="header-social-link" title="Bluesky" aria-label="Bluesky">
+          <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.2-1.8-2.6-3.8-4-5.3-2.1-2.2-4.5-3.5-6.5-1.5S1.2 8.5 3.4 10.6c1.5 1.4 3.5 2.8 5.3 4 1.2.8 2.3 1.5 3.3 2.2-1 .7-2.1 1.4-3.3 2.2-1.8 1.2-3.8 2.6-5.3 4-2.2 2.1-3.5 4.5-1.5 6.5s4.5.6 6.5-1.5c1.4-1.5 2.8-3.5 4-5.3.8-1.2 1.5-2.3 2.2-3.3.7 1 1.4 2.1 2.2 3.3 1.2 1.8 2.6 3.8 4 5.3 2.1 2.2 4.5 3.5 6.5 1.5s.6-4.5-1.5-6.5c-1.5-1.4-3.5-2.8-5.3-4-1.2-.8-2.3-1.5-3.3-2.2 1-.7 2.1-1.4 3.3-2.2 1.8-1.2 3.8-2.6 5.3-4 2.2-2.1 3.5-4.5 1.5-6.5s-4.5-.6-6.5 1.5c-1.4 1.5-2.8 3.5-4 5.3-.8 1.2-1.5 2.3-2.2 3.3z"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="header-social-link" title="Instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0 3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+
       <!-- Custom Language Dropdown with Flags -->
       <div class="custom-lang-dropdown" id="lang-dropdown-container">
         <button class="lang-dropdown-btn" id="lang-dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
@@ -54,19 +75,6 @@
             <span class="lang-name">EN</span>
           </li>
         </ul>
-      </div>
-
-      <!-- Social Networks -->
-      <div class="header-socials">
-        <a href="https://facebook.com" target="_blank" class="header-social-link" title="Facebook" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-        </a>
-        <a href="https://bsky.app" target="_blank" class="header-social-link" title="Bluesky" aria-label="Bluesky">
-          <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.2-1.8-2.6-3.8-4-5.3-2.1-2.2-4.5-3.5-6.5-1.5S1.2 8.5 3.4 10.6c1.5 1.4 3.5 2.8 5.3 4 1.2.8 2.3 1.5 3.3 2.2-1 .7-2.1 1.4-3.3 2.2-1.8 1.2-3.8 2.6-5.3 4-2.2 2.1-3.5 4.5-1.5 6.5s4.5.6 6.5-1.5c1.4-1.5 2.8-3.5 4-5.3.8-1.2 1.5-2.3 2.2-3.3.7 1 1.4 2.1 2.2 3.3 1.2 1.8 2.6 3.8 4 5.3 2.1 2.2 4.5 3.5 6.5 1.5s.6-4.5-1.5-6.5c-1.5-1.4-3.5-2.8-5.3-4-1.2-.8-2.3-1.5-3.3-2.2 1-.7 2.1-1.4 3.3-2.2 1.8-1.2 3.8-2.6 5.3-4 2.2-2.1 3.5-4.5 1.5-6.5s-4.5-.6-6.5 1.5c-1.4 1.5-2.8 3.5-4 5.3-.8 1.2-1.5 2.3-2.2 3.3z"/></svg>
-        </a>
-        <a href="https://instagram.com" target="_blank" class="header-social-link" title="Instagram" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0 3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
       </div>
       
       <!-- Mobile toggler -->
@@ -291,13 +299,10 @@
           <div class="project-text-block">
             <h3 data-i18n="project_what_is">¿Qué es COPLITELE-IA?</h3>
             <p data-i18n="project_what_is_p1">
-              <strong>COPLITELE-IA</strong> (Codiseño, Personalización y Tecnología en la Telecolaboración para el Aprendizaje de Lenguas con IA) es un proyecto de investigación financiado por el Ministerio de Ciencia e Innovación de España (Ref. PID2021-127836NB-I00).
+              COPLITELE-IA es un proyecto de investigación científica orientado a la transformación digital y la innovación metodológica en el ámbito de la educación superior. Su eje central consiste en estudiar, diseñar y validar escenarios y estrategias flexibles de aprendizaje que aprovechen el potencial dialógico y adaptativo de la Inteligencia Artificial Generativa (IAG). A diferencia de otros enfoques centrados únicamente en la automatización, esta propuesta sitúa la pedagogía en el centro, utilizando la tecnología como un socio estratégico para potenciar los procesos formativos en entornos virtuales conectados.
             </p>
             <p data-i18n="project_what_is_p2">
-              El proyecto examina cómo los enfoques de codiseño participativo, combinados con herramientas de inteligencia artificial, pueden transformar las experiencias de telecolaboración interlingüística, especialmente en contextos de aprendizaje de lenguas extranjeras.
-            </p>
-            <p data-i18n="project_what_is_p3">
-              Nuestro enfoque integra la comunicación mediada por ordenador (CMC), el aprendizaje de lenguas asistido por ordenador (CALL) y las tecnologías emergentes de IA, incluidos modelos de lenguaje, análisis de sentimientos y sistemas de retroalimentación automatizada.
+              El proyecto introduce el concepto de "codiseño educativo", implicando activamente a docentes y estudiantes en la toma de decisiones y en la co-construcción de itinerarios de aprendizaje personalizados y adaptados a los intereses y metas individuales. De este modo, la IAG se implementa no solo para enriquecer el aprendizaje del alumnado, sino también como una herramienta de apoyo didáctico para el profesorado. El objetivo último de COPLITELE-IA es empoderar y fortalecer tanto la agencia académica de los estudiantes como la agencia profesional de los docentes, garantizando entornos educativos inclusivos, equitativos y de alta calidad.
             </p>
 
             <div class="project-meta-grid">
