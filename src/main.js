@@ -13,76 +13,244 @@ let currentLang = 'es'; // 'es', 'ca', 'en'
 
 const teamMembers = [
   {
-    id: "maria-gomez",
-    name: "Dra. Maria Gómez",
+    id: "adolfina-perez",
+    name: "Dra. Adolfina Pérez Garcías",
     role: {
-      es: "Directora del Proyecto",
-      ca: "Directora del Projecte",
-      en: "Project Director"
+      es: "Investigadora Principal",
+      ca: "Investigadora Principal",
+      en: "Principal Investigator"
+    },
+    title: {
+      es: "Profesora Titular de Tecnología Educativa, UIB",
+      ca: "Professora Titular de Tecnologia Educativa, UIB",
+      en: "Associate Professor of Educational Technology, UIB"
     },
     bio: {
-      es: "Doctora en Tecnología Educativa por la UIB. Especialista en metodologías participativas y codiseño de entornos inteligentes de aprendizaje. Coordina la vinculación del proyecto con las escuelas.",
-      ca: "Doctora en Tecnologia Educativa per la UIB. Especialista en metodologies participatives i codisseny d'entorns intel·ligents d'aprenentatge. Coordina la vinculació del projecte amb les escoles.",
-      en: "PhD in Educational Technology from UIB. Specialist in participatory methodologies and co-design of smart learning environments. She coordinates project partnerships with schools."
+      es: "Doctora en Filosofía y Ciencias de la Educación. Profesora titular en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Codirectora del Grupo de Tecnología Educativa (GTE). Su investigación se centra en el codiseño educativo, entornos virtuales y la innovación docente.",
+      ca: "Doctora en Filosofia i Ciències de l'Educació. Professora titular al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Codirectora del Grup de Tecnologia Educativa (GTE). La seva recerca se centra en el codisseny educatiu, entorns virtuals i la innovació docent.",
+      en: "PhD in Philosophy and Educational Sciences. Associate Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Co-director of the Educational Technology Group (GTE). Her research focuses on educational co-design, virtual environments, and teaching innovation."
     },
-    email: "maria.gomez@uib.es",
-    orcid: "0000-0002-1823-9922",
-    researchgate: "https://researchgate.net/profile/Maria-Gomez",
-    photo: investigadoresImg
+    email: "adolfina.perez@uib.es",
+    orcid: "0000-0001-9721-6548",
+    researchgate: "https://www.researchgate.net/profile/Adolfina-Perez-Garcias",
+    photo: "miembros/color/adolfina_perez.png",
+    photoHover: "miembros/Hover/adolfina_perez.png"
   },
   {
-    id: "alberto-rodriguez",
-    name: "Dr. Alberto Rodríguez",
+    id: "barbara-de-benito",
+    name: "Dra. Bárbara de Benito Crosetti",
     role: {
-      es: "Investigador Principal",
-      ca: "Investigador Principal",
-      en: "Lead Researcher"
+      es: "Investigadora Principal",
+      ca: "Investigadora Principal",
+      en: "Principal Investigator"
+    },
+    title: {
+      es: "Catedrática de Tecnología Educativa, UIB",
+      ca: "Catedràtica de Tecnologia Educativa, UIB",
+      en: "Professor of Educational Technology, UIB"
     },
     bio: {
-      es: "Doctor en Informática. Su campo de investigación es la Inteligencia Artificial aplicada a la personalización de contenidos y a la analítica de aprendizaje en educación superior.",
-      ca: "Doctor en Informàtica. El seu camp d'investigació és la Intel·ligència Artificial aplicada a la personalització de continguts i a l'analítica d'aprenentatge en educació superior.",
-      en: "PhD in Computer Science. His research field is Artificial Intelligence applied to content personalization and learning analytics in higher education."
+      es: "Doctora en Tecnología Educativa y profesora en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Miembro activo del Grupo de Tecnología Educativa (GTE). Especializada en el diseño de recursos virtuales, integración de TIC y metodologías activas.",
+      ca: "Doctora en Tecnologia Educativa i professora al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Membre actiu del Grup de Tecnologia Educativa (GTE). Especialitzada en el disseny de recursos virtuals, integració de TIC i metodologies actives.",
+      en: "PhD in Educational Technology and Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Active member of the Educational Technology Group (GTE). Specialized in the design of virtual resources, ICT integration, and active methodologies."
     },
-    email: "alberto.rodriguez@uib.es",
-    orcid: "0000-0003-4902-8812",
-    researchgate: "https://researchgate.net/profile/Alberto-Rodriguez",
-    photo: investigadoresImg
+    email: "barbara.debenito@uib.es",
+    orcid: "0000-0002-4589-9812",
+    researchgate: "https://www.researchgate.net/profile/Barbara-De-Benito-Crosetti",
+    photo: "miembros/color/barbara_de_benito.png",
+    photoHover: "miembros/Hover/barbara_de_benito.png"
   },
   {
-    id: "lucas-martinez",
-    name: "Dr. Lucas Martínez",
+    id: "jesus-salinas",
+    name: "Dr. Jesús María Salinas Ibáñez",
     role: {
-      es: "Investigador en IA",
-      ca: "Investigador en IA",
-      en: "AI Researcher"
+      es: "Investigador",
+      ca: "Investigador",
+      en: "Researcher"
+    },
+    title: {
+      es: "Catedrático de Universidad, UIB",
+      ca: "Catedràtic d'Universitat, UIB",
+      en: "Full Professor, UIB"
     },
     bio: {
-      es: "Especialista en procesamiento del lenguaje natural y modelado de estudiante. Desarrolla los algoritmos predictivos adaptativos del proyecto.",
-      ca: "Especialista en processament del llenguatge natural i modelatge d'estudiant. Desenvolupa els algorismes predictius adaptatius del projecte.",
-      en: "Specialist in natural language processing and student modeling. He develops the project's predictive adaptive algorithms."
+      es: "Catedrático del Área de Didáctica y Organización Escolar de la UIB. Fundador del Grupo de Tecnología Educativa (GTE). Amplia trayectoria en el diseño de entornos virtuales de aprendizaje, formación del profesorado en TIC y educación flexible y a distancia.",
+      ca: "Catedràtic de l'Àrea de Didàctica i Organització Escolar de la UIB. Fundador del Grup de Tecnologia Educativa (GTE). Àmplia trajectòria en el disseny d'entorns virtuals d'aprenentatge, formació del profesorat en TIC i educació flexible i a distància.",
+      en: "Full Professor in Didactics and School Organization at UIB. Founder of the Educational Technology Group (GTE). Extensive career in designing virtual learning environments, teacher training in ICT, and flexible and distance education."
     },
-    email: "lucas.martinez@uib.es",
-    orcid: "0000-0001-9922-3844",
-    researchgate: "https://researchgate.net/profile/Lucas-Martinez",
-    photo: investigadoresImg
+    email: "jesus.salinas@uib.es",
+    orcid: "0000-0003-2415-8822",
+    researchgate: "https://www.researchgate.net/profile/Jesus-Salinas-3",
+    photo: "miembros/color/jesus_salinas.png",
+    photoHover: "miembros/Hover/jesus_salinas.png"
   },
   {
-    id: "sara-vidal",
-    name: "Sara Vidal",
+    id: "santos-urbina",
+    name: "Dr. Santos Urbina Ramírez",
     role: {
-      es: "Diseñadora UX / Facilitadora",
-      ca: "Dissenyadora UX / Facilitadora",
-      en: "UX Designer / Facilitator"
+      es: "Investigador",
+      ca: "Investigador",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesor Titular de Tecnología Educativa, UIB",
+      ca: "Profesor Titular de Tecnologia Educativa, UIB",
+      en: "Associate Professor of Educational Technology, UIB"
     },
     bio: {
-      es: "Máster en Diseño de Interacción. Dirige los talleres de codiseño con profesorado y alumnado, traduciendo requisitos pedagógicos en wireframes interactivos.",
-      ca: "Màster en Disseny d'Interacció. Dirigeix els tallers de codisseny amb professorat i alumnat, traduint requisits pedagògics en wireframes interactius.",
-      en: "Master in Interaction Design. Leads the co-design workshops with teachers and students, translating pedagogical requirements into interactive wireframes."
+      es: "Doctor en Pedagogía y profesor titular en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Investiga sobre la integración de tecnologías en la enseñanza escolar, alfabetización mediática y herramientas tecnológicas colaborativas.",
+      ca: "Doctor en Pedagogia i professor titular al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Investiga sobre la integració de tecnologies en l'ensenyament escolar, alfabetització mediàtica i eines tecnològiques col·laboratives.",
+      en: "PhD in Pedagogy and Associate Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Researches the integration of technology in school education, media literacy, and collaborative technological tools."
     },
-    email: "sara.vidal@uib.es",
-    orcid: "0000-0002-3811-1922",
-    researchgate: "https://researchgate.net/profile/Sara-Vidal",
-    photo: investigadoresImg
+    email: "santos.urbina@uib.es",
+    orcid: "0000-0002-3901-7788",
+    researchgate: "https://www.researchgate.net/profile/Santos-Urbina",
+    photo: "miembros/color/santos_urbina.png",
+    photoHover: "miembros/Hover/santos_urbina.png"
+  },
+  {
+    id: "francisca-negre",
+    name: "Dra. Francisca Negre Bennásar",
+    role: {
+      es: "Investigadora",
+      ca: "Investigadora",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesora Titular de Didáctica y Organización Escolar, UIB",
+      ca: "Professora Titular de Didàctica i Organització Escolar, UIB",
+      en: "Associate Professor in Didactics and School Organization, UIB"
+    },
+    bio: {
+      es: "Profesora en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Investiga en el campo de la tecnología educativa aplicada a la educación especial, el codiseño y la accesibilidad digital en entornos de aprendizaje conectados.",
+      ca: "Professora al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Investiga en el camp de la tecnologia educativa aplicada a l'educació especial, el codisseny i l'accessibilitat digital en entorns d'aprenentatge connectats.",
+      en: "Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Researches in the field of educational technology applied to special education, co-design, and digital accessibility in connected learning environments."
+    },
+    email: "xisca.negre@uib.es",
+    orcid: "0000-0002-8456-1122",
+    researchgate: "https://www.researchgate.net/profile/Francisca-Negre",
+    photo: "miembros/color/francisca_negre.png",
+    photoHover: "miembros/Hover/francisca_negre.png"
+  },
+  {
+    id: "gemma-tur",
+    name: "Dra. Gemma Tur Ferrer",
+    role: {
+      es: "Investigadora",
+      ca: "Investigadora",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesora Titular de Tecnología Educativa, UIB",
+      ca: "Professora Titular de Tecnologia Educativa, UIB",
+      en: "Associate Professor of Educational Technology, UIB"
+    },
+    bio: {
+      es: "Doctora en Tecnología Educativa por la UIB. Su investigación se centra en los entornos personales de aprendizaje (PLE), la identidad profesional docente, los portafolios digitales y la integración pedagógica de las redes sociales en educación superior.",
+      ca: "Doctora en Tecnologia Educativa per la UIB. La seva recerca se centra en els entorns personals d'aprenentatge (PLE), la identitat professional docent, els portafolis digitals i la integració pedagògica de les xarxes socials en educació superior.",
+      en: "PhD in Educational Technology from UIB. Her research focuses on Personal Learning Environments (PLE), teacher professional identity, digital portfolios, and the pedagogical integration of social media in higher education."
+    },
+    email: "gemma.tur@uib.cat",
+    orcid: "0000-0002-2309-8812",
+    researchgate: "https://www.researchgate.net/profile/Gemma-Tur",
+    photo: "miembros/color/gemma_tur.png",
+    photoHover: "miembros/Hover/gemma_tur.png"
+  },
+  {
+    id: "francisco-lirola",
+    name: "Dr. Francisco Lirola",
+    role: {
+      es: "Investigador",
+      ca: "Investigador",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesor de Didáctica y Organización Escolar, UIB",
+      ca: "Professor de Didàctica i Organització Escolar, UIB",
+      en: "Lecturer in Didactics and School Organization, UIB"
+    },
+    bio: {
+      es: "Investigador y docente en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Sus áreas de interés abarcan el codiseño didáctico, la incorporación de inteligencia artificial en la práctica docente y el desarrollo de itinerarios flexibles.",
+      ca: "Investigador i docent al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Les seves àrees d'interès inclouen el codisseny didàctic, la incorporació d'intel·ligència artificial a la pràctica docent i el desenvolupament d'itineraris flexibles.",
+      en: "Researcher and lecturer in the Department of Applied Pedagogy and Educational Psychology at UIB. His areas of interest cover didactic co-design, the incorporation of artificial intelligence in teaching practice, and the development of flexible learning paths."
+    },
+    email: "francisco.lirola@uib.es",
+    orcid: "0000-0001-5612-4433",
+    researchgate: "https://www.researchgate.net/profile/Francisco-Lirola",
+    photo: "miembros/color/francisco_lirola.png",
+    photoHover: "miembros/Hover/francisco_lirola.png"
+  },
+  {
+    id: "linda-castaneda",
+    name: "Dra. Linda Castañeda Quintero",
+    role: {
+      es: "Investigadora",
+      ca: "Investigadora",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesora Titular de Tecnología Educativa, Universidad de Murcia",
+      ca: "Professora Titular de Tecnologia Educativa, Universitat de Múrcia",
+      en: "Associate Professor of Educational Technology, University of Murcia"
+    },
+    bio: {
+      es: "Doctora en Tecnología Educativa. Profesora titular en el Departamento de Didáctica y Organización Escolar de la Universidad de Murcia. Su investigación versa sobre entornos personales de aprendizaje (PLE), perspectivas críticas sobre la tecnología educativa y el codiseño.",
+      ca: "Doctora en Tecnologia Educativa. Professora titular al Departament de Didàctica i Organització Escolar de la Universitat de Múrcia. La seva recerca tracta sobre entorns personals d'aprenentatge (PLE), perspectives crítiques sobre la tecnologia educativa i el codisseny.",
+      en: "PhD in Educational Technology. Associate Professor in the Department of Didactics and School Organization at the University of Murcia. Her research addresses Personal Learning Environments (PLE), critical perspectives on educational technology, and co-design."
+    },
+    email: "lindacq@um.es",
+    orcid: "0000-0002-3112-9988",
+    researchgate: "https://www.researchgate.net/profile/Linda-Castaneda",
+    photo: "miembros/color/linda_castaneda.png",
+    photoHover: "miembros/Hover/linda_castaneda.png"
+  },
+  {
+    id: "enric-bresco",
+    name: "Dr. Enric Brescó Baiges",
+    role: {
+      es: "Investigador",
+      ca: "Investigador",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesor Lector en Tecnología Educativa, UdL / UIB",
+      ca: "Professor Lector en Tecnologia Educativa, UdL / UIB",
+      en: "Lecturer in Educational Technology, UdL / UIB"
+    },
+    bio: {
+      es: "Doctor en Educación e investigador asociado. Su trabajo analiza la integración didáctica de herramientas tecnológicas en secundaria y educación superior, el codiseño participativo de recursos digitales y la influencia de la IA en la práctica educativa.",
+      ca: "Doctor en Educació i investigador associat. El seu treball analitza la integració didàctica d'eines tecnològiques a secundària i educació superior, el codisseny participatiu de recursos digitals i la influència de la IA en la pràctica educativa.",
+      en: "PhD in Education and Associate Researcher. His work analyzes the didactic integration of technological tools in secondary and higher education, participatory co-design of digital resources, and the influence of AI on educational practice."
+    },
+    email: "enric.bresco@udl.cat",
+    orcid: "0000-0003-1288-4455",
+    researchgate: "https://www.researchgate.net/profile/Enric-Bresco-Baiges",
+    photo: "miembros/color/enric_bresco.png",
+    photoHover: "miembros/Hover/enric_bresco.png"
+  },
+  {
+    id: "gustavo-angulo",
+    name: "Dr. Gustavo Adolfo Angulo Mendoza",
+    role: {
+      es: "Investigador",
+      ca: "Investigador",
+      en: "Researcher"
+    },
+    title: {
+      es: "Investigador Postdoctoral y Docente, UIB",
+      ca: "Investigador Postdoctoral i Docent, UIB",
+      en: "Postdoctoral Researcher & Lecturer, UIB"
+    },
+    bio: {
+      es: "Doctor en Tecnología Educativa. Miembro del Grupo de Tecnología Educativa (GTE). Sus líneas de investigación comprenden los sistemas adaptativos de aprendizaje, analítica del aprendizaje y codiseño de escenarios virtuales con Inteligencia Artificial.",
+      ca: "Doctor en Tecnologia Educativa. Membre del Grup de Tecnologia Educativa (GTE). Les seves línies de recerca comprenen els sistemes adaptatius d'aprenentatge, analítica de l'aprenentatge i codisseny d'escenaris virtuals amb Intel·ligència Artificial.",
+      en: "PhD in Educational Technology. Member of the Educational Technology Group (GTE). His research lines include adaptive learning systems, learning analytics, and co-design of virtual scenarios using Artificial Intelligence."
+    },
+    email: "gustavo.angulo@uib.cat",
+    orcid: "0000-0002-6677-1122",
+    researchgate: "https://www.researchgate.net/profile/Gustavo-Angulo-Mendoza",
+    photo: "miembros/color/gustavo_angulo.png",
+    photoHover: "miembros/Hover/gustavo_angulo.png"
   }
 ];
 
@@ -95,7 +263,7 @@ const publications = [
       ca: "Codisseny d'entorns virtuals d'aprenentatge personalitzats mitjançant Intel·ligència Artificial: Un enfocament cooperatiu",
       en: "Co-design of personalized virtual learning environments using Artificial Intelligence: A cooperative approach"
     },
-    citation: "Gómez, M., & Rodríguez, A. (2025). Revista de Educación y Tecnología, 14(2), 120-138.",
+    citation: "de Benito, B., & Pérez, A. (2025). Revista de Educación y Tecnología, 14(2), 120-138.",
     abstract: {
       es: "Este artículo explora un marco metodológico para el codiseño de plataformas virtuales donde estudiantes y docentes participan activamente en la parametrización de algoritmos de inteligencia artificial para personalizar trayectorias de aprendizaje. Se detalla un estudio de caso en dos centros de secundaria y las percepciones de control de los usuarios frente al algoritmo.",
       ca: "Aquest article explora un marc metodològic per al codisseny de plataformes virtuals on estudiants i docents participen activament en la parametrització d'algorismes d'intel·ligència artificial per personalitzar trajectòries d'aprenentatge. Es detalla un estudi de cas en dos centres de secundària i les percepcions de control dels usuaris enfront de l'algorisme.",
@@ -103,13 +271,13 @@ const publications = [
     },
     doi: "10.1016/j.edutec.2025.101230",
     tags: ["Codiseño / Codisseny", "Inteligencia Artificial / IA", "Educación / Educació"],
-    zoteroKey: "GOM2025",
+    zoteroKey: "BEN2025",
     extraLabel: {
       es: "Artículos",
       ca: "Articles",
       en: "Articles"
     },
-    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/GOM2025"
+    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/BEN2025"
   },
   {
     id: "pub-2",
@@ -124,16 +292,16 @@ const publications = [
       ca: "Estudi sobre els reptes de comunicació i competències tecnològiques que emergeixen en seure a la mateixa taula de codisseny desenvolupadors de programari educatiu i investigadors escolars. Es proposen dinàmiques visuals per mitigar l'asimetria tècnica i empoderar la comunitat educativa.",
       en: "Study on communication challenges and technical skills emerging when bringing educational software developers and school researchers together at the same co-design table. Visual dynamics are proposed to mitigate technical asymmetry and empower the educational community."
     },
-    citation: "Martínez, L., Vidal, S., & Gómez, M. (2024). Pixel-Bit: Revista de Medios y Educación, 69, 45-78.",
+    citation: "Salinas, J., Tur, G., & de Benito, B. (2024). Pixel-Bit: Revista de Medios y Educación, 69, 45-78.",
     doi: "10.12795/pixelbit.2024.10189",
     tags: ["Co-creación / Co-creació", "Tecnología / Tecnologia", "Usabilidad / Usabilitat"],
-    zoteroKey: "MAR2024",
+    zoteroKey: "SAL2024",
     extraLabel: {
       es: "Artículos",
       ca: "Articles",
       en: "Articles"
     },
-    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/MAR2024"
+    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/SAL2024"
   },
   {
     id: "pub-3",
@@ -148,16 +316,16 @@ const publications = [
       ca: "Un manual exhaustiu que proveeix marcs teòrics, plantilles de tallers de codisseny i guies ètiques per a la introducció d'algorismes adaptatius en l'àmbit de l'educació primària i secundària. Adreçat a formadors de professorat i tecnòlegs.",
       en: "A comprehensive manual providing theoretical frameworks, templates for co-design workshops, and ethical guidelines for implementing adaptive algorithms in primary and secondary education. Intended for teacher trainers and technologists."
     },
-    citation: "Gómez, M. (2024). Editorial UIB, Palma de Mallorca.",
+    citation: "de Benito, B. (2024). Editorial UIB, Palma de Mallorca.",
     isbn: "978-84-8384-498-3",
     tags: ["Manual", "Codiseño / Codisseny", "Aulas / Aules"],
-    zoteroKey: "GOM2024b",
+    zoteroKey: "BEN2024",
     extraLabel: {
       es: "Publicaciones",
       ca: "Publicacions",
       en: "Publications"
     },
-    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/GOM2024b"
+    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/BEN2024"
   },
   {
     id: "pub-4",
@@ -172,16 +340,16 @@ const publications = [
       ca: "Una antologia que reuneix investigacions iberoamericanes sobre el paper del docent com a co-creador i supervisor d'agents intel·ligents a l'aula, discutint el disseny de quadres de comandament explicables i la sobirania de la dada escolar.",
       en: "An anthology gathering Ibero-American research on the teacher's role as co-creator and supervisor of intelligent agents in the classroom, discussing the design of explainable dashboards and school data sovereignty."
     },
-    citation: "Rodríguez, A. (Ed.). (2025). Octaedro Editorial.",
+    citation: "Pérez, A. (Ed.). (2025). Octaedro Editorial.",
     isbn: "978-84-19023-88-2",
     tags: ["IA", "Docencia / Docència", "Innovación / Innovació"],
-    zoteroKey: "ROD2025b",
+    zoteroKey: "PER2025",
     extraLabel: {
       es: "Publicaciones",
       ca: "Publicacions",
       en: "Publications"
     },
-    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/ROD2025b"
+    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/PER2025"
   },
   {
     id: "pub-5",
@@ -193,19 +361,19 @@ const publications = [
     },
     abstract: {
       es: "Este artículo analiza la implementación técnica de interfaces configuradas dinámicamente a través de talleres de codiseño. Presentamos un marco de telemetría diseñado para equilibrar las recomendaciones automáticas de IA con los ajustes manuales del docente en tiempo real.",
-      ca: "Aquest article analitza la implementació tècnica d'interfícies configurades dinàmicament a través de tallers de codisseny. Presentem un marc de telemetria dissenyat per equilibrar les recomanacions automàtiques d'IA amb els ajustaments manuals del docent en temps real.",
+      ca: "Aquest article analitza la implementació tècnica d'interfícies configurades dinàmicament a través de tallers de codisseny. Presentem un marc de telemetria dissenyat per equilibrar las recomanacions automàtiques d'IA amb els ajustaments manuals del docent en temps real.",
       en: "This paper analyzes the technical implementation of interfaces configured dynamically through co-design workshops. We present a telemetry framework designed to balance agentic AI recommendations with manual teacher overrides in real-time."
     },
-    citation: "Presented at International Conference on Educational Technology (ICET), Paris, 2024.",
+    citation: "Urbina, S. & Castañeda, L. (2024). Presented at International Conference on Educational Technology (ICET), Paris.",
     event: "ICET 2024, París",
     tags: ["UI", "Automation", "Agency"],
-    zoteroKey: "ICET2024",
+    zoteroKey: "URB2024",
     extraLabel: {
       es: "Congresos",
       ca: "Congressos",
       en: "Conferences"
     },
-    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/ICET2024"
+    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/URB2024"
   },
   {
     id: "pub-6",
@@ -217,19 +385,19 @@ const publications = [
     },
     abstract: {
       es: "Presentación de resultados del prototipado rápido de asistentes inteligentes en tres institutos de Mallorca, detallando la metodología de codiseño por fases (exploración, co-creación, evaluación) y la acogida de los tableros de control.",
-      ca: "Presentació de resultats del prototipat ràpid d'assistents intel·ligents en tres instituts de Mallorca, detallant la metodologia de codisseny per fases (exploració, co-creació, avaluació) i l'acollida dels quadres de comandament.",
+      ca: "Presentació de resultats del prototipat ràpid d'assistents intel·ligents en tres instituts de Mallorca, detallant la metodologia de codisseny per fases (exploració, co-creació, avaluació) y l'acollida dels quadres de comandament.",
       en: "Presentation of results from rapid prototyping of intelligent assistants in three high schools in Mallorca, detailing the phased co-design methodology (exploration, co-creation, evaluation) and the acceptance of dashboard controls."
     },
-    citation: "Vidal, S. & Martínez, L. (2025). Ponencia en el Congreso Nacional de Investigación Educativa, Madrid.",
+    citation: "Negre, F., Lirola, F. & Angulo, G. (2025). Ponencia en el Congreso Nacional de Investigación Educativa, Madrid.",
     event: "CNIE 2025, Madrid",
     tags: ["Asistentes / Assistents", "Secundaria / Secundària", "Prototipado / Prototipat"],
-    zoteroKey: "VID2025",
+    zoteroKey: "NEG2025",
     extraLabel: {
       es: "Seminarios",
       ca: "Seminaris",
       en: "Seminars"
     },
-    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/VID2025"
+    zoteroUrl: "https://www.zotero.org/groups/coplitele-ia/items/NEG2025"
   }
 ];
 
@@ -1015,28 +1183,42 @@ function renderTeam() {
   if (!teamGrid) return;
   
   teamGrid.innerHTML = teamMembers.map(member => `
-    <article class="team-card" id="card-${member.id}">
+    <article class="team-card" id="card-${member.id}" style="cursor: pointer;">
       <div class="team-photo">
-        <img src="${member.photo}" alt="${member.name}" loading="lazy" onerror="this.src='https://placehold.co/400x300/1e293b/7ce4e0?text=${encodeURIComponent(member.name)}'">
+        <img src="${member.photo}" class="photo-color" alt="${member.name}" loading="lazy">
+        <img src="${member.photoHover}" class="photo-hover" alt="${member.name}" loading="lazy">
       </div>
       <div class="team-info">
         <span class="team-role">${member.role[currentLang]}</span>
         <h3 class="team-name">${member.name}</h3>
         <p class="team-bio">${member.bio[currentLang].substring(0, 100)}...</p>
         <div class="team-links">
-          <button class="btn-small view-member-btn" data-id="${member.id}">Ver Perfil Completo</button>
+          <button class="btn-small view-member-btn" data-id="${member.id}">${currentLang === 'en' ? 'View Full Profile' : (currentLang === 'ca' ? 'Veure Perfil Complet' : 'Ver Perfil Completo')}</button>
         </div>
       </div>
     </article>
   `).join('');
   
-  // Add events to details buttons
+  // Add events to details buttons and whole cards
+  document.querySelectorAll('.team-card').forEach(card => {
+    const memberId = card.id.replace('card-', '');
+    card.addEventListener('click', (e) => {
+      // If they clicked the button specifically, we let the button click handler do it
+      if (e.target.classList.contains('view-member-btn')) return;
+      openMemberModal(memberId);
+    });
+  });
+
   document.querySelectorAll('.view-member-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent card click
       const memberId = e.target.getAttribute('data-id');
       openMemberModal(memberId);
     });
   });
+
+  // Dispatch event for custom cursor and reveals to re-bind
+  window.dispatchEvent(new Event('content-updated'));
 }
 
 let activeTab = 'all';
@@ -1145,27 +1327,56 @@ function openMemberModal(id) {
   modalContent.innerHTML = `
     <div class="modal-header">
       <div>
-        <span class="modal-meta-label">${member.role[currentLang]}</span>
-        <h3>${member.name}</h3>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span class="member-role-badge ${member.role.en.toLowerCase().includes('principal') ? 'badge-ip' : 'badge-member'}">
+            ${member.role[currentLang]}
+          </span>
+        </div>
+        <h3 style="font-size: 24px; font-weight: 850; margin: 0; color: var(--color-text-light);">${member.name}</h3>
+        <p style="font-size: 13.5px; font-weight: 550; color: var(--color-blue); margin: 4px 0 0 0;">${member.title[currentLang]}</p>
       </div>
-      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
+      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal" style="font-size: 24px;">&times;</button>
     </div>
     <div class="modal-body">
-      <div style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; margin-bottom: 24px; align-items: start;">
-        <img src="${member.photo}" alt="${member.name}" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 20px;" onerror="this.src='https://placehold.co/150x150/1e293b/7ce4e0?text=Logo'">
+      <div class="modal-member-layout" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px; margin-bottom: 24px; align-items: start;">
+        <div class="modal-member-photo-wrapper" style="border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid var(--color-border-light);">
+          <img src="${member.photo}" alt="${member.name}" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block;">
+        </div>
         <div>
-          <p style="margin-bottom: 12px; font-weight: 500; color: var(--color-text-light);">${member.bio[currentLang]}</p>
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-            <div><strong>Email:</strong> <a href="mailto:${member.email}" style="color: var(--color-blue); text-decoration: none;">${member.email}</a></div>
-            <div><strong>ORCID:</strong> <a href="https://orcid.org/${member.orcid}" target="_blank" style="color: var(--color-blue); text-decoration: none;">${member.orcid}</a></div>
+          <p style="margin-top: 0; margin-bottom: 16px; font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted-light);">${member.bio[currentLang]}</p>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
+            <a href="mailto:${member.email}" class="member-contact-link email-btn" title="Email">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </a>
+            <a href="https://orcid.org/${member.orcid}" target="_blank" class="member-contact-link orcid-btn" title="ORCID">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.541 0 .954.212 1.238.636.284.424.426.974.426 1.65 0 .67-.142 1.218-.426 1.644-.284.426-.697.639-1.238.639-.547 0-.961-.213-1.244-.639a2.766 2.766 0 0 1-.426-1.644c0-.676.142-1.226.426-1.65.283-.424.697-.636 1.244-.636zm-.437 6.136h.885v3.136h-.885V10.514zm11.393.993c0 .548-.121 1.026-.363 1.436-.242.41-.577.728-1.006.953-.428.225-.921.338-1.478.338-.642 0-1.189-.153-1.643-.459a2.723 2.723 0 0 1-1.054-1.261h-.06v1.545h-.854V4.76h2.247c.597 0 1.11.113 1.54.339.428.226.757.545.986.957.228.411.343.896.343 1.455 0 .428-.073.816-.219 1.164a2.296 2.296 0 0 1-.617.868c.287.162.528.384.723.666.195.281.338.608.428.981a5.05 5.05 0 0 1 .135 1.037l-.001.28zm-3.056-4.992c0-.404-.085-.723-.255-.956-.169-.233-.423-.349-.762-.349h-.979v2.609h.979c.339 0 .593-.116.762-.349.17-.233.255-.552.255-.955zm.406 3.655c0-.43-.092-.767-.276-1.011-.184-.244-.455-.366-.812-.366h-.979v2.756h.979c.357 0 .628-.122.812-.366.184-.244.276-.582.276-1.013z"/>
+              </svg>
+            </a>
+            <a href="${member.researchgate}" target="_blank" class="member-contact-link rg-btn" title="ResearchGate">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M19.5 0h-15C2.015 0 0 2.015 0 4.5v15C0 21.985 2.015 24 4.5 24h15c2.485 0 4.5-2.015 4.5-4.5v-15C24 2.015 21.985 0 19.5 0zM8.76 16.24c-1.34 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42c.46 0 .89.13 1.25.35V9.45c-.36-.12-.74-.18-1.25-.18-2.61 0-4.73 2.12-4.73 4.73s2.12 4.73 4.73 4.73c.96 0 1.83-.29 2.56-.8v-3.05c-.65.71-1.57 1.3-2.56 1.3zm7.84-6.97c-.96 0-1.83.29-2.56.8v3.05c.65-.71 1.57-1.3 2.56-1.3 1.34 0 2.42 1.08 2.42 2.42s-1.08 2.42-2.42 2.42c-.46 0-.89-.13-1.25-.35v2.3c.36.12.74.18 1.25.18 2.61 0 4.73-2.12 4.73-4.73s-2.12-4.73-4.73-4.73z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
       <div style="border-top: 1px solid var(--color-border-light); padding-top: 20px;">
-        <h4 style="margin-bottom: 12px; font-family: var(--font-primary);">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
-        <ul style="padding-left: 20px; font-size: 13.5px; line-height: 1.5; color: var(--color-text-muted-light);">
+        <h4 style="margin-top: 0; margin-bottom: 12px; font-family: var(--font-primary); font-size: 14.5px; font-weight: 700;">
+          ${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}
+        </h4>
+        <ul style="padding-left: 20px; font-size: 13.5px; line-height: 1.5; color: var(--color-text-muted-light); margin: 0;">
           ${publications
-            .filter(pub => pub.citation.includes(member.name.split(' ').pop()))
+            .filter(pub => {
+              // Match author last name (robust check)
+              const lastName = member.name.split(' ').slice(-2, -1)[0] || member.name.split(' ').pop();
+              const cleanLastName = lastName.replace('í', 'i').replace('é', 'e').replace('ó', 'o').replace('á', 'a').replace('ú', 'u');
+              return pub.citation.toLowerCase().includes(lastName.toLowerCase()) || 
+                     pub.citation.toLowerCase().includes(cleanLastName.toLowerCase());
+            })
             .map(pub => `<li style="margin-bottom: 8px;"><strong>${pub.citation.match(/\((\d{4})\)/)?.[0] || ''}</strong> ${pub.title[currentLang]}</li>`)
             .join('') || `<li style="list-style:none; padding-left:0; margin-left:-20px;">${currentLang === 'en' ? 'No individual publications registered yet.' : (currentLang === 'ca' ? 'No s\'han registrat publicacions individuals encara.' : 'No se registraron publicaciones individuales todavía.')}</li>`}
         </ul>
@@ -1173,9 +1384,7 @@ function openMemberModal(id) {
     </div>
   `;
   
-  // Apply dark mode adaptations dynamically
   adaptModalColors(modalContent);
-  
   modal.showModal();
   setupModalClose(modal);
 }
@@ -1618,6 +1827,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', () => {
     handleRouting();
     initSubmenuScrollObserver();
+    initCustomCursor();
+    initScrollReveal();
   });
   handleRouting();
 });
@@ -1865,4 +2076,89 @@ function initSubmenuScrollObserver() {
   }, observerOptions);
 
   sections.forEach(section => observer.observe(section));
+}
+
+
+/* ----------------------------------------------------
+   UPDATED CUSTOM SYSTEMS (Custom Glow Cursor, Scroll Reveals)
+   ---------------------------------------------------- */
+
+function initCustomCursor() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  
+  const follower = document.createElement('div');
+  follower.className = 'custom-cursor-follower';
+  document.body.appendChild(follower);
+  
+  let posX = 0, posY = 0;
+  let mouseX = 0, mouseY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = `${mouseX}px`;
+    cursor.style.top = `${mouseY}px`;
+  });
+  
+  function animateFollower() {
+    posX += (mouseX - posX) * 0.15;
+    posY += (mouseY - posY) * 0.15;
+    follower.style.left = `${posX}px`;
+    follower.style.top = `${posY}px`;
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+  
+  const updateHoverEvents = () => {
+    document.querySelectorAll('a, button, [role="button"], .team-card, .activity-card, #hero-logo-container, .logo-wrapper, .submenu-link').forEach(el => {
+      el.removeEventListener('mouseenter', addHoverClass);
+      el.removeEventListener('mouseleave', removeHoverClass);
+      
+      el.addEventListener('mouseenter', addHoverClass);
+      el.addEventListener('mouseleave', removeHoverClass);
+    });
+  };
+  
+  function addHoverClass() {
+    document.body.classList.add('custom-cursor-hover');
+  }
+  function removeHoverClass() {
+    document.body.classList.remove('custom-cursor-hover');
+  }
+  
+  updateHoverEvents();
+  window.addEventListener('content-updated', updateHoverEvents);
+}
+
+function initScrollReveal() {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+      } else {
+        const rect = entry.target.getBoundingClientRect();
+        if (rect.top > window.innerHeight || rect.bottom < 0) {
+          entry.target.classList.remove('reveal-visible');
+        }
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.05,
+    rootMargin: '0px 0px -40px 0px'
+  });
+  
+  const setupReveals = () => {
+    document.querySelectorAll('section, .page-section, .hero-stats-row, .section-nav-grid, .team-card, .activity-card, .objective-card, .resource-card, .framework-card').forEach(el => {
+      el.classList.add('scroll-reveal');
+      revealObserver.observe(el);
+    });
+  };
+  
+  setupReveals();
+  window.addEventListener('content-updated', setupReveals);
 }

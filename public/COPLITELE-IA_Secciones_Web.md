@@ -213,41 +213,95 @@ Esta vista se organiza bajo un menú interno con tres pestañas: Descripción, O
 ### 4.3. Sección: Equipo de Investigadores (`equipo`)
 **Título de la sección (`tab_equipo`)**: ES: "Equipo" | CA: "Equip" | EN: "Team"
 
-#### Miembro: Dra. Maria Gómez (ID: `maria-gomez`)
+#### Miembro: Dra. Adolfina Pérez Garcías (ID: `adolfina-perez`)
 - **Rol**:
-  - ES: "Directora del Proyecto" | CA: "Directora del Projecte" | EN: "Project Director"
+  - ES: "Investigadora Principal" | CA: "Investigadora Principal" | EN: "Principal Investigator"
 - **Biografía**:
-  - **ES**: Doctora en Tecnología Educativa por la UIB. Especialista en metodologías participativas y codiseño de entornos inteligentes de aprendizaje. Coordina la vinculación del proyecto con las escuelas.
-  - **CA**: Doctora en Tecnologia Educativa per la UIB. Especialista en metodologies participatives i codisseny d'entorns intel·ligents d'aprenentatge. Coordina la vinculació del projecte amb les escoles.
-  - **EN**: PhD in Educational Technology from UIB. Specialist in participatory methodologies and co-design of smart learning environments. She coordinates project partnerships with schools.
-- **Contacto**: Email: maria.gomez@uib.es | ORCID: 0000-0002-1823-9922
+  - **ES**: Doctora en Filosofía y Ciencias de la Educación. Profesora titular en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Codirectora del Grupo de Tecnología Educativa (GTE). Su investigación se centra en el codiseño educativo, entornos virtuales y la innovación docente.
+  - **CA**: Doctora en Filosofia i Ciències de l'Educació. Professora titular al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Codirectora del Grup de Tecnologia Educativa (GTE). La seva recerca se centra en el codisseny educatiu, entorns virtuals i la innovació docent.
+  - **EN**: PhD in Philosophy and Educational Sciences. Associate Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Co-director of the Educational Technology Group (GTE). Her research focuses on educational co-design, virtual environments, and teaching innovation.
+- **Contacto**: Email: adolfina.perez@uib.es | ORCID: 0000-0001-9721-6548
 
-#### Miembro: Dr. Alberto Rodríguez (ID: `alberto-rodriguez`)
+#### Miembro: Dra. Bárbara de Benito Crosetti (ID: `barbara-de-benito`)
 - **Rol**:
-  - ES: "Investigador Principal" | CA: "Investigador Principal" | EN: "Lead Researcher"
+  - ES: "Investigadora Principal" | CA: "Investigadora Principal" | EN: "Principal Investigator"
 - **Biografía**:
-  - **ES**: Doctor en Informática. Su campo de investigación es la Inteligencia Artificial aplicada a la personalización de contenidos y a la analítica de aprendizaje en educación superior.
-  - **CA**: Doctor en Informàtica. El seu camp d'investigació és la Intel·ligència Artificial aplicada a la personalització de continguts i a l'analítica d'aprenentatge en educació superior.
-  - **EN**: PhD in Computer Science. His research field is Artificial Intelligence applied to content personalization and learning analytics in higher education.
-- **Contacto**: Email: alberto.rodriguez@uib.es | ORCID: 0000-0003-4902-8812
+  - **ES**: Doctora en Tecnología Educativa y profesora en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Miembro activo del Grupo de Tecnología Educativa (GTE). Especializada en el diseño de recursos virtuales, integración de TIC y metodologías activas.
+  - **CA**: Doctora en Tecnologia Educativa i professora al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Membre actiu del Grup de Tecnologia Educativa (GTE). Especialitzada en el disseny de recursos virtuals, integració de TIC i metodologies actives.
+  - **EN**: PhD in Educational Technology and Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Active member of the Educational Technology Group (GTE). Specialized in the design of virtual resources, ICT integration, and active methodologies.
+- **Contacto**: Email: barbara.debenito@uib.es | ORCID: 0000-0002-4589-9812
 
-#### Miembro: Dr. Lucas Martínez (ID: `lucas-martinez`)
+#### Miembro: Dr. Jesús María Salinas Ibáñez (ID: `jesus-salinas`)
 - **Rol**:
-  - ES: "Investigador en IA" | CA: "Investigador en IA" | EN: "AI Researcher"
+  - ES: "Investigador" | CA: "Investigador" | EN: "Researcher"
 - **Biografía**:
-  - **ES**: Especialista en procesamiento del lenguaje natural y modelado de estudiante. Desarrolla los algoritmos predictivos adaptativos del proyecto.
-  - **CA**: Especialista en processament del llenguatge natural i modelatge d'estudiant. Desenvolupa els algorismes predictius adaptatius del projecte.
-  - **EN**: Specialist in natural language processing and student modeling. He develops the project's predictive adaptive algorithms.
-- **Contacto**: Email: lucas.martinez@uib.es | ORCID: 0000-0001-9922-3844
+  - **ES**: Catedrático del Área de Didáctica y Organización Escolar de la UIB. Fundador del Grupo de Tecnología Educativa (GTE). Amplia trayectoria en el diseño de entornos virtuales de aprendizaje, formación del profesorado en TIC y educación flexible y a distancia.
+  - **CA**: Catedràtic de l'Àrea de Didàctica i Organització Escolar de la UIB. Fundador del Grup de Tecnologia Educativa (GTE). Àmplia trajectòria en el disseny d'entorns virtuals d'aprenentatge, formació del profesorat en TIC i educación flexible i a distància.
+  - **EN**: Full Professor in Didactics and School Organization at UIB. Founder of the Educational Technology Group (GTE). Extensive career in designing virtual learning environments, teacher training in ICT, and flexible and distance education.
+- **Contacto**: Email: jesus.salinas@uib.es | ORCID: 0000-0003-2415-8822
 
-#### Miembro: Sara Vidal (ID: `sara-vidal`)
+#### Miembro: Dr. Santos Urbina Ramírez (ID: `santos-urbina`)
 - **Rol**:
-  - ES: "Diseñadora UX / Facilitadora" | CA: "Dissenyadora UX / Facilitadora" | EN: "UX Designer / Facilitator"
+  - ES: "Investigador" | CA: "Investigador" | EN: "Researcher"
 - **Biografía**:
-  - **ES**: Máster en Diseño de Interacción. Dirige los talleres de codiseño con profesorado y alumnado, traduciendo requisitos pedagógicos en wireframes interactivos.
-  - **CA**: Màster en Disseny d'Interacció. Dirigeix els tallers de codisseny amb professorat i alumnat, traduint requisits pedagògics en wireframes interactius.
-  - **EN**: Master in Interaction Design. Leads the co-design workshops with teachers and students, translating pedagogical requirements into interactive wireframes.
-- **Contacto**: Email: sara.vidal@uib.es | ORCID: 0000-0002-3811-1922
+  - **ES**: Doctor en Pedagogía y profesor titular en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Investiga sobre la integración de tecnologías en la enseñanza escolar, alfabetización mediática y herramientas tecnológicas colaborativas.
+  - **CA**: Doctor en Pedagogia i professor titular al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Investiga sobre la integració de tecnologies en l'ensenyament escolar, alfabetització mediàtica i eines tecnològiques col·laboratives.
+  - **EN**: PhD in Pedagogy and Associate Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Researches the integration of technology in school education, media literacy, and collaborative technological tools.
+- **Contacto**: Email: santos.urbina@uib.es | ORCID: 0000-0002-3901-7788
+
+#### Miembro: Dra. Francisca Negre Bennásar (ID: `francisca-negre`)
+- **Rol**:
+  - ES: "Investigadora" | CA: "Investigadora" | EN: "Researcher"
+- **Biografía**:
+  - **ES**: Profesora en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Investiga en el campo de la tecnología educativa aplicada a la educación especial, el codiseño y la accesibilidad digital en entornos de aprendizaje conectados.
+  - **CA**: Professora al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Investiga en el camp de la tecnologia educativa aplicada a l'educació especial, el codisseny i l'accessibilitat digital en entorns d'aprenentatge connectats.
+  - **EN**: Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Researches in the field of educational technology applied to special education, co-design, and digital accessibility in connected learning environments.
+- **Contacto**: Email: xisca.negre@uib.es | ORCID: 0000-0002-8456-1122
+
+#### Miembro: Dra. Gemma Tur Ferrer (ID: `gemma-tur`)
+- **Rol**:
+  - ES: "Investigadora" | CA: "Investigadora" | EN: "Researcher"
+- **Biografía**:
+  - **ES**: Doctora en Tecnología Educativa por la UIB. Su investigación se centra en los entornos personales de aprendizaje (PLE), la identidad profesional docente, los portafolios digitales y la integración pedagógica de las redes sociales en educación superior.
+  - **CA**: Doctora en Tecnologia Educativa per la UIB. La seva recerca se centra en els entorns personals d'aprenentatge (PLE), la identitat professional docent, els portafolis digitals i la integració pedagògica de les xarxes socials en educació superior.
+  - **EN**: PhD in Educational Technology from UIB. Her research focuses on Personal Learning Environments (PLE), teacher professional identity, digital portfolios, and the pedagogical integration of social media in higher education.
+- **Contacto**: Email: gemma.tur@uib.cat | ORCID: 0000-0002-2309-8812
+
+#### Miembro: Dr. Francisco Lirola (ID: `francisco-lirola`)
+- **Rol**:
+  - ES: "Investigador" | CA: "Investigador" | EN: "Researcher"
+- **Biografía**:
+  - **ES**: Investigador y docente en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Sus áreas de interés abarcan el codiseño didáctico, la incorporación de inteligencia artificial en la práctica docente y el desarrollo de itinerarios flexibles.
+  - **CA**: Investigador i docent al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Les seves àrees d'interès inclouen el codisseny didàctic, la incorporació d'intel·ligència artificial a la pràctica docent i el desenvolupament d'itineraris flexibles.
+  - **EN**: Researcher and lecturer in the Department of Applied Pedagogy and Educational Psychology at UIB. His areas of interest cover didactic co-design, the incorporation of artificial intelligence in teaching practice, and the development of flexible learning paths.
+- **Contacto**: Email: francisco.lirola@uib.es | ORCID: 0000-0001-5612-4433
+
+#### Miembro: Dra. Linda Castañeda Quintero (ID: `linda-castaneda`)
+- **Rol**:
+  - ES: "Investigadora" | CA: "Investigadora" | EN: "Researcher"
+- **Biografía**:
+  - **ES**: Doctora en Tecnología Educativa. Profesora titular en el Departamento de Didáctica y Organización Escolar de la Universidad de Murcia. Su investigación versa sobre entornos personales de aprendizaje (PLE), perspectivas críticas sobre la tecnología educativa y el codiseño.
+  - **CA**: Doctora en Tecnologia Educativa. Professora titular al Departament de Didàctica i Organització Escolar de la Universitat de Múrcia. La seva recerca tracta sobre entorns personals d'aprenentatge (PLE), perspectives crítiques sobre la tecnologia educativa i el codisseny.
+  - **EN**: PhD in Educational Technology. Associate Professor in the Department of Didactics and School Organization at the University of Murcia. Her research addresses Personal Learning Environments (PLE), critical perspectives on educational technology, and co-design.
+- **Contacto**: Email: lindacq@um.es | ORCID: 0000-0002-3112-9988
+
+#### Miembro: Dr. Enric Brescó Baiges (ID: `enric-bresco`)
+- **Rol**:
+  - ES: "Investigador" | CA: "Investigador" | EN: "Researcher"
+- **Biografía**:
+  - **ES**: Doctor en Educación e investigador asociado. Su trabajo analiza la integración didáctica de herramientas tecnológicas en secundaria y educación superior, el codiseño participativo de recursos digitales y la influencia de la IA en la práctica educativa.
+  - **CA**: Doctor en Educació i investigador associat. El seu treball analitza la integració didàctica d'eines tecnològiques a secundària i educació superior, el codisseny participatiu de recursos digitals i la influència de la IA en la pràctica educativa.
+  - **EN**: PhD in Education and Associate Researcher. His work analyzes the didactic integration of technological tools in secondary and higher education, participatory co-design of digital resources, and the influence of AI on educational practice.
+- **Contacto**: Email: enric.bresco@udl.cat | ORCID: 0000-0003-1288-4455
+
+#### Miembro: Dr. Gustavo Adolfo Angulo Mendoza (ID: `gustavo-angulo`)
+- **Rol**:
+  - ES: "Investigador" | CA: "Investigador" | EN: "Researcher"
+- **Biografía**:
+  - **ES**: Doctor en Tecnología Educativa. Miembro del Grupo de Tecnología Educativa (GTE). Sus líneas de investigación comprenden los sistemas adaptativos de aprendizaje, analítica del aprendizaje y codiseño de escenarios virtuales con Inteligencia Artificial.
+  - **CA**: Doctor en Tecnologia Educativa. Membre del Grup de Tecnologia Educativa (GTE). Les seves línies de recerca comprenen els sistemes adaptatius d'aprenentatge, analítica de l'aprenentatge i codisseny d'escenaris virtuals amb Intel·ligència Artificial.
+  - **EN**: PhD in Educational Technology. Member of the Educational Technology Group (GTE). His research lines include adaptive learning systems, learning analytics, and co-design of virtual scenarios using Artificial Intelligence.
+- **Contacto**: Email: gustavo.angulo@uib.cat | ORCID: 0000-0002-6677-1122
 
 ---
 
@@ -402,7 +456,7 @@ Presentations summarized both quantitative and qualitative metrics recorded in h
 
 #### Publicación: Codiseño de entornos virtuales de aprendizaje personalizados mediante Inteligencia Artificial: Un enfoque cooperativo (ID: `pub-1`)
 - **Tipo**: ES: "Artículos" | CA: "Articles" | EN: "Articles"
-- **Cita Bibliográfica**: Gómez, M., & Rodríguez, A. (2025). Revista de Educación y Tecnología, 14(2), 120-138.
+- **Cita Bibliográfica**: de Benito, B., & Pérez, A. (2025). Revista de Educación y Tecnología, 14(2), 120-138.
 - **Título Multilingüe**:
   - ES: "Codiseño de entornos virtuales de aprendizaje personalizados mediante Inteligencia Artificial: Un enfoque cooperativo"
   - CA: "Codisseny d'entorns virtuals d'aprenentatge personalitzats mitjançant Intel·ligència Artificial: Un enfocament cooperatiu"
@@ -411,12 +465,12 @@ Presentations summarized both quantitative and qualitative metrics recorded in h
   - **ES**: Este artículo explora un marco metodológico para el codiseño de plataformas virtuales donde estudiantes y docentes participan activamente en la parametrización de algoritmos de inteligencia artificial para personalizar trayectorias de aprendizaje. Se detalla un estudio de caso en dos centros de secundaria y las percepciones de control de los usuarios frente al algoritmo.
   - **CA**: Aquest article explora un marc metodològic per al codisseny de plataformes virtuals on estudiants i docents participen activament en la parametrització d'algorismes d'intel·ligència artificial per personalitzar trajectòries d'aprenentatge. Es detalla un estudi de cas en dos centres de secundària i les percepcions de control dels usuaris enfront de l'algorisme.
   - **EN**: This article explores a methodological framework for the co-design of virtual platforms where students and teachers actively participate in configuring artificial intelligence algorithms to personalize learning pathways. A case study in two secondary schools and users' perceptions of control over the algorithm are detailed.
-- **Metadatos**: DOI: 10.1016/j.edutec.2025.101230 | Zotero Key: GOM2025
+- **Metadatos**: DOI: 10.1016/j.edutec.2025.101230 | Zotero Key: BEN2025
 - **Palabras clave**: Codiseño, Inteligencia Artificial, Educación
 
 #### Publicación: La perspectiva de la comunidad educativa en el diseño de herramientas de IA: Desafíos prácticos de la co-creación (ID: `pub-2`)
 - **Tipo**: ES: "Artículos" | CA: "Articles" | EN: "Articles"
-- **Cita Bibliográfica**: Martínez, L., Vidal, S., & Gómez, M. (2024). Pixel-Bit: Revista de Medios y Educación, 69, 45-78.
+- **Cita Bibliográfica**: Salinas, J., Tur, G., & de Benito, B. (2024). Pixel-Bit: Revista de Medios y Educación, 69, 45-78.
 - **Título Multilingüe**:
   - ES: "La perspectiva de la comunidad educativa en el diseño de herramientas de IA: Desafíos prácticos de la co-creación"
   - CA: "La perspectiva de la comunitat educativa en el disseny d'eines d'IA: Desafiaments pràctics de la co-creació"
@@ -425,12 +479,12 @@ Presentations summarized both quantitative and qualitative metrics recorded in h
   - **ES**: Estudio sobre los retos de comunicación y competencias tecnológicas que emergen al sentar en la misma mesa de codiseño a desarrolladores de software educativo e investigadores escolares. Se proponen dinámicas visuales para mitigar la asimetría técnica y empoderar a la comunidad educativa.
   - **CA**: Estudi sobre els reptes de comunicació i competències tecnològiques que emergeixen en seure a la mateixa taula de codisseny desenvolupadors de programari educatiu i investigadors escolars. Es proposen dinàmiques visuals per mitigar l'asimetria tècnica i empoderar la comunitat educativa.
   - **EN**: Study on communication challenges and technical skills emerging when bringing educational software developers and school researchers together at the same co-design table. Visual dynamics are proposed to mitigate technical asymmetry and empower the educational community.
-- **Metadatos**: DOI: 10.12795/pixelbit.2024.10189 | Zotero Key: MAR2024
+- **Metadatos**: DOI: 10.12795/pixelbit.2024.10189 | Zotero Key: SAL2024
 - **Palabras clave**: Co-creación, Tecnología, Usabilidad
 
 #### Publicación: Tecnología Educativa y Personalización: Guía Práctica para el Codiseño de Aulas Inteligentes (ID: `pub-3`)
 - **Tipo**: ES: "Publicaciones" | CA: "Publicacions" | EN: "Publications"
-- **Cita Bibliográfica**: Gómez, M. (2024). Editorial UIB, Palma de Mallorca.
+- **Cita Bibliográfica**: de Benito, B. (2024). Editorial UIB, Palma de Mallorca.
 - **Título Multilingüe**:
   - ES: "Tecnología Educativa y Personalización: Guía Práctica para el Codiseño de Aulas Inteligentes"
   - CA: "Tecnologia Educativa i Personalització: Guia Pràctica per al Codisseny d'Aules Intel·ligents"
@@ -439,12 +493,12 @@ Presentations summarized both quantitative and qualitative metrics recorded in h
   - **ES**: Un manual exhaustivo que provee marcos teóricos, plantillas de talleres de codiseño y guías éticas para la introducción de algoritmos adaptativos en el ámbito de la educación primaria y secundaria. Dirigido a formadores de profesorado y tecnólogos.
   - **CA**: Un manual exhaustiu que proveeix marcs teòrics, plantilles de tallers de codisseny i guies ètiques per a la introducció d'algorismes adaptatius en l'àmbit de l'educació primària i secundària. Adreçat a formadors de professorat i tecnòlegs.
   - **EN**: A comprehensive manual providing theoretical frameworks, templates for co-design workshops, and ethical guidelines for implementing adaptive algorithms in primary and secondary education. Intended for teacher trainers and technologists.
-- **Metadatos**: ISBN: 978-84-8384-498-3 | Zotero Key: GOM2024b
+- **Metadatos**: ISBN: 978-84-8384-498-3 | Zotero Key: BEN2024
 - **Palabras clave**: Manual, Codiseño, Aulas
 
 #### Publicación: Inteligencia Artificial y Educación: Nuevos horizontes para el codiseño docente (ID: `pub-4`)
 - **Tipo**: ES: "Publicaciones" | CA: "Publicacions" | EN: "Publications"
-- **Cita Bibliográfica**: Rodríguez, A. (Ed.). (2025). Octaedro Editorial.
+- **Cita Bibliográfica**: Pérez, A. (Ed.). (2025). Octaedro Editorial.
 - **Título Multilingüe**:
   - ES: "Inteligencia Artificial y Educación: Nuevos horizontes para el codiseño docente"
   - CA: "Intel·ligència Artificial i Educació: Nous horitzons per al codisseny docent"
@@ -453,35 +507,35 @@ Presentations summarized both quantitative and qualitative metrics recorded in h
   - **ES**: Una antología que reúne investigaciones iberoamericanas sobre el papel del docente como co-creador y supervisor de agentes inteligentes en el aula, discutiendo el diseño de cuadros de mando explicables y la soberanía del dato escolar.
   - **CA**: Una antologia que reuneix investigacions iberoamericanes sobre el paper del docent com a co-creador i supervisor d'agents intel·ligents a l'aula, discutint el disseny de quadres de comandament explicables i la sobirania de la dada escolar.
   - **EN**: An anthology gathering Ibero-American research on the teacher's role as co-creator and supervisor of intelligent agents in the classroom, discussing the design of explainable dashboards and school data sovereignty.
-- **Metadatos**: ISBN: 978-84-19023-88-2 | Zotero Key: ROD2025b
+- **Metadatos**: ISBN: 978-84-19023-88-2 | Zotero Key: PER2025
 - **Palabras clave**: IA, Docencia, Innovación
 
 #### Publicación: Dynamic Interface Generation for Personalized Learning: A Co-design Case Study (ID: `pub-5`)
 - **Tipo**: ES: "Congresos" | CA: "Congressos" | EN: "Conferences"
-- **Cita Bibliográfica**: Presented at International Conference on Educational Technology (ICET), Paris, 2024.
+- **Cita Bibliográfica**: Urbina, S. & Castañeda, L. (2024). Presented at International Conference on Educational Technology (ICET), Paris.
 - **Título Multilingüe**:
   - ES: "Dynamic Interface Generation for Personalized Learning: A Co-design Case Study"
   - CA: "Dynamic Interface Generation for Personalized Learning: A Co-design Case Study"
   - EN: "Dynamic Interface Generation for Personalized Learning: A Co-design Case Study"
 - **Resumen (Abstract)**:
   - **ES**: Este artículo analiza la implementación técnica de interfaces configuradas dinámicamente a través de talleres de codiseño. Presentamos un marco de telemetría diseñado para equilibrar las recomendaciones automáticas de IA con los ajustes manuales del docente en tiempo real.
-  - **CA**: Aquest article analitza la implementació tècnica d'interfícies configurades dinàmicament a través de tallers de codisseny. Presentem un marc de telemetria dissenyat per equilibrar les recomanacions automàtiques d'IA com els ajustaments manuals del docent en temps real.
+  - **CA**: Aquest article analitza la implementació tècnica d'interfícies configurades dinàmicament a través de tallers de codisseny. Presentem un marc de telemetria dissenyat per equilibrar las recomanacions automàtiques d'IA amb els ajustaments manuals del docent en tiempo real.
   - **EN**: This paper analyzes the technical implementation of interfaces configured dynamically through co-design workshops. We present a telemetry framework designed to balance agentic AI recommendations with manual teacher overrides in real-time.
-- **Metadatos**: Zotero Key: ICET2024
+- **Metadatos**: Zotero Key: URB2024
 - **Palabras clave**: UI, Automation, Agency
 
 #### Publicación: El rol del codiseño en el desarrollo de asistentes virtuales inteligentes para secundaria (ID: `pub-6`)
 - **Tipo**: ES: "Seminarios" | CA: "Seminaris" | EN: "Seminars"
-- **Cita Bibliográfica**: Vidal, S. & Martínez, L. (2025). Ponencia en el Congreso Nacional de Investigación Educativa, Madrid.
+- **Cita Bibliográfica**: Negre, F., Lirola, F. & Angulo, G. (2025). Ponencia en el Congreso Nacional de Investigación Educativa, Madrid.
 - **Título Multilingüe**:
   - ES: "El rol del codiseño en el desarrollo de asistentes virtuales inteligentes para secundaria"
   - CA: "El rol del codisseny en el desenvolupament d'assistents virtuals intel·ligents per a secundària"
   - EN: "The role of co-design in the development of intelligent virtual assistants for secondary schools"
 - **Resumen (Abstract)**:
   - **ES**: Presentación de resultados del prototipado rápido de asistentes inteligentes en tres institutos de Mallorca, detallando la metodología de codiseño por fases (exploración, co-creación, evaluación) y la acogida de los tableros de control.
-  - **CA**: Presentació de resultats del prototipat ràpid d'assistents intel·ligents en tres instituts de Mallorca, detallant la metodologia de codisseny per fases (exploració, co-creació, avaluació) i l'acollida dels quadres de comandament.
+  - **CA**: Presentació de resultats del prototipat ràpid d'assistents intel·ligents en tres instituts de Mallorca, detallant la metodologia de codisseny per fases (exploración, co-creació, avaluació) y l'acollida dels quadres de comandament.
   - **EN**: Presentation of results from rapid prototyping of intelligent assistants in three high schools in Mallorca, detailing the phased co-design methodology (exploration, co-creation, evaluation) and the acceptance of dashboard controls.
-- **Metadatos**: Zotero Key: VID2025
+- **Metadatos**: Zotero Key: NEG2025
 - **Palabras clave**: Asistentes, Secundaria, Prototipado
 
 ### 5.3. Recursos del Proyecto (Descargables)

@@ -2868,3 +2868,241 @@ body.dark-mode .progress-bar-track {
 #view-actividad-detalle {
   padding-top: 120px;
 }
+
+/* ----------------------------------------------------
+   UPDATED CUSTOM STYLES (Real team, animations, submenu, custom cursor)
+   ---------------------------------------------------- */
+
+/* Reduced padding-top for El Proyecto to sit higher */
+#proyecto {
+  padding-top: 40px !important;
+}
+
+/* Remove two-column layout from project description */
+.project-desc-layout {
+  display: block !important;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.project-meta-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  margin-top: 40px;
+}
+
+/* Submenu active states styled with the logo colors (blue, green, teal) */
+.submenu-link[href*="#proyecto"].active {
+  background: var(--color-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(29, 91, 254, 0.2);
+}
+.submenu-link[href*="#proyecto"]:hover {
+  color: var(--color-blue) !important;
+  background: rgba(29, 91, 254, 0.08) !important;
+}
+
+.submenu-link[href*="#objetivos"].active {
+  background: var(--color-green) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(90, 206, 139, 0.2);
+}
+.submenu-link[href*="#objetivos"]:hover {
+  color: var(--color-green) !important;
+  background: rgba(90, 206, 139, 0.08) !important;
+}
+
+.submenu-link[href*="#equipo"].active {
+  background: var(--color-teal) !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 15px rgba(124, 228, 224, 0.25);
+}
+.submenu-link[href*="#equipo"]:hover {
+  color: var(--color-teal) !important;
+  background: rgba(124, 228, 224, 0.08) !important;
+}
+
+/* Language flag images - custom rounder and larger size */
+.lang-flag-img {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  vertical-align: middle;
+  margin-right: 8px !important;
+  display: inline-block;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2) !important;
+  transition: transform 0.2s ease;
+}
+
+.lang-dropdown-btn:hover .lang-flag-img {
+  transform: scale(1.1);
+}
+
+.lang-dropdown-btn {
+  padding: 6px 16px !important;
+}
+
+/* Collaborator logos (Images) in footer */
+.colab-logo img {
+  height: 44px;
+  width: auto;
+  max-width: 220px;
+  display: block;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(200%);
+  opacity: 0.65;
+  transition: all 0.3s ease;
+}
+
+.colab-logo:hover img {
+  filter: grayscale(0%) brightness(100%);
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+/* Member Role Badge in details modal */
+.member-role-badge {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.member-role-badge.badge-ip {
+  background: rgba(29, 91, 254, 0.08);
+  color: var(--color-blue);
+}
+.member-role-badge.badge-member {
+  background: rgba(124, 228, 224, 0.1);
+  color: #0fb1ab;
+}
+body.dark-mode .member-role-badge.badge-member {
+  color: var(--color-teal);
+}
+
+/* Custom interactive elements contacts hover */
+.member-contact-link:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.email-btn:hover { background: var(--color-blue) !important; color: #fff !important; }
+.orcid-btn:hover { background: var(--color-green) !important; color: #fff !important; }
+.rg-btn:hover { background: var(--color-teal) !important; color: #0f172a !important; }
+
+/* Custom Interactive Glow Cursor follower */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--color-blue);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s ease;
+  transform-origin: center center;
+}
+.custom-cursor-follower {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-teal);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  transform-origin: center center;
+}
+
+body.custom-cursor-hover .custom-cursor {
+  background: var(--color-green);
+}
+body.custom-cursor-hover .custom-cursor-follower {
+  width: 46px;
+  height: 46px;
+  background: rgba(90, 206, 139, 0.1);
+  border-color: var(--color-green);
+}
+
+/* Scroll reveal fade-in/out scroll reveal system */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* floating loop animations */
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.icon-animated {
+  animation: floating 6s ease-in-out infinite;
+}
+
+.stat-item:nth-child(2) .icon-animated { animation-delay: 1.5s; }
+.stat-item:nth-child(3) .icon-animated { animation-delay: 3s; }
+.stat-item:nth-child(4) .icon-animated { animation-delay: 4.5s; }
+
+/* Photo hover swapping on team-cards */
+.team-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  aspect-ratio: 4/5;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid var(--color-border-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .team-photo {
+  border-color: var(--color-border-dark);
+}
+
+.team-card:hover .team-photo {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.team-photo .photo-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.team-card:hover .photo-hover {
+  opacity: 1;
+}
+
+.team-card:hover .photo-color {
+  opacity: 0;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor, .custom-cursor-follower {
+    display: none !important;
+  }
+}
