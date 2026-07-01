@@ -65,32 +65,34 @@ Estos textos corresponden al menú superior, botones de control de idioma, barra
 ## 3. VISTA: INICIO (HOME)
 Se compone del mensaje de bienvenida principal (Hero), estadísticas y llamadas a la acción.
 
-### Título Principal del Hero (Visual / Fijo)
-- **Español / General**: Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do
-
 ### ID: `hero_tag` (Etiqueta superior del Hero)
-- **Español (ES)**: Proyecto de Investigación Activo
-- **Catalán (CA)**: Projecte d'Investigació Actiu
-- **Inglés (EN)**: Active Research Project
+- **Español (ES)**: Proyecto de Investigación activo
+- **Catalán (CA)**: Proyecte d’Investigació actiu
+- **Inglés (EN)**: Active Investigation Project
+
+### ID: `hero_main_title` (Título Principal del Hero)
+- **Español (ES)**: Rediseñamos el futuro de la educación con <span class="blue-highlight">Codiseño</span> e <span class="green-highlight">Inteligencia Artificial</span>
+- **Catalán (CA)**: Redissenyam el futur de l'educació amb <span class="blue-highlight">Codisseny</span> i <span class="green-highlight">Intel·ligència Artificial</span>
+- **Inglés (EN)**: Redesigning the Future of Education with <span class="blue-highlight">Codesign</span> & <span class="green-highlight">Artificial Intelligence</span>
 
 ### ID: `hero_desc` (Descripción detallada del Hero)
-- **Español (ES)**: Lorem ipsum **DOLOR SIT AMET** conéctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Catalán (CA)**: Lorem ipsum **DOLOR SIT AMET** consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Inglés (EN)**: Lorem ipsum **DOLOR SIT AMET** consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- **Español (ES)**: COPLITELE-IA es un proyecto de investigación que transforma la educación superior integrando la Inteligencia Artificial Generativa (IAG) desde un enfoque pedagógico innovador. A través del codiseño educativo entre docentes y estudiantes, impulsamos la personalización del aprendizaje mediante itinerarios flexibles, promoviendo entornos virtuales conectados que garantizan la equidad, la inclusión y la calidad educativa.
+- **Catalán (CA)**: COPLITELE-IA és un projecte d'investigació que transforma l'educació superior integrant la Intel·ligència Artificial Generativa (IAG) des d'un enfocament pedagògic innovador. A través del codissenyi educatiu entre docents i estudiants, impulsem la personalització de l'aprenentatge mitjançant itineraris flexibles, promovent entorns virtuals connectats que garanteixen l'equitat, la inclusió i la qualitat educativa.
+- **Inglés (EN)**: COPLITELE-IA is a research project transforming higher education by integrating Generative Artificial Intelligence (GAI) through an innovative pedagogical lens. Through educational co-design between faculty and students, we champion personalized learning using flexible itineraries, fostering connected virtual environments that ensure equity, inclusion, and educational quality.
 
 ### ID: `btn_conocer` (Texto del Botón Principal)
-- **Español (ES)**: Conocer el Proyecto
-- **Catalán (CA)**: Conèixer el Projecte
-- **Inglés (EN)**: Explore Project
+- **Español (ES)**: Conoce el Proyecto
+- **Catalán (CA)**: Conèix el Proyecte
+- **Inglés (EN)**: Explore the Project
 
 ### ID: `progress_label` (Etiqueta de la barra de progreso (Valor fijo: 75%))
 - **Español (ES)**: Progreso del Proyecto
 - **Catalán (CA)**: Progrés del Projecte
-- **Inglés (EN)**: Project Progress
+- **Inglés (EN)**: Project Process
 
 ### ID: `stats_years` (Estadística 1: Años de Investigación)
 - **Español (ES)**: Años de investigación
-- **Catalán (CA)**: Anys d'investigació
+- **Catalán (CA)**: Anys d’investigació
 - **Inglés (EN)**: Years of research
 
 ### ID: `stats_investigadores` (Estadística 2: Investigadores)
@@ -106,7 +108,7 @@ Se compone del mensaje de bienvenida principal (Hero), estadísticas y llamadas 
 ### ID: `stats_experiencias` (Estadística 4: Experiencias en centros)
 - **Español (ES)**: Experiencias
 - **Catalán (CA)**: Experiències
-- **Inglés (EN)**: Experiences
+- **Inglés (EN)**: Experiencies
 
 ### ID: `news_title` (Cabecera de noticias en Inicio)
 - **Español (ES)**: Últimas noticias

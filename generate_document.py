@@ -10,9 +10,10 @@ translations = {
         "menu_inicio": "Inicio",
         "menu_proyecto": "Proyecto",
         "menu_impacto": "Impacto y Difusión",
-        "hero_tag": "Proyecto de Investigación Activo",
-        "hero_desc": "Lorem ipsum <strong>DOLOR SIT AMET</strong> conéctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "btn_conocer": "Conocer el Proyecto",
+        "hero_tag": "Proyecto de Investigación activo",
+        "hero_main_title": "Rediseñamos el futuro de la educación con <span class=\"blue-highlight\">Codiseño</span> e <span class=\"green-highlight\">Inteligencia Artificial</span>",
+        "hero_desc": "COPLITELE-IA es un proyecto de investigación que transforma la educación superior integrando la Inteligencia Artificial Generativa (IAG) desde un enfoque pedagógico innovador. A través del codiseño educativo entre docentes y estudiantes, impulsamos la personalización del aprendizaje mediante itinerarios flexibles, promoviendo entornos virtuales conectados que garantizan la equidad, la inclusión y la calidad educativa.",
+        "btn_conocer": "Conoce el Proyecto",
         "btn_publicaciones": "Publicaciones",
         "news_title": "Últimas noticias",
         "news_pretitle": "Actualidad",
@@ -76,13 +77,14 @@ translations = {
         "menu_inicio": "Inici",
         "menu_proyecto": "Projecte",
         "menu_impacto": "Impacte i Difusió",
-        "hero_tag": "Projecte d'Investigació Actiu",
-        "hero_desc": "Lorem ipsum <strong>DOLOR SIT AMET</strong> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "btn_conocer": "Conèixer el Projecte",
+        "hero_tag": "Proyecte d’Investigació actiu",
+        "hero_main_title": "Redissenyam el futur de l'educació amb <span class=\"blue-highlight\">Codisseny</span> i <span class=\"green-highlight\">Intel·ligència Artificial</span>",
+        "hero_desc": "COPLITELE-IA és un projecte d'investigació que transforma l'educació superior integrant la Intel·ligència Artificial Generativa (IAG) des d'un enfocament pedagògic innovador. A través del codissenyi educatiu entre docents i estudiants, impulsem la personalització de l'aprenentatge mitjançant itineraris flexibles, promovent entorns virtuals connectats que garanteixen l'equitat, la inclusió i la qualitat educativa.",
+        "btn_conocer": "Conèix el Proyecte",
         "btn_publicaciones": "Publicacions",
         "news_title": "Últimes notícies",
         "news_pretitle": "Actualitat",
-        "stats_years": "Anys d'investigació",
+        "stats_years": "Anys d’investigació",
         "stats_investigadores": "Investigadors",
         "stats_publicaciones": "Publicacions",
         "stats_experiencias": "Experiències",
@@ -142,17 +144,18 @@ translations = {
         "menu_inicio": "Home",
         "menu_proyecto": "Project",
         "menu_impacto": "Impact & Dissemination",
-        "hero_tag": "Active Research Project",
-        "hero_desc": "Lorem ipsum <strong>DOLOR SIT AMET</strong> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "btn_conocer": "Explore Project",
+        "hero_tag": "Active Investigation Project",
+        "hero_main_title": "Redesigning the Future of Education with <span class=\"blue-highlight\">Codesign</span> & <span class=\"green-highlight\">Artificial Intelligence</span>",
+        "hero_desc": "COPLITELE-IA is a research project transforming higher education by integrating Generative Artificial Intelligence (GAI) through an innovative pedagogical lens. Through educational co-design between faculty and students, we champion personalized learning using flexible itineraries, fostering connected virtual environments that ensure equity, inclusion, and educational quality.",
+        "btn_conocer": "Explore the Project",
         "btn_publicaciones": "Publications",
         "news_title": "Latest news",
         "news_pretitle": "News",
         "stats_years": "Years of research",
         "stats_investigadores": "Researchers",
         "stats_publicaciones": "Publications",
-        "stats_experiencias": "Experiences",
-        "progress_label": "Project Progress",
+        "stats_experiencias": "Experiencies",
+        "progress_label": "Project Process",
         "submenu_desc": "Description",
         "submenu_obj": "Objectives",
         "submenu_miembros": "Members",
@@ -634,13 +637,9 @@ def generate_markdown():
     md.append("Se compone del mensaje de bienvenida principal (Hero), estadísticas y llamadas a la acción.")
     md.append("")
     
-    # Hero Title (hardcoded in HTML)
-    md.append("### Título Principal del Hero (Visual / Fijo)")
-    md.append("- **Español / General**: Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do")
-    md.append("")
-    
     home_keys = [
         ("hero_tag", "Etiqueta superior del Hero"),
+        ("hero_main_title", "Título Principal del Hero"),
         ("hero_desc", "Descripción detallada del Hero"),
         ("btn_conocer", "Texto del Botón Principal"),
         ("progress_label", "Etiqueta de la barra de progreso (Valor fijo: 75%)"),
@@ -995,16 +994,11 @@ def generate_html():
 
   <h2>3. Vista: Inicio (Home)</h2>
   <p>Textos y secciones correspondientes a la página de bienvenida y presentación general.</p>
-
-  <h3>Título Principal del Hero</h3>
-  <div class="lang-section">
-    <div class="lang-tag">General (Fijo en HTML)</div>
-    <div>Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do</div>
-  </div>
   """)
 
   home_keys = [
       ("hero_tag", "Etiqueta superior del Hero"),
+      ("hero_main_title", "Título Principal del Hero"),
       ("hero_desc", "Descripción detallada del Hero"),
       ("btn_conocer", "Texto del Botón Principal"),
       ("progress_label", "Etiqueta de la barra de progreso (Valor fijo: 75%)"),
@@ -1403,14 +1397,9 @@ def generate_docx(output_path="COPLITELE-IA_Secciones_Web.docx"):
     run = h.add_run("3. Vista: Inicio (Home)")
     run.font.color.rgb = RGBColor(29, 91, 254)
     
-    # Hero Title
-    p = doc.add_paragraph()
-    run = p.add_run("Título Principal del Hero (Visual / Fijo)")
-    run.bold = True
-    p.add_run("\n- Valor: Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do")
-    
     home_keys = [
         ("hero_tag", "Etiqueta superior del Hero"),
+        ("hero_main_title", "Título Principal del Hero"),
         ("hero_desc", "Descripción detallada del Hero"),
         ("btn_conocer", "Texto del Botón Principal"),
         ("progress_label", "Etiqueta de la barra de progreso (Valor fijo: 75%)"),
