@@ -4683,3 +4683,95 @@ html {
   min-height: 280px;
 }
 
+/* ===================================================
+   USER REQUESTED OVERRIDES
+   =================================================== */
+
+/* Footer semicircular mask & bottom centering */
+footer {
+  border-radius: 50% 50% 0 0 / 40px 40px 0 0 !important;
+  margin-top: -20px !important;
+  padding-top: 80px !important;
+  position: relative;
+  z-index: 10;
+}
+.footer-bottom {
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.legal-links {
+  justify-content: center !important;
+}
+
+/* Nav card idle text white, hover text dark */
+.nav-card-content p {
+  color: #ffffff !important;
+}
+.section-nav-card:hover .nav-card-content p {
+  color: #475569 !important;
+}
+body.dark-mode .section-nav-card:hover .nav-card-content p {
+  color: #94a3b8 !important;
+}
+
+/* Activity (Transferencia) hover intense */
+.activity-card:hover {
+  background: #22C55E !important;
+  border-color: transparent !important;
+}
+.activity-card:hover h3, 
+.activity-card:hover .activity-desc, 
+.activity-card:hover .activity-badge,
+.activity-card:hover .activity-footer-item {
+  color: #ffffff !important;
+}
+.activity-card:hover svg {
+  fill: #ffffff !important;
+}
+
+/* Pub (Producción Científica) hover intense */
+.pub-card:hover {
+  background: #8B5CF6 !important;
+  border-color: transparent !important;
+}
+.pub-card:hover .pub-title, 
+.pub-card:hover .pub-citation, 
+.pub-card:hover p, 
+.pub-card:hover .pub-year-badge {
+  color: #ffffff !important;
+}
+.pub-card-row:hover {
+  background: #8B5CF6 !important;
+  border-color: transparent !important;
+}
+.pub-card-row:hover * {
+  color: #ffffff !important;
+}
+
+/* Resource (Recursos) hover intense */
+.resource-card:hover {
+  background: #14B8A6 !important;
+  border-color: transparent !important;
+}
+.resource-card:hover .resource-title, 
+.resource-card:hover .resource-desc {
+  color: #ffffff !important;
+}
+.resource-card:hover .btn-secondary {
+  background: #ffffff !important;
+  color: #14B8A6 !important;
+  border-color: #ffffff !important;
+}
+
+/* Button Turquoise global fix */
+.btn-secondary {
+  color: var(--color-teal) !important;
+  border-color: var(--color-teal) !important;
+}
+.resource-info .btn-secondary {
+  color: var(--color-teal) !important;
+  border-color: var(--color-teal) !important;
+}
+
+

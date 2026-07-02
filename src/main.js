@@ -1008,7 +1008,7 @@ function updateAllLogos() {
   
   const footerLogoWrapper = document.getElementById('footer-logo-container');
   if (footerLogoWrapper) {
-    footerLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 32, false);
+    footerLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 96, false);
   }
   
   // Render in hero showcase (large version, isLarge = true)
