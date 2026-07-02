@@ -636,7 +636,7 @@ const translations = {
     progress_label: "Progreso del Proyecto",
     submenu_desc: "Descripción",
     submenu_obj: "Objetivos",
-    submenu_miembros: "Miembros",
+    submenu_miembros: "Equipo",
     submenu_noticias: "Últimas noticias",
     submenu_transferencia: "Transferencia",
     submenu_publicaciones: "Producción científica",
@@ -703,7 +703,7 @@ const translations = {
     progress_label: "Progrés del Projecte",
     submenu_desc: "Descripció",
     submenu_obj: "Objectius",
-    submenu_miembros: "Membres",
+    submenu_miembros: "Equip",
     submenu_noticias: "Últimes notícies",
     submenu_transferencia: "Transferència",
     submenu_publicaciones: "Producció científica",
@@ -770,7 +770,7 @@ const translations = {
     progress_label: "Project Process",
     submenu_desc: "Description",
     submenu_obj: "Objectives",
-    submenu_miembros: "Members",
+    submenu_miembros: "Team",
     submenu_noticias: "Latest news",
     submenu_transferencia: "Transfer",
     submenu_publicaciones: "Scientific production",
@@ -1006,6 +1006,11 @@ function updateAllLogos() {
     headerLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 44, false);
   }
   
+  const footerLogoWrapper = document.getElementById('footer-logo-container');
+  if (footerLogoWrapper) {
+    footerLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 32, false);
+  }
+  
   // Render in hero showcase (large version, isLarge = true)
   const heroLogoWrapper = document.getElementById('hero-logo-container');
   if (heroLogoWrapper) {
@@ -1130,7 +1135,16 @@ function renderNewsFeed() {
   // Images for news cards (cycle through imported assets)
   const newsImages = [transferenciaImg, investigadoresImg, congresosImg];
   
-  const htmlContent = newsFeedItems.map((item, i) => {
+  // Display up to 5 items on home, all on impact page.
+  // Actually, let's generate HTML separately if needed, but for simplicity:
+  const homeContent = newsFeedItems.slice(0, 5).map((item, i) => generateNewsHTML(item, i, newsImages)).join('');
+  const impactContent = newsFeedItems.map((item, i) => generateNewsHTML(item, i, newsImages)).join('');
+  
+  if (newsListHome) newsListHome.innerHTML = homeContent;
+  if (newsListImpact) newsListImpact.innerHTML = impactContent;
+  
+  // Helper to generate the HTML
+  function generateNewsHTML(item, i, images) {
     const text = item.text[currentLang];
     const badgeText = item.tag[currentLang];
     let badgeClass = 'badge-news';
@@ -1149,15 +1163,9 @@ function renderNewsFeed() {
           <span class="news-card-badge ${badgeClass}">${badgeText}</span>
           <p class="news-card-title">${text}</p>
         </div>
+        </div>
       </div>
     `;
-  }).join('');
-  
-  if (newsListHome) {
-    newsListHome.innerHTML = htmlContent;
-  }
-  if (newsListImpact) {
-    newsListImpact.innerHTML = htmlContent;
   }
   
   // Add click events
@@ -1183,23 +1191,41 @@ function renderTeam() {
   if (!teamGrid) return;
   
   const colors = ['blue', 'green', 'teal'];
+  const colorAccents = {
+    blue:  'rgba(29, 91, 254, 0.75)',
+    green: 'rgba(34, 197, 94, 0.7)',
+    teal:  'rgba(20, 184, 166, 0.7)'
+  };
   
-  teamGrid.innerHTML = teamMembers.map((member, i) => {
+  // Shuffle array securely for randomized masonry layout
+  const shuffledTeam = [...teamMembers].sort(() => Math.random() - 0.5);
+  
+  teamGrid.innerHTML = shuffledTeam.map((member, i) => {
     const colorClass = colors[i % colors.length];
-    const btnText = currentLang === 'en' ? 'View Full Profile' : (currentLang === 'ca' ? 'Veure Perfil Complet' : 'Ver Perfil Completo');
+    const accent = colorAccents[colorClass];
+    const roleText = member.role[currentLang];
+    
+    // Assign random aspect ratios for dynamic sizing (mostly vertical)
+    const aspectRatios = ['4/5', '3/4', '1/1', '16/10'];
+    const randomAspect = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
     
     return `
-      <article class="team-card color-variation-${colorClass}" id="card-${member.id}" style="cursor: pointer;">
-        <div class="team-photo">
-          <img src="${member.photo}" class="photo-color" alt="${member.name}" loading="lazy">
-          <img src="${member.photoHover}" class="photo-hover" alt="${member.name}" loading="lazy">
-        </div>
-        <div class="team-info">
-          <span class="team-role">${member.role[currentLang]}</span>
-          <h3 class="team-name">${member.name}</h3>
-          <p class="team-bio">${member.bio[currentLang].substring(0, 100)}...</p>
-          <div class="team-links">
-            <button class="btn-premium ${colorClass} view-member-btn" data-id="${member.id}">${btnText}</button>
+      <article class="team-card color-variation-${colorClass}" id="card-${member.id}" style="cursor:pointer;">
+        <div class="team-photo" style="aspect-ratio: ${randomAspect};">
+          <!-- Original image shown by default -->
+          <img src="${member.photoHover}" class="photo-original" alt="${member.name}" loading="lazy">
+          <!-- Tinted photo fades in on hover -->
+          <img src="${member.photoHover}" class="photo-color-overlay" alt="${member.name}" loading="lazy">
+          <!-- Dark gradient for text readability -->
+          <div class="photo-overlay"></div>
+          <!-- Info anchored to bottom of photo -->
+          <div class="team-photo-info">
+            <span class="team-role-badge">${roleText}</span>
+            <p class="team-photo-name">${member.name}</p>
+            <button class="team-name-btn view-member-btn" data-id="${member.id}" style="border-color:${accent};background:rgba(255,255,255,0.08);">
+              <span>${member.name}</span>
+              <span class="btn-arrow">→</span>
+            </button>
           </div>
         </div>
       </article>
@@ -1227,8 +1253,9 @@ function renderTeam() {
   window.dispatchEvent(new Event('content-updated'));
 }
 
-let activeTab = 'all';
+// State variables
 let searchQuery = '';
+let pubFilterType = 'all';
 
 function getPubIcon(type) {
   if (type === 'revista') {
@@ -1254,8 +1281,10 @@ function renderPublications() {
       citationText.includes(searchQuery) ||
       abstractText.includes(searchQuery) ||
       pub.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+      
+    const matchesType = pubFilterType === 'all' || pub.type === pubFilterType;
     
-    return matchesSearch;
+    return matchesSearch && matchesType;
   });
   
   const mapPubHTML = pub => {
@@ -1263,26 +1292,24 @@ function renderPublications() {
     const extraLabelText = pub.extraLabel[currentLang];
     const year = pub.citation.match(/\((\d{4})\)/)?.[1] || 'Zotero';
     
+    // Extract authors roughly
+    const authorStr = pub.citation.split(/\(\d{4}\)\./)[0] || pub.citation.split(' (')[0] || pub.citation.substring(0, 50);
+    
     return `
-      <article class="pub-card" data-id="${pub.id}">
-        <div class="pub-card-header">
-          <span class="pub-badge badge-${labelColorClass}">
-            ${getPubIcon(pub.type)} ${extraLabelText}
-          </span>
+      <article class="pub-card-row view-pub-btn" data-id="${pub.id}">
+        <div class="pub-col pub-col-year">
           <span class="pub-year-badge">${year}</span>
         </div>
-        <div class="pub-card-body">
-          <h3 class="pub-title">${pub.title[currentLang]}</h3>
-          <p class="pub-citation">${pub.citation}</p>
-          <div class="pub-tags">
-            ${pub.tags.map(tag => `<span class="pub-tag bg-${labelColorClass}">${tag.split(' / ')[currentLang === 'es' ? 0 : (currentLang === 'ca' ? 1 : 0)] || tag}</span>`).join('')}
-          </div>
-          <div class="pub-actions">
-            <button class="btn-premium ${labelColorClass} view-pub-btn" style="width: 100%; justify-content: center;" data-id="${pub.id}">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="margin-right: 6px;"><path d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
-              ${currentLang === 'en' ? 'View Zotero Sheet' : (currentLang === 'ca' ? 'Veure Fitxa Zotero' : 'Ver Ficha Zotero')}
-            </button>
-          </div>
+        <div class="pub-col pub-col-title">
+          <h3 class="pub-title" style="margin-bottom:0;">${pub.title[currentLang]}</h3>
+        </div>
+        <div class="pub-col pub-col-authors">
+          <p class="pub-authors" style="margin:0;">${authorStr}</p>
+        </div>
+        <div class="pub-col pub-col-platform">
+          <span class="pub-badge badge-${labelColorClass}" style="width: fit-content; padding: 4px 8px;">
+            ${getPubIcon(pub.type)} ${extraLabelText}
+          </span>
         </div>
       </article>
     `;
@@ -1305,10 +1332,14 @@ function renderPublications() {
   }
   
   // Add click handlers for detailed modal
-  document.querySelectorAll('.view-pub-btn').forEach(btn => {
+  document.querySelectorAll('.pub-card-row.view-pub-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const pubId = e.target.getAttribute('data-id');
-      openPubModal(pubId);
+      // Find closest pub-card-row because user might click on inner elements
+      const row = e.target.closest('.pub-card-row');
+      if(row) {
+        const pubId = row.getAttribute('data-id');
+        openPubModal(pubId);
+      }
     });
   });
 }
@@ -1330,6 +1361,10 @@ function openMemberModal(id) {
     modal.classList.remove('modal-large');
   }, { once: true });
   
+  // Alternate layout depending on member ID string character (simulates random but consistent)
+  const isEven = member.id.charCodeAt(member.id.length - 1) % 2 === 0;
+  const layoutClass = isEven ? 'layout-inverted' : '';
+  
   modalContent.innerHTML = `
     <div class="modal-header">
       <div>
@@ -1341,11 +1376,11 @@ function openMemberModal(id) {
         <h3 style="font-size: 26px; font-weight: 850; margin: 0; color: var(--color-text-light);">${member.name}</h3>
         <p style="font-size: 14.5px; font-weight: 550; color: var(--color-blue); margin: 6px 0 0 0;">${member.title[currentLang]}</p>
       </div>
-      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal" style="font-size: 28px;">&times;</button>
+      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="modal-member-layout">
-        <div class="modal-member-left-col">
+      <div class="modal-member-layout ${layoutClass}">
+        <div class="modal-member-left-col" style="${isEven ? 'order: 2;' : ''}">
           <div class="modal-member-photo-wrapper">
             <img src="${member.photoHover}" alt="${member.name}">
           </div>
@@ -1542,6 +1577,20 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPublications();
   renderTransferActivities();
   
+  // 5.1.1 Hero brand title letter-by-letter entrance animation
+  // Use rAF + small timeout so CSS is settled before we add the class
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const heroTitle = document.querySelector('.hero-intro-brand-title');
+      const heroTagline = document.querySelector('.hero-intro-tagline');
+      const heroDivider = document.querySelector('.brand-divider-line');
+      if (heroTitle) heroTitle.classList.add('hero-animated');
+      if (heroTagline) heroTagline.classList.add('hero-tagline-in');
+      if (heroDivider) heroDivider.classList.add('hero-divider-in');
+    }, 80);
+  });
+
+  
   // 5.2 Dynamic Logo Trigger on click
   const heroLogoContainer = document.getElementById('hero-logo-container');
   if (heroLogoContainer) {
@@ -1559,36 +1608,69 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // 5.3 Shrinking Fixed Header on Scroll
+  let arcsSvg = document.querySelector('.animated-arcs-bg');
+  
+  let ticking = false;
   const handleScroll = () => {
-    const header = document.querySelector('header');
-    if (header) {
-      if (window.scrollY > 30) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }
-    
-    // Scroll-driven logo scaling
-    const maxScroll = 250;
-    const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
-    
-    const heroLogo = document.getElementById('hero-logo-container');
-    const headerLogo = document.getElementById('header-logo-container');
-    
-    if (heroLogo) {
-      heroLogo.style.transform = `scale(${1 - progress})`;
-      heroLogo.style.opacity = `${1 - progress}`;
-    }
-    if (headerLogo) {
-      headerLogo.style.transform = `scale(${progress})`;
-      headerLogo.style.opacity = `${progress}`;
-      headerLogo.style.pointerEvents = progress > 0.15 ? 'auto' : 'none';
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const sy = window.scrollY;
+        const header = document.querySelector('header');
+        if (header) {
+          if (sy > 30) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        }
+        
+        const heroLogo = document.getElementById('hero-logo-container');
+        const headerLogo = document.getElementById('header-logo-container');
+        
+        const currentPath = (window.location.hash || '#/').replace(/^#\/?/, '').split('#')[0] || 'inicio';
+        const isInicioPg = (currentPath === 'inicio' || currentPath === '');
+        
+        if (isInicioPg) {
+          const maxScroll = 250;
+          const progress = Math.min(1, Math.max(0, sy / maxScroll));
+          if (heroLogo) { heroLogo.style.transform = `scale(${1 - progress})`; heroLogo.style.opacity = `${1 - progress}`; }
+          if (headerLogo) { headerLogo.style.transform = `scale(${progress})`; headerLogo.style.opacity = `${progress}`; headerLogo.style.pointerEvents = progress > 0.15 ? 'auto' : 'none'; }
+          
+          // Hero brand text fade-out with slight delay after logo
+          const brandText = document.querySelector('.hero-intro-brand-wrapper');
+          if (brandText) {
+            const textProgress = Math.min(1, Math.max(0, (sy - 30) / 200));
+            brandText.style.opacity = `${1 - textProgress}`;
+            brandText.style.transform = `translateY(${textProgress * 18}px)`;
+          }
+        } else {
+          if (heroLogo) { heroLogo.style.transform = 'scale(0)'; heroLogo.style.opacity = '0'; }
+          if (headerLogo) { headerLogo.style.transform = 'scale(1)'; headerLogo.style.opacity = '1'; headerLogo.style.pointerEvents = 'auto'; }
+        }
+        
+        // Pause CSS spinning animations when scrolling past Hero to improve smoothness
+        if (sy > window.innerHeight * 0.8) {
+          document.body.classList.add('scrolled-past-hero');
+        } else {
+          document.body.classList.remove('scrolled-past-hero');
+        }
+        
+        // Arc parallax: apply transformation via JS for smooth scroll-driven movement
+        if (arcsSvg) {
+          const offsetY = sy * 0.25; 
+          const scale = 1 + (sy * 0.0005);
+          const rotate = sy * 0.05;
+          arcsSvg.style.transform = `translateY(${offsetY}px) scale(${scale}) rotate(${rotate}deg)`;
+        }
+        
+        ticking = false;
+      });
+      ticking = true;
     }
   };
   
-  window.addEventListener('scroll', handleScroll);
-  handleScroll(); // Run once to initialize correct scaling on reload
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
 
 
   // 5.3.2 Hero Intro Scroll Down Smoothly
@@ -1772,12 +1854,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // 5.10 Publications Tab Filters
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  tabBtns.forEach(btn => {
+  const pubFilterBtns = document.querySelectorAll('.pub-filter-btn');
+  pubFilterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      tabBtns.forEach(b => b.classList.remove('active'));
+      pubFilterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      activeTab = btn.getAttribute('data-tab');
+      pubFilterType = btn.getAttribute('data-filter');
       renderPublications();
     });
   });
@@ -1855,6 +1937,10 @@ function handleRouting() {
   let path = routePart || 'inicio';
   
   let detailId = null;
+  // Hide all simulated views
+  const views = document.querySelectorAll('.spa-view');
+  views.forEach(v => v.classList.remove('active'));
+  
   if (path.startsWith('actividad/')) {
     detailId = path.substring('actividad/'.length);
     path = 'actividad-detalle';
@@ -1866,10 +1952,6 @@ function handleRouting() {
     return;
   }
   
-  // Hide all simulated views
-  const views = document.querySelectorAll('.spa-view');
-  views.forEach(v => v.classList.remove('active'));
-  
   // Show target SPA view
   const targetView = document.getElementById(`view-${path}`);
   if (targetView) {
@@ -1879,6 +1961,11 @@ function handleRouting() {
     if (homeView) homeView.classList.add('active');
     path = 'inicio';
   }
+  
+  updateBackgroundLines(path);
+  
+  // Update body data-page for CSS targeting
+  document.body.setAttribute('data-page', path);
   
   // Update nav-menu links active states
   const navLinks = document.querySelectorAll('.nav-link, .mobile-menu-link');
@@ -1916,6 +2003,9 @@ function handleRouting() {
   if (path === 'actividad-detalle' && detailId) {
     renderActivityDetail(detailId);
   }
+  
+  // Force immediate scroll triggers (logo visibility, circles, etc.)
+  window.dispatchEvent(new Event('scroll'));
 }
 
 function getActivityIcon(type) {
@@ -2180,8 +2270,8 @@ function initScrollReveal() {
   });
   
   const setupReveals = () => {
-    // Target all headings, paragraphs, and cards, excluding headers, mobile navs, cursor indicators or modals to avoid visual bugs
-    document.querySelectorAll('h1, h2, h3, h4, p, section, .page-section, .team-card, .pub-card, .objective-card, .resource-card, .framework-card, .hero-stats-row, .section-nav-grid').forEach(el => {
+    // Target typography elements to keep scroll animation smooth
+    document.querySelectorAll('h1, h2, h3, h4, p, .hero-stats-row, .section-nav-grid').forEach(el => {
       if (el.closest('header') || el.closest('#details-modal') || el.closest('.custom-cursor') || el.closest('.custom-cursor-follower') || el.closest('.custom-lang-dropdown')) return;
       
       el.classList.add('scroll-reveal');
@@ -2192,3 +2282,114 @@ function initScrollReveal() {
   setupReveals();
   window.addEventListener('content-updated', setupReveals);
 }
+
+function initLordIconHovers() {
+  const updateIcons = () => {
+    document.querySelectorAll('.section-nav-card').forEach(card => {
+      const icon = card.querySelector('lord-icon');
+      if (!icon) return;
+      
+      let hoverPrimary = '#1D5BFE';
+      let hoverSecondary = '#7ce4e0';
+      
+      if (card.classList.contains('card-transferencia')) {
+        hoverPrimary = '#0f766e'; // teal dark
+        hoverSecondary = '#14b8a6'; // teal light
+      } else if (card.classList.contains('card-publicaciones')) {
+        hoverPrimary = '#6d28d9'; // purple dark
+        hoverSecondary = '#8b5cf6'; // purple light
+      } else if (card.classList.contains('card-recursos')) {
+        hoverPrimary = '#0369a1'; // blue dark
+        hoverSecondary = '#0ea5e9'; // blue light
+      }
+
+      // Initial state
+      icon.setAttribute('colors', 'primary:#ffffff,secondary:#ffffff');
+
+      // Add listeners only once
+      if (!card.dataset.lordIconListener) {
+        card.addEventListener('mouseenter', () => {
+          icon.setAttribute('colors', `primary:${hoverPrimary},secondary:${hoverSecondary}`);
+        });
+        card.addEventListener('mouseleave', () => {
+          icon.setAttribute('colors', 'primary:#ffffff,secondary:#ffffff');
+        });
+        card.dataset.lordIconListener = 'true';
+      }
+    });
+  };
+  
+  updateIcons();
+  window.addEventListener('content-updated', updateIcons);
+}
+
+function updateBackgroundLines(route) {
+  let svgBg = document.querySelector('.animated-arcs-bg');
+  if (!svgBg) {
+    svgBg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svgBg.classList.add("animated-arcs-bg");
+    svgBg.setAttribute("viewBox", "0 0 1400 900");
+    svgBg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    svgBg.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(svgBg, document.body.firstChild);
+  }
+  
+  svgBg.innerHTML = '';
+  
+  let cx = 700;
+  let cy = 350;
+
+  let circlesHTML = '';
+
+  if (route === 'inicio') {
+    circlesHTML = `
+      <!-- PAIR 1: inner ring -->
+      <circle class="arc arc-p arc-1"  cx="${cx}" cy="${cy}" r="160" />
+      <circle class="arc arc-s arc-1b" cx="${cx}" cy="${cy}" r="178" />
+      <!-- TRIO 1: mid-inner -->
+      <circle class="arc arc-p arc-2"  cx="${cx}" cy="${cy}" r="300" />
+      <circle class="arc arc-s arc-2b" cx="${cx}" cy="${cy}" r="320" />
+      <circle class="arc arc-s arc-2c" cx="${cx}" cy="${cy}" r="340" />
+      <!-- PAIR 2: mid -->
+      <circle class="arc arc-p arc-3"  cx="${cx}" cy="${cy}" r="490" />
+      <circle class="arc arc-s arc-3b" cx="${cx}" cy="${cy}" r="510" />
+      <!-- TRIO 2: outer-mid -->
+      <circle class="arc arc-p arc-4"  cx="${cx}" cy="${cy}" r="680" />
+      <circle class="arc arc-s arc-4b" cx="${cx}" cy="${cy}" r="700" />
+      <circle class="arc arc-s arc-4c" cx="${cx}" cy="${cy}" r="720" />
+      <!-- PAIR 3: outermost -->
+      <circle class="arc arc-p arc-5"  cx="${cx}" cy="${cy}" r="940" />
+      <circle class="arc arc-s arc-5b" cx="${cx}" cy="${cy}" r="960" />
+    `;
+  } else if (route === 'proyecto') {
+    cx = 1200; cy = 200;
+    circlesHTML = `
+      <circle class="arc arc-p arc-1" cx="${cx}" cy="${cy}" r="200" />
+      <circle class="arc arc-s arc-1b" cx="${cx}" cy="${cy}" r="220" />
+      <circle class="arc arc-color-blue arc-2" cx="${cx}" cy="${cy}" r="450" />
+      <circle class="arc arc-s arc-2b" cx="${cx}" cy="${cy}" r="480" />
+      <circle class="arc arc-p arc-3" cx="${cx}" cy="${cy}" r="750" />
+      <circle class="arc arc-color-teal arc-3b" cx="${cx}" cy="${cy}" r="780" />
+    `;
+  } else if (route === 'impacto') {
+    cx = 200; cy = 300;
+    circlesHTML = `
+      <circle class="arc arc-color-teal arc-1" cx="${cx}" cy="${cy}" r="100" />
+      <circle class="arc arc-s arc-1b" cx="${cx}" cy="${cy}" r="120" />
+      <circle class="arc arc-p arc-2" cx="${cx}" cy="${cy}" r="350" />
+      <circle class="arc arc-s arc-2b" cx="${cx}" cy="${cy}" r="380" />
+      <circle class="arc arc-s arc-2c" cx="${cx}" cy="${cy}" r="410" />
+      <circle class="arc arc-color-blue arc-3" cx="${cx}" cy="${cy}" r="650" />
+      <circle class="arc arc-p arc-3b" cx="${cx}" cy="${cy}" r="680" />
+    `;
+  } else {
+    circlesHTML = `
+      <circle class="arc arc-p arc-1" cx="700" cy="450" r="300" />
+      <circle class="arc arc-s arc-1b" cx="700" cy="450" r="320" />
+    `;
+  }
+
+  svgBg.innerHTML = circlesHTML;
+}
+
+document.addEventListener('DOMContentLoaded', initLordIconHovers);

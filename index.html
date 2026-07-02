@@ -10,13 +10,8 @@
 </head>
 <body>
 
-  <!-- Concentric Scroll Circles Background -->
-  <div class="scroll-circles-bg">
-    <div class="scroll-circle circle-1"></div>
-    <div class="scroll-circle circle-2"></div>
-    <div class="scroll-circle circle-3"></div>
-    <div class="scroll-circle circle-4"></div>
-  </div>
+  <!-- Animated Concentric Arcs Background — pairs & trios -->
+  <!-- Background Arcs injected by JS based on route -->
 
   <!-- Ambient Glow Backgrounds -->
   <div class="ambient-glow glow-1"></div>
@@ -137,7 +132,7 @@
           </h1>
           
           <p class="hero-desc" data-i18n="hero_desc">
-            Lorem ipsum <strong>DOLOR SIT AMET</strong> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            COPLITELE-IA es un proyecto de investigación que transforma la educación superior integrando la Inteligencia Artificial Generativa (IAG) desde un enfoque pedagógico innovador. A través del codiseño educativo entre docentes y estudiantes, impulsamos la personalización del aprendizaje mediante itinerarios flexibles, promoviendo entornos virtuales conectados que garantizan la equidad, la inclusión y la calidad educativa.
           </p>
           
           <div class="btn-group">
@@ -160,11 +155,13 @@
         <div class="hero-stats-row">
           <a href="#/proyecto#proyecto" class="stat-item">
             <div class="stat-icon-circle">
-              <svg class="icon-animated" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/msoeawqm.json"
+                  trigger="loop"
+                  delay="1000"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:140px;height:140px">
+              </lord-icon>
             </div>
             <span class="stat-number">3+</span>
             <span class="stat-label" data-i18n="stats_years">Años de investigación</span>
@@ -172,12 +169,13 @@
           
           <a href="#/proyecto#equipo" class="stat-item">
             <div class="stat-icon-circle">
-              <svg class="icon-animated" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/ljvjsnvh.json"
+                  trigger="loop"
+                  delay="1200"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:140px;height:140px">
+              </lord-icon>
             </div>
             <span class="stat-number">12</span>
             <span class="stat-label" data-i18n="stats_investigadores">Investigadores</span>
@@ -185,10 +183,13 @@
           
           <a href="#/impacto#publicaciones" class="stat-item">
             <div class="stat-icon-circle">
-              <svg class="icon-animated" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/puvaffet.json"
+                  trigger="loop"
+                  delay="1400"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:140px;height:140px">
+              </lord-icon>
             </div>
             <span class="stat-number">25+</span>
             <span class="stat-label" data-i18n="stats_publicaciones">Publicaciones</span>
@@ -196,11 +197,13 @@
           
           <a href="#/impacto#transferencia" class="stat-item">
             <div class="stat-icon-circle">
-              <svg class="icon-animated" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                <path d="M2 12h20" />
-              </svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/uqpazftn.json"
+                  trigger="loop"
+                  delay="1600"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:140px;height:140px">
+              </lord-icon>
             </div>
             <span class="stat-number">4</span>
             <span class="stat-label" data-i18n="stats_experiencias">Experiencias</span>
@@ -221,14 +224,18 @@
         </div>
         
         <!-- Row 2: Direct access cards to sections -->
+        <div class="news-section-header" style="margin-top: 60px;">
+          <h2 class="news-section-title" data-i18n="trans_pretitle">Impacto y Difusión</h2>
+        </div>
         <div class="section-nav-grid">
           <a href="#/impacto#transferencia" class="section-nav-card card-transferencia">
             <div class="nav-card-icon">
               <lord-icon
-                  src="https://cdn.lordicon.com/fpipqsxp.json"
-                  trigger="hover"
+                  src="https://cdn.lordicon.com/stxfyhky.json"
+                  trigger="loop"
+                  delay="500"
                   colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:55px;height:55px">
+                  style="width:80px;height:80px">
               </lord-icon>
             </div>
             <div class="nav-card-content">
@@ -241,10 +248,11 @@
           <a href="#/impacto#publicaciones" class="section-nav-card card-publicaciones">
             <div class="nav-card-icon">
               <lord-icon
-                  src="https://cdn.lordicon.com/wxnxoxse.json"
-                  trigger="hover"
+                  src="https://cdn.lordicon.com/nobciafz.json"
+                  trigger="loop"
+                  delay="1000"
                   colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:55px;height:55px">
+                  style="width:80px;height:80px">
               </lord-icon>
             </div>
             <div class="nav-card-content">
@@ -257,10 +265,11 @@
           <a href="#/impacto#recursos" class="section-nav-card card-recursos">
             <div class="nav-card-icon">
               <lord-icon
-                  src="https://cdn.lordicon.com/nocnwjqy.json"
-                  trigger="hover"
+                  src="https://cdn.lordicon.com/vlycxjwx.json"
+                  trigger="loop"
+                  delay="1500"
                   colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:55px;height:55px">
+                  style="width:80px;height:80px">
               </lord-icon>
             </div>
             <div class="nav-card-content">
@@ -282,7 +291,7 @@
         <ul class="page-submenu">
           <li><a href="#/proyecto#proyecto" class="submenu-link active" data-i18n="submenu_desc">Descripción</a></li>
           <li><a href="#/proyecto#objetivos" class="submenu-link" data-i18n="submenu_obj">Objetivos</a></li>
-          <li><a href="#/proyecto#equipo" class="submenu-link" data-i18n="submenu_miembros">Miembros</a></li>
+          <li><a href="#/proyecto#equipo" class="submenu-link" data-i18n="submenu_miembros">Equipo</a></li>
         </ul>
       </div>
     </div>
@@ -331,18 +340,19 @@
     <!-- Section 2: Objetivos -->
     <section id="objetivos" class="page-section">
       <div class="section-container">
-        <div class="section-title-wrapper" style="display: none;">
+        <div class="section-title-wrapper">
+          <span class="section-pretitle" data-i18n="menu_proyecto">Proyecto</span>
           <h2 class="section-title" data-i18n="obj_title">Objetivos del Proyecto</h2>
         </div>
         <div class="objectives-grid">
           <article class="objective-card">
             <div class="objective-card-icon">
               <lord-icon
-                  src="https://cdn.lordicon.com/hursldrn.json"
+                  src="https://cdn.lordicon.com/gqdnbnwt.json?v=4"
                   trigger="loop"
-                  delay="1500"
+                  delay="1000"
                   colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:70px;height:70px">
+                  style="width:90px;height:90px">
               </lord-icon>
             </div>
             <h3 data-i18n="obj_1_title">Objetivo Principal</h3>
@@ -351,11 +361,11 @@
           <article class="objective-card">
             <div class="objective-card-icon">
               <lord-icon
-                  src="https://cdn.lordicon.com/vjndpllp.json"
+                  src="https://cdn.lordicon.com/jvucoldz.json?v=4"
                   trigger="loop"
-                  delay="1500"
+                  delay="1200"
                   colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:70px;height:70px">
+                  style="width:90px;height:90px">
               </lord-icon>
             </div>
             <h3 data-i18n="obj_2_title">Innovación</h3>
@@ -364,11 +374,11 @@
           <article class="objective-card">
             <div class="objective-card-icon">
               <lord-icon
-                  src="https://cdn.lordicon.com/yfczvyer.json"
+                  src="https://cdn.lordicon.com/zpxybbhl.json?v=4"
                   trigger="loop"
-                  delay="1500"
+                  delay="1400"
                   colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:70px;height:70px">
+                  style="width:90px;height:90px">
               </lord-icon>
             </div>
             <h3 data-i18n="obj_3_title">Alcance Internacional</h3>
@@ -376,10 +386,16 @@
           </article>
           <article class="objective-card">
             <div class="objective-card-icon">
-              <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+              <lord-icon
+                  src="https://cdn.lordicon.com/rjzlnunf.json?v=6"
+                  trigger="loop"
+                  delay="1600"
+                  colors="primary:#1D5BFE,secondary:#7ce4e0"
+                  style="width:90px;height:90px">
+              </lord-icon>
             </div>
             <h3 data-i18n="obj_4_title">Impacto Social</h3>
-            <p data-i18n="obj_4_desc">Contribuir a la inclusión digital y educativa a través de soluciones tecnológicas accesibles y personalizadas.</p>
+            <p data-i18n="obj_4_desc">Fomentar un entorno educativo más equitativo, accesible e inclusivo a través de herramientas de telecolaboración abiertas y transferibles.</p>
           </article>
         </div>
       </div>
@@ -432,7 +448,7 @@
       <div class="section-container">
         <div class="section-title-wrapper">
           <span class="section-pretitle" data-i18n="trans_pretitle">Impacto y difusión</span>
-          <h2 class="section-title">Actividades de <span class="blue-highlight">Transferencia</span></h2>
+          <h2 class="section-title">Actividades de <span class="green-highlight">Transferencia</span></h2>
           <p class="section-subtitle" data-i18n="trans_subtitle">Actividades diseñadas para maximizar el impacto social y educativo de nuestra investigación, conectando la academia con la práctica docente y la sociedad.</p>
         </div>
         <!-- Activities Grid (Dynamically rendered via JS) -->
@@ -449,13 +465,19 @@
           <p class="section-subtitle" data-i18n="pub_subtitle">Accede a las publicaciones del proyecto sincronizadas con nuestra biblioteca de referencias de Zotero.</p>
         </div>
         
-        <!-- Centered and simplified Search Bar -->
-        <div class="filter-bar-centered" style="display: flex; justify-content: center; margin-bottom: 40px; width: 100%;">
+        <!-- Centered and simplified Search Bar and Filters -->
+        <div class="filter-bar-centered" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; width: 100%; gap: 16px;">
           <div class="search-wrapper" style="max-width: 600px; width: 100%; position: relative;">
             <span class="search-icon" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; pointer-events: none; color: var(--color-text-muted-light);">
               <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             </span>
             <input type="text" id="publications-search" class="search-input" style="width: 100%; padding: 14px 20px 14px 52px; border-radius: 99px; border: 1.5px solid var(--color-border-light); background: rgba(255, 255, 255, 0.03); color: var(--color-text-light); font-family: var(--font-primary); font-size: 14.5px; transition: all 0.3s ease;" placeholder="Buscar por título, autor o tag...">
+          </div>
+          <div class="pub-filters" style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            <button class="pub-filter-btn active" data-filter="all">Todos</button>
+            <button class="pub-filter-btn" data-filter="revista">Artículos</button>
+            <button class="pub-filter-btn" data-filter="congreso">Congresos</button>
+            <button class="pub-filter-btn" data-filter="libro">Libros</button>
           </div>
         </div>
         
@@ -529,7 +551,7 @@
     <div class="footer-container">
       
       <!-- Collaborators Section with dynamic grayscale vector SVG logos -->
-      <div class="collaborators-wrapper">
+      <div class="collaborators-wrapper" style="margin-bottom: 60px;">
         <h4 class="collaborators-title" data-i18n="colab_title">Con la colaboración y financiación de:</h4>
         <div class="collaborators-logos">
           
@@ -563,6 +585,25 @@
         </div>
       </div>
       
+      <!-- COPLITELE-IA Logo and Social Links -->
+      <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; gap: 24px;">
+        <div class="footer-logo" style="display: flex; align-items: center; gap: 16px; filter: brightness(0) invert(1);">
+          <div id="footer-logo-container" style="width: 32px; height: 32px; flex-shrink: 0;"></div>
+          <span class="header-logo-text" style="font-size: 24px; font-weight: 800; letter-spacing: -0.04em; margin-left: 0;"><span class="co">CO</span><span class="pli">PLI</span><span class="tele">TELE</span><span class="dash">-</span><span class="ia">IA</span></span>
+        </div>
+        <div class="social-links" style="display: flex; gap: 20px; justify-content: center;">
+          <a href="https://facebook.com" target="_blank" class="social-link" title="Facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+          </a>
+          <a href="https://bsky.app" target="_blank" class="social-link" title="Bluesky" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.2-1.8-2.6-3.8-4-5.3-2.1-2.2-4.5-3.5-6.5-1.5S1.2 8.5 3.4 10.6c1.5 1.4 3.5 2.8 5.3 4 1.2.8 2.3 1.5 3.3 2.2-1 .7-2.1 1.4-3.3 2.2-1.8 1.2-3.8 2.6-5.3 4-2.2 2.1-3.5 4.5-1.5 6.5s4.5.6 6.5-1.5c1.4-1.5 2.8-3.5-4-5.3.8-1.2 1.5-2.3 2.2-3.3.7 1 1.4 2.1 2.2 3.3 1.2 1.8 2.6 3.8 4 5.3 2.1 2.2 4.5 3.5 6.5 1.5s.6-4.5-1.5-6.5c-1.5-1.4-3.5-2.8-5.3-4-1.2-.8-2.3-1.5-3.3-2.2 1-.7 2.1-1.4 3.3-2.2 1.8-1.2 3.8-2.6 5.3-4 2.2-2.1 3.5-4.5 1.5-6.5s-4.5-.6-6.5 1.5c-1.4 1.5-2.8 3.5-4 5.3-.8 1.2-1.5 2.3-2.2 3.3z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+      
       <div class="footer-divider"></div>
       
       <!-- Footer Bottom row -->
@@ -570,18 +611,11 @@
         <span class="footer-copyright" data-i18n="footer_copy">
           &copy; 2026 COPLITELE-IA. Proyecto financiado por el Ministerio español de Ciencia e Innovación, desarrollado por el GTE de la UIB y el IRIE.
         </span>
-        
-        <!-- Social links -->
-        <div class="social-links">
-          <a href="https://facebook.com" target="_blank" class="social-link" title="Facebook" aria-label="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-          </a>
-          <a href="https://bsky.app" target="_blank" class="social-link" title="Bluesky" aria-label="Bluesky">
-            <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.2-1.8-2.6-3.8-4-5.3-2.1-2.2-4.5-3.5-6.5-1.5S1.2 8.5 3.4 10.6c1.5 1.4 3.5 2.8 5.3 4 1.2.8 2.3 1.5 3.3 2.2-1 .7-2.1 1.4-3.3 2.2-1.8 1.2-3.8 2.6-5.3 4-2.2 2.1-3.5 4.5-1.5 6.5s4.5.6 6.5-1.5c1.4-1.5 2.8-3.5 4-5.3.8-1.2 1.5-2.3 2.2-3.3.7 1 1.4 2.1 2.2 3.3 1.2 1.8 2.6 3.8 4 5.3 2.1 2.2 4.5 3.5 6.5 1.5s.6-4.5-1.5-6.5c-1.5-1.4-3.5-2.8-5.3-4-1.2-.8-2.3-1.5-3.3-2.2 1-.7 2.1-1.4 3.3-2.2 1.8-1.2 3.8-2.6 5.3-4 2.2-2.1 3.5-4.5 1.5-6.5s-4.5-.6-6.5 1.5c-1.4 1.5-2.8 3.5-4 5.3-.8 1.2-1.5 2.3-2.2 3.3z"/></svg>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </a>
+        <!-- Legal links -->
+        <div class="legal-links" style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+          <a href="#/aviso-legal" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.2s ease;">Aviso Legal</a>
+          <a href="#/privacidad" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.2s ease;">Política de privacidad</a>
+          <a href="#/cookies" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.2s ease;">Política de cookies</a>
         </div>
       </div>
       
