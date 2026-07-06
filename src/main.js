@@ -1146,7 +1146,6 @@ function renderNewsFeed() {
           <span class="news-card-badge ${badgeClass}">${badgeText}</span>
           <p class="news-card-title">${text}</p>
         </div>
-        </div>
       </div>
     `;
   }
