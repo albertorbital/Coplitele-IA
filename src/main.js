@@ -2,8 +2,8 @@ import { generateLogoConfig, renderLogoSVG } from './logoGenerator.js';
 import './style.css';
 import investigadoresImg from './assets/images/investigadores.png';
 import transferenciaImg from './assets/images/transferencia.png';
-import congresosImg from './assets/images/congresos.png';
 import recursosImg from './assets/images/recursos.png';
+import posterWorkshop1Img from './assets/images/poster_workshop1.png';
 
 // ----------------------------------------------------
 // 1. DATA DEFINITIONS (Mock databases in 3 languages)
@@ -403,6 +403,17 @@ const publications = [
 
 const newsFeedItems = [
   {
+    id: "news-new",
+    type: "transferencia",
+    tag: { es: "Seminario", ca: "Seminari", en: "Seminar" },
+    text: {
+      es: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
+      ca: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
+      en: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency"
+    },
+    activityId: "act-new"
+  },
+  {
     id: "news-1",
     type: "revista",
     tag: { es: "Publicación", ca: "Publicació", en: "Publication" },
@@ -488,7 +499,7 @@ const transferActivities = [
     pills: ["Workshop", "AI", "Agency"],
     date: "Miércoles 11 de marzo de 10:30 a 12:30",
     location: "Aula C-11 edificio Guillem Cifre de Colonya, UIB, Palma, Spain",
-    image: "/images/poster_workshop1.png",
+    image: posterWorkshop1Img,
     loremIpsum: {
       es: `<p><strong>¿Cómo pueden los diseños de aprendizaje basados en IA en la educación superior promover la agencia de los estudiantes?</strong></p>
 <p>Para responder a la pregunta principal del estudio, se han definido varias subpreguntas orientadas a comprender qué diseños de aprendizaje se están implementando e investigando para potenciar la agencia del alumnado en la educación superior vinculada a la Inteligencia Artificial.</p>
@@ -1124,7 +1135,7 @@ function renderNewsFeed() {
   if (!newsListHome && !newsListImpact) return;
   
   // Images for news cards (cycle through imported assets)
-  const newsImages = [transferenciaImg, investigadoresImg, congresosImg];
+  const newsImages = [posterWorkshop1Img, investigadoresImg, congresosImg, transferenciaImg, recursosImg];
   
   // Display up to 5 items on home, all on impact page.
   // Actually, let's generate HTML separately if needed, but for simplicity:

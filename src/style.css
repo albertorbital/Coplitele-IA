@@ -4775,3 +4775,8 @@ body.dark-mode .section-nav-card:hover .nav-card-content p {
 }
 
 
+
+img[src*="poster_workshop1.png"] {
+  object-position: top !important;
+}
+
