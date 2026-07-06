@@ -2,6 +2,7 @@ import { generateLogoConfig, renderLogoSVG } from './logoGenerator.js';
 import './style.css';
 import investigadoresImg from './assets/images/investigadores.png';
 import transferenciaImg from './assets/images/transferencia.png';
+import congresosImg from './assets/images/congresos.png';
 import recursosImg from './assets/images/recursos.png';
 import posterWorkshop1Img from './assets/images/poster_workshop1.png';
 
