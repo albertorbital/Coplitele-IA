@@ -5,6 +5,8 @@ import transferenciaImg from './assets/images/transferencia.png';
 import congresosImg from './assets/images/congresos.png';
 import recursosImg from './assets/images/recursos.png';
 import posterWorkshop1Img from './assets/images/poster_workshop1.png';
+import posidonia1Img from './assets/images/posidonia_1.png';
+import posidonia2Img from './assets/images/posidonia_2.png';
 
 // ----------------------------------------------------
 // 1. DATA DEFINITIONS (Mock databases in 3 languages)
@@ -408,11 +410,22 @@ const newsFeedItems = [
     type: "transferencia",
     tag: { es: "Seminario", ca: "Seminari", en: "Seminar" },
     text: {
-      es: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
-      ca: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
+      es: "TALLER: Síntesis de investigación para explorar diseños de aprendizaje mejorados por IA que fomenten la agencia de los futuros docentes",
+      ca: "TALLER: Síntesi d'investigació per explorar dissenys d'aprenentatge millorats per IA que fomentin l'agència dels futurs docents",
       en: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency"
     },
     activityId: "act-new"
+  },
+  {
+    id: "news-posidonia",
+    type: "transferencia",
+    tag: { es: "Taller", ca: "Taller", en: "Workshop" },
+    text: {
+      es: "Codiseño de juegos basados en IA para el bienestar digital. Lecciones aprendidas de los proyectos DALI y Posidonia 360º.",
+      ca: "Codisseny de jocs basats en IA per al benestar digital. Lliçons apreses dels projectes DALI i Posidonia 360º.",
+      en: "AI-based Game co-design for digital wellbeing. Lessons learnt from the DALI and Posidonia 360º projects."
+    },
+    activityId: "act-posidonia"
   },
   {
     id: "news-1",
@@ -488,8 +501,8 @@ const transferActivities = [
     type: "seminario",
     tag: { es: "Seminario", ca: "Seminari", en: "Seminar" },
     title: {
-      es: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
-      ca: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
+      es: "TALLER: Síntesis de investigación para explorar diseños de aprendizaje mejorados por IA que fomenten la agencia de los futuros docentes",
+      ca: "TALLER: Síntesi d'investigació per explorar dissenys d'aprenentatge millorats per IA que fomentin l'agència dels futurs docents",
       en: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency"
     },
     desc: {
@@ -506,16 +519,17 @@ const transferActivities = [
 <p>Para responder a la pregunta principal del estudio, se han definido varias subpreguntas orientadas a comprender qué diseños de aprendizaje se están implementando e investigando para potenciar la agencia del alumnado en la educación superior vinculada a la Inteligencia Artificial.</p>
 <p>En este sentido, el seminario explorará qué elementos de la agencia de los estudiantes son observables en estas investigaciones sobre diseños de aprendizaje enriquecidos con IA, analizando también qué herramientas de inteligencia artificial se integran en dichos diseños y con qué propósito específico.</p>
 <p>Este seminario es parte del proyecto de I+D+i PID2024-157113OB-100, financiado/a por MICIU/AEI/10.13039/501100011033/ y “FEDER Una manera de hacer Europa”.</p>
+<img src="/images/poster_workshop1.png" style="max-width: 50%; display: block; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in;" onclick="window.open(this.src, '_blank')" alt="Póster del Seminario" title="Haz clic para ampliar">
 <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
   <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registro al Workshop</a>
   <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YThkN2I1ZWMtM2MwMy00YTM3LTg1N2YtYThlOWI2NWVkZjky%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252271bb3458-d75f-4716-a5cb-647cdacbc0af%2522%252c%2522Oid%2522%253a%252231eeffae-e3fa-43ac-a4ae-fb5d6db7a3ce%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=7853d22e-1284-4e30-a527-33d2058bec16&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" class="btn-primary">Acceso al Workshop</a>
 </div>
 <div style="margin-top: 32px;">
   <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entidades</h4>
-  <ul style="margin-bottom: 24px;">
-    <li>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</li>
-    <li>UIB - Universitat de les Illes Balears</li>
-  </ul>
+  <div style="margin-bottom: 24px; line-height: 1.2;">
+    <div>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+    <div>UIB - Universitat de les Illes Balears</div>
+  </div>
   <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizadores</h4>
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
     <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
@@ -528,16 +542,17 @@ const transferActivities = [
 <p>Per respondre a la pregunta principal de l'estudi, s'han definit diverses subpreguntes orientades a comprendre quins dissenys d'aprenentatge s'estan implementant i investigant per potenciar l'agència de l'alumnat en l'educació superior vinculada a la Intel·ligència Artificial.</p>
 <p>En aquest sentit, el seminari explorarà quins elements de l'agència dels estudiants són observables en aquestes investigacions sobre dissenys d'aprenentatge enriquits amb IA, analitzant també quines eines d'intel·ligència artificial s'integren en aquests dissenys i amb quin propòsit específic.</p>
 <p>Aquest seminari és part del projecte de R+D+I PID2024-157113OB-100, finançat per MICIU/AEI/10.13039/501100011033/ i “FEDER Una manera de fer Europa”.</p>
+<img src="/images/poster_workshop1.png" style="max-width: 50%; display: block; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in;" onclick="window.open(this.src, '_blank')" alt="Póster del Seminari" title="Fes clic per ampliar">
 <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
   <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registre al Workshop</a>
   <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YThkN2I1ZWMtM2MwMy00YTM3LTg1N2YtYThlOWI2NWVkZjky%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252271bb3458-d75f-4716-a5cb-647cdacbc0af%2522%252c%2522Oid%2522%253a%252231eeffae-e3fa-43ac-a4ae-fb5d6db7a3ce%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=7853d22e-1284-4e30-a527-33d2058bec16&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" class="btn-primary">Accés al Workshop</a>
 </div>
 <div style="margin-top: 32px;">
   <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entitats</h4>
-  <ul style="margin-bottom: 24px;">
-    <li>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</li>
-    <li>UIB - Universitat de les Illes Balears</li>
-  </ul>
+  <div style="margin-bottom: 24px; line-height: 1.2;">
+    <div>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+    <div>UIB - Universitat de les Illes Balears</div>
+  </div>
   <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organitzadors</h4>
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
     <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
@@ -550,16 +565,17 @@ const transferActivities = [
 <p>To answer the study's main research question, several subquestions have been defined aimed at understanding which learning designs are being implemented and investigated to enhance students' agency in AI-related higher education.</p>
 <p>In this regard, the seminar will explore what elements of learners' agency are observable in research on AI-enhanced learning designs, also analyzing which artificial intelligence tools are integrated into these designs and for what specific purpose.</p>
 <p>This seminar is part of the R&D project PID2024-157113OB-100, funded by MICIU/AEI/10.13039/501100011033/ and "ERDF A way of making Europe".</p>
+<img src="/images/poster_workshop1.png" style="max-width: 50%; display: block; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in;" onclick="window.open(this.src, '_blank')" alt="Workshop Poster" title="Click to expand">
 <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
   <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Workshop Registration</a>
   <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YThkN2I1ZWMtM2MwMy00YTM3LTg1N2YtYThlOWI2NWVkZjky%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252271bb3458-d75f-4716-a5cb-647cdacbc0af%2522%252c%2522Oid%2522%253a%252231eeffae-e3fa-43ac-a4ae-fb5d6db7a3ce%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=7853d22e-1284-4e30-a527-33d2058bec16&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" class="btn-primary">Access to Workshop</a>
 </div>
 <div style="margin-top: 32px;">
   <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entities</h4>
-  <ul style="margin-bottom: 24px;">
-    <li>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</li>
-    <li>UIB - Universitat de les Illes Balears</li>
-  </ul>
+  <div style="margin-bottom: 24px; line-height: 1.2;">
+    <div>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+    <div>UIB - Universitat de les Illes Balears</div>
+  </div>
   <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizers</h4>
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
     <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
@@ -571,51 +587,81 @@ const transferActivities = [
     }
   },
   {
-    id: "act-1",
+    id: "act-posidonia",
     type: "taller",
     tag: { es: "Taller", ca: "Taller", en: "Workshop" },
     title: {
-      es: "Taller de Codiseño con Docentes",
-      ca: "Taller de Codisseny amb Docents",
-      en: "Co-design Workshop with Teachers"
+      es: "Codiseño de juegos basados en IA para el bienestar digital. Lecciones aprendidas de los proyectos DALI y Posidonia 360º.",
+      ca: "Codisseny de jocs basats en IA per al benestar digital. Lliçons apreses dels projectes DALI i Posidonia 360º.",
+      en: "AI-based Game co-design for digital wellbeing. Lessons learnt from the DALI and Posidonia 360º projects."
     },
     desc: {
-      es: "Sesión participativa con profesorado de educación secundaria para co-crear estrategias de integración de IA en la enseñanza de lenguas.",
-      ca: "Sessió participativa amb professorat d'educació secundària per co-crear estratègies d'integració d'IA en l'ensenyament de llengües.",
-      en: "Participatory session with secondary education teachers to co-create strategies for integrating AI in language teaching."
+      es: "Diseña un juego siguiendo el proceso de codiseño presentado en el taller, explorando el bienestar digital y la agencia estudiantil con IA.",
+      ca: "Dissenya un joc seguint el procés de codisseny presentat en el taller, explorant el benestar digital i l'agència estudiantil amb IA.",
+      en: "Design a game following the co-design process presented in the workshop, exploring digital wellbeing and student agency with AI."
     },
-    pills: ["Codiseño", "Formación Docente"],
-    date: "Marzo 2024",
-    location: "UIB, Palma de Mallorca",
-    image: transferenciaImg,
+    pills: ["Juegos", "Bienestar Digital", "Codiseño"],
+    date: "5 - 7 Noviembre de 2025",
+    location: "UIB, Carrer del Calvari, 1, 07800 Eivissa, Spain",
+    image: posidonia1Img,
     loremIpsum: {
-      es: "El Taller de Codiseño con Docentes se concibió como un espacio participativo donde más de veinte profesores y profesoras de educación secundaria compartieron sus necesidades y expectativas sobre la integración de sistemas adaptativos de Inteligencia Artificial en el aula. A través de dinámicas de diseño centrado en el usuario, se definieron los requisitos para un panel de control que permita al docente supervisar las sugerencias de la IA en tiempo real. Este codiseño fomenta la soberanía educativa frente al algoritmo.\n\nDurante las sesiones de trabajo cooperativo, se elaboraron wireframes conceptuales de visualizaciones de datos y métricas adaptativas, determinando qué información sobre el procesamiento del lenguaje del alumnado resulta verdaderamente relevante para la toma de decisiones pedagógicas y cómo presentarla sin provocar sobrecarga cognitiva.",
-      ca: "El Taller de Codisseny amb Docents es va concebre com un espai participatiu on més de vint professors i professores d'educació secundària van compartir les seves necessitats i expectatives sobre la integració de sistemes adaptatius d'Intel·ligència Artificial a l'aula. A través de dinàmiques de disseny centrat en l'usuari, es van definir els requisits per a un panell de control que permeti al docent supervisar les suggeriments de la IA en temps real. Aquest codisseny fomenta la sobirania educativa enfront de l'algorisme.\n\nDurant les sessions de treball cooperatiu, es van elaborar wireframes conceptuals de visualitzacions de dades i mètriques adaptatives, determinant quina informació sobre el processament del llenguatge de l'alumnat resulta verdaderament rellevant per a la presa de decisions pedagògiques i com presentar-la sense provocar sobrecàrrega cognitiva.",
-      en: "The Co-design Workshop with Teachers was conceived as a participatory space where more than twenty secondary education teachers shared their needs and expectations regarding the integration of adaptive Artificial Intelligence systems in the classroom. Through user-centered design dynamics, requirements were defined for a dashboard that allows teachers to supervise AI suggestions in real time. This co-design promotes educational sovereignty in the face of the algorithm.\n\nDuring the cooperative work sessions, conceptual wireframes of data visualizations and adaptive metrics were developed, determining what information on student language processing is truly relevant for pedagogical decision-making and how to present it without causing cognitive overload."
-    }
-  },
-  {
-    id: "act-2",
-    type: "seminario",
-    tag: { es: "Seminario", ca: "Seminari", en: "Seminar" },
-    title: {
-      es: "Seminario Internacional: IA y CALL",
-      ca: "Seminari Internacional: IA i CALL",
-      en: "International Seminar: AI and CALL"
-    },
-    desc: {
-      es: "Seminario online internacional con expertos de Europa y América Latina sobre el estado del arte en IA aplicada al aprendizaje de lenguas.",
-      ca: "Seminari online internacional amb experts d'Europa i Amèrica Llatina sobre l'estat de l'art en IA aplicada a l'aprenentatge de llengües.",
-      en: "International online seminar with experts from Europe and Latin America on the state of the art in AI applied to language learning."
-    },
-    pills: ["IA", "CALL", "Internacional"],
-    date: "Mayo 2024",
-    location: "Online (Zoom)",
-    image: congresosImg,
-    loremIpsum: {
-      es: "El Seminario Internacional: IA y CALL congregó a investigadores de primer nivel procedentes de universidades europeas y americanas. Las sesiones se centraron en debatir el estado del arte de las tecnologías de procesamiento del lenguaje natural (NLP) aplicadas a la adquisición de segundas lenguas (CALL), prestant especial atención a la retroalimentación automática y al análisis de interacciones en contextos de telecolaboración virtual.\n\nLos ponentes discutieron sobre los límites éticos de los modelos de lenguaje comerciales en entornos escolares y presentaron propuestas de implementación local que salvaguardan la privacidad del estudiante. El debate evidenció la necesidad de crear frameworks híbridos que unan la intuición pedagógica humana con la precisión de los análisis basados en deep learning.",
-      ca: "El Seminari Internacional: IA i CALL va congregar investigadors de primer nivell procedents d'universitats europees i americanes. Les sessions es van centrar en debatre l'estat de l'art de les tecnologies de processament del llenguatge natural (NLP) aplicades a l'adquisició de segones llengües (CALL), prestant especial atenció a la retroalimentació automàtica i a l'anàlisi d'interaccions en contextos de telecol·laboració virtual.\n\nEls ponents van discutir sobre els límits ètics dels models de llenguatge comercials en entorns escolars i van presentar propostes d'implementació local que salvaguarden la privacitat de l'estudiant. El debat va evidenciar la necessitat de crear frameworks híbrids que uneixin la intuïció pedagògica humana amb la precisió de les anàlisis basades en deep learning.",
-      en: "The International Seminar: AI and CALL gathered top-tier researchers from European and American universities. The sessions focused on debating the state of the art of natural language processing (NLP) technologies applied to computer-assisted language learning (CALL), paying special attention to automated feedback and interaction analysis in virtual telecollaboration contexts.\n\nSpeakers discussed the ethical limits of commercial language models in school environments and presented local implementation proposals that safeguard student privacy. The debate highlighted the need to create hybrid frameworks that combine human pedagogical intuition with the precision of deep learning-based analytics."
+      es: `<p>Esta visita de estudio en Ibiza presenta un proceso de codiseño de juegos basados en inteligencia artificial enfocados en promover el bienestar digital. Durante la sesión, se explorarán las lecciones aprendidas de proyectos europeos como <a href="https://dalicitizens.eu" target="_blank" style="color: var(--color-blue);">DALI</a> y <a href="https://posidonia360.uib.cat" target="_blank" style="color: var(--color-blue);">Posidonia 360º</a>, analizando cómo integrar mecanismos de agencia estudiantil en el diseño lúdico.</p>
+<p>La actividad principal invita a los participantes a diseñar su propio juego aplicando el marco metodológico expuesto. Esto permite entender de forma práctica cómo los elementos del juego y la mediación de la IA pueden alinearse para fomentar entornos digitales más saludables.</p>
+<img src="/src/assets/images/posidonia_2.png" style="max-width: 50%; display: block; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in;" onclick="window.open(this.src, '_blank')" alt="Esquema Posidonia" title="Haz clic para ampliar">
+<div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+  <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registro al Workshop</a>
+  <a href="https://canva.link/ns3e85jf2lbvozn" target="_blank" class="btn-primary">Acceso al Workshop</a>
+</div>
+<div style="margin-top: 32px;">
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entidades</h4>
+  <div style="margin-bottom: 24px; line-height: 1.2;">
+    <div>UIB - Universitat de les Illes Balears</div>
+  </div>
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizadores</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+    <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
+    <div><strong>Bárbara Luisa De Benito Crosetti</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
+    <div><strong>Tatiana Valerde</strong><br><a href="mailto:tatydrs@gmail.com" style="color: var(--color-blue); text-decoration: none;">tatydrs@gmail.com</a></div>
+  </div>
+</div>`,
+      ca: `<p>Aquesta visita d'estudi a Eivissa presenta un procés de codisseny de jocs basats en intel·ligència artificial enfocats a promoure el benestar digital. Durant la sessió, s'exploraran les lliçons apreses de projectes europeus com <a href="https://dalicitizens.eu" target="_blank" style="color: var(--color-blue);">DALI</a> i <a href="https://posidonia360.uib.cat" target="_blank" style="color: var(--color-blue);">Posidonia 360º</a>, analitzant com integrar mecanismes d'agència estudiantil en el disseny lúdic.</p>
+<p>L'activitat principal convida els participants a dissenyar el seu propi joc aplicant el marc metodològic exposat. Això permet entendre de manera pràctica com els elements del joc i la mediació de la IA poden alinear-se per fomentar entorns digitals més saludables.</p>
+<img src="/src/assets/images/posidonia_2.png" style="max-width: 50%; display: block; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in;" onclick="window.open(this.src, '_blank')" alt="Esquema Posidonia" title="Fes clic per ampliar">
+<div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+  <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registre al Workshop</a>
+  <a href="https://canva.link/ns3e85jf2lbvozn" target="_blank" class="btn-primary">Accés al Workshop</a>
+</div>
+<div style="margin-top: 32px;">
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entitats</h4>
+  <div style="margin-bottom: 24px; line-height: 1.2;">
+    <div>UIB - Universitat de les Illes Balears</div>
+  </div>
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organitzadors</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+    <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
+    <div><strong>Bárbara Luisa De Benito Crosetti</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
+    <div><strong>Tatiana Valerde</strong><br><a href="mailto:tatydrs@gmail.com" style="color: var(--color-blue); text-decoration: none;">tatydrs@gmail.com</a></div>
+  </div>
+</div>`,
+      en: `<p>This study visit in Ibiza presents an AI-based game co-design process focused on promoting digital wellbeing. During the session, lessons learned from European projects such as <a href="https://dalicitizens.eu" target="_blank" style="color: var(--color-blue);">DALI</a> and <a href="https://posidonia360.uib.cat" target="_blank" style="color: var(--color-blue);">Posidonia 360º</a> will be explored, analyzing how to integrate student agency mechanisms into game design.</p>
+<p>The main activity invites participants to design their own game by applying the methodological framework presented. This allows for a practical understanding of how game elements and AI mediation can be aligned to foster healthier digital environments.</p>
+<img src="/src/assets/images/posidonia_2.png" style="max-width: 50%; display: block; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in;" onclick="window.open(this.src, '_blank')" alt="Posidonia Schema" title="Click to expand">
+<div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+  <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Workshop Registration</a>
+  <a href="https://canva.link/ns3e85jf2lbvozn" target="_blank" class="btn-primary">Access to Workshop</a>
+</div>
+<div style="margin-top: 32px;">
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entities</h4>
+  <div style="margin-bottom: 24px; line-height: 1.2;">
+    <div>UIB - Universitat de les Illes Balears</div>
+  </div>
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizers</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+    <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
+    <div><strong>Bárbara Luisa De Benito Crosetti</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
+    <div><strong>Tatiana Valerde</strong><br><a href="mailto:tatydrs@gmail.com" style="color: var(--color-blue); text-decoration: none;">tatydrs@gmail.com</a></div>
+  </div>
+</div>`
     }
   }
 ];
@@ -1136,7 +1182,7 @@ function renderNewsFeed() {
   if (!newsListHome && !newsListImpact) return;
   
   // Images for news cards (cycle through imported assets)
-  const newsImages = [posterWorkshop1Img, investigadoresImg, congresosImg, transferenciaImg, recursosImg];
+  const newsImages = [posterWorkshop1Img, posidonia1Img, investigadoresImg, congresosImg, transferenciaImg, recursosImg];
   
   // Display up to 5 items on home, all on impact page.
   // Actually, let's generate HTML separately if needed, but for simplicity:
