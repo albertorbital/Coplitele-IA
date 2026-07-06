@@ -472,6 +472,105 @@ const newsFeedItems = [
 
 const transferActivities = [
   {
+    id: "act-new",
+    type: "seminario",
+    tag: { es: "Seminario", ca: "Seminari", en: "Seminar" },
+    title: {
+      es: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
+      ca: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency",
+      en: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency"
+    },
+    desc: {
+      es: "How can AI-based learning designs in higher education promote students’ agency? To answer the study’s main research question, the following subquestions are defined...",
+      ca: "How can AI-based learning designs in higher education promote students’ agency? To answer the study’s main research question, the following subquestions are defined...",
+      en: "How can AI-based learning designs in higher education promote students’ agency? To answer the study’s main research question, the following subquestions are defined..."
+    },
+    pills: ["Workshop", "AI", "Agency"],
+    date: "Miércoles 11 de marzo de 10:30 a 12:30",
+    location: "Aula C-11 edificio Guillem Cifre de Colonya, UIB, Palma, Spain",
+    image: congresosImg,
+    loremIpsum: {
+      es: `<p><strong>How can AI-based learning designs in higher education promote students’ agency?</strong></p>
+<p>To answer the study’s main research question, the following subquestions are defined:</p>
+<ul>
+  <li>Which learning designs are implemented and investigated to enhance students’ agency in AI-related higher education?</li>
+  <li>What elements of learners’ agency are observable in the research on AI enhanced learning designs in higher education?</li>
+  <li>Which are the artificial intelligence tools used as part of the learning design and for what purpose?</li>
+</ul>
+<p>Este seminario es parte del proyecto de I+D+i PID2024-157113OB-100, financiado/a por MICIU/AEI/10.13039/501100011033/ y “FEDER Una manera de hacer Europa”.</p>
+<div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+  <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registro al Workshop</a>
+  <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YThkN2I1ZWMtM2MwMy00YTM3LTg1N2YtYThlOWI2NWVkZjky%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252271bb3458-d75f-4716-a5cb-647cdacbc0af%2522%252c%2522Oid%2522%253a%252231eeffae-e3fa-43ac-a4ae-fb5d6db7a3ce%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=7853d22e-1284-4e30-a527-33d2058bec16&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" class="btn-primary">Acceso al Workshop</a>
+</div>
+<div style="margin-top: 32px;">
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entidades</h4>
+  <ul style="margin-bottom: 24px;">
+    <li>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</li>
+    <li>UIB - Universitat de les Illes Balears</li>
+  </ul>
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizadores</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+    <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
+    <div><strong>Bárbara Luisa De Benito Crosetti</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
+    <div><strong>Antònia Darder Mesquida</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
+    <div><strong>Lea Katharina Reis</strong><br><a href="mailto:lea.katharina.reis@fau.de" style="color: var(--color-blue); text-decoration: none;">lea.katharina.reis@fau.de</a></div>
+  </div>
+</div>`,
+      ca: `<p><strong>How can AI-based learning designs in higher education promote students’ agency?</strong></p>
+<p>To answer the study’s main research question, the following subquestions are defined:</p>
+<ul>
+  <li>Which learning designs are implemented and investigated to enhance students’ agency in AI-related higher education?</li>
+  <li>What elements of learners’ agency are observable in the research on AI enhanced learning designs in higher education?</li>
+  <li>Which are the artificial intelligence tools used as part of the learning design and for what purpose?</li>
+</ul>
+<p>Aquest seminari és part del projecte de R+D+I PID2024-157113OB-100, finançat per MICIU/AEI/10.13039/501100011033/ i “FEDER Una manera de fer Europa”.</p>
+<div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+  <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registre al Workshop</a>
+  <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YThkN2I1ZWMtM2MwMy00YTM3LTg1N2YtYThlOWI2NWVkZjky%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252271bb3458-d75f-4716-a5cb-647cdacbc0af%2522%252c%2522Oid%2522%253a%252231eeffae-e3fa-43ac-a4ae-fb5d6db7a3ce%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=7853d22e-1284-4e30-a527-33d2058bec16&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" class="btn-primary">Accés al Workshop</a>
+</div>
+<div style="margin-top: 32px;">
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entitats</h4>
+  <ul style="margin-bottom: 24px;">
+    <li>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</li>
+    <li>UIB - Universitat de les Illes Balears</li>
+  </ul>
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organitzadors</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+    <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
+    <div><strong>Bárbara Luisa De Benito Crosetti</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
+    <div><strong>Antònia Darder Mesquida</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
+    <div><strong>Lea Katharina Reis</strong><br><a href="mailto:lea.katharina.reis@fau.de" style="color: var(--color-blue); text-decoration: none;">lea.katharina.reis@fau.de</a></div>
+  </div>
+</div>`,
+      en: `<p><strong>How can AI-based learning designs in higher education promote students’ agency?</strong></p>
+<p>To answer the study’s main research question, the following subquestions are defined:</p>
+<ul>
+  <li>Which learning designs are implemented and investigated to enhance students’ agency in AI-related higher education?</li>
+  <li>What elements of learners’ agency are observable in the research on AI enhanced learning designs in higher education?</li>
+  <li>Which are the artificial intelligence tools used as part of the learning design and for what purpose?</li>
+</ul>
+<p>This seminar is part of the R&D project PID2024-157113OB-100, funded by MICIU/AEI/10.13039/501100011033/ and "ERDF A way of making Europe".</p>
+<div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+  <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Workshop Registration</a>
+  <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YThkN2I1ZWMtM2MwMy00YTM3LTg1N2YtYThlOWI2NWVkZjky%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252271bb3458-d75f-4716-a5cb-647cdacbc0af%2522%252c%2522Oid%2522%253a%252231eeffae-e3fa-43ac-a4ae-fb5d6db7a3ce%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=7853d22e-1284-4e30-a527-33d2058bec16&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank" class="btn-primary">Access to Workshop</a>
+</div>
+<div style="margin-top: 32px;">
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Entities</h4>
+  <ul style="margin-bottom: 24px;">
+    <li>FAU - Friedrich-Alexander-Universität Erlangen-Nürnberg</li>
+    <li>UIB - Universitat de les Illes Balears</li>
+  </ul>
+  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizers</h4>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+    <div><strong>Gemma Tur Ferrer</strong><br><a href="mailto:gemma.tur@uib.es" style="color: var(--color-blue); text-decoration: none;">gemma.tur@uib.es</a></div>
+    <div><strong>Bárbara Luisa De Benito Crosetti</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
+    <div><strong>Antònia Darder Mesquida</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
+    <div><strong>Lea Katharina Reis</strong><br><a href="mailto:lea.katharina.reis@fau.de" style="color: var(--color-blue); text-decoration: none;">lea.katharina.reis@fau.de</a></div>
+  </div>
+</div>`
+    }
+  },
+  {
     id: "act-1",
     type: "taller",
     tag: { es: "Taller", ca: "Taller", en: "Workshop" },
@@ -490,9 +589,9 @@ const transferActivities = [
     location: "UIB, Palma de Mallorca",
     image: transferenciaImg,
     loremIpsum: {
-      es: "El Taller de Codiseño con Docentes se concibió como un espacio participativo donde más de veinte profesores y profesoras de educación secundaria compartieron sus necesidades y expectativas sobre la integración de sistemas adaptativos de Inteligencia Artificial en el aula. A través de dinámicas de diseño centrado en el usuario, se definieron los requisitos para un panel de control que permita al docente supervisar las sugerencias de la IA en tiempo real. Este codiseño fomenta la soberanía educativa frente al algoritmo.\n\nDurante las sesiones de trabajo cooperativo, se elaboraron wireframes conceptuales de visualizaciones de datos y métricas adaptativas, determinando qué información sobre el procesamiento del lenguaje del alumnado resulta verdaderamente relevante para la toma de decisiones pedagógicas y cómo presentarla sin provocar sobrecarga cognitiva.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim. Cras facilisis ante eros, vel porttitor ipsum luctus in. Duis dictum ligula id augue eleifend, at tristique nulla pretium.",
-      ca: "El Taller de Codisseny amb Docents es va concebre com un espai participatiu on més de vint professors i professores d'educació secundària van compartir les seves necessitats i expectatives sobre la integració de sistemes adaptatius d'Intel·ligència Artificial a l'aula. A través de dinàmiques de disseny centrat en l'usuari, es van definir els requisits per a un panell de control que permeti al docent supervisar les suggeriments de la IA en temps real. Aquest codisseny fomenta la sobirania educativa enfront de l'algorisme.\n\nDurant les sessions de treball cooperatiu, es van elaborar wireframes conceptuals de visualitzacions de dades i mètriques adaptatives, determinant quina informació sobre el processament del llenguatge de l'alumnat resulta verdaderament rellevant per a la presa de decisions pedagògiques i com presentar-la sense provocar sobrecàrrega cognitiva.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim.",
-      en: "The Co-design Workshop with Teachers was conceived as a participatory space where more than twenty secondary education teachers shared their needs and expectations regarding the integration of adaptive Artificial Intelligence systems in the classroom. Through user-centered design dynamics, requirements were defined for a dashboard that allows teachers to supervise AI suggestions in real time. This co-design promotes educational sovereignty in the face of the algorithm.\n\nDuring the cooperative work sessions, conceptual wireframes of data visualizations and adaptive metrics were developed, determining what information on student language processing is truly relevant for pedagogical decision-making and how to present it without causing cognitive overload.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus."
+      es: "El Taller de Codiseño con Docentes se concibió como un espacio participativo donde más de veinte profesores y profesoras de educación secundaria compartieron sus necesidades y expectativas sobre la integración de sistemas adaptativos de Inteligencia Artificial en el aula. A través de dinámicas de diseño centrado en el usuario, se definieron los requisitos para un panel de control que permita al docente supervisar las sugerencias de la IA en tiempo real. Este codiseño fomenta la soberanía educativa frente al algoritmo.\n\nDurante las sesiones de trabajo cooperativo, se elaboraron wireframes conceptuales de visualizaciones de datos y métricas adaptativas, determinando qué información sobre el procesamiento del lenguaje del alumnado resulta verdaderamente relevante para la toma de decisiones pedagógicas y cómo presentarla sin provocar sobrecarga cognitiva.",
+      ca: "El Taller de Codisseny amb Docents es va concebre com un espai participatiu on més de vint professors i professores d'educació secundària van compartir les seves necessitats i expectatives sobre la integració de sistemes adaptatius d'Intel·ligència Artificial a l'aula. A través de dinàmiques de disseny centrat en l'usuari, es van definir els requisits per a un panell de control que permeti al docent supervisar les suggeriments de la IA en temps real. Aquest codisseny fomenta la sobirania educativa enfront de l'algorisme.\n\nDurant les sessions de treball cooperatiu, es van elaborar wireframes conceptuals de visualitzacions de dades i mètriques adaptatives, determinant quina informació sobre el processament del llenguatge de l'alumnat resulta verdaderament rellevant per a la presa de decisions pedagògiques i com presentar-la sense provocar sobrecàrrega cognitiva.",
+      en: "The Co-design Workshop with Teachers was conceived as a participatory space where more than twenty secondary education teachers shared their needs and expectations regarding the integration of adaptive Artificial Intelligence systems in the classroom. Through user-centered design dynamics, requirements were defined for a dashboard that allows teachers to supervise AI suggestions in real time. This co-design promotes educational sovereignty in the face of the algorithm.\n\nDuring the cooperative work sessions, conceptual wireframes of data visualizations and adaptive metrics were developed, determining what information on student language processing is truly relevant for pedagogical decision-making and how to present it without causing cognitive overload."
     }
   },
   {
@@ -514,105 +613,9 @@ const transferActivities = [
     location: "Online (Zoom)",
     image: congresosImg,
     loremIpsum: {
-      es: "El Seminario Internacional: IA y CALL congregó a investigadores de primer nivel procedentes de universidades europeas y americanas. Las sesiones se centraron en debatir el estado del arte de las tecnologías de procesamiento del lenguaje natural (NLP) aplicadas a la adquisición de segundas lenguas (CALL), prestant especial atención a la retroalimentación automática y al análisis de interacciones en contextos de telecolaboración virtual.\n\nLos ponentes discutieron sobre los límites éticos de los modelos de lenguaje comerciales en entornos escolares y presentaron propuestas de implementación local que salvaguardan la privacidad del estudiante. El debate evidenció la necesidad de crear frameworks híbridos que unan la intuición pedagógica humana con la precisión de los análisis basados en deep learning.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim. Cras facilisis ante eros, vel porttitor ipsum luctus in. Duis dictum ligula id augue eleifend, at tristique nulla pretium.",
-      ca: "El Seminari Internacional: IA i CALL va congregar investigadors de primer nivell procedents d'universitats europees i americanes. Les sessions es van centrar en debatre l'estat de l'art de les tecnologies de processament del llenguatge natural (NLP) aplicades a l'adquisició de segones llengües (CALL), prestant especial atenció a la retroalimentació automàtica i a l'anàlisi d'interaccions en contextos de telecol·laboració virtual.\n\nEls ponents van discutir sobre els límits ètics dels models de llenguatge comercials en entorns escolars i van presentar propostes d'implementació local que salvaguarden la privacitat de l'estudiant. El debat va evidenciar la necessitat de crear frameworks híbrids que uneixin la intuïció pedagògica humana amb la precisió de les anàlisis basades en deep learning.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus.",
-      en: "The International Seminar: AI and CALL gathered top-tier researchers from European and American universities. The sessions focused on debating the state of the art of natural language processing (NLP) technologies applied to computer-assisted language learning (CALL), paying special attention to automated feedback and interaction analysis in virtual telecollaboration contexts.\n\nSpeakers discussed the ethical limits of commercial language models in school environments and presented local implementation proposals that safeguard student privacy. The debate highlighted the need to create hybrid frameworks that combine human pedagogical intuition with the precision of deep learning-based analytics.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus."
-    }
-  },
-  {
-    id: "act-3",
-    type: "demo",
-    tag: { es: "Demo", ca: "Demo", en: "Demo" },
-    title: {
-      es: "Demostración de Prototipo",
-      ca: "Demostració de Prototip",
-      en: "Prototype Demonstration"
-    },
-    desc: {
-      es: "Presentación del prototipo de plataforma de telecolaboración con módulo de IA integrado. Sesión abierta a la comunidad universitaria.",
-      ca: "Presentació del prototip de plataforma de telecolaboració amb mòdul d'IA integrat. Sessió oberta a la comunitat universitària.",
-      en: "Presentation of the telecollaboration platform prototype with integrated AI module. Session open to the university community."
-    },
-    pills: ["Tecnología", "Demostración"],
-    date: "Octubre 2024",
-    location: "UIB, Palma de Mallorca",
-    image: recursosImg,
-    loremIpsum: {
-      es: "La Demostración de Prototipo del sistema interactivo COPLITELE-IA sirvió para validar con la comunidad investigadora y educativa la primera versión funcional del entorno adaptativo de telecolaboración. El prototipo permite parametrizar de forma ágil la retroalimentación predictiva del sistema, proporcionando una interfaz limpia y accesible que asegura que la mediación tecnológica sea explicable y transparente.\n\nLos asistentes pudieron probar de primera mano cómo los alumnos interactúan en las salas de telecolaboración mientras un motor de análisis lingüístico proporciona sugerencias dinámicas adaptadas al nivel de competencia de cada participante. Las respuestas recolectadas servirán para pulir los tiempos de respuesta y la precisión de la interfaz en futuras iteraciones del proyecto.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim. Cras facilisis ante eros, vel porttitor ipsum luctus in. Duis dictum ligula id augue eleifend, at tristique nulla pretium.",
-      ca: "La Demostració de Prototip del sistema interactiu COPLITELE-IA va servir per validar amb la comunitat investigadora i educativa la primera versió funcional de l'entorn adaptatiu de telecol·laboració. El prototip permet parametritzar de manera àgil la retroalimentació predictiva del sistema, proporcionant una interfície neta i accessible que assegura que la mediació tecnològica sigui explicable i transparent.\n\nEls assistents van poder provar de primera mà com els alumnes interactuen a les sales de telecol·laboració mentre un motor d'anàlisi lingüística proporciona suggeriments dinàmics adaptats al nivell de competència de cada participant. Les respostes recollides serviran per polir els temps de resposta i la precisió de la interfície en futures iteracions del projecte.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus.",
-      en: "The Prototype Demonstration of the COPLITELE-IA interactive system served to validate the first functional version of the adaptive telecollaboration environment with the research and educational community. The prototype allows for agile configuration of the system's predictive feedback, providing a clean and accessible interface that ensures the technological mediation is explainable and transparent.\n\nAttendees experienced firsthand how students interact in the telecollaboration rooms while a linguistic analysis engine provides dynamic suggestions adapted to each participant's proficiency level. The feedback collected will be used to refine response times and interface precision in future project iterations.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus."
-    }
-  },
-  {
-    id: "act-4",
-    type: "formacion",
-    tag: { es: "Formación", ca: "Formació", en: "Training" },
-    title: {
-      es: "Curso de Formación: NLP para Educadores",
-      ca: "Curs de Formació: NLP per a Educadors",
-      en: "Training Course: NLP for Educators"
-    },
-    desc: {
-      es: "Programa de formación de 8 horas dirigido a docentes de lenguas sobre procesamiento del lenguaje natural y herramientas de feedback automatizado.",
-      ca: "Programa de formació de 8 hores adreçat a docents de llengües sobre processament del llenguatge natural i eines de feedback automatitzat.",
-      en: "8-hour training program for language teachers on natural language processing and automated feedback tools."
-    },
-    pills: ["NLP", "Formación", "Blended"],
-    date: "Enero 2025",
-    location: "Online y presencial (UIB)",
-    image: transferenciaImg,
-    loremIpsum: {
-      es: "El Curso de Formación en NLP para Educadores proporcionó al profesorado participante herramientas conceptuales y prácticas para comprender cómo la IA procesa el lenguaje de los estudiantes. Durante el curso, se diseñaron actividades de escritura que incorporaban sistemas automáticos de retroalimentación constructiva, analizando el impacto de este andamiaje algorítmico en la motivación del alumnado.\n\nSe profundizó en el funcionamiento básico de los transformadores y los modelos de lenguaje, explicando cómo traducir la probabilidad de palabras en andamios de escritura significativos. Los docentes participantes diseñaron guías didácticas que integran estas herramientas como asistentes de escritura, promoviendo el pensamiento crítico frente al texto generado automáticamente.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim. Cras facilisis ante eros, vel porttitor ipsum luctus in. Duis dictum ligula id augue eleifend, at tristique nulla pretium.",
-      ca: "El Curs de Formació en NLP per a Educadors va proporcionar al professorat participant eines conceptuals i pràctiques per comprendre com la IA processa el llenguatge dels estudiants. Durant el curs, es van dissenyar activitats d'escriptura que incorporaven sistemes automàtics de retroalimentació constructiva, analitzant l'impacte d'aquesta bastida algorísmica en la motivació de l'alumnat.\n\nEs va aprofundir en el funcionament bàsic dels transformadors i els models de llenguatge, explicant com traduir la probabilitat de paraules en bastides d'escriptura significatives. Els docents participants van dissenyar guies didàctiques que integren aquestes eines com a assistents d'escriptura, promovent el pensament crític enfront del text generat automàticament.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus.",
-      en: "The NLP for Educators Training Course provided participating teachers with conceptual and practical tools to understand how AI processes student language. During the course, writing activities incorporating automatic systems of constructive feedback were designed, analyzing the impact of this algorithmic scaffolding on student motivation.\n\nThe basic operation of transformers and language models was covered, explaining how to translate word probabilities into meaningful writing scaffolds. Participating teachers designed educational guides that integrate these tools as writing assistants, promoting critical thinking toward automatically generated text.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus."
-    }
-  },
-  {
-    id: "act-5",
-    type: "taller",
-    tag: { es: "Taller", ca: "Taller", en: "Workshop" },
-    title: {
-      es: "Workshop: Diseño de Tareas Telecolaborativas",
-      ca: "Workshop: Disseny de Tasques Telecolaboratives",
-      en: "Workshop: Designing Telecollaborative Tasks"
-    },
-    desc: {
-      es: "Taller práctico para el diseño colaborativo de tareas de intercambio lingüístico entre estudiantes de diferentes países con apoyo de IA.",
-      ca: "Taller pràctic per al disseny col·laboratiu de tasques d'intercanvi lingüístic entre estudiants de diferents països amb suport d'IA.",
-      en: "Practical workshop for the collaborative design of language exchange tasks between students from different countries supported by AI."
-    },
-    pills: ["Diseño de Tareas", "Telecolaboración"],
-    date: "Marzo 2025",
-    location: "UAH, Alcalá de Henares",
-    image: congresosImg,
-    loremIpsum: {
-      es: "El Workshop de Diseño de Tareas Telecolaborativas, celebrado en Alcalá de Henares, sirvió como un foro de co-creación de itinerarios didácticos virtuales. Los investigadores y docentes desarrollaron tareas de comunicación interactiva apoyadas por IA, adaptadas a diversos niveles de competencia lingüística, priorizando la equidad de las dinámicas en contextos plurilingües.\n\nLas dinámicas permitieron unificar criterios sobre cómo estructurar los turnos de intervención de los alumnos, y cómo la plataforma inteligente puede sugerir disparadores de conversación (prompts) en caso de bloqueos comunicativos, asegurando que las parejas mantengan un flujo natural de telecolaboración.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim. Cras facilisis ante eros, vel porttitor ipsum luctus in. Duis dictum ligula id augue eleifend, at tristique nulla pretium.",
-      ca: "El Workshop de Disseny de Tasques Telecol·laboratives, celebrat a Alcalá de Henares, va servir com un fòrum de co-creació d'itineraris didàctics virtuals. Els investigadors i docents van desenvolupar tasques de comunicació interactiva amb suport d'IA, adaptades a diversos nivells de competència lingüística, prioritzant l'equitat de les dinàmiques en contextos plurilingües.\n\nLes dinàmiques van permetre unificar criteris sobre com estructurar els torns d'intervenció dels alumnes, i com la plataforma intel·ligent pot suggerir disparadors de conversa (prompts) en cas de bloquejos comunicatius, assegurant que les parelles mantinguin un flux natural de telecol·laboració.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus.",
-      en: "The Designing Telecollaborative Tasks Workshop, held in Alcalá de Henares, served as a forum for co-creating virtual educational itineraries. Researchers and teachers developed interactive communication tasks supported by AI, adapted to various language proficiency levels, prioritizing equity in plurilingual contexts.\n\nThe dynamics allowed for unifying criteria on how to structure student turn-taking, and how the smart platform can suggest conversation starters (prompts) in case of communication blocks, ensuring that partners maintain a natural flow of telecollaboration.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus."
-    }
-  },
-  {
-    id: "act-6",
-    type: "difusion",
-    tag: { es: "Difusión", ca: "Difusió", en: "Dissemination" },
-    title: {
-      es: "Jornada de Difusión de Resultados",
-      ca: "Jornada de Difusió de Resultats",
-      en: "Results Dissemination Day"
-    },
-    desc: {
-      es: "Presentación pública de los principales hallazgos del proyecto, con mesas redondas y presentación de materiales didácticos elaborados.",
-      ca: "Presentació pública de les principals troballes del projecte, amb taules rodones i presentació de materials didàctics elaborats.",
-      en: "Public presentation of the project's main findings, with roundtables and presentation of developed educational materials."
-    },
-    pills: ["Resultados", "Difusión"],
-    date: "Junio 2025",
-    location: "UIB, Palma de Mallorca",
-    image: recursosImg,
-    loremIpsum: {
-      es: "La Jornada de Difusión de Resultados marcó el cierre público del proyecto, reuniendo a autoridades académicas, docentes y público general. Se presentaron los principales hallazgos de las pruebas de campo, demostrando el impacto positivo de la telecolaboración asistida por IA co-diseñada, y se distribuyeron manuales didácticos y códigos de buenas prácticas éticas.\n\nLas ponencias resumieron las métricas cuantitativas y cualitativas registradas en los institutos, destacando una mejora estadísticamente significativa en la fluidez de escritura de los estudiantes y una reducción de la ansiedad lingüística gracias al andamiaje personalizado del sistema adaptativo.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus. Curabitur vitae justo elementum, gravida arcu at, luctus enim. Cras facilisis ante eros, vel porttitor ipsum luctus in. Duis dictum ligula id augue eleifend, at tristique nulla pretium.",
-      ca: "La Jornada de Difusió de Resultats va marcar el tancament públic del projecte, reunint autoritats acadèmiques, docents i públic general. Es van presentar les principals troballes de les proves de camp, demostrant l'impacte positiu de la telecol·laboració assistida per IA co-dissenyada, i es van distribuir manuals didàctics i codis de bones pràctiques ètiques.\n\nLes ponències van resumir les mètriques quantitatives i qualitatives registrades als instituts, destacant una millora estadísticament significativa en la fluïdesa d'escriptura dels estudiants i una reducció de l'ansietat lingüística gràcies a la bastida personalitzada del sistema adaptatiu.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus.",
-      en: "The Results Dissemination Day marked the public closing of the project, bringing together academic authorities, teachers, and the general public. The main findings from the field trials were presented, demonstrating the positive impact of co-designed AI-assisted telecollaboration, and educational manuals and codes of ethical good practices were distributed.\n\nPresentations summarized both quantitative and qualitative metrics recorded in high schools, highlighting a statistically significant improvement in students' writing fluency and a reduction in language anxiety due to the personalized scaffolding of the adaptive system.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat molestie elementum. Integer accumsan pulvinar erat eget accumsan. Vestibulum tristique sapien et leo egestas molestie. Mauris nec pretium nisl. Proin ac convallis lacus."
+      es: "El Seminario Internacional: IA y CALL congregó a investigadores de primer nivel procedentes de universidades europeas y americanas. Las sesiones se centraron en debatir el estado del arte de las tecnologías de procesamiento del lenguaje natural (NLP) aplicadas a la adquisición de segundas lenguas (CALL), prestant especial atención a la retroalimentación automática y al análisis de interacciones en contextos de telecolaboración virtual.\n\nLos ponentes discutieron sobre los límites éticos de los modelos de lenguaje comerciales en entornos escolares y presentaron propuestas de implementación local que salvaguardan la privacidad del estudiante. El debate evidenció la necesidad de crear frameworks híbridos que unan la intuición pedagógica humana con la precisión de los análisis basados en deep learning.",
+      ca: "El Seminari Internacional: IA i CALL va congregar investigadors de primer nivell procedents d'universitats europees i americanes. Les sessions es van centrar en debatre l'estat de l'art de les tecnologies de processament del llenguatge natural (NLP) aplicades a l'adquisició de segones llengües (CALL), prestant especial atenció a la retroalimentació automàtica i a l'anàlisi d'interaccions en contextos de telecol·laboració virtual.\n\nEls ponents van discutir sobre els límits ètics dels models de llenguatge comercials en entorns escolars i van presentar propostes d'implementació local que salvaguarden la privacitat de l'estudiant. El debat va evidenciar la necessitat de crear frameworks híbrids que uneixin la intuïció pedagògica humana amb la precisió de les anàlisis basades en deep learning.",
+      en: "The International Seminar: AI and CALL gathered top-tier researchers from European and American universities. The sessions focused on debating the state of the art of natural language processing (NLP) technologies applied to computer-assisted language learning (CALL), paying special attention to automated feedback and interaction analysis in virtual telecollaboration contexts.\n\nSpeakers discussed the ethical limits of commercial language models in school environments and presented local implementation proposals that safeguard student privacy. The debate highlighted the need to create hybrid frameworks that combine human pedagogical intuition with the precision of deep learning-based analytics."
     }
   }
 ];
