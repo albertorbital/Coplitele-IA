@@ -481,22 +481,18 @@ const transferActivities = [
       en: "WORKSHOP: Research syntheses to investigate AI-enhanced learning designs to foster pre-service teachers agency"
     },
     desc: {
-      es: "How can AI-based learning designs in higher education promote students’ agency? To answer the study’s main research question, the following subquestions are defined...",
-      ca: "How can AI-based learning designs in higher education promote students’ agency? To answer the study’s main research question, the following subquestions are defined...",
-      en: "How can AI-based learning designs in higher education promote students’ agency? To answer the study’s main research question, the following subquestions are defined..."
+      es: "Para responder a la pregunta principal del estudio, se han definido subpreguntas para comprender qué diseños de aprendizaje se investigan para potenciar la agencia del alumnado en la educación superior con IA.",
+      ca: "Per respondre a la pregunta principal de l'estudi, s'han definit subpreguntes per comprendre quins dissenys d'aprenentatge s'investiguen per potenciar l'agència de l'alumnat en l'educació superior amb IA.",
+      en: "To answer the study's main research question, subquestions have been defined to understand which learning designs are investigated to enhance students' agency in AI-related higher education."
     },
     pills: ["Workshop", "AI", "Agency"],
     date: "Miércoles 11 de marzo de 10:30 a 12:30",
     location: "Aula C-11 edificio Guillem Cifre de Colonya, UIB, Palma, Spain",
-    image: congresosImg,
+    image: "/images/poster_workshop1.png",
     loremIpsum: {
-      es: `<p><strong>How can AI-based learning designs in higher education promote students’ agency?</strong></p>
-<p>To answer the study’s main research question, the following subquestions are defined:</p>
-<ul>
-  <li>Which learning designs are implemented and investigated to enhance students’ agency in AI-related higher education?</li>
-  <li>What elements of learners’ agency are observable in the research on AI enhanced learning designs in higher education?</li>
-  <li>Which are the artificial intelligence tools used as part of the learning design and for what purpose?</li>
-</ul>
+      es: `<p><strong>¿Cómo pueden los diseños de aprendizaje basados en IA en la educación superior promover la agencia de los estudiantes?</strong></p>
+<p>Para responder a la pregunta principal del estudio, se han definido varias subpreguntas orientadas a comprender qué diseños de aprendizaje se están implementando e investigando para potenciar la agencia del alumnado en la educación superior vinculada a la Inteligencia Artificial.</p>
+<p>En este sentido, el seminario explorará qué elementos de la agencia de los estudiantes son observables en estas investigaciones sobre diseños de aprendizaje enriquecidos con IA, analizando también qué herramientas de inteligencia artificial se integran en dichos diseños y con qué propósito específico.</p>
 <p>Este seminario es parte del proyecto de I+D+i PID2024-157113OB-100, financiado/a por MICIU/AEI/10.13039/501100011033/ y “FEDER Una manera de hacer Europa”.</p>
 <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
   <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registro al Workshop</a>
@@ -516,13 +512,9 @@ const transferActivities = [
     <div><strong>Lea Katharina Reis</strong><br><a href="mailto:lea.katharina.reis@fau.de" style="color: var(--color-blue); text-decoration: none;">lea.katharina.reis@fau.de</a></div>
   </div>
 </div>`,
-      ca: `<p><strong>How can AI-based learning designs in higher education promote students’ agency?</strong></p>
-<p>To answer the study’s main research question, the following subquestions are defined:</p>
-<ul>
-  <li>Which learning designs are implemented and investigated to enhance students’ agency in AI-related higher education?</li>
-  <li>What elements of learners’ agency are observable in the research on AI enhanced learning designs in higher education?</li>
-  <li>Which are the artificial intelligence tools used as part of the learning design and for what purpose?</li>
-</ul>
+      ca: `<p><strong>Com poden els dissenys d'aprenentatge basats en IA a l'educació superior promoure l'agència dels estudiants?</strong></p>
+<p>Per respondre a la pregunta principal de l'estudi, s'han definit diverses subpreguntes orientades a comprendre quins dissenys d'aprenentatge s'estan implementant i investigant per potenciar l'agència de l'alumnat en l'educació superior vinculada a la Intel·ligència Artificial.</p>
+<p>En aquest sentit, el seminari explorarà quins elements de l'agència dels estudiants són observables en aquestes investigacions sobre dissenys d'aprenentatge enriquits amb IA, analitzant també quines eines d'intel·ligència artificial s'integren en aquests dissenys i amb quin propòsit específic.</p>
 <p>Aquest seminari és part del projecte de R+D+I PID2024-157113OB-100, finançat per MICIU/AEI/10.13039/501100011033/ i “FEDER Una manera de fer Europa”.</p>
 <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
   <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Registre al Workshop</a>
@@ -543,12 +535,8 @@ const transferActivities = [
   </div>
 </div>`,
       en: `<p><strong>How can AI-based learning designs in higher education promote students’ agency?</strong></p>
-<p>To answer the study’s main research question, the following subquestions are defined:</p>
-<ul>
-  <li>Which learning designs are implemented and investigated to enhance students’ agency in AI-related higher education?</li>
-  <li>What elements of learners’ agency are observable in the research on AI enhanced learning designs in higher education?</li>
-  <li>Which are the artificial intelligence tools used as part of the learning design and for what purpose?</li>
-</ul>
+<p>To answer the study's main research question, several subquestions have been defined aimed at understanding which learning designs are being implemented and investigated to enhance students' agency in AI-related higher education.</p>
+<p>In this regard, the seminar will explore what elements of learners' agency are observable in research on AI-enhanced learning designs, also analyzing which artificial intelligence tools are integrated into these designs and for what specific purpose.</p>
 <p>This seminar is part of the R&D project PID2024-157113OB-100, funded by MICIU/AEI/10.13039/501100011033/ and "ERDF A way of making Europe".</p>
 <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
   <a href="#" class="btn-secondary" style="background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed; pointer-events: none;" onclick="event.preventDefault();">Workshop Registration</a>
