@@ -1033,8 +1033,14 @@ body.dark-mode .news-section-title {
 /* News card grid (square cards with image) */
 .news-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .news-cards-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .news-card {
@@ -1674,9 +1680,15 @@ body.dark-mode .framework-tag.outline-teal {
 /* Actividades de Transferencia Grid (Screenshot-accurate) */
 .activities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .activity-card {
@@ -3050,24 +3062,12 @@ body.dark-mode .progress-bar-track {
   100% { transform: translateX(100%); }
 }
 
-/* Publications Grid and Cards Update */
+/* Publications List Update */
 .publications-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 20px;
-}
-
-@media (max-width: 1024px) {
-  .publications-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .publications-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Publication Card Gradient Headers */
