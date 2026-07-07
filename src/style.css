@@ -1033,7 +1033,7 @@ body.dark-mode .news-section-title {
 /* News card grid (square cards with image) */
 .news-cards-grid {
   display: block;
-  column-count: 3;
+  column-count: 2;
   column-gap: 20px;
 }
 
