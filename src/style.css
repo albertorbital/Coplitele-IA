@@ -1032,9 +1032,9 @@ body.dark-mode .news-section-title {
 
 /* News card grid (square cards with image) */
 .news-cards-grid {
-  display: block;
-  column-count: 2;
-  column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
 }
 
 .news-card {
@@ -1674,15 +1674,7 @@ body.dark-mode .framework-tag.outline-teal {
 /* Actividades de Transferencia Grid (Screenshot-accurate) */
 .activities-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 40px;
-}
-
-/* Actividades de Transferencia Overlap Tag Card Redesign */
-.activities-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
   margin-bottom: 40px;
 }
