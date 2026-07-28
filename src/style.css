@@ -6949,23 +6949,24 @@ body.dark-mode .btn-outline-turquoise:hover {
   flex-grow: 1 !important;
 }
 
-/* ─── 35. LATEST NEWS HOVER OVERLAY CORRECTIONS ─── */
-.news-card-redesign:hover .act-hover-overlay {
-  opacity: 1 !important;
+/* ─── 36. PROJECT PHASES ROW & CARDS (COMPACT & COLORIZED FASES) ─── */
+#objetivos.page-section {
+  padding-top: 16px !important;
+  padding-bottom: 24px !important;
 }
-.news-card-redesign .news-image-wrapper img,
-.news-card-redesign .news-image-wrapper video {
-  transition: transform 0.4s ease !important;
+
+#objetivos .section-title-wrapper {
+  margin-bottom: 16px !important;
 }
-.news-card-redesign:hover .news-image-wrapper img,
-.news-card-redesign:hover .news-image-wrapper video {
-  transform: scale(1.04) !important;
+
+#objetivos .decorative-progress-bar-container {
+  margin-bottom: 20px !important;
 }
-/* ─── 36. PROJECT PHASES ROW & CARDS (5 FASES EN 1 FILA) ─── */
+
 .project-phases-row {
   display: flex !important;
-  gap: 16px !important;
-  margin-bottom: 48px !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
   width: 100% !important;
 }
 
@@ -6989,11 +6990,11 @@ body.dark-mode .btn-outline-turquoise:hover {
   min-width: 0 !important;
   background: var(--color-bg-card-light) !important;
   border: none !important;
-  border-radius: 20px !important;
-  padding: 24px 16px !important;
+  border-radius: 14px !important;
+  padding: 16px 10px !important;
   position: relative !important;
   overflow: hidden !important;
-  min-height: 180px !important;
+  min-height: 140px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
@@ -7001,7 +7002,7 @@ body.dark-mode .btn-outline-turquoise:hover {
   text-align: center !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.04) !important;
 }
 
 body.dark-mode .phase-card {
@@ -7010,30 +7011,59 @@ body.dark-mode .phase-card {
 }
 
 .phase-card:hover {
-  transform: translateY(-5px) !important;
+  transform: translateY(-4px) !important;
   border: none !important;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12) !important;
 }
 
 .phase-badge {
-  font-size: 13px !important;
+  font-size: 11.5px !important;
   font-weight: 800 !important;
-  letter-spacing: 1.5px !important;
+  letter-spacing: 1.2px !important;
   text-transform: uppercase !important;
-  color: var(--color-blue) !important;
-  background: rgba(29, 91, 254, 0.1) !important;
-  padding: 5px 12px !important;
+  padding: 3px 10px !important;
   border-radius: 20px !important;
-  margin-bottom: 12px !important;
+  margin-bottom: 8px !important;
   display: inline-block !important;
 }
 
+/* Individual Phase Badge Colors (Fase 1 -> Fase 5) */
+.phase-card.phase-1 .phase-badge,
+.phase-card:nth-child(1) .phase-badge {
+  color: #1D5BFE !important;
+  background: rgba(29, 91, 254, 0.12) !important;
+}
+
+.phase-card.phase-2 .phase-badge,
+.phase-card:nth-child(2) .phase-badge {
+  color: #14b8a6 !important;
+  background: rgba(20, 184, 166, 0.12) !important;
+}
+
+.phase-card.phase-3 .phase-badge,
+.phase-card:nth-child(3) .phase-badge {
+  color: #0d9488 !important;
+  background: rgba(13, 148, 136, 0.12) !important;
+}
+
+.phase-card.phase-4 .phase-badge,
+.phase-card:nth-child(4) .phase-badge {
+  color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+}
+
+.phase-card.phase-5 .phase-badge,
+.phase-card:nth-child(5) .phase-badge {
+  color: #059669 !important;
+  background: rgba(5, 150, 105, 0.12) !important;
+}
+
 .phase-title {
-  font-size: 18px !important;
+  font-size: 16px !important;
   font-weight: 800 !important;
   color: var(--color-text-light) !important;
-  margin: 0 0 6px 0 !important;
-  line-height: 1.3 !important;
+  margin: 0 0 4px 0 !important;
+  line-height: 1.25 !important;
 }
 
 body.dark-mode .phase-title {
@@ -7041,10 +7071,10 @@ body.dark-mode .phase-title {
 }
 
 .phase-subtitle {
-  font-size: 14.5px !important;
+  font-size: 13px !important;
   color: var(--color-text-muted-light) !important;
   margin: 0 !important;
-  line-height: 1.4 !important;
+  line-height: 1.35 !important;
 }
 
 .phase-hover-text {
@@ -7052,13 +7082,13 @@ body.dark-mode .phase-title {
   inset: 0 !important;
   background: var(--color-blue) !important;
   color: #ffffff !important;
-  padding: 20px 14px !important;
+  padding: 14px 10px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  font-size: 14.5px !important;
-  line-height: 1.5 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
   font-weight: 600 !important;
   opacity: 0 !important;
   transform: translateY(100%) !important;
@@ -7071,41 +7101,36 @@ body.dark-mode .phase-title {
   transform: translateY(0) !important;
 }
 
-/* 5 Phase cards hover gradient progression (Azul -> Azul-Turquesa -> Turquesa -> Turquesa-Verde -> Verde) */
 .phase-card.phase-1:hover .phase-hover-text,
 .phase-card:nth-child(1):hover .phase-hover-text {
   background: #1D5BFE !important;
 }
 .phase-card.phase-1:hover {
-  border-color: #1D5BFE !important;
-  box-shadow: 0 10px 30px rgba(29, 91, 254, 0.2) !important;
+  box-shadow: 0 10px 28px rgba(29, 91, 254, 0.2) !important;
 }
 
 .phase-card.phase-2:hover .phase-hover-text,
 .phase-card:nth-child(2):hover .phase-hover-text {
-  background: #148be8 !important;
+  background: #14b8a6 !important;
 }
 .phase-card.phase-2:hover {
-  border-color: #148be8 !important;
-  box-shadow: 0 10px 30px rgba(20, 139, 232, 0.2) !important;
+  box-shadow: 0 10px 28px rgba(20, 184, 166, 0.2) !important;
 }
 
 .phase-card.phase-3:hover .phase-hover-text,
 .phase-card:nth-child(3):hover .phase-hover-text {
-  background: #14b8a6 !important;
+  background: #0d9488 !important;
 }
 .phase-card.phase-3:hover {
-  border-color: #14b8a6 !important;
-  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.2) !important;
+  box-shadow: 0 10px 28px rgba(13, 148, 136, 0.2) !important;
 }
 
 .phase-card.phase-4:hover .phase-hover-text,
 .phase-card:nth-child(4):hover .phase-hover-text {
-  background: #10b991 !important;
+  background: #10b981 !important;
 }
 .phase-card.phase-4:hover {
-  border-color: #10b991 !important;
-  box-shadow: 0 10px 30px rgba(16, 185, 145, 0.2) !important;
+  box-shadow: 0 10px 28px rgba(16, 185, 129, 0.2) !important;
 }
 
 .phase-card.phase-5:hover .phase-hover-text,
