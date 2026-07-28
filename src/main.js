@@ -2903,6 +2903,44 @@ function initCustomCursor() {
     `;
   };
 
+  // Same as above but without the text label — used for button hover
+  const getCursorIsotypeSVGNoText = (strokeColor = '#a78bfa') => {
+    const config = generateLogoConfig();
+    const center = 50;
+    const outerRadius = 37;
+    const strokeWidth = 5;
+    const perimDotRadius = strokeWidth * 0.65;
+    const perimNotchRadius = perimDotRadius + 2.2;
+    const localPolarToCartesian = (cx, cy, r, deg) => {
+      const rad = (deg - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+    };
+    const localDescribeArc = (x, y, r, s, e) => {
+      const start = localPolarToCartesian(x, y, r, s);
+      const end   = localPolarToCartesian(x, y, r, e);
+      const flag  = e - s <= 180 ? '0' : '1';
+      return `M ${start.x} ${start.y} A ${r} ${r} 0 ${flag} 1 ${end.x} ${end.y}`;
+    };
+    const rs = Math.floor(Math.random() * 1000000);
+    let masks = '<defs>', paths = '', dots = '';
+    config.arcs.forEach(arc => {
+      const dp = localPolarToCartesian(center, center, outerRadius, arc.dotPos);
+      const mid = `btn-mask-${arc.id}-${rs}`;
+      masks += `<mask id="${mid}" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="100" height="100" fill="white"/><circle cx="${dp.x}" cy="${dp.y}" r="${perimNotchRadius}" fill="black"/></mask>`;
+      paths += `<path d="${localDescribeArc(center, center, outerRadius, arc.start, arc.end)}" fill="none" stroke="${strokeColor}" stroke-width="${strokeWidth}" stroke-linecap="round" mask="url(#${mid})"/>`;
+      dots  += `<circle cx="${dp.x}" cy="${dp.y}" r="${perimDotRadius}" fill="${strokeColor}"/>`;
+    });
+    masks += '</defs>';
+    return `
+      <div style="position:relative; width:80px; height:80px; display:flex; align-items:center; justify-content:center;">
+        <svg class="spinning-arcs-cursor" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%; height:100%; fill:none; overflow:visible; position:absolute; top:0; left:0;">
+          ${masks}${paths}${dots}
+        </svg>
+      </div>
+    `;
+  };
+
   const handleCardEnter = (e) => {
     const el = e.currentTarget;
     let color = 'blue';
@@ -2932,6 +2970,10 @@ function initCustomCursor() {
     if (el.classList.contains('section-nav-card')) {
       cursor.classList.add('hover-nav-button');
       cursor.textContent = currentLang === 'en' ? 'View' : (currentLang === 'ca' ? 'Veure' : 'Ver');
+    } else if (el.classList.contains('team-card')) {
+      cursor.classList.add('hover-post');
+      cursor.setAttribute('data-color', 'purple');
+      cursor.innerHTML = getCursorIsotypeSVG('purple');
     } else {
       cursor.classList.add('hover-post');
       cursor.innerHTML = getCursorIsotypeSVG(color);
@@ -2951,17 +2993,19 @@ function initCustomCursor() {
 
   const handleButtonEnter = () => {
     cursor.classList.add('hover-button');
+    cursor.innerHTML = getCursorIsotypeSVGNoText('#a78bfa');
     document.body.classList.add('custom-cursor-hover');
   };
 
   const handleButtonLeave = () => {
     cursor.classList.remove('hover-button');
+    cursor.innerHTML = '';
     document.body.classList.remove('custom-cursor-hover');
   };
   
   const updateHoverEvents = () => {
-    // 1. Post cards, news cards and navigation shortcut cards
-    document.querySelectorAll('.section-nav-card, .activity-card, .rec-card, .news-card').forEach(el => {
+    // 1. Post cards, news cards, navigation shortcut cards, and team member cards
+    document.querySelectorAll('.section-nav-card, .activity-card, .rec-card, .news-card, .team-card').forEach(el => {
       el.removeEventListener('mouseenter', handleCardEnter);
       el.removeEventListener('mouseleave', handleCardLeave);
       el.addEventListener('mouseenter', handleCardEnter);

@@ -6195,27 +6195,19 @@ body.dark-mode .section-inner-panel {
 .custom-cursor.hover-post[data-color="purple"]    { background-color: #8b5cf6 !important; box-shadow: 0 4px 18px rgba(139,92,246,0.5) !important; }
 .custom-cursor.hover-post[data-color="green"]     { background-color: #10b981 !important; box-shadow: 0 4px 18px rgba(16,185,129,0.5) !important; }
 
-/* Button hover → circle with center dot only (no isotype rotation) */
+/* Button hover → logo isotype without text */
 .custom-cursor.hover-button {
-  width: 46px !important;
-  height: 46px !important;
+  width: 80px !important;
+  height: 80px !important;
   background: transparent !important;
-  border: 1.5px solid rgba(100,100,100,0.6) !important;
-  border-radius: 50% !important;
+  border: none !important;
+  border-radius: 0 !important;
   animation: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  opacity: 0.85 !important;
 }
-.custom-cursor.hover-button::after {
-  content: '' !important;
-  display: block !important;
-  width: 5px !important;
-  height: 5px !important;
-  background: rgba(100,100,100,0.8) !important;
-  border-radius: 50% !important;
-}
+.custom-cursor.hover-button::after,
 .custom-cursor.hover-button::before {
   display: none !important;
 }
