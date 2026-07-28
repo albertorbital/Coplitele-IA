@@ -3012,8 +3012,8 @@ function initCustomCursor() {
       el.addEventListener('mouseleave', handleCardLeave);
     });
 
-    // 2. Regular interactive buttons and links
-    document.querySelectorAll('a:not(.section-nav-card):not(.activity-card):not(.news-card), button:not(.rec-card), [role="button"]:not(.news-card), #hero-logo-container, .logo-wrapper, .custom-lang-btn, .modal-close').forEach(el => {
+    // 2. Regular interactive buttons and links (exclude pub links inside member modal — they handle their own hover)
+    document.querySelectorAll('a:not(.section-nav-card):not(.activity-card):not(.news-card):not(.member-pub-link), button:not(.rec-card), [role="button"]:not(.news-card), #hero-logo-container, .logo-wrapper, .custom-lang-btn, .modal-close').forEach(el => {
       el.removeEventListener('mouseenter', handleButtonEnter);
       el.removeEventListener('mouseleave', handleButtonLeave);
       el.addEventListener('mouseenter', handleButtonEnter);

@@ -1936,7 +1936,7 @@ body.dark-mode dialog {
 
 dialog[open] {
   animation: modalOpen 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  cursor: default; /* Reset cursor inside dialog */
+  cursor: none; /* Keep custom cursor inside dialog */
 }
 
 dialog::backdrop {
@@ -1964,15 +1964,18 @@ dialog[open]::backdrop {
 .modal-close {
   background: transparent;
   border: none;
-  cursor: pointer;
-  width: 28px;
-  height: 28px;
+  cursor: none;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 32px;
+  line-height: 1;
   color: var(--color-text-muted-light);
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 body.dark-mode .modal-close {
@@ -1980,7 +1983,7 @@ body.dark-mode .modal-close {
 }
 
 .modal-close:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.06);
   color: var(--color-text-light);
 }
 
