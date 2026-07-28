@@ -6130,20 +6130,20 @@ body.dark-mode .section-inner-panel {
 /* Per-section padding-top fine-tuned so titles clear the sticky submenu */
 /* Descripción (#proyecto) – needs more, it overlaps */
 #view-proyecto #proyecto {
-  padding-top: 60px !important;
+  padding-top: 100px !important;
 }
 
-/* Objetivos, Equipo – already good, keep current padding via base .page-section */
+/* Objetivos, Equipo – already good */
 #view-proyecto #objetivos,
 #view-proyecto #equipo {
   padding-top: 80px !important;
 }
 
-/* Transferencia, Producción Científica, Recursos – had too much, reduce */
+/* Transferencia, Producción Científica, Recursos – too much, reduce */
 #view-impacto #transferencia,
 #view-impacto #publicaciones,
 #view-impacto #recursos {
-  padding-top: 40px !important;
+  padding-top: 15px !important;
 }
 
 /* Actividades – first section of Impacto, already fine */

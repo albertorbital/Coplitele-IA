@@ -1639,8 +1639,8 @@ function openMemberModal(id) {
             <div><strong>ORCID:</strong> <a href="https://orcid.org/${member.orcid}" target="_blank" style="color: var(--color-blue); text-decoration: none; font-weight: 600; font-family: monospace; letter-spacing: 0.02em;">${member.orcid}</a></div>
           </div>
           <div class="modal-publications-section" style="${(member.pubIds && member.pubIds.length > 0) ? 'border-top: 1px solid var(--color-border-light); padding-top: 20px; margin-top: 4px;' : 'display:none;'}">
-            <h4 style="margin-top: 0; margin-bottom: 10px; font-family: var(--font-primary); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted-light); opacity: 0.7;">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
-            <ul style="padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 5px;">
+            <h4 style="margin-top: 0; margin-bottom: 10px; font-family: var(--font-primary); font-size: 13px; font-weight: 700; color: var(--color-text-light);">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
+            <ul style="padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 4px;">
               ${
                 (member.pubIds || []).map(pid => {
                   const pub = publications.find(p => p.id === pid);
@@ -1659,11 +1659,14 @@ function openMemberModal(id) {
                       line-height: 1.5;
                       color: var(--color-text-muted-light);
                       text-decoration: none;
-                      transition: color 0.18s ease;
+                      border-radius: 6px;
+                      padding: 3px 7px 3px 5px;
+                      margin: -3px -7px -3px -5px;
+                      transition: background 0.18s ease, color 0.18s ease;
                       cursor: pointer;
                     "
-                    onmouseover="this.style.color='#a78bfa'"
-                    onmouseout="this.style.color='var(--color-text-muted-light)'"
+                    onmouseover="this.style.background='#a78bfa'; this.style.color='#ffffff';"
+                    onmouseout="this.style.background='transparent'; this.style.color='var(--color-text-muted-light)';"
                   ><span style="font-weight: 700; flex-shrink: 0; font-family: monospace; color: inherit;">(${year})</span><span style="color: inherit;">${pub.title[currentLang]}</span></a></li>`;
                 }).join('')
               }
