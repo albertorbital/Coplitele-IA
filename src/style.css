@@ -6118,14 +6118,14 @@ body.dark-mode .section-inner-panel {
 
 /* ─── 6. SUBMENU: PUSH DOWN BELOW HEADER & STICKY ON SCROLL ─── */
 #view-impacto, #view-proyecto {
-  padding-top: 140px !important;
+  padding-top: 100px !important;
   overflow: visible !important;
 }
 
 #view-impacto .page-submenu-wrapper,
 #view-proyecto .page-submenu-wrapper {
-  margin-top: 30px !important;
-  margin-bottom: 30px !important;
+  margin-top: 10px !important;
+  margin-bottom: 50px !important;
   position: sticky !important;
   top: 86px !important;
   z-index: 900 !important;

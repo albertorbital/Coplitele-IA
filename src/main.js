@@ -2713,57 +2713,54 @@ function initSubmenuScrollObserver() {
     document.getElementById('proyecto'),
     document.getElementById('objetivos'),
     document.getElementById('equipo'),
-    document.getElementById('noticias'),
     document.getElementById('actividades'),
     document.getElementById('transferencia'),
     document.getElementById('publicaciones'),
     document.getElementById('recursos')
   ].filter(Boolean);
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '-80px 0px -40% 0px',
-    threshold: 0
-  };
+  if (!sections.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    if (window.scrollY < 120) return;
+  const updateActiveSubmenuLink = () => {
+    const activeView = document.querySelector('.spa-view.active');
+    if (!activeView) return;
 
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        const activeView = document.querySelector('.spa-view.active');
-        if (!activeView) return;
-        const activeLinks = activeView.querySelectorAll(`.submenu-link`);
-        activeLinks.forEach(link => {
-          const href = link.getAttribute('href');
-          if (href && href.endsWith(`#${id}`)) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }
-    });
-  }, observerOptions);
+    const links = Array.from(activeView.querySelectorAll('.submenu-link'));
+    if (!links.length) return;
 
-  sections.forEach(section => observer.observe(section));
+    const viewSections = sections.filter(sec => activeView.contains(sec));
+    if (!viewSections.length) return;
 
-  // Reset to first submenu link when scrolling back to top of page
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < 120) {
-      const activeView = document.querySelector('.spa-view.active');
-      if (activeView) {
-        const links = activeView.querySelectorAll('.submenu-link');
-        if (links.length > 0) {
-          links.forEach((l, idx) => {
-            if (idx === 0) l.classList.add('active');
-            else l.classList.remove('active');
-          });
-        }
+    // Line 160px from top of viewport for sticky submenu trigger
+    const triggerY = 160;
+    let currentSection = viewSections[0];
+
+    for (let i = 0; i < viewSections.length; i++) {
+      const rect = viewSections[i].getBoundingClientRect();
+      if (rect.top <= triggerY) {
+        currentSection = viewSections[i];
       }
     }
-  }, { passive: true });
+
+    if (window.scrollY < 100) {
+      currentSection = viewSections[0];
+    }
+
+    const currentId = currentSection.getAttribute('id');
+
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && href.endsWith(`#${currentId}`)) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', updateActiveSubmenuLink, { passive: true });
+  window.addEventListener('hashchange', updateActiveSubmenuLink, { passive: true });
+  updateActiveSubmenuLink();
 }
 
 
