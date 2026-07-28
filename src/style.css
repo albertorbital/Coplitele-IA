@@ -6124,17 +6124,29 @@ body.dark-mode .section-inner-panel {
 #transferencia,
 #publicaciones,
 #recursos {
-  scroll-margin-top: 200px !important;
+  scroll-margin-top: 160px !important;
 }
 
-/* Ensure section titles have breathing room below sticky submenu */
-#view-proyecto .page-section,
-#view-impacto .page-section {
+/* Per-section padding-top fine-tuned so titles clear the sticky submenu */
+/* Descripción (#proyecto) – needs more, it overlaps */
+#view-proyecto #proyecto {
+  padding-top: 60px !important;
+}
+
+/* Objetivos, Equipo – already good, keep current padding via base .page-section */
+#view-proyecto #objetivos,
+#view-proyecto #equipo {
   padding-top: 80px !important;
 }
 
-/* First section in each view: less padding since view has its own padding-top */
-#view-proyecto #proyecto,
+/* Transferencia, Producción Científica, Recursos – had too much, reduce */
+#view-impacto #transferencia,
+#view-impacto #publicaciones,
+#view-impacto #recursos {
+  padding-top: 40px !important;
+}
+
+/* Actividades – first section of Impacto, already fine */
 #view-impacto #actividades {
   padding-top: 20px !important;
 }

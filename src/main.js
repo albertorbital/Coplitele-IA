@@ -20,6 +20,7 @@ const teamMembers = [
   {
     id: "adolfina-perez",
     name: "Dra. Adolfina Pérez Garcías",
+    pubIds: ["pub-1", "pub-4"],
     role: {
       es: "Investigadora Principal",
       ca: "Investigadora Principal",
@@ -44,6 +45,7 @@ const teamMembers = [
   {
     id: "barbara-de-benito",
     name: "Dra. Bárbara de Benito Crosetti",
+    pubIds: ["pub-1", "pub-2", "pub-3"],
     role: {
       es: "Investigadora Principal",
       ca: "Investigadora Principal",
@@ -68,6 +70,7 @@ const teamMembers = [
   {
     id: "jesus-salinas",
     name: "Dr. Jesús María Salinas Ibáñez",
+    pubIds: ["pub-2"],
     role: {
       es: "Investigador",
       ca: "Investigador",
@@ -80,7 +83,7 @@ const teamMembers = [
     },
     bio: {
       es: "Catedrático del Área de Didáctica y Organización Escolar de la UIB. Fundador del Grupo de Tecnología Educativa (GTE). Amplia trayectoria en el diseño de entornos virtuales de aprendizaje, formación del profesorado en TIC y educación flexible y a distancia.",
-      ca: "Catedràtic de l'Àrea de Didàctica i Organització Escolar de la UIB. Fundador del Grup de Tecnologia Educativa (GTE). Àmplia trajectòria en el disseny d'entorns virtuals d'aprenentatge, formació del profesorat en TIC i educació flexible i a distància.",
+      ca: "Catedràtic de l'Àrea de Didàctica i Organització Escolar de la UIB. Fundador del Grup de Tecnologia Educativa (GTE). Àmplia trajectòria en el disseny d'entorns virtuals d'aprenentatge, formació del professorat en TIC i educació flexible i a distància.",
       en: "Full Professor in Didactics and School Organization at UIB. Founder of the Educational Technology Group (GTE). Extensive career in designing virtual learning environments, teacher training in ICT, and flexible and distance education."
     },
     email: "jesus.salinas@uib.es",
@@ -92,6 +95,7 @@ const teamMembers = [
   {
     id: "santos-urbina",
     name: "Dr. Santos Urbina Ramírez",
+    pubIds: ["pub-5"],
     role: {
       es: "Investigador",
       ca: "Investigador",
@@ -116,6 +120,7 @@ const teamMembers = [
   {
     id: "francisca-negre",
     name: "Dra. Francisca Negre Bennásar",
+    pubIds: ["pub-6"],
     role: {
       es: "Investigadora",
       ca: "Investigadora",
@@ -140,6 +145,7 @@ const teamMembers = [
   {
     id: "gemma-tur",
     name: "Dra. Gemma Tur Ferrer",
+    pubIds: ["pub-2", "pub-4"],
     role: {
       es: "Investigadora",
       ca: "Investigadora",
@@ -164,6 +170,7 @@ const teamMembers = [
   {
     id: "francisco-lirola",
     name: "Dr. Francisco Lirola",
+    pubIds: ["pub-6", "pub-3"],
     role: {
       es: "Investigador",
       ca: "Investigador",
@@ -188,6 +195,7 @@ const teamMembers = [
   {
     id: "linda-castaneda",
     name: "Dra. Linda Castañeda Quintero",
+    pubIds: [],
     role: {
       es: "Investigadora",
       ca: "Investigadora",
@@ -212,6 +220,7 @@ const teamMembers = [
   {
     id: "enric-bresco",
     name: "Dr. Enric Brescó Baiges",
+    pubIds: ["pub-1", "pub-5", "pub-6"],
     role: {
       es: "Investigador",
       ca: "Investigador",
@@ -236,6 +245,7 @@ const teamMembers = [
   {
     id: "gustavo-angulo",
     name: "Dr. Gustavo Adolfo Angulo Mendoza",
+    pubIds: ["pub-6", "pub-5", "pub-2"],
     role: {
       es: "Investigador",
       ca: "Investigador",
@@ -1628,18 +1638,35 @@ function openMemberModal(id) {
             <div><strong>Email:</strong> <a href="mailto:${member.email}" style="color: var(--color-blue); text-decoration: none; font-weight: 600;">${member.email}</a></div>
             <div><strong>ORCID:</strong> <a href="https://orcid.org/${member.orcid}" target="_blank" style="color: var(--color-blue); text-decoration: none; font-weight: 600; font-family: monospace; letter-spacing: 0.02em;">${member.orcid}</a></div>
           </div>
-          <div class="modal-publications-section" style="border-top: 1px solid var(--color-border-light); padding-top: 24px;">
-            <h4 style="margin-top: 0; margin-bottom: 16px; font-family: var(--font-primary); font-size: 16px; font-weight: 750; color: var(--color-text-light);">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
-            <ul style="padding-left: 20px; font-size: 14px; line-height: 1.6; color: var(--color-text-muted-light); margin: 0;">
-              ${publications
-                .filter(pub => {
-                  const lastName = member.name.split(' ').slice(-2, -1)[0] || member.name.split(' ').pop();
-                  const cleanLastName = lastName.replace('í', 'i').replace('é', 'e').replace('ó', 'o').replace('á', 'a').replace('ú', 'u');
-                  return pub.citation.toLowerCase().includes(lastName.toLowerCase()) || 
-                         pub.citation.toLowerCase().includes(cleanLastName.toLowerCase());
-                })
-                .map(pub => `<li style="margin-bottom: 10px;"><strong>${pub.citation.match(/\((\d{4})\)/)?.[0] || ''}</strong> ${pub.title[currentLang]}</li>`)
-                .join('') || `<li style="list-style:none; padding-left:0; margin-left:-20px;">${currentLang === 'en' ? 'No individual publications registered yet.' : (currentLang === 'ca' ? 'No s\'han registrat publicacions individuals encara.' : 'No se registraron publicaciones individuales todavía.')}</li>`}
+          <div class="modal-publications-section" style="${(member.pubIds && member.pubIds.length > 0) ? 'border-top: 1px solid var(--color-border-light); padding-top: 20px; margin-top: 4px;' : 'display:none;'}">
+            <h4 style="margin-top: 0; margin-bottom: 10px; font-family: var(--font-primary); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted-light); opacity: 0.7;">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
+            <ul style="padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 5px;">
+              ${
+                (member.pubIds || []).map(pid => {
+                  const pub = publications.find(p => p.id === pid);
+                  if (!pub) return '';
+                  const year = pub.citation.match(/(\d{4})/)?.[0] || '';
+                  const url = pub.doi ? `https://doi.org/${pub.doi}` : pub.zoteroUrl;
+                  return `<li><a
+                    href="${url}"
+                    target="_blank"
+                    class="member-pub-link"
+                    style="
+                      display: inline-flex;
+                      align-items: baseline;
+                      gap: 6px;
+                      font-size: 13px;
+                      line-height: 1.5;
+                      color: var(--color-text-muted-light);
+                      text-decoration: none;
+                      transition: color 0.18s ease;
+                      cursor: pointer;
+                    "
+                    onmouseover="this.style.color='#a78bfa'"
+                    onmouseout="this.style.color='var(--color-text-muted-light)'"
+                  ><span style="font-weight: 700; flex-shrink: 0; font-family: monospace; color: inherit;">(${year})</span><span style="color: inherit;">${pub.title[currentLang]}</span></a></li>`;
+                }).join('')
+              }
             </ul>
           </div>
         </div>
