@@ -3024,23 +3024,16 @@ function initCustomCursor() {
   updateHoverEvents();
   window.addEventListener('content-updated', updateHoverEvents);
 
-  // Monitor details-modal events to toggle class on body and move cursor into top layer
+  // Monitor details-modal events to toggle class on body
   const modal = document.getElementById('details-modal');
   if (modal) {
     modal.addEventListener('close', () => {
       document.body.classList.remove('modal-open');
-      // Restore cursor elements to body when modal closes
-      if (cursor.parentNode !== document.body) document.body.appendChild(cursor);
-      if (follower.parentNode !== document.body) document.body.appendChild(follower);
     });
     const origShowModal = modal.showModal;
     modal.showModal = function() {
       document.body.classList.add('modal-open');
       origShowModal.apply(this, arguments);
-      // Move cursor elements inside dialog so they render in the top layer
-      // (dialog is in the browser's top layer — it paints above all body z-index values)
-      modal.appendChild(cursor);
-      modal.appendChild(follower);
     };
   }
 }

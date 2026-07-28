@@ -1936,7 +1936,7 @@ body.dark-mode dialog {
 
 dialog[open] {
   animation: modalOpen 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  cursor: none; /* Keep custom cursor inside dialog */
+  cursor: auto; /* System cursor inside dialog (custom cursor can't penetrate top layer) */
 }
 
 dialog::backdrop {
@@ -1964,7 +1964,7 @@ dialog[open]::backdrop {
 .modal-close {
   background: transparent;
   border: none;
-  cursor: none;
+  cursor: pointer;
   width: 56px;
   height: 56px;
   border-radius: 50%;
