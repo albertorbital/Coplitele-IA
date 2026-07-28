@@ -6127,6 +6127,18 @@ body.dark-mode .section-inner-panel {
   scroll-margin-top: 200px !important;
 }
 
+/* Ensure section titles have breathing room below sticky submenu */
+#view-proyecto .page-section,
+#view-impacto .page-section {
+  padding-top: 80px !important;
+}
+
+/* First section in each view: less padding since view has its own padding-top */
+#view-proyecto #proyecto,
+#view-impacto #actividades {
+  padding-top: 20px !important;
+}
+
 #view-impacto, #view-proyecto {
   padding-top: 120px !important;
   overflow: visible !important;
@@ -6135,7 +6147,7 @@ body.dark-mode .section-inner-panel {
 #view-impacto .page-submenu-wrapper,
 #view-proyecto .page-submenu-wrapper {
   margin-top: 10px !important;
-  margin-bottom: 90px !important;
+  margin-bottom: 40px !important;
   position: sticky !important;
   top: 86px !important;
   z-index: 900 !important;
@@ -6961,7 +6973,7 @@ body.dark-mode .btn-outline-turquoise:hover {
 
 /* ─── 36. PROJECT PHASES ROW & CARDS (COMPACT & COLORIZED FASES) ─── */
 #objetivos.page-section {
-  padding-top: 16px !important;
+  padding-top: 80px !important;
   padding-bottom: 24px !important;
 }
 
