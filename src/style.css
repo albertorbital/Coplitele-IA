@@ -6124,18 +6124,18 @@ body.dark-mode .section-inner-panel {
 #transferencia,
 #publicaciones,
 #recursos {
-  scroll-margin-top: 160px !important;
+  scroll-margin-top: 200px !important;
 }
 
 #view-impacto, #view-proyecto {
-  padding-top: 110px !important;
+  padding-top: 120px !important;
   overflow: visible !important;
 }
 
 #view-impacto .page-submenu-wrapper,
 #view-proyecto .page-submenu-wrapper {
   margin-top: 10px !important;
-  margin-bottom: 60px !important;
+  margin-bottom: 90px !important;
   position: sticky !important;
   top: 86px !important;
   z-index: 900 !important;
