@@ -6116,16 +6116,26 @@ body.dark-mode .section-inner-panel {
   margin-bottom: 28px !important;
 }
 
-/* ─── 6. SUBMENU: PUSH DOWN BELOW HEADER & STICKY ON SCROLL ─── */
+/* ─── 6. SUBMENU & SECTION ANCHOR SCROLL CLEARANCE ─── */
+#proyecto,
+#objetivos,
+#equipo,
+#actividades,
+#transferencia,
+#publicaciones,
+#recursos {
+  scroll-margin-top: 160px !important;
+}
+
 #view-impacto, #view-proyecto {
-  padding-top: 100px !important;
+  padding-top: 110px !important;
   overflow: visible !important;
 }
 
 #view-impacto .page-submenu-wrapper,
 #view-proyecto .page-submenu-wrapper {
   margin-top: 10px !important;
-  margin-bottom: 50px !important;
+  margin-bottom: 60px !important;
   position: sticky !important;
   top: 86px !important;
   z-index: 900 !important;
