@@ -109,16 +109,13 @@ h1, h2, h3, h4, h5, h6 {
 header {
   position: fixed;
   top: 10px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  transform: none;
+  left: 50%;
+  transform: translateX(-50%);
   width: 92%;
   max-width: 1400px;
   height: 80px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 0 36px;
   z-index: 1000;
@@ -1297,7 +1294,7 @@ body.dark-mode .stat-item:hover {
 }
 
 .stat-item:hover .stat-label {
-  color: var(--color-blue) !important;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 body.dark-mode .stat-number {
@@ -2554,33 +2551,25 @@ body.dark-mode .pub-keyword {
 
 /* Image Resiliency and Scaling (Fixes user breaks) */
 .image-showcase {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 540px !important;
-  max-height: 540px !important;
-  margin: 0 auto !important;
-  overflow: hidden !important;
-  border-radius: 0 !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
+  width: 100%;
+  max-width: 500px;
+  max-height: 320px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--color-border-light);
+  background: #1e293b;
 }
 
 body.dark-mode .image-showcase {
-  border: none !important;
+  border-color: var(--color-border-dark);
 }
 
-.image-showcase img,
-.image-showcase video {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  border-radius: 0 !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  display: block !important;
+.image-showcase img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .resource-image {
@@ -3029,16 +3018,20 @@ body.dark-mode .page-submenu-wrapper {
   padding: 0;
 }
 
-/* Submenu Link Text & Contrast Rules */
 .submenu-link {
   font-family: var(--font-primary);
   font-size: 14.5px;
   font-weight: 600;
-  color: #334155 !important;
+  color: #555e7a;
   text-decoration: none;
   padding: 8px 20px;
   border-radius: 99px;
   transition: all 0.3s ease;
+  background: rgba(100, 110, 140, 0.07);
+}
+
+body.dark-mode .submenu-link {
+  color: rgba(255,255,255,0.55);
   background: rgba(255,255,255,0.04);
 }
 
@@ -3228,13 +3221,11 @@ body.dark-mode .progress-bar-track {
   padding-top: 40px !important;
 }
 
-/* Expanded full width project description layout */
+/* Remove two-column layout from project description */
 .project-desc-layout {
   display: block !important;
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  box-sizing: border-box !important;
+  max-width: 850px;
+  margin: 0 auto;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -4789,11 +4780,11 @@ html {
    USER REQUESTED OVERRIDES
    =================================================== */
 
-/* Straight body-to-footer transition */
+/* Footer semicircular mask & bottom centering */
 footer {
-  border-radius: 0 !important;
-  margin-top: 0 !important;
-  padding-top: 60px !important;
+  border-radius: 50% 50% 0 0 / 40px 40px 0 0 !important;
+  margin-top: -20px !important;
+  padding-top: 80px !important;
   position: relative;
   z-index: 10;
 }
@@ -5222,81 +5213,29 @@ a:hover, button:hover, [role="button"]:hover {
 /* ASYMMETRY AND NEW HOVER STYLES FOR ACTIVITIES/TRANS */
 /* ------------------------------------------------ */
 
-/* ─── Editorial Asymmetric 4-Card Layout for Actividades del Proyecto ─── */
-#activities-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  grid-auto-rows: 280px !important;
-  gap: 24px !important;
-  width: 100% !important;
-  margin-bottom: 40px !important;
-}
+/* Asymmetric Grids */
 
-#activities-grid .activity-card {
-  position: relative !important;
-  overflow: hidden !important;
-  border-radius: 16px !important;
-  height: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-#activities-grid .activity-card .activity-image-wrapper {
-  height: 100% !important;
-  aspect-ratio: unset !important;
-}
-
-/* 1st element: Large (left featured card) */
-#activities-grid .activity-card:nth-child(1) {
-  grid-column: span 2 !important;
-  grid-row: span 2 !important;
-}
-
-/* 2nd element: Wide top right card */
-#activities-grid .activity-card:nth-child(2) {
-  grid-column: span 2 !important;
-  grid-row: span 1 !important;
-}
-
-/* 3rd element: Standard bottom right left card */
-#activities-grid .activity-card:nth-child(3) {
-  grid-column: span 1 !important;
-  grid-row: span 1 !important;
-}
-
-/* 4th element: Standard bottom right right card */
-#activities-grid .activity-card:nth-child(4) {
-  grid-column: span 1 !important;
-  grid-row: span 1 !important;
-}
-
-@media (max-width: 900px) {
-  #activities-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    grid-auto-rows: 220px !important;
-  }
-  #activities-grid .activity-card:nth-child(1) { grid-column: span 2 !important; grid-row: span 1 !important; }
-  #activities-grid .activity-card:nth-child(2) { grid-column: span 2 !important; grid-row: span 1 !important; }
-  #activities-grid .activity-card:nth-child(3) { grid-column: span 1 !important; grid-row: span 1 !important; }
-  #activities-grid .activity-card:nth-child(4) { grid-column: span 1 !important; grid-row: span 1 !important; }
-}
-
-@media (max-width: 600px) {
-  #activities-grid {
-    grid-template-columns: 1fr !important;
-    grid-auto-rows: 240px !important;
-  }
-  #activities-grid .activity-card {
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
-  }
-}
-
-.transferencia-grid {
+.activities-grid, .transferencia-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: 32px;
   width: 100%;
+}
+@media (min-width: 768px) {
+  .activities-grid, .transferencia-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #activities-grid .activity-card:first-child {
+    grid-column: span 2;
+  }
+  #transferencia-grid .activity-card:nth-child(3n) {
+    grid-column: span 2;
+  }
+}
+@media (min-width: 1024px) {
+  .activities-grid, .transferencia-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 
@@ -5485,31 +5424,28 @@ a:hover, button:hover, [role="button"]:hover {
   cursor: none !important;
 }
 
-/* 3. Redesign Últimas Noticias layout (masonry vertical column-count focus) */
-/* Override old news-cards-grid definitions to mimic team masonry */
+/* 3. Redesign Últimas Noticias layout (masonry vertical focus) */
+/* Override old news-cards-grid definitions */
 .news-cards-grid {
-  display: block !important;
-  column-count: 3 !important;
-  column-gap: 24px !important;
-  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  grid-auto-rows: 240px !important;
+  gap: 20px !important;
 }
-.news-card {
-  break-inside: avoid !important;
-  margin-bottom: 24px !important;
-  display: block !important;
-  width: 100% !important;
-}
-
-@media (max-width: 900px) {
-  .news-cards-grid {
-    column-count: 2 !important;
-  }
-}
+/* No items span more than 1 col to keep them small horizontally, 
+   but some span 2 rows vertically to break symmetry */
+.news-card.idx-0 { grid-column: span 1 !important; grid-row: span 2 !important; }
+.news-card.idx-1 { grid-column: span 1 !important; grid-row: span 1 !important; }
+.news-card.idx-2 { grid-column: span 1 !important; grid-row: span 2 !important; }
+.news-card.idx-3 { grid-column: span 1 !important; grid-row: span 1 !important; }
+.news-card.idx-4 { grid-column: span 1 !important; grid-row: span 1 !important; }
 
 @media (max-width: 600px) {
   .news-cards-grid {
-    column-count: 1 !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 220px !important;
   }
+  .news-card { grid-row: span 1 !important; }
 }
 
 
@@ -6091,19 +6027,18 @@ body.dark-mode .section-inner-panel {
   margin-bottom: 28px !important;
 }
 
-/* ─── 6. SUBMENU: PUSH DOWN BELOW HEADER & STICKY ON SCROLL ─── */
-#view-impacto, #view-proyecto {
-  padding-top: 140px !important;
-  overflow: visible !important;
+/* ─── 6. SUBMENU: MORE TOP MARGIN AFTER NOTICIAS ─── */
+#view-impacto .page-submenu-wrapper {
+  margin-top: 50px !important;
+  margin-bottom: 0 !important;
 }
 
-#view-impacto .page-submenu-wrapper,
+/* ─── 7. PROYECTO SUBMENU — fix clipping at top ─── */
 #view-proyecto .page-submenu-wrapper {
-  margin-top: 30px !important;
-  margin-bottom: 30px !important;
-  position: sticky !important;
-  top: 86px !important;
-  z-index: 900 !important;
+  overflow: visible !important;
+}
+#view-proyecto {
+  overflow: visible !important;
 }
 
 /* ─── 8. CUSTOM CURSOR REDESIGN ─── */
@@ -6244,7 +6179,7 @@ body.dark-mode .section-inner-panel {
   top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
   opacity: 0 !important;
   visibility: hidden !important;
-  z-index: 2 !important;
+  z-index: 5 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -6564,11 +6499,10 @@ body.dark-mode .section-inner-panel {
 }
 
 /* ─── 20. SUBMENU ANCHOR SCROLL MARGIN (more breathing room) ─── */
-#actividades,
 #transferencia,
-#publicaciones,
+#produccion,
 #recursos {
-  scroll-margin-top: 185px !important;
+  scroll-margin-top: 120px !important;
 }
 
 /* ─── 21. HOVER ISOTYPE — fix transparent bg, no white fill ─── */
@@ -6609,42 +6543,17 @@ body.dark-mode .section-inner-panel {
   background: transparent !important;
 }
 
-[id="actividades"],
 [id="transferencia"],
-[id="publicaciones"],
-[id="recursos"] {
-  scroll-margin-top: 185px !important;
+[id="produccion-cientifica"],
+[id="recursos-artefactos"] {
+  scroll-margin-top: 130px !important;
 }
 
 /* ─── 26. LAYOUT CENTERING AND GRID ALIGNMENT OVERRIDES ─── */
-html, body, #app, main, .spa-view {
-  width: 100% !important;
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.section-container, 
-.footer-container, 
-main, 
-.hero-body-container, 
-.decorative-progress-bar-container, 
-.project-phases-row {
+.section-container, .footer-container, main {
   margin-left: auto !important;
   margin-right: auto !important;
   float: none !important;
-  box-sizing: border-box !important;
-}
-
-.decorative-progress-bar-container {
-  width: 100% !important;
-  max-width: 1200px !important;
-}
-
-.project-phases-row {
-  width: 100% !important;
-  max-width: 1200px !important;
 }
 
 /* Team Grid should NOT be justified center because it uses column-count masonry layout */
@@ -6702,14 +6611,6 @@ body.dark-mode .act-card-transferencia:hover {
   background: var(--color-bg-card-dark) !important;
   border-color: transparent !important;
 }
-.trans-card-title-dynamic,
-.act-card-transferencia:hover .trans-card-title-dynamic {
-  font-size: 18px !important;
-  line-height: 1.35 !important;
-  transform: none !important;
-  color: #0f172a !important;
-  transition: color 0.3s ease !important;
-}
 .act-card-transferencia:hover .trans-card-title-dynamic {
   color: #0d9488 !important;
 }
@@ -6755,9 +6656,8 @@ html {
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
+  max-width: 100vw !important;
   box-sizing: border-box !important;
-  overflow-x: clip !important;
-  overflow-y: visible !important;
 }
 
 body {
@@ -6765,8 +6665,7 @@ body {
   padding: 0 !important;
   width: 100% !important;
   max-width: 100vw !important;
-  overflow-x: clip !important;
-  overflow-y: visible !important;
+  overflow-x: hidden !important;
   box-sizing: border-box !important;
 }
 
@@ -6776,18 +6675,11 @@ body {
 
 main {
   width: 100% !important;
-  margin: 0 auto !important;
 }
 
 .spa-view {
-  display: none;
-  opacity: 0;
   width: 100% !important;
-}
-
-.spa-view.active {
-  display: block !important;
-  opacity: 1 !important;
+  overflow: visible !important;
 }
 
 
@@ -6935,226 +6827,6 @@ body.dark-mode .btn-outline-turquoise:hover {
 .news-card-redesign:hover .news-image-wrapper img,
 .news-card-redesign:hover .news-image-wrapper video {
   transform: scale(1.04) !important;
-}
-/* ─── 36. PROJECT PHASES ROW & CARDS (5 FASES EN 1 FILA) ─── */
-.project-phases-row {
-  display: flex !important;
-  gap: 16px !important;
-  margin-bottom: 48px !important;
-  width: 100% !important;
-}
-
-@media (max-width: 992px) {
-  .project-phases-row {
-    flex-wrap: wrap !important;
-  }
-  .phase-card {
-    flex: 1 1 45% !important;
-  }
-}
-
-@media (max-width: 600px) {
-  .phase-card {
-    flex: 1 1 100% !important;
-  }
-}
-
-.phase-card {
-  flex: 1 1 0 !important;
-  min-width: 0 !important;
-  background: var(--color-bg-card-light) !important;
-  border: none !important;
-  border-radius: 20px !important;
-  padding: 24px 16px !important;
-  position: relative !important;
-  overflow: hidden !important;
-  min-height: 180px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-}
-
-body.dark-mode .phase-card {
-  background: var(--color-bg-card-dark) !important;
-  border: none !important;
-}
-
-.phase-card:hover {
-  transform: translateY(-5px) !important;
-  border: none !important;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12) !important;
-}
-
-.phase-badge {
-  font-size: 13px !important;
-  font-weight: 800 !important;
-  letter-spacing: 1.5px !important;
-  text-transform: uppercase !important;
-  color: var(--color-blue) !important;
-  background: rgba(29, 91, 254, 0.1) !important;
-  padding: 5px 12px !important;
-  border-radius: 20px !important;
-  margin-bottom: 12px !important;
-  display: inline-block !important;
-}
-
-.phase-title {
-  font-size: 18px !important;
-  font-weight: 800 !important;
-  color: var(--color-text-light) !important;
-  margin: 0 0 6px 0 !important;
-  line-height: 1.3 !important;
-}
-
-body.dark-mode .phase-title {
-  color: var(--color-text-dark) !important;
-}
-
-.phase-subtitle {
-  font-size: 14.5px !important;
-  color: var(--color-text-muted-light) !important;
-  margin: 0 !important;
-  line-height: 1.4 !important;
-}
-
-.phase-hover-text {
-  position: absolute !important;
-  inset: 0 !important;
-  background: var(--color-blue) !important;
-  color: #ffffff !important;
-  padding: 20px 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  font-size: 14.5px !important;
-  line-height: 1.5 !important;
-  font-weight: 600 !important;
-  opacity: 0 !important;
-  transform: translateY(100%) !important;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  z-index: 2 !important;
-}
-
-.phase-card:hover .phase-hover-text {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* 5 Phase cards hover gradient progression (Azul -> Azul-Turquesa -> Turquesa -> Turquesa-Verde -> Verde) */
-.phase-card.phase-1:hover .phase-hover-text,
-.phase-card:nth-child(1):hover .phase-hover-text {
-  background: #1D5BFE !important;
-}
-.phase-card.phase-1:hover {
-  border-color: #1D5BFE !important;
-  box-shadow: 0 10px 30px rgba(29, 91, 254, 0.2) !important;
-}
-
-.phase-card.phase-2:hover .phase-hover-text,
-.phase-card:nth-child(2):hover .phase-hover-text {
-  background: #148be8 !important;
-}
-.phase-card.phase-2:hover {
-  border-color: #148be8 !important;
-  box-shadow: 0 10px 30px rgba(20, 139, 232, 0.2) !important;
-}
-
-.phase-card.phase-3:hover .phase-hover-text,
-.phase-card:nth-child(3):hover .phase-hover-text {
-  background: #14b8a6 !important;
-}
-.phase-card.phase-3:hover {
-  border-color: #14b8a6 !important;
-  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.2) !important;
-}
-
-.phase-card.phase-4:hover .phase-hover-text,
-.phase-card:nth-child(4):hover .phase-hover-text {
-  background: #10b991 !important;
-}
-.phase-card.phase-4:hover {
-  border-color: #10b991 !important;
-  box-shadow: 0 10px 30px rgba(16, 185, 145, 0.2) !important;
-}
-
-.phase-card.phase-5:hover .phase-hover-text,
-.phase-card:nth-child(5):hover .phase-hover-text {
-  background: #10b981 !important;
-}
-.phase-card.phase-5:hover {
-  border-color: #10b981 !important;
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2) !important;
-}
-
-/* Explicit News Card hover overlay color by section type */
-.news-card[data-type="actividades"]:hover .act-hover-overlay,
-.news-card[data-type="actividad"]:hover .act-hover-overlay,
-.news-card[data-cursor-color="blue"]:hover .act-hover-overlay {
-  opacity: 1 !important;
-  visibility: visible !important;
-  background: rgba(29, 91, 254, 0.96) !important;
-}
-
-.news-card[data-type="transferencia"]:hover .act-hover-overlay,
-.news-card[data-cursor-color="turquoise"]:hover .act-hover-overlay {
-  opacity: 1 !important;
-  visibility: visible !important;
-  background: rgba(13, 148, 136, 0.96) !important;
-}
-
-/* ─── 37. RESPONSIVE GRID OVERFLOW PREVENTION & STRICT CENTERING ─── */
-@media (max-width: 1100px) {
-  .news-cards-grid, #activities-grid, .activities-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    grid-auto-rows: auto !important;
-  }
-  .news-cards-grid > *, #activities-grid > *, .activities-grid > * {
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
-    height: auto !important;
-    min-height: 240px !important;
-  }
-  .team-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 20px !important;
-    column-count: auto !important;
-  }
-}
-
-@media (max-width: 650px) {
-  .news-cards-grid, #activities-grid, .activities-grid, .team-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-.section-container, 
-.hero-body-container, 
-.footer-container,
-.hero-intro-container,
-.page-submenu-container {
-  position: relative !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 92% !important;
-  max-width: 1200px !important;
-  box-sizing: border-box !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.project-desc-layout {
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
 }
 
 

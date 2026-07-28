@@ -421,7 +421,7 @@ const newsFeedItems = [
   {
     id: "news-posidonia",
     type: "transferencia",
-    tag: { es: "Transferencia", ca: "Transferència", en: "Transfer" },
+    tag: { es: "Taller", ca: "Taller", en: "Workshop" },
     text: {
       es: "Codiseño de juegos basados en IA para el bienestar digital. Lecciones aprendidas de los proyectos DALI y Posidonia 360º.",
       ca: "Codisseny de jocs basats en IA per al benestar digital. Lliçons apreses dels projectes DALI i Posidonia 360º.",
@@ -430,157 +430,41 @@ const newsFeedItems = [
     activityId: "act-posidonia"
   },
   {
-    id: "news-iag",
-    type: "actividad",
-    tag: { es: "Formación", ca: "Formació", en: "Training" },
+    id: "news-1",
+    type: "revista",
+    tag: { es: "Publicación", ca: "Publicació", en: "Publication" },
     text: {
-      es: "Uso de la IAG para multi-análisis en proyectos de Investigación",
-      ca: "Ús de la IAG per a multi-anàlisi en projectes d'Investigació",
-      en: "Use of GAI for multi-analysis in Research projects"
+      es: "Publicado nuevo artículo sobre codiseño de plataformas de IA en la Revista de Educación y Tecnología.",
+      ca: "Publicat nou article sobre codisseny de plataformes d'IA a la Revista de Educación y Tecnología.",
+      en: "New article published on AI platform co-design in the Journal of Education and Technology."
     },
-    activityId: "act-iag-multianalisis"
+    pubId: "pub-1"
   },
   {
-    id: "news-taller-iag",
-    type: "actividad",
+    id: "news-2",
+    type: "news",
     tag: { es: "Taller", ca: "Taller", en: "Workshop" },
     text: {
-      es: "Taller Práctico: Aplicación de la IAG en Procesos de Aprendizaje",
-      ca: "Taller Pràctic: Aplicació de la IAG en Processos d'Aprenentatge",
-      en: "Practical Workshop: Applying GAI in Learning Processes"
+      es: "Comienzo de los talleres de co-creación de interfaces inteligentes en institutos colaboradores de Mallorca.",
+      ca: "Començament dels tallers de co-creació d'interfícies intel·ligents a instituts col·laboradors de Mallorca.",
+      en: "Co-creation workshops for smart interfaces begin in collaborating high schools in Mallorca."
     },
-    activityId: "act-taller-iag"
+    activityId: "act-1"
+  },
+  {
+    id: "news-3",
+    type: "transferencia",
+    tag: { es: "Transferencia", ca: "Transferència", en: "Transfer" },
+    text: {
+      es: "Sesión de transferencia tecnológica con inspectores y directores del IRIE sobre soberanía digital.",
+      ca: "Sessió de transferència tecnològica amb inspectors i directors de l'IRIE sobre sobirania digital.",
+      en: "Technology transfer session with inspectors and directors of IRIE on digital sovereignty."
+    },
+    activityId: "act-6"
   }
 ];
 
 const transferActivities = [
-  {
-    id: "act-iag-multianalisis",
-    section: "actividades",
-    filterType: "formacion",
-    type: "formacion",
-    tag: { es: "Formación", ca: "Formació", en: "Training" },
-    title: {
-      es: "Uso de la IAG para multi-análisis en proyectos de Investigación",
-      ca: "Ús de la IAG per a multi-anàlisi en projectes d'Investigació",
-      en: "Use of GAI for multi-analysis in Research projects"
-    },
-    desc: {
-      es: "Sesión de formación sobre metodologías y herramientas de Inteligencia Artificial Generativa aplicada al multi-análisis de datos en investigación educativa.",
-      ca: "Sessió de formació sobre metodologies i eines d'Intel·ligència Artificial Generativa aplicada al multi-anàlisi de dades en investigació educativa.",
-      en: "Training session on methodologies and Generative Artificial Intelligence tools applied to multi-analysis of research data."
-    },
-    pills: ["Formación", "IAG", "Investigación"],
-    date: "Miércoles 18 de marzo de 11:00 a 13:00",
-    location: "Aula Digital, Edifici Guillem Cifre de Colonya, UIB, Palma, Spain",
-    image: "./images/3.png",
-    loremIpsum: {
-      es: `<p><strong>¿Cómo utilizar la Inteligencia Artificial Generativa para optimizar el análisis cuantitativo y cualitativo en la investigación?</strong></p>
-<p>Este post presenta una guía práctica basada en las sesiones de formación realizadas. En ella se detalla cómo estructurar prompts y encadenar análisis multidimensionales utilizando modelos de lenguaje avanzados para el pre-procesamiento de datos, codificación cualitativa preliminar y triangulación metodológica.</p>
-<img src="./images/5.png" class="post-body-img lightbox-img" alt="Multi-análisis con IAG" title="Haz clic para ampliar">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula, erat ac facilisis consectetur, augue mauris vehicula ligula, id gravida lorem nunc id sapien. Nullam fringilla erat non tortor condimentum, vel facilisis libero ornare. Aliquam erat volutpat. Integer suscipit, lorem id lacinia condimentum, eros ante tempus mi, in commodo purus augue sed nisi.</p>
-<img src="./images/6.png" class="post-body-img lightbox-img" alt="Flujo de multi-análisis" title="Haz clic para ampliar">
-<p>Sed euismod, metus a feugiat vehicula, est quam placerat ligula, non ultricies eros quam at felis. Proin facilisis lorem ac sapien ullamcorper, quis malesuada lorem fermentum. Curabitur gravida, sapien a luctus aliquam, erat enim ultrices nisi, a sodales lorem augue vel sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-<div style="margin-top: 32px;">
-  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizadores</h4>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-    <div><strong>Barbara de Benito (UIB)</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
-    <div><strong>Antonia Darder (UIB)</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
-    <div><strong>Gustavo Angulo (U. Téluq)</strong><br><a href="mailto:GustavoAdolfo.Angulomendoza@teluq.ca" style="color: var(--color-blue); text-decoration: none;">GustavoAdolfo.Angulomendoza@teluq.ca</a></div>
-  </div>
-</div>`,
-      ca: `<p><strong>Com utilitzar la Intel·ligència Artificial Generativa per optimitzar l'anàlisi quantitativa i qualitativa en la investigació?</strong></p>
-<p>Aquest post presenta una guia pràctica basada en les sessions de formació realitzades. S'hi detalla com estructurar prompts i encadenar anàlisis multidimensionals utilitzant models de llenguatge avançats per al pre-processament de dades, codificació qualitativa preliminar i triangulació metodològica.</p>
-<img src="./images/5.png" class="post-body-img lightbox-img" alt="Multi-anàlisi amb IAG" title="Fes clic per ampliar">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula, erat ac facilisis consectetur, augue mauris vehicula ligula, id gravida lorem nunc id sapien. Nullam fringilla erat non tortor condimentum, vel facilisis libero ornare. Aliquam erat volutpat. Integer suscipit, lorem id lacinia condimentum, eros ante tempus mi, in commodo purus augue sed nisi.</p>
-<img src="./images/6.png" class="post-body-img lightbox-img" alt="Flux de multi-anàlisi" title="Fes clic per ampliar">
-<p>Sed euismod, metus a feugiat vehicula, est quam placerat ligula, non ultricies eros quam at felis. Proin facilisis lorem ac sapien ullamcorper, quis malesuada lorem fermentum. Curabitur gravida, sapien a luctus aliquam, erat enim ultrices nisi, a sodales lorem augue vel sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-<div style="margin-top: 32px;">
-  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organitzadors</h4>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-    <div><strong>Barbara de Benito (UIB)</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
-    <div><strong>Antonia Darder (UIB)</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
-    <div><strong>Gustavo Angulo (U. Téluq)</strong><br><a href="mailto:GustavoAdolfo.Angulomendoza@teluq.ca" style="color: var(--color-blue); text-decoration: none;">GustavoAdolfo.Angulomendoza@teluq.ca</a></div>
-  </div>
-</div>`,
-      en: `<p><strong>How to use Generative Artificial Intelligence to optimize quantitative and qualitative analysis in research?</strong></p>
-<p>This post presents a practical guide based on the training sessions conducted. It details how to structure prompts and chain multidimensional analyses using advanced language models for data pre-processing, preliminary qualitative coding, and methodological triangulation.</p>
-<img src="./images/5.png" class="post-body-img lightbox-img" alt="Multi-analysis with GAI" title="Click to enlarge">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula, erat ac facilisis consectetur, augue mauris vehicula ligula, id gravida lorem nunc id sapien. Nullam fringilla erat non tortor condimentum, vel facilisis libero ornare. Aliquam erat volutpat. Integer suscipit, lorem id lacinia condimentum, eros ante tempus mi, in commodo purus augue sed nisi.</p>
-<img src="./images/6.png" class="post-body-img lightbox-img" alt="Multi-analysis flow" title="Click to enlarge">
-<p>Sed euismod, metus a feugiat vehicula, est quam placerat ligula, non ultricies eros quam at felis. Proin facilisis lorem ac sapien ullamcorper, quis malesuada lorem fermentum. Curabitur gravida, sapien a luctus aliquam, erat enim ultrices nisi, a sodales lorem augue vel sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-<div style="margin-top: 32px;">
-  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizers</h4>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-    <div><strong>Barbara de Benito (UIB)</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
-    <div><strong>Antonia Darder (UIB)</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
-    <div><strong>Gustavo Angulo (U. Téluq)</strong><br><a href="mailto:GustavoAdolfo.Angulomendoza@teluq.ca" style="color: var(--color-blue); text-decoration: none;">GustavoAdolfo.Angulomendoza@teluq.ca</a></div>
-  </div>
-</div>`
-    }
-  },
-  {
-    id: "act-taller-iag",
-    section: "actividades",
-    filterType: "taller",
-    type: "taller",
-    tag: { es: "Taller", ca: "Taller", en: "Workshop" },
-    title: {
-      es: "Taller Práctico: Aplicación de la IAG en Procesos de Aprendizaje",
-      ca: "Taller Pràctic: Aplicació de la IAG en Processos d'Aprenentatge",
-      en: "Practical Workshop: Applying GAI in Learning Processes"
-    },
-    desc: {
-      es: "Taller práctico sobre la co-creación de asistentes y herramientas de inteligencia artificial generativa integradas en metodologías activas.",
-      ca: "Taller pràctic sobre la co-creació d'assistents i eines d'intel·ligència artificial generativa integrades en metodologies actives.",
-      en: "Practical workshop on the co-creation of generative artificial intelligence assistants integrated into active learning."
-    },
-    pills: ["Taller", "IAG", "Codiseño"],
-    date: "Viernes 13 de marzo de 09:30 a 11:30",
-    location: "Aula Digital, Edifici Guillem Cifre de Colonya, UIB, Palma, Spain",
-    image: "./images/5.png",
-    loremIpsum: {
-      es: `<p><strong>¿Cómo integrar la IAG de forma práctica en las dinámicas y metodologías de aprendizaje activo?</strong></p>
-<p>Este taller práctico se centra en la aplicación real de herramientas basadas en Inteligencia Artificial Generativa. Los participantes experimentarán con el diseño de prompts instruccionales y la personalización de asistentes virtuales orientados a dar soporte a las tareas del alumnado.</p>
-<p>Se trabajará en equipos multidisciplinares para diseñar retos didácticos donde la IA actúe como un andamiaje cognitivo y un facilitador del aprendizaje autónomo.</p>
-<img src="./images/6.png" class="post-body-img lightbox-img" alt="Aplicación de IAG en el aula" title="Haz clic para ampliar">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula, erat ac facilisis consectetur, augue mauris vehicula ligula, id gravida lorem nunc id sapien. Nullam fringilla erat non tortor condimentum, vel facilisis libero ornare. Aliquam erat volutpat.</p>
-<div style="margin-top: 32px;">
-  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizadores</h4>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-    <div><strong>Barbara de Benito (UIB)</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
-    <div><strong>Antonia Darder (UIB)</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
-    <div><strong>Gustavo Angulo (U. Téluq)</strong><br><a href="mailto:GustavoAdolfo.Angulomendoza@teluq.ca" style="color: var(--color-blue); text-decoration: none;">GustavoAdolfo.Angulomendoza@teluq.ca</a></div>
-  </div>
-</div>`,
-      ca: `<p><strong>Com integrar la IAG de forma pràctica en les dinàmiques i metodologies d'aprenentatge actiu?</strong></p>
-<p>Aquest taller pràctic se centra en l'aplicació real d'eines basades en Intel·ligència Artificial Generativa. Els participants experimentaran amb el disseny de prompts instruccionals i la personalització d'assistents virtuals orientats a donar suport a les tasques de l'alumnat.</p>
-<p>Es treballarà en equips multidisciplinaris per dissenyar reptes didàctics on la IA actuï com a bastida cognitiva i facilitadora de l'aprenentatge autònom.</p>
-<img src="./images/6.png" class="post-body-img lightbox-img" alt="Aplicació d'IAG a l'aula" title="Fes clic per ampliar">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula, erat ac facilisis consectetur, augue mauris vehicula ligula, id gravida lorem nunc id sapien. Nullam fringilla erat non tortor condimentum, vel facilisis libero ornare. Aliquam erat volutpat.</p>
-<div style="margin-top: 32px;">
-  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organitzadors</h4>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-    <div><strong>Barbara de Benito (UIB)</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
-    <div><strong>Antonia Darder (UIB)</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
-    <div><strong>Gustavo Angulo (U. Téluq)</strong><br><a href="mailto:GustavoAdolfo.Angulomendoza@teluq.ca" style="color: var(--color-blue); text-decoration: none;">GustavoAdolfo.Angulomendoza@teluq.ca</a></div>
-  </div>
-</div>`,
-      en: `<p><strong>How to practically integrate GAI in active learning dynamics and methodologies?</strong></p>
-<p>This practical workshop focuses on the real-world application of Generative Artificial Intelligence tools. Participants will experiment with instructional prompt design and personalization of virtual assistants aimed at supporting students' tasks.</p>
-<p>Teams will work together to design learning challenges where AI acts as a cognitive scaffold and a facilitator of self-regulated learning.</p>
-<img src="./images/6.png" class="post-body-img lightbox-img" alt="GAI application in classroom" title="Click to enlarge">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula, erat ac facilisis consectetur, augue mauris vehicula ligula, id gravida lorem nunc id sapien. Nullam fringilla erat non tortor condimentum, vel facilisis libero ornare. Aliquam erat volutpat.</p>
-<div style="margin-top: 32px;">
-  <h4 style="color: var(--color-blue); margin-bottom: 12px; font-size: 18px;">Organizers</h4>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-    <div><strong>Barbara de Benito (UIB)</strong><br><a href="mailto:barbara.debenito@uib.es" style="color: var(--color-blue); text-decoration: none;">barbara.debenito@uib.es</a></div>
-    <div><strong>Antonia Darder (UIB)</strong><br><a href="mailto:antonia.darder@uib.es" style="color: var(--color-blue); text-decoration: none;">antonia.darder@uib.es</a></div>
-    <div><strong>Gustavo Angulo (U. Téluq)</strong><br><a href="mailto:GustavoAdolfo.Angulomendoza@teluq.ca" style="color: var(--color-blue); text-decoration: none;">GustavoAdolfo.Angulomendoza@teluq.ca</a></div>
-  </div>
-</div>`
-    }
-  },
   {
     id: "act-new",
     section: "actividades",
@@ -600,7 +484,8 @@ const transferActivities = [
     pills: ["Seminario", "AI", "Agency"],
     date: "Miércoles 11 de marzo de 10:30 a 12:30",
     location: "Aula C-11 edificio Guillem Cifre de Colonya, UIB, Palma, Spain",
-    image: "./images/1.png",
+    image: posterWorkshop1Img,
+    videoSrc: "./videos/1.mp4",
     loremIpsum: {
       es: `<p><strong>¿Cómo pueden los diseños de aprendizaje basados en IA en la educación superior promover la agencia de los estudiantes?</strong></p>
 <p>Para responder a la pregunta principal del estudio, se han definido varias subpreguntas orientadas a comprender qué diseños de aprendizaje se están implementando e investigando para potenciar la agencia del alumnado en la educación superior vinculada a la Inteligencia Artificial.</p>
@@ -791,7 +676,7 @@ const translations = {
     menu_proyecto: "Proyecto",
     menu_impacto: "Impacto y Difusión",
     hero_tag: "Proyecto de Investigación activo",
-    hero_main_title: "Rediseñamos el futuro de la educación con <span class=\"blue-highlight\">Codiseño</span> e <span class=\"green-highlight\">IA</span>",
+    hero_main_title: "Rediseñamos el futuro de la educación con <span class=\"blue-highlight\">Codiseño</span> e <span class=\"green-highlight\">Inteligencia Artificial</span>",
     hero_desc: "COPLITELE-IA es un proyecto de investigación que transforma la educación superior integrando la Inteligencia Artificial Generativa (IAG) desde un enfoque pedagógico innovador. A través del codiseño educativo entre docentes y estudiantes, impulsamos la personalización del aprendizaje mediante itinerarios flexibles, promoviendo entornos virtuales conectados que garantizan la equidad, la inclusión y la calidad educativa.",
     btn_conocer: "Conoce el Proyecto",
     btn_publicaciones: "Publicaciones",
@@ -800,8 +685,7 @@ const translations = {
     stats_years: "Años de investigación",
     stats_investigadores: "Investigadores",
     stats_publicaciones: "Publicaciones",
-    stats_actividades: "Actividades",
-    stats_experiencias: "Actividades",
+    stats_experiencias: "Experiencias",
     progress_label: "Progreso del Proyecto",
     submenu_desc: "Descripción",
     submenu_obj: "Objetivos",
@@ -811,14 +695,14 @@ const translations = {
     submenu_publicaciones: "Producción científica",
     submenu_recursos: "Recursos",
     obj_title: "Objetivos del Proyecto",
-    obj_1_title: "Agencia Profesional y Académica",
-    obj_1_desc: "Disminuir la incertidumbre pedagógica al potenciar la capacidad de decisión de docentes y estudiantes en entornos digitales.",
-    obj_2_title: "Personalización y codiseño",
-    obj_2_desc: "Diseñar, implementar y validar estrategias de codiseño educativo y de personalización mediante itinerarios flexibles de aprendizaje, que aplicando la IAG promuevan la agencia del estudiante.",
-    obj_3_title: "Innovación e inclusión",
-    obj_3_desc: "Explorar las posibilidades de la IAG como herramienta de apoyo al codiseño educativo en educación superior para favorecer una educación equitativa, inclusiva y de calidad.",
-    obj_4_title: "Sostenibilidad de Recursos Abiertos",
-    obj_4_desc: "Promover la creación ética y transparente mediante Inteligencia Artificial Generativa validada para la comunidad académica.",
+    obj_1_title: "Objetivo Principal",
+    obj_1_desc: "Investigar el impacto de la IA en la telecolaboración interlingüística, analizando cómo el codiseño mejora los procesos de aprendizaje de lenguas.",
+    obj_2_title: "Innovación",
+    obj_2_desc: "Desarrollar herramientas de personalización adaptativa basadas en IA para entornos de aprendizaje de lenguas mediado por tecnología.",
+    obj_3_title: "Alcance Internacional",
+    obj_3_desc: "Colaboración con instituciones europeas y latinoamericanas para estudiar la comunicación mediada por ordenador en contextos plurilingüísticos.",
+    obj_4_title: "Impacto Social",
+    obj_4_desc: "Contribuir a la inclusión digital y educativa a través de soluciones tecnológicas accesibles y personalizadas.",
     project_pretitle: "Conoce más",
     project_title: "El Proyecto",
     tab_desc: "Descripción",
@@ -1305,23 +1189,22 @@ function renderNewsFeed() {
   // Images for news cards (cycle through imported assets)
   const newsImages = [posterWorkshop1Img, posidonia1Img, investigadoresImg, congresosImg, transferenciaImg, recursosImg];
   
-  // Display 4 items on home, all on impact page.
-  const homeContent = newsFeedItems.slice(0, 4).map((item, i) => generateNewsHTML(item, i, newsImages)).join('');
+  // Display up to 5 items on home, all on impact page.
+  const homeContent = newsFeedItems.slice(0, 5).map((item, i) => generateNewsHTML(item, i, newsImages)).join('');
   const impactContent = newsFeedItems.map((item, i) => generateNewsHTML(item, i, newsImages)).join('');
   
   if (newsListHome) newsListHome.innerHTML = homeContent;
   if (newsListImpact) newsListImpact.innerHTML = impactContent;
   
+  // Helper to generate the HTML — matches Actividades/Transferencia/Recursos card style
   function generateNewsHTML(item, i, images) {
     const text = item.text[currentLang];
     
-    // Find linked activity/publication to synchronize images, video, tag and date
+    // Find linked activity to synchronize images, video, tag and date
     const linkedAct = transferActivities.find(act => act.id === item.activityId);
-    const linkedPub = publications.find(pub => pub.id === item.pubId);
-    
-    const section = linkedAct ? linkedAct.section : (linkedPub ? 'publicaciones' : 'actividades');
-    const tagText = linkedAct ? linkedAct.tag[currentLang] : (linkedPub ? linkedPub.extraLabel[currentLang] : (item.tag ? item.tag[currentLang] : 'Seminario'));
-    const dateText = linkedAct ? linkedAct.date : (linkedPub ? linkedPub.event : '');
+    const section = linkedAct ? linkedAct.section : 'actividades';
+    const tagText = linkedAct ? linkedAct.tag[currentLang] : (item.tag ? item.tag[currentLang] : 'Seminario');
+    const dateText = linkedAct ? linkedAct.date : '';
     const cleanDate = dateText ? dateText.split('·')[0].split('de 10:30')[0].trim() : '';
 
     // Synchronize media
@@ -1333,7 +1216,7 @@ function renderNewsFeed() {
         </video>
       `;
     } else {
-      const fallbackSrc = linkedAct ? linkedAct.image : (linkedPub ? images[2] : images[i % images.length]);
+      const fallbackSrc = linkedAct ? linkedAct.image : images[i % images.length];
       mediaHTML = `<img src="${fallbackSrc}" alt="${text}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;">`;
     }
     
@@ -1352,36 +1235,28 @@ function renderNewsFeed() {
       colorAttr = 'purple';
     }
 
-    // Set designated aspect ratios for asymmetric masonry sizes
-    const aspectRatios = ['16/10', '4/3', '1/1', '4/5', '16/9'];
-    const cardAspect = aspectRatios[i % aspectRatios.length];
-
     return `
       <article class="news-card news-card-redesign idx-${i}" data-id="${item.id}" data-type="${section}" data-cursor-color="${colorAttr}"
-               role="button" tabindex="0" style="break-inside: avoid; margin-bottom: 24px; position: relative; overflow: hidden; border-radius: 20px;">
-        <div class="news-image-wrapper" style="width: 100%; aspect-ratio: ${cardAspect}; overflow: hidden; position: relative;">
+               role="button" tabindex="0" style="aspect-ratio: 4/3; position: relative; overflow: hidden; border-radius: 16px;">
+        <!-- Background media -->
+        <div class="news-image-wrapper" style="position:absolute;inset:0;overflow:hidden;">
           ${mediaHTML}
-          
-          <!-- Hover overlay: tag/date centered, z-index 2 -->
-          <div class="act-hover-overlay" style="position:absolute;inset:0;z-index:2;
-               background:${hoverBg} !important;display:flex;flex-direction:column;align-items:center;justify-content:center;
-               opacity:0;transition:opacity 0.35s ease, visibility 0.35s ease;text-align:center;padding:24px 16px 80px;">
-            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">
-              ${tagText}
-            </span>
-            ${cleanDate ? `<span style="font-size:14px;color:rgba(255,255,255,0.85);font-weight:500;margin-top:8px;">${cleanDate}</span>` : ''}
-          </div>
-          
-          <!-- Idle bottom gradient: shadow for text, z-index 3 -->
-          <div class="act-idle-gradient act-idle-bottom" style="z-index:3;"></div>
-          
-          <!-- Singleton Title: Always visible at bottom, z-index 4, pointer-events none -->
-          <div class="news-card-title-container" style="position:absolute;bottom:20px;left:18px;right:18px;z-index:4;pointer-events:none;text-align:center;">
-            <h3 style="font-size:18px !important;color:#fff !important;font-weight:700 !important;margin:0 !important;line-height:1.35 !important;
-                       display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
-              ${text}
-            </h3>
-          </div>
+        </div>
+        <!-- Idle: dark gradient + title at bottom -->
+        <div class="act-idle-gradient act-idle-bottom" style="position:absolute;inset:0;z-index:1;"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:18px 20px;">
+          <h3 style="font-size:15px;color:#fff;font-weight:700;margin:0;line-height:1.35;
+                     text-shadow:0 2px 8px rgba(0,0,0,0.6);display:-webkit-box;-webkit-line-clamp:3;
+                     -webkit-box-orient:vertical;overflow:hidden;">${text}</h3>
+        </div>
+        <!-- Hover overlay: full color + tag + date -->
+        <div class="act-hover-overlay" style="position:absolute;inset:0;z-index:3;
+             background:${hoverBg};display:flex;flex-direction:column;align-items:center;justify-content:center;
+             opacity:0;transition:opacity 0.3s ease;text-align:center;padding:20px;">
+          <span style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#ffffff;margin-bottom:6px;">
+            ${tagText}
+          </span>
+          ${cleanDate ? `<span style="font-size:13.5px;color:rgba(255,255,255,0.85);font-weight:500;">${cleanDate}</span>` : ''}
         </div>
       </article>
     `;
@@ -1441,6 +1316,7 @@ function renderTeam() {
           <!-- Info anchored to bottom of photo -->
           <div class="team-photo-info">
             <span class="team-role-badge">${roleText}</span>
+            <p class="team-photo-name">${member.name}</p>
             <button class="team-name-btn view-member-btn" data-id="${member.id}" style="border-color:${accent};background:rgba(255,255,255,0.08);">
               <span>${member.name}</span>
               <span class="btn-arrow">→</span>
@@ -2137,19 +2013,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5.12 Dynamic Stat Counts Injection & Redirection Routing
-  const updateStatCounts = () => {
-    const invEl = document.getElementById('stat-count-investigadores');
-    if (invEl) invEl.innerText = teamMembers.length;
-
-    const pubEl = document.getElementById('stat-count-publicaciones');
-    if (pubEl) pubEl.innerText = publications.length;
-
-    const actEl = document.getElementById('stat-count-actividades');
-    if (actEl) actEl.innerText = transferActivities.length;
-  };
-  updateStatCounts();
-
+  // 5.12 Stat row redirection routing clicks
   const statItems = document.querySelectorAll('.stat-item');
   statItems.forEach(item => {
     item.style.cursor = 'pointer';
@@ -2159,8 +2023,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.hash = '#/proyecto#proyecto';
       } else if (label === 'stats_investigadores') {
         window.location.hash = '#/proyecto#equipo';
-      } else if (label === 'stats_actividades' || label === 'stats_experiencias') {
-        window.location.hash = '#/impacto#actividades';
+      } else if (label === 'stats_experiencias') {
+        window.location.hash = '#/impacto#transferencia';
       } else if (label === 'stats_publicaciones') {
         window.location.hash = '#/impacto#publicaciones';
       }
@@ -2318,22 +2182,30 @@ function renderTransferActivities(filterType = 'all') {
         return `${d.padStart(2,'0')}/${months[m.toLowerCase()] || '01'}/${y}`;
       }) : '';
 
-      const mediaHTML = `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
+      const mediaHTML = act.videoSrc
+        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover;">
+             <source src="${act.videoSrc}" type="video/mp4">
+           </video>`
+        : `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
 
       return `
-      <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center; position:relative;">
+      <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center;">
         <div class="activity-image-wrapper">
           ${mediaHTML}
-          <!-- Hover overlay: tag/date centered, title remains underneath (z-index 4) -->
-          <div class="act-hover-overlay act-hover-blue" style="background: rgba(29, 91, 254, 0.96) !important; padding: 24px 16px 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; width: 100%; z-index: 2;">
-            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${act.tag[currentLang]}</span>
-            ${shortDate ? `<span style="font-size:14px; color:rgba(255,255,255,0.8); font-weight:500; margin-top:8px;">${shortDate}</span>` : ''}
+          <!-- Idle gradient: shows title at bottom, no tags -->
+          <div class="act-idle-gradient act-idle-bottom"></div>
+          <div class="act-idle-title" style="left:10px; right:10px; text-align:center;">
+            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important;">${act.title[currentLang]}</h3>
           </div>
-          <!-- Idle gradient: shadow behind text -->
-          <div class="act-idle-gradient act-idle-bottom" style="z-index: 3;"></div>
-          <!-- Singleton Title: Always at the bottom, z-index 4, pointer-events none -->
-          <div class="act-card-title-container" style="position: absolute; bottom: 20px; left: 16px; right: 16px; z-index: 4; text-align: center; pointer-events: none;">
-            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${act.title[currentLang]}</h3>
+          <!-- Hover overlay: tag/date centered, title at bottom matching idle -->
+          <div class="act-hover-overlay act-hover-blue" style="background: rgba(29, 91, 254, 0.96) !important; padding: 24px 16px 20px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; height: 100%; width: 100%;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; flex-grow: 1; width: 100%;">
+              <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${act.tag[currentLang]}</span>
+              ${shortDate ? `<span style="font-size:14px; color:rgba(255,255,255,0.8); font-weight:500;">${shortDate}</span>` : ''}
+            </div>
+            <div style="width: 100%;">
+              <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${act.title[currentLang]}</h3>
+            </div>
           </div>
         </div>
       </article>
@@ -2344,7 +2216,11 @@ function renderTransferActivities(filterType = 'all') {
   if (transferenciaGrid) {
     const transferences = transferActivities.filter(act => act.section === 'transferencia');
     transferenciaGrid.innerHTML = transferences.map(act => {
-      const mediaHTML = `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
+      const mediaHTML = act.videoSrc
+        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover;">
+             <source src="${act.videoSrc}" type="video/mp4">
+           </video>`
+        : `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
 
       return `
       <article class="activity-card act-card-transferencia trans-card" data-id="${act.id}" data-type="${act.type}" data-cursor-color="turquoise" style="overflow:visible !important; display:flex; flex-direction:column; text-align:center;">
@@ -2362,7 +2238,7 @@ function renderTransferActivities(filterType = 'all') {
         </div>
         <!-- Card text content below image - padded and text centered -->
         <div class="trans-card-text-container" style="padding: 20px 12px 16px; flex-grow: 1; display:flex; align-items:center; justify-content:center; text-align:center;">
-          <h3 class="trans-card-title-dynamic" style="font-size: 18px !important; font-weight: 700 !important; color: #0f172a; margin: 0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color 0.3s ease;">
+          <h3 class="trans-card-title-dynamic" style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color 0.3s ease;">
             ${act.title[currentLang]}
           </h3>
         </div>
@@ -2373,21 +2249,25 @@ function renderTransferActivities(filterType = 'all') {
   // ─── HOME ACTIVITIES GRID ─── same style as Actividades
   if (homeActivitiesGrid) {
     homeActivitiesGrid.innerHTML = transferActivities.slice(0, 3).map(act => {
-      const mediaHTML = `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
+      const mediaHTML = act.videoSrc
+        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover;">
+             <source src="${act.videoSrc}" type="video/mp4">
+           </video>`
+        : `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
 
       return `
-      <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center; position:relative;">
+      <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center;">
         <div class="activity-image-wrapper">
           ${mediaHTML}
-          <!-- Hover overlay: tag/date centered, title remains underneath (z-index 4) -->
-          <div class="act-hover-overlay act-hover-blue" style="background: rgba(29, 91, 254, 0.96) !important; padding: 24px 16px 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; width: 100%; z-index: 2;">
-            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${act.tag[currentLang]}</span>
+          <div class="act-idle-gradient act-idle-bottom"></div>
+          <div class="act-idle-title" style="left:10px; right:10px; text-align:center;">
+            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important;">${act.title[currentLang]}</h3>
           </div>
-          <!-- Idle gradient: shadow behind text -->
-          <div class="act-idle-gradient act-idle-bottom" style="z-index: 3;"></div>
-          <!-- Singleton Title: Always at the bottom, z-index 4, pointer-events none -->
-          <div class="act-card-title-container" style="position: absolute; bottom: 20px; left: 16px; right: 16px; z-index: 4; text-align: center; pointer-events: none;">
-            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${act.title[currentLang]}</h3>
+          <div class="act-hover-overlay act-hover-blue" style="background: rgba(29, 91, 254, 0.96) !important;">
+            <div class="act-hover-inner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 20px; height:100%; width:100%;">
+              <span class="act-hover-tag" style="background:transparent !important; border:none !important; color:#fff !important; font-weight:800; font-size:12px; text-transform:uppercase;">${act.tag[currentLang]}</span>
+              <h3 style="font-size:18px !important; font-weight:700; color:#fff; margin:8px 0 0 0; line-height:1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${act.title[currentLang]}</h3>
+            </div>
           </div>
         </div>
       </article>
@@ -2403,9 +2283,6 @@ function renderTransferActivities(filterType = 'all') {
       }
     });
   });
-
-  // Notify custom cursor systems to update bindings
-  window.dispatchEvent(new Event('content-updated'));
 }
 
 
@@ -2617,47 +2494,45 @@ function renderActivityDetail(id) {
   const detailContainer = document.getElementById('view-actividad-detalle');
   if (!detailContainer || !activity) return;
 
-  // Enforce scroll to top immediately on post selection
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  setTimeout(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, 50);
-
-  // Featured media: full-width borderless image (doubled size)
-  const featuredMedia = `<img src="${activity.image}" alt="${activity.title[currentLang]}" style="width:100%; height:540px; object-fit:cover; border-radius:0; border:none; outline:none; display:block;">`;
+  // Featured media: video loop or image
+  const featuredMedia = activity.videoSrc
+    ? `<video autoplay loop muted playsinline 
+              style="width:100%; height:100%; object-fit:cover; border-radius:24px;"
+              poster="${activity.image}">
+         <source src="${activity.videoSrc}" type="video/mp4">
+         <img src="${activity.image}" alt="${activity.title[currentLang]}">
+       </video>`
+    : `<img src="${activity.image}" alt="${activity.title[currentLang]}" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">`;
 
   const isTransferencia = activity.section === 'transferencia';
   const buttonClass = isTransferencia ? 'btn-outline-turquoise' : 'btn-outline-blue';
   const backAnchor = isTransferencia ? '#/impacto#transferencia' : '#/impacto#actividades';
-  const typeColor = isTransferencia ? '#14b8a6' : '#1d5bfe';
 
   detailContainer.innerHTML = `
-    <div class="section-container" style="max-width: 960px; padding: 40px 20px;">
+    <div class="section-container" style="max-width: 860px; padding: 40px 20px;">
       <a href="${backAnchor}" class="${buttonClass}" style="margin-bottom: 30px; display: inline-flex; align-items: center; gap: 8px;">
         &larr; ${currentLang === 'en' ? 'Back' : (currentLang === 'ca' ? 'Tornar' : 'Volver')}
       </a>
       
-      <div class="section-inner-panel" style="margin-top: 10px; padding: 0 0 40px; overflow: hidden; border-radius: 20px;">
-        <div class="image-showcase" style="height: 540px; max-height: 540px; width: 100%; margin-bottom: 32px; border-radius: 0; border: none; box-shadow: none; overflow: hidden; position: relative;">
-          ${featuredMedia}
+      <div class="image-showcase" style="aspect-ratio: 16/9; margin-bottom: 30px; border-radius: 24px; overflow: hidden; position: relative;">
+        ${featuredMedia}
+      </div>
+      
+      <div class="detail-inner-panel">
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap;">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: ${typeColor}; padding: 4px 12px; border-radius: 20px; border: 1.5px solid ${typeColor};">
+            ${activity.tag[currentLang]}
+          </span>
+          <span style="font-size: 13px; color: var(--color-text-muted-light);">${activity.date}</span>
+          <span style="font-size: 13px; color: var(--color-text-muted-light);">· ${activity.location}</span>
         </div>
         
-        <div class="detail-inner-panel" style="padding: 0 36px;">
-          <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap;">
-            <span style="font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: ${typeColor}; padding: 4px 12px; border-radius: 20px; border: 1.5px solid ${typeColor};">
-              ${activity.tag[currentLang]}
-            </span>
-            <span style="font-size: 13px; color: var(--color-text-muted-light);">${activity.date}</span>
-            <span style="font-size: 13px; color: var(--color-text-muted-light);">· ${activity.location}</span>
-          </div>
-          
-          <h1 style="font-size: clamp(22px, 4vw, 34px); margin-bottom: 28px; font-family: var(--font-primary); font-weight: 800; line-height: 1.25;">
-            ${activity.title[currentLang]}
-          </h1>
-          
-          <div class="activity-detail-lorem" style="font-size: 15.5px; line-height: 1.8; text-align: justify;">
-            ${activity.loremIpsum[currentLang]}
-          </div>
+        <h1 style="font-size: clamp(22px, 4vw, 34px); margin-bottom: 28px; font-family: var(--font-primary); font-weight: 800; line-height: 1.25;">
+          ${activity.title[currentLang]}
+        </h1>
+        
+        <div class="activity-detail-lorem" style="font-size: 15.5px; line-height: 1.8; text-align: justify;">
+          ${activity.loremIpsum[currentLang]}
         </div>
       </div>
     </div>
@@ -2722,19 +2597,15 @@ function initSubmenuScrollObserver() {
 
   const observerOptions = {
     root: null,
-    rootMargin: '-80px 0px -40% 0px',
+    rootMargin: '-120px 0px -50% 0px',
     threshold: 0
   };
 
   const observer = new IntersectionObserver((entries) => {
-    if (window.scrollY < 120) return;
-
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
-        const activeView = document.querySelector('.spa-view.active');
-        if (!activeView) return;
-        const activeLinks = activeView.querySelectorAll(`.submenu-link`);
+        const activeLinks = document.querySelectorAll(`.submenu-link`);
         activeLinks.forEach(link => {
           const href = link.getAttribute('href');
           if (href && href.endsWith(`#${id}`)) {
@@ -2748,22 +2619,6 @@ function initSubmenuScrollObserver() {
   }, observerOptions);
 
   sections.forEach(section => observer.observe(section));
-
-  // Reset to first submenu link when scrolling back to top of page
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < 120) {
-      const activeView = document.querySelector('.spa-view.active');
-      if (activeView) {
-        const links = activeView.querySelectorAll('.submenu-link');
-        if (links.length > 0) {
-          links.forEach((l, idx) => {
-            if (idx === 0) l.classList.add('active');
-            else l.classList.remove('active');
-          });
-        }
-      }
-    }
-  }, { passive: true });
 }
 
 

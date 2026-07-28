@@ -128,7 +128,7 @@
         <div class="hero-content">
           <span class="hero-pill-tag" data-i18n="hero_tag">Proyecto de Investigación Activo</span>
           <h1 id="hero-main-title" data-i18n="hero_main_title">
-            Rediseñamos el futuro de la educación con <span class="blue-highlight">Codiseño</span> e <span class="green-highlight">Inteligencia Artificial</span>
+            Rediseñamos el futuro de la educación con <span class="blue-highlight">Codiseño</span> e <span class="green-highlight">IA</span>
           </h1>
           
           <p class="hero-desc" data-i18n="hero_desc">
@@ -141,15 +141,15 @@
         </div>
 
         <!-- Decorative Minimal Progress Bar -->
-        <div class="decorative-progress-bar-container">
+        <a href="#/proyecto#proyecto" class="decorative-progress-bar-container" style="text-decoration: none; cursor: pointer; display: block;">
           <div class="progress-header">
             <div class="progress-bar-label" data-i18n="progress_label">Progreso del Proyecto</div>
-            <div class="progress-percentage">75%</div>
+            <div class="progress-percentage">25%</div>
           </div>
           <div class="progress-bar-track">
-            <div class="progress-bar-fill"></div>
+            <div class="progress-bar-fill" style="width: 25%;"></div>
           </div>
-        </div>
+        </a>
         
         <!-- Stat Counters Row (Clickable links to sections) -->
         <div class="hero-stats-row">
@@ -163,7 +163,7 @@
                   style="width:140px;height:140px">
               </lord-icon>
             </div>
-            <span class="stat-number">3+</span>
+            <span class="stat-number">1/3</span>
             <span class="stat-label" data-i18n="stats_years">Años de investigación</span>
           </a>
           
@@ -177,7 +177,7 @@
                   style="width:140px;height:140px">
               </lord-icon>
             </div>
-            <span class="stat-number">12</span>
+            <span class="stat-number" id="stat-count-investigadores">6</span>
             <span class="stat-label" data-i18n="stats_investigadores">Investigadores</span>
           </a>
           
@@ -191,11 +191,11 @@
                   style="width:140px;height:140px">
               </lord-icon>
             </div>
-            <span class="stat-number">25+</span>
+            <span class="stat-number" id="stat-count-publicaciones">6</span>
             <span class="stat-label" data-i18n="stats_publicaciones">Publicaciones</span>
           </a>
           
-          <a href="#/impacto#transferencia" class="stat-item">
+          <a href="#/impacto#actividades" class="stat-item">
             <div class="stat-icon-circle">
               <lord-icon
                   src="https://cdn.lordicon.com/uqpazftn.json"
@@ -205,8 +205,8 @@
                   style="width:140px;height:140px">
               </lord-icon>
             </div>
-            <span class="stat-number">4</span>
-            <span class="stat-label" data-i18n="stats_experiencias">Experiencias</span>
+            <span class="stat-number" id="stat-count-actividades">4</span>
+            <span class="stat-label" data-i18n="stats_actividades">Actividades</span>
           </a>
         </div>
       </div>
@@ -227,33 +227,43 @@
         <div class="news-section-header" style="margin-top: 60px;">
           <h2 class="news-section-title" data-i18n="trans_pretitle">Impacto y Difusión</h2>
         </div>
+        
         <div class="section-nav-grid">
-          <a href="#/impacto#transferencia" class="section-nav-card card-transferencia">
+          <a href="#/impacto#actividades" class="section-nav-card card-actividades" data-cursor-color="blue">
             <div class="nav-card-icon">
-              <lord-icon
-                  src="https://cdn.lordicon.com/stxfyhky.json"
-                  trigger="loop"
-                  delay="500"
-                  colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:80px;height:80px">
-              </lord-icon>
+              <lord-icon src="https://cdn.lordicon.com/stxfyhky.json" trigger="loop" delay="500" colors="primary:#1D5BFE,secondary:#7ce4e0" style="width:80px;height:80px"></lord-icon>
             </div>
             <div class="nav-card-content">
-              <h3>Actividades de Transferencia</h3>
+              <h3>Actividades</h3>
               <p>Demos, talleres, seminarios y programas de formación.</p>
             </div>
             <span class="nav-card-arrow">&rarr;</span>
           </a>
           
-          <a href="#/impacto#publicaciones" class="section-nav-card card-publicaciones">
+          <a href="#/impacto#transferencia" class="section-nav-card card-transferencia" data-cursor-color="turquoise">
             <div class="nav-card-icon">
-              <lord-icon
-                  src="https://cdn.lordicon.com/nobciafz.json"
-                  trigger="loop"
-                  delay="1000"
-                  colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:80px;height:80px">
-              </lord-icon>
+              <div class="trans-svg-icon">
+                <svg viewBox="0 0 80 80" width="70" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g class="trans-arrows">
+                    <path d="M20 28 L40 16 L60 28" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M40 16 L40 52" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M60 52 L40 64 L20 52" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M40 28 L40 64" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="40" cy="40" r="32" stroke="currentColor" stroke-width="3" stroke-dasharray="8 6" opacity="0.4"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="nav-card-content">
+              <h3>Transferencia</h3>
+              <p>Experiencias aplicando las estrategias del proyecto</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+          
+          <a href="#/impacto#publicaciones" class="section-nav-card card-publicaciones" data-cursor-color="purple">
+            <div class="nav-card-icon">
+              <lord-icon src="https://cdn.lordicon.com/nobciafz.json" trigger="loop" delay="1000" colors="primary:#8b5cf6,secondary:#c4b5fd" style="width:80px;height:80px"></lord-icon>
             </div>
             <div class="nav-card-content">
               <h3>Producción Científica</h3>
@@ -262,18 +272,12 @@
             <span class="nav-card-arrow">&rarr;</span>
           </a>
           
-          <a href="#/impacto#recursos" class="section-nav-card card-recursos">
+          <a href="#/impacto#recursos" class="section-nav-card card-recursos" data-cursor-color="green">
             <div class="nav-card-icon">
-              <lord-icon
-                  src="https://cdn.lordicon.com/vlycxjwx.json"
-                  trigger="loop"
-                  delay="1500"
-                  colors="primary:#1D5BFE,secondary:#7ce4e0"
-                  style="width:80px;height:80px">
-              </lord-icon>
+              <lord-icon src="https://cdn.lordicon.com/vlycxjwx.json" trigger="loop" delay="1500" colors="primary:#10b981,secondary:#6ee7b7" style="width:80px;height:80px"></lord-icon>
             </div>
             <div class="nav-card-content">
-              <h3>Recursos y Materiales</h3>
+              <h3>Recursos y Artefactos</h3>
               <p>Acceso a software, corpus, guías didácticas y herramientas.</p>
             </div>
             <span class="nav-card-arrow">&rarr;</span>
@@ -321,7 +325,7 @@
               </div>
               <div class="meta-box">
                 <span class="meta-label" data-i18n="meta_duracion">Duración</span>
-                <span class="meta-value">2022-2025</span>
+                <span class="meta-value">2025-2028</span>
               </div>
               <div class="meta-box">
                 <span class="meta-label" data-i18n="meta_lider">Institución Líder</span>
@@ -344,6 +348,62 @@
           <span class="section-pretitle" data-i18n="menu_proyecto">Proyecto</span>
           <h2 class="section-title" data-i18n="obj_title">Objetivos del Proyecto</h2>
         </div>
+
+        <!-- Progress Bar (25%) -->
+        <a href="#/proyecto#proyecto" class="decorative-progress-bar-container" style="text-decoration: none; cursor: pointer; display: block; margin-bottom: 36px;">
+          <div class="progress-header">
+            <div class="progress-bar-label" data-i18n="progress_label">Progreso del Proyecto</div>
+            <div class="progress-percentage">25%</div>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" style="width: 25%;"></div>
+          </div>
+        </a>
+
+        <!-- 5 Project Phases Row -->
+        <div class="project-phases-row">
+          <div class="phase-card">
+            <span class="phase-badge">Fase 1</span>
+            <h4 class="phase-title">Cimentación</h4>
+            <p class="phase-subtitle">Análisis y Consenso</p>
+            <div class="phase-hover-text">
+              Revisar la literatura y aplica la Técnica Delphi para consolidar el marco teórico sobre IAG y validar el Protocolo de Análisis de Diseños Agénticos.
+            </div>
+          </div>
+          <div class="phase-card">
+            <span class="phase-badge">Fase 2</span>
+            <h4 class="phase-title">Exploración</h4>
+            <p class="phase-subtitle">Diagnóstico de Resiliencia</p>
+            <div class="phase-hover-text">
+              Mediante grupos focales y metanálisis, publicar un Informe Estratégico sobre IAG y crear Protocolos de Interacción ética con Chatbots.
+            </div>
+          </div>
+          <div class="phase-card">
+            <span class="phase-badge">Fase 3</span>
+            <h4 class="phase-title">Diseño</h4>
+            <p class="phase-subtitle">Escenarios y Tecnología</p>
+            <div class="phase-hover-text">
+              Realizar un estudio multicaso para desarrollar estrategias de codiseño e integrar IA en la app FLIC (Flexible Learning Itineraries Configurator).
+            </div>
+          </div>
+          <div class="phase-card">
+            <span class="phase-badge">Fase 4</span>
+            <h4 class="phase-title">Validación</h4>
+            <p class="phase-subtitle">Impacto en Aula</p>
+            <div class="phase-hover-text">
+              Evaluar la agencia en entornos reales para lanzar el Catálogo Validado de REA y un repertorio de instrucciones (prompts) para docentes y alumnos.
+            </div>
+          </div>
+          <div class="phase-card">
+            <span class="phase-badge">Fase 5</span>
+            <h4 class="phase-title">Impacto</h4>
+            <p class="phase-subtitle">Transferencia Social</p>
+            <div class="phase-hover-text">
+              Activar la transferencia institucional vía SmartUIB, OTRI e IRIE, desplegando el Portal Web Estratégico y realizando seminarios internacionales.
+            </div>
+          </div>
+        </div>
+
         <div class="objectives-grid">
           <article class="objective-card">
             <div class="objective-card-icon">
@@ -355,8 +415,8 @@
                   style="width:90px;height:90px">
               </lord-icon>
             </div>
-            <h3 data-i18n="obj_1_title">Objetivo Principal</h3>
-            <p data-i18n="obj_1_desc">Investigar el impacto de la IA en la telecolaboración interlingüística, analizando cómo el codiseño mejora los procesos de aprendizaje de lenguas.</p>
+            <h3 data-i18n="obj_1_title">Agencia Profesional y Académica</h3>
+            <p data-i18n="obj_1_desc">Disminuir la incertidumbre pedagógica al potenciar la capacidad de decisión de docentes y estudiantes en entornos digitales.</p>
           </article>
           <article class="objective-card">
             <div class="objective-card-icon">
@@ -368,8 +428,8 @@
                   style="width:90px;height:90px">
               </lord-icon>
             </div>
-            <h3 data-i18n="obj_2_title">Innovación</h3>
-            <p data-i18n="obj_2_desc">Desarrollar herramientas de personalización adaptativa basadas en IA para entornos de aprendizaje de lenguas mediado por tecnología.</p>
+            <h3 data-i18n="obj_2_title">Personalización y codiseño</h3>
+            <p data-i18n="obj_2_desc">Diseñar, implementar y validar estrategias de codiseño educativo y de personalización mediante itinerarios flexibles de aprendizaje, que aplicando la IAG promuevan la agencia del estudiante.</p>
           </article>
           <article class="objective-card">
             <div class="objective-card-icon">
@@ -381,8 +441,8 @@
                   style="width:90px;height:90px">
               </lord-icon>
             </div>
-            <h3 data-i18n="obj_3_title">Alcance Internacional</h3>
-            <p data-i18n="obj_3_desc">Colaboración con instituciones europeas y latinoamericanas para estudiar la comunicación mediada por ordenador en contextos plurilingüísticos.</p>
+            <h3 data-i18n="obj_3_title">Innovación e inclusión</h3>
+            <p data-i18n="obj_3_desc">Explorar las posibilidades de la IAG como herramienta de apoyo al codiseño educativo en educación superior para favorecer una educación equitativa, inclusiva y de calidad.</p>
           </article>
           <article class="objective-card">
             <div class="objective-card-icon">
@@ -394,8 +454,8 @@
                   style="width:90px;height:90px">
               </lord-icon>
             </div>
-            <h3 data-i18n="obj_4_title">Impacto Social</h3>
-            <p data-i18n="obj_4_desc">Fomentar un entorno educativo más equitativo, accesible e inclusivo a través de herramientas de telecolaboración abiertas y transferibles.</p>
+            <h3 data-i18n="obj_4_title">Sostenibilidad de Recursos Abiertos</h3>
+            <p data-i18n="obj_4_desc">Promover la creación ética y transparente mediante Inteligencia Artificial Generativa validada para la comunidad académica.</p>
           </article>
         </div>
       </div>
@@ -418,55 +478,118 @@
   <!-- SPA View: Transferencia -->
   <!-- SPA View: Impacto y Difusión -->
   <div id="view-impacto" class="spa-view">
-    <!-- Sticky Submenu -->
+    <!-- Nav Grid Impacto (arriba del todo) -->
+    <div class="section-container" style="margin-top: 40px; margin-bottom: 20px;">
+        <div class="section-nav-grid">
+          <a href="#/impacto#actividades" class="section-nav-card card-actividades" data-cursor-color="blue">
+            <div class="nav-card-icon">
+              <lord-icon src="https://cdn.lordicon.com/stxfyhky.json" trigger="loop" delay="500" colors="primary:#1D5BFE,secondary:#7ce4e0" style="width:80px;height:80px"></lord-icon>
+            </div>
+            <div class="nav-card-content">
+              <h3>Actividades</h3>
+              <p>Demos, talleres, seminarios y programas de formación.</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+          
+          <a href="#/impacto#transferencia" class="section-nav-card card-transferencia" data-cursor-color="turquoise">
+            <div class="nav-card-icon">
+              <div class="trans-svg-icon">
+                <svg viewBox="0 0 80 80" width="70" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g class="trans-arrows">
+                    <path d="M20 28 L40 16 L60 28" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M40 16 L40 52" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M60 52 L40 64 L20 52" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M40 28 L40 64" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="40" cy="40" r="32" stroke="currentColor" stroke-width="3" stroke-dasharray="8 6" opacity="0.4"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="nav-card-content">
+              <h3>Transferencia</h3>
+              <p>Experiencias aplicando las estrategias del proyecto</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+          
+          <a href="#/impacto#publicaciones" class="section-nav-card card-publicaciones" data-cursor-color="purple">
+            <div class="nav-card-icon">
+              <lord-icon src="https://cdn.lordicon.com/nobciafz.json" trigger="loop" delay="1000" colors="primary:#8b5cf6,secondary:#c4b5fd" style="width:80px;height:80px"></lord-icon>
+            </div>
+            <div class="nav-card-content">
+              <h3>Producción Científica</h3>
+              <p>Artículos en revistas, libros, ponencias y actas de congreso.</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+          
+          <a href="#/impacto#recursos" class="section-nav-card card-recursos" data-cursor-color="green">
+            <div class="nav-card-icon">
+              <lord-icon src="https://cdn.lordicon.com/vlycxjwx.json" trigger="loop" delay="1500" colors="primary:#10b981,secondary:#6ee7b7" style="width:80px;height:80px"></lord-icon>
+            </div>
+            <div class="nav-card-content">
+              <h3>Recursos y Artefactos</h3>
+              <p>Acceso a software, corpus, guías didácticas y herramientas.</p>
+            </div>
+            <span class="nav-card-arrow">&rarr;</span>
+          </a>
+        </div>
+    </div>
+
+
+    <!-- Sticky Submenu (tras pasar la sección de Últimas noticias) -->
     <div class="page-submenu-wrapper">
       <div class="page-submenu-container">
         <ul class="page-submenu">
-          <li><a href="#/impacto#noticias" class="submenu-link active" data-i18n="submenu_noticias">Últimas noticias</a></li>
-          <li><a href="#/impacto#transferencia" class="submenu-link" data-i18n="submenu_transferencia">Transferencia</a></li>
-          <li><a href="#/impacto#publicaciones" class="submenu-link" data-i18n="submenu_publicaciones">Producción científica</a></li>
-          <li><a href="#/impacto#recursos" class="submenu-link" data-i18n="submenu_recursos">Recursos</a></li>
+          <li><a href="#/impacto#actividades" class="submenu-link link-actividades active">Actividades</a></li>
+          <li><a href="#/impacto#transferencia" class="submenu-link link-transferencia">Transferencia</a></li>
+          <li><a href="#/impacto#publicaciones" class="submenu-link link-publicaciones">Producción Científica</a></li>
+          <li><a href="#/impacto#recursos" class="submenu-link link-recursos">Recursos</a></li>
         </ul>
       </div>
     </div>
 
-    <!-- Section 1: Últimas noticias -->
-    <section id="noticias" class="page-section news-section" style="padding-top: 40px; padding-bottom: 40px;">
+    <!-- Section 2: Actividades de Transferencia -->
+    <!-- Section 1.5: Actividades -->
+    <section id="actividades" class="page-section impacto-section">
       <div class="section-container">
-        <div class="section-title-wrapper">
-          <span class="section-pretitle" data-i18n="news_pretitle">Actualidad</span>
-          <h2 class="section-title" data-i18n="news_title">Últimas noticias</h2>
-        </div>
-        <div class="news-cards-grid" id="latest-news-list-impact">
-          <!-- Injected by JS -->
+        <div class="section-inner-panel">
+          <div class="section-title-wrapper impacto-title-wrapper">
+            <h2 class="section-title"><span class="blue-highlight">Actividades</span> <span class="black-text">del Proyecto</span></h2>
+          </div>
+
+
+          <div class="activities-grid" id="activities-grid">
+            <!-- Injected by JS -->
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 2: Actividades de Transferencia -->
-    <section id="transferencia" class="page-section scientific-section" style="padding-top: 40px; padding-bottom: 40px;">
+    <!-- Section 2: Transferencia -->
+    <section id="transferencia" class="page-section impacto-section">
       <div class="section-container">
-        <div class="section-title-wrapper">
-          <span class="section-pretitle" data-i18n="trans_pretitle">Impacto y difusión</span>
-          <h2 class="section-title">Actividades de <span class="green-highlight">Transferencia</span></h2>
-          <p class="section-subtitle" data-i18n="trans_subtitle">Actividades diseñadas para maximizar el impacto social y educativo de nuestra investigación, conectando la academia con la práctica docente y la sociedad.</p>
+        <div class="section-inner-panel">
+          <div class="section-title-wrapper impacto-title-wrapper">
+            <h2 class="section-title"><span class="black-text">Actividades de</span> <span class="turquoise-highlight">Transferencia</span></h2>
+          </div>
+          <!-- Activities Grid (Dynamically rendered via JS) -->
+          <div class="transferencia-grid" id="transferencia-grid"></div>
         </div>
-        <!-- Activities Grid (Dynamically rendered via JS) -->
-        <div class="activities-grid" id="activities-grid"></div>
       </div>
     </section>
 
     <!-- Section 3: Producción Científica -->
-    <section id="publicaciones" class="page-section" style="padding-top: 40px; padding-bottom: 40px;">
+    <section id="publicaciones" class="page-section impacto-section">
       <div class="section-container">
-        <div class="section-title-wrapper">
-          <span class="section-pretitle" data-i18n="pub_pretitle">Biblioteca Científica</span>
-          <h2 class="section-title" data-i18n="pub_title">Producción Científica</h2>
-          <p class="section-subtitle" data-i18n="pub_subtitle">Accede a las publicaciones del proyecto sincronizadas con nuestra biblioteca de referencias de Zotero.</p>
-        </div>
+        <div class="section-inner-panel">
+          <div class="section-title-wrapper impacto-title-wrapper">
+            <h2 class="section-title"><span class="purple-highlight">Producción</span> <span class="black-text">Científica</span></h2>
+          </div>
         
-        <!-- Centered and simplified Search Bar and Filters -->
-        <div class="filter-bar-centered" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; width: 100%; gap: 16px;">
+          <!-- Centered and simplified Search Bar and Filters -->
+          <div class="filter-bar-centered" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; width: 100%; gap: 16px;">
           <div class="search-wrapper" style="max-width: 600px; width: 100%; position: relative;">
             <span class="search-icon" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; pointer-events: none; color: var(--color-text-muted-light);">
               <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -481,61 +604,24 @@
           </div>
         </div>
         
-        <!-- Publications Grid -->
-        <div class="publications-grid" id="publications-grid">
-          <!-- Injected by JS -->
+          <!-- Publications Grid -->
+          <div class="publications-grid" id="publications-grid">
+            <!-- Injected by JS -->
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Section 4: Recursos -->
-    <section id="recursos" class="page-section scientific-section" style="padding-top: 40px; padding-bottom: 40px;">
+    <section id="recursos" class="page-section impacto-section">
       <div class="section-container">
-        <div class="section-title-wrapper">
-          <span class="section-pretitle" data-i18n="rec_pretitle">Repositorio Abierto</span>
-          <h2 class="section-title" data-i18n="rec_title">Recursos del Proyecto</h2>
-          <p class="section-subtitle" data-i18n="rec_subtitle">Descarga materiales pedagógicos y herramientas de codiseño desarrolladas durante la investigación.</p>
-        </div>
-        
-        <div class="resources-grid">
-          <!-- Resource Card 1 -->
-          <article class="resource-card">
-            <div class="resource-image">
-              <img src="/src/assets/images/recursos.png" alt="Guía metodológica para codiseño educativo">
-            </div>
-            <div class="resource-info">
-              <span class="resource-tag">Manual Metodológico</span>
-              <h3 class="resource-title">Guía de Codiseño en Tecnología Educativa</h3>
-              <p class="resource-desc">Un compendio de dinámicas, fichas imprimibles y directrices prácticas para planificar y llevar a cabo talleres de codiseño tecnológico con profesorado y estudiantes.</p>
-              <button class="btn-secondary" style="padding: 10px 20px; font-size: 13px; margin-top: auto; justify-content: center;" data-i18n="rec_btn_pdf">Descargar PDF (4.8 MB)</button>
-            </div>
-          </article>
+        <div class="section-inner-panel">
+          <div class="section-title-wrapper impacto-title-wrapper">
+            <h2 class="section-title"><span class="green-highlight">Recursos</span> <span class="black-text">del Proyecto</span></h2>
+          </div>
           
-          <!-- Resource Card 2 -->
-          <article class="resource-card">
-            <div class="resource-image">
-              <img src="/src/assets/images/transferencia.png" alt="Fichas didácticas de apoyo algorítmico">
-            </div>
-            <div class="resource-info">
-              <span class="resource-tag">Plantillas Didácticas</span>
-              <h3 class="resource-title">Fichas de Explicabilidad Algorítmica</h3>
-              <p class="resource-desc">Materiales didácticos de apoyo para trabajar la soberanía y comprensión del dato escolar con alumnos de secundaria y bachillerato en sesiones presenciales.</p>
-              <button class="btn-secondary" style="padding: 10px 20px; font-size: 13px; margin-top: auto; justify-content: center;" data-i18n="rec_btn_zip">Descargar Plantillas (Zip, 12 MB)</button>
-            </div>
-          </article>
           
-          <!-- Resource Card 3 -->
-          <article class="resource-card">
-            <div class="resource-image">
-              <img src="/src/assets/images/congresos.png" alt="Código abierto de personalización adaptativa">
-            </div>
-            <div class="resource-info">
-              <span class="resource-tag">Código Abierto</span>
-              <h3 class="resource-title">Módulo de Personalización Soberana</h3>
-              <p class="resource-desc">Accede al repositorio público del prototipo funcional que integra las librerías de personalización algorítmica parametrizable con interfaces web adaptables.</p>
-              <button class="btn-secondary" style="padding: 10px 20px; font-size: 13px; margin-top: auto; justify-content: center;" data-i18n="rec_btn_git">Ver Repositorio GitHub</button>
-            </div>
-          </article>
+          <div class="resources-grid" id="resources-grid"></div>
         </div>
       </div>
     </section>
@@ -550,40 +636,16 @@
   <footer>
     <div class="footer-container">
       
-      <!-- Collaborators Section with dynamic grayscale vector SVG logos -->
-      <div class="collaborators-wrapper" style="margin-bottom: 60px;">
-        <h4 class="collaborators-title" data-i18n="colab_title">Con la colaboración y financiación de:</h4>
-        <div class="collaborators-logos">
-          
-          <!-- Logo 1: Ministerio de Ciencia, Innovación y Universidades de España -->
-          <div class="colab-logo" title="Ministerio de Ciencia, Innovación y Universidades - Gobierno de España">
-            <img src="icons/ministerio_icon.png" alt="Ministerio de Ciencia, Innovación y Universidades">
-            <div class="colab-text">
-              <span class="colab-org">GOBIERNO DE ESPAÑA</span>
-              <span class="colab-dept">MINISTERIO DE CIENCIA E INNOVACIÓN</span>
-            </div>
-          </div>
-          
-          <!-- Logo 2: IRIE de la UIB -->
-          <div class="colab-logo" title="Institut de Recerca i Innovació Educativa - UIB">
-            <img src="icons/irie_icon.png" alt="IRIE">
-            <div class="colab-text">
-              <span class="colab-org">IRIE</span>
-              <span class="colab-dept">UIB Research</span>
-            </div>
-          </div>
-          
-          <!-- Logo 3: GTE de la UIB -->
-          <div class="colab-logo" title="Grupo de Tecnología Educativa - UIB">
-            <img src="icons/gte.png" alt="GTE">
-            <div class="colab-text">
-              <span class="colab-org">GTE</span>
-              <span class="colab-dept">Tecnología Educativa</span>
-            </div>
-          </div>
-          
-        </div>
+      <!-- Collaborators Section — MICIU logo & Grant text -->
+      <div class="collaborators-wrapper" style="margin-bottom: 60px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap: 20px;">
+        <p class="footer-grant-text" style="color: rgba(255, 255, 255, 0.95); font-size: 15px; font-weight: 600; text-align: center; max-width: 850px; margin: 0 auto; line-height: 1.6;">
+          Proyecto PID2024-157113OB-100 financiado por MICIU/AEI /10.13039/501100011033 y por FEDER, UE
+        </p>
+        <img src="./icons/MICIU_logo.jpg" alt="Ministerio de Ciencia, Innovación y Universidades · Cofinanciado por la Unión Europea · Agencia Estatal de Investigación" 
+             style="max-width: 780px; width: 95%; height: auto; display: block; opacity: 1;">
       </div>
+
+
       
       <!-- COPLITELE-IA Logo and Social Links -->
       <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; gap: 24px;">
@@ -631,5 +693,6 @@
 
   <!-- Script Injection -->
   <script type="module" src="/src/main.js"></script>
+
 </body>
 </html>

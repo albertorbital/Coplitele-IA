@@ -180,7 +180,7 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
   config.arcs.forEach(arc => {
     const dotPos = polarToCartesian(center, center, outerRadius, arc.dotPos);
     svg += `
-      <mask id="mask-${arc.id}-${isLarge ? 'lg' : 'sm'}" maskUnits="userSpaceOnUse">
+      <mask id="mask-${arc.id}-${isLarge ? 'lg' : 'sm'}-${size}" maskUnits="userSpaceOnUse">
         <rect x="0" y="0" width="${size}" height="${size}" fill="white" />
         <circle cx="${dotPos.x}" cy="${dotPos.y}" r="${perimNotchRadius}" fill="black" />
       </mask>
@@ -219,12 +219,12 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
         stroke="${arc.color}" 
         stroke-width="${strokeWidth}" 
         stroke-linecap="round" 
-        mask="url(#mask-${arc.id}-${isLarge ? 'lg' : 'sm'})"
+        mask="url(#mask-${arc.id}-${isLarge ? 'lg' : 'sm'}-${size})"
         class="logo-arc-path"
         style="
           stroke-dasharray: ${pathLength}; 
-          stroke-dashoffset: ${pathLength}; 
-          transition: stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+          stroke-dashoffset: ${isLarge ? pathLength : 0}; 
+          transition: ${isLarge ? 'stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s' : 'none'};
         "
       />
     `;
@@ -240,7 +240,7 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
         r="${perimDotRadius}" 
         fill="${arc.color}" 
         class="logo-perim-dot perim-${arc.id}"
-        style="opacity: 0; transform-origin: ${dotPos.x}px ${dotPos.y}px; transition: opacity 0.5s ease-out 1.2s;"
+        style="opacity: ${isLarge ? 0 : 1}; transform-origin: ${dotPos.x}px ${dotPos.y}px; transition: ${isLarge ? 'opacity 0.5s ease-out 1.2s' : 'none'};"
       />
     `;
   });
@@ -267,8 +267,8 @@ export function renderLogoSVG(config, size = 200, isLarge = false) {
           data-color="${dot.color}"
           style="
             transform-origin: ${dot.baseX}px ${dot.baseY}px;
-            opacity: 0; 
-            transform: scale(0.5);
+            opacity: ${isLarge ? 0 : 1}; 
+            transform: ${isLarge ? 'scale(0.5)' : 'scale(1)'};
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.8s ease;
           "
         />
