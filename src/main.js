@@ -1,14 +1,36 @@
-import { generateLogoConfig, renderLogoSVG } from './logoGenerator.js';
-import './style.css';
-import investigadoresImg from './assets/images/investigadores.png';
-import transferenciaImg from './assets/images/transferencia.png';
-import congresosImg from './assets/images/congresos.png';
-import recursosImg from './assets/images/recursos.png';
-import posterWorkshop1Img from './assets/images/poster_workshop1.png';
-import posidonia1Img from './assets/images/posidonia_1.png';
-import posidonia2Img from './assets/images/posidonia_2.png';
-import posidonia3Img from './assets/images/posidonia_3.png';
-import posidonia4Img from './assets/images/posidonia_4.png';
+// Browser & WordPress Compatible Initialization
+const getAssetUrl = (path) => {
+  if (!path) return '';
+  const base = (typeof window !== 'undefined' && window.CopliteleData && window.CopliteleData.assetsUrl) 
+    ? window.CopliteleData.assetsUrl 
+    : 'assets/';
+  return path.startsWith('assets/') ? (base + path.slice(7)) : (base + path);
+};
+
+const getLogoConfig = () => {
+  if (typeof window !== 'undefined' && typeof window.generateLogoConfig === 'function') {
+    return window.generateLogoConfig();
+  }
+  return null;
+};
+
+const getLogoSVG = (config, size, isLarge) => {
+  if (!config) return '';
+  if (typeof window !== 'undefined' && typeof window.renderLogoSVG === 'function') {
+    return window.renderLogoSVG(config, size, isLarge);
+  }
+  return '';
+};
+
+const investigadoresImg = getAssetUrl('images/investigadores.png');
+const transferenciaImg = getAssetUrl('images/transferencia.png');
+const congresosImg = getAssetUrl('images/congresos.png');
+const recursosImg = getAssetUrl('images/recursos.png');
+const posterWorkshop1Img = getAssetUrl('images/poster_workshop1.png');
+const posidonia1Img = getAssetUrl('images/posidonia_1.png');
+const posidonia2Img = getAssetUrl('images/posidonia_2.png');
+const posidonia3Img = getAssetUrl('images/posidonia_3.png');
+const posidonia4Img = getAssetUrl('images/posidonia_4.png');
 
 // ----------------------------------------------------
 // 1. DATA DEFINITIONS (Mock databases in 3 languages)
@@ -1177,23 +1199,24 @@ function runLogoPulseLoop() {
 }
 
 function updateAllLogos() {
-  currentLogoConfig = generateLogoConfig();
+  currentLogoConfig = getLogoConfig();
+  if (!currentLogoConfig) return;
   
   // Render in header (small version, isLarge = false)
   const headerLogoWrapper = document.getElementById('header-logo-container');
   if (headerLogoWrapper) {
-    headerLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 44, false);
+    headerLogoWrapper.innerHTML = getLogoSVG(currentLogoConfig, 44, false);
   }
   
   const footerLogoWrapper = document.getElementById('footer-logo-container');
   if (footerLogoWrapper) {
-    footerLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 96, false);
+    footerLogoWrapper.innerHTML = getLogoSVG(currentLogoConfig, 96, false);
   }
   
   // Render in hero showcase (large version, isLarge = true)
   const heroLogoWrapper = document.getElementById('hero-logo-container');
   if (heroLogoWrapper) {
-    heroLogoWrapper.innerHTML = renderLogoSVG(currentLogoConfig, 800, true);
+    heroLogoWrapper.innerHTML = getLogoSVG(currentLogoConfig, 800, true);
   }
   
   // Trigger line-drawing ease-out animations
