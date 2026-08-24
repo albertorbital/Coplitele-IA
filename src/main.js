@@ -1466,9 +1466,9 @@ function renderTeam() {
       <article class="team-card color-variation-${colorClass}" id="card-${member.id}" style="cursor:pointer;">
         <div class="team-photo" style="aspect-ratio: ${randomAspect};">
           <!-- Original image shown by default -->
-          <img src="${member.photoHover}" class="photo-original" alt="${member.name}" loading="lazy">
+          <img src="${member.image || member.photoHover || member.thumb}" class="photo-original" alt="${member.name}" loading="lazy">
           <!-- Tinted photo fades in on hover -->
-          <img src="${member.photoHover}" class="photo-color-overlay" alt="${member.name}" loading="lazy">
+          <img src="${member.photoHover || member.image || member.thumb}" class="photo-color-overlay" alt="${member.name}" loading="lazy">
           <!-- Dark gradient for text readability -->
           <div class="photo-overlay"></div>
           <!-- Info anchored to bottom of photo -->
@@ -1634,7 +1634,7 @@ function openMemberModal(id) {
       <div class="modal-member-layout ${layoutClass}">
         <div class="modal-member-left-col" style="${isEven ? 'order: 2;' : ''}">
           <div class="modal-member-photo-wrapper">
-            <img src="${member.photoHover}" alt="${member.name}">
+            <img src="${member.image || member.photoHover || member.thumb}" alt="${member.name}">
           </div>
           <div class="modal-member-contacts-row">
             <a href="mailto:${member.email}" class="member-contact-link email-btn" title="Email">
