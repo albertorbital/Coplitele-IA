@@ -2371,7 +2371,9 @@ function renderTransferActivities(filterType = 'all') {
         return `${d.padStart(2,'0')}/${months[m.toLowerCase()] || '01'}/${y}`;
       }) : '';
 
-      const mediaHTML = `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
+      const mediaHTML = act.videoSrc 
+        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="${getAssetUrl(act.videoSrc)}" type="video/mp4"></video>`
+        : `<img src="${getAssetUrl(act.image)}" alt="${act.title[currentLang]}" loading="lazy">`;
 
       return `
       <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center; position:relative;">
@@ -2397,7 +2399,9 @@ function renderTransferActivities(filterType = 'all') {
   if (transferenciaGrid) {
     const transferences = transferActivities.filter(act => act.section === 'transferencia');
     transferenciaGrid.innerHTML = transferences.map(act => {
-      const mediaHTML = `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
+      const mediaHTML = act.videoSrc 
+        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="${getAssetUrl(act.videoSrc)}" type="video/mp4"></video>`
+        : `<img src="${getAssetUrl(act.image)}" alt="${act.title[currentLang]}" loading="lazy">`;
 
       return `
       <article class="activity-card act-card-transferencia trans-card" data-id="${act.id}" data-type="${act.type}" data-cursor-color="turquoise" style="overflow:visible !important; display:flex; flex-direction:column; text-align:center;">
@@ -2426,7 +2430,9 @@ function renderTransferActivities(filterType = 'all') {
   // ─── HOME ACTIVITIES GRID ─── same style as Actividades
   if (homeActivitiesGrid) {
     homeActivitiesGrid.innerHTML = transferActivities.slice(0, 3).map(act => {
-      const mediaHTML = `<img src="${act.image}" alt="${act.title[currentLang]}" loading="lazy">`;
+      const mediaHTML = act.videoSrc 
+        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="${getAssetUrl(act.videoSrc)}" type="video/mp4"></video>`
+        : `<img src="${getAssetUrl(act.image)}" alt="${act.title[currentLang]}" loading="lazy">`;
 
       return `
       <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center; position:relative;">
