@@ -1964,29 +1964,39 @@ dialog[open]::backdrop {
 }
 
 .modal-close {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  width: 56px;
-  height: 56px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer !important;
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  min-height: 54px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 38px;
+  font-weight: 300;
   line-height: 1;
   color: var(--color-text-muted-light);
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
+  outline: none;
+  padding: 0;
 }
 
 body.dark-mode .modal-close {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
   color: var(--color-text-muted-dark);
 }
 
 .modal-close:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: var(--color-text-light);
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #ef4444 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  transform: scale(1.12) rotate(90deg);
+  cursor: pointer !important;
 }
 
 .modal-body p {
