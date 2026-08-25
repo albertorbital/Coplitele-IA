@@ -1512,6 +1512,8 @@ function renderNewsFeed() {
   });
 }
 
+let teamDisplayOrder = null;
+
 function renderTeam() {
   const teamGrid = document.getElementById('team-grid');
   if (!teamGrid) return;
@@ -1523,10 +1525,16 @@ function renderTeam() {
     teal:  'rgba(20, 184, 166, 0.7)'
   };
   
-  // Shuffle array securely for randomized masonry layout
-  const shuffledTeam = [...teamMembers].sort(() => Math.random() - 0.5);
+  // Shuffle array once on initial page load (does not change order on language change)
+  if (!teamDisplayOrder || teamDisplayOrder.length !== teamMembers.length || !teamDisplayOrder.every(m => teamMembers.some(curr => curr.id === m.id))) {
+    teamDisplayOrder = [...teamMembers].sort(() => Math.random() - 0.5);
+  }
   
-  teamGrid.innerHTML = shuffledTeam.map((member, i) => {
+  const displayTeam = teamDisplayOrder.map(orderedM => {
+    return teamMembers.find(curr => curr.id === orderedM.id) || orderedM;
+  });
+  
+  teamGrid.innerHTML = displayTeam.map((member, i) => {
     const colorClass = colors[i % colors.length];
     const accent = colorAccents[colorClass];
     const roleText = member.role[currentLang];
