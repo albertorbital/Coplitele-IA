@@ -2745,7 +2745,23 @@ function openRecModal(id) {
 }
 
 function renderActivityDetail(id) {
-  const activity = transferActivities.find(a => a.id === id);
+  let allActivities = [];
+  if (typeof transferActivities !== 'undefined' && Array.isArray(transferActivities)) {
+    allActivities.push(...transferActivities);
+  }
+  if (typeof window !== 'undefined' && window.CopliteleWPData) {
+    if (Array.isArray(window.CopliteleWPData.actividades)) allActivities.push(...window.CopliteleWPData.actividades);
+    if (Array.isArray(window.CopliteleWPData.transferencia)) allActivities.push(...window.CopliteleWPData.transferencia);
+  }
+  const cleanId = decodeURIComponent(String(id || '')).toLowerCase().trim();
+  const activity = allActivities.find(a => a && (
+    String(a.id || '').toLowerCase() === cleanId ||
+    String(a.wp_id || '') === cleanId ||
+    String(a.slug || '').toLowerCase() === cleanId ||
+    String(a.id || '').replace(/^wp-post-/, '') === cleanId ||
+    (a.name && typeof a.name === 'string' && a.name.toLowerCase().includes(cleanId)) ||
+    (getI18nText(a.title) && getI18nText(a.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(cleanId))
+  ));
   const detailContainer = document.getElementById('view-actividad-detalle');
   if (!detailContainer || !activity) return;
 
