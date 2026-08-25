@@ -1559,18 +1559,17 @@ function renderTeam() {
   
   // Add events to details buttons and whole cards
   document.querySelectorAll('.team-card').forEach(card => {
-    const memberId = card.id.replace('card-', '');
     card.addEventListener('click', (e) => {
-      if (e.target.classList.contains('view-member-btn')) return;
-      openMemberModal(memberId);
+      const memberId = card.getAttribute('data-id') || card.id.replace(/^card-/, '');
+      if (memberId) openMemberModal(memberId);
     });
   });
 
   document.querySelectorAll('.view-member-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      e.stopPropagation(); // prevent card click
-      const memberId = e.target.getAttribute('data-id');
-      openMemberModal(memberId);
+      e.stopPropagation(); // prevent card click bubbling
+      const memberId = btn.getAttribute('data-id') || btn.closest('.team-card')?.getAttribute('data-id') || btn.closest('.team-card')?.id.replace(/^card-/, '');
+      if (memberId) openMemberModal(memberId);
     });
   });
 
