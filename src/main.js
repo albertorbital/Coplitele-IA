@@ -956,7 +956,7 @@ const translations = {
   en: {
     menu_inicio: "Home",
     menu_proyecto: "Project",
-    menu_impacto: "Impact & Dissemination",
+    menu_impacto: "Impact & Communication",
     hero_tag: "Active Investigation Project",
     hero_main_title: "Redesigning the Future of Education with <span class=\"blue-highlight\">Codesign</span> & <span class=\"green-highlight\">Artificial Intelligence</span>",
     hero_desc: "COPLITELE-IA is a research project transforming higher education by integrating Generative Artificial Intelligence (GAI) through an innovative pedagogical lens. Through educational co-design between faculty and students, we champion personalized learning using flexible itineraries, fostering connected virtual environments that ensure equity, inclusion, and educational quality.",
