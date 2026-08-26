@@ -8,12 +8,24 @@ const getI18nText = (val) => {
   return String(val);
 };
 
+window.handleImgLoad = function(img) {
+  if (!img) return;
+  img.classList.add('is-loaded');
+  const wrapper = img.closest('.img-loader-wrapper');
+  if (wrapper) wrapper.classList.add('is-loaded');
+};
+
 const getAssetUrl = (path) => {
   if (!path) return '';
-  const base = (typeof window !== 'undefined' && window.CopliteleData && window.CopliteleData.assetsUrl) 
-    ? window.CopliteleData.assetsUrl 
-    : 'assets/';
-  return path.startsWith('assets/') ? (base + path.slice(7)) : (base + path);
+  let strPath = String(path).trim();
+  if (strPath.startsWith('http://') || strPath.startsWith('https://') || strPath.startsWith('data:')) return strPath;
+  if (strPath.startsWith('./')) strPath = strPath.substring(2);
+  if (strPath.startsWith('/')) strPath = strPath.substring(1);
+  if (typeof window !== 'undefined' && window.CopliteleData && window.CopliteleData.assetsUrl) {
+    return window.CopliteleData.assetsUrl + (strPath.startsWith('assets/') ? strPath.slice(7) : strPath);
+  }
+  const base = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : '/';
+  return base + strPath;
 };
 
 const getLogoConfig = () => {
@@ -1747,91 +1759,94 @@ function openMemberModal(id) {
   const modalContent = modal.querySelector('.modal-content-placeholder');
   if (!modalContent) return;
   
-  modal.classList.add('modal-large');
+  modal.classList.remove('green-tint-modal');
+  modal.classList.add('modal-large', 'modal-member-popup');
   
   // Make sure we clean up the class on modal close
   modal.addEventListener('close', () => {
-    modal.classList.remove('modal-large');
+    modal.classList.remove('modal-large', 'modal-member-popup', 'green-tint-modal');
   }, { once: true });
   
-  // Alternate layout depending on member ID string character (simulates random but consistent)
-  const isEven = member.id.charCodeAt(member.id.length - 1) % 2 === 0;
-  const layoutClass = isEven ? 'layout-inverted' : '';
-  
+  const memberName = getI18nText(member.name);
+  const memberRole = member.role ? (getI18nText(member.role)) : 'Investigador/a';
+  const memberTitle = member.title ? (getI18nText(member.title)) : '';
+  const memberBio = member.bio ? getI18nText(member.bio) : '';
+
   modalContent.innerHTML = `
-    <div class="modal-header">
-      <div>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <span class="member-role-badge ${member.role.en.toLowerCase().includes('principal') ? 'badge-ip' : 'badge-member'}">
-            ${member.role[currentLang]}
-          </span>
+    <div class="member-modal-wrapper">
+      <div class="member-modal-photo-column">
+        <div class="modal-member-photo-wrapper img-loader-wrapper">
+          <div class="img-skeleton-spinner">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+              <path d="M12 2a10 10 0 0 1 10 10"/>
+            </svg>
+          </div>
+          <img src="${getAssetUrl(member.photoHover || member.photo || member.image || member.thumb || member.photoDefault)}" alt="${memberName}" class="fade-in-img member-fullheight-photo" onload="handleImgLoad(this)">
         </div>
-        <h3 style="font-size: 26px; font-weight: 850; margin: 0; color: var(--color-text-light);">${member.name}</h3>
-        <p style="font-size: 14.5px; font-weight: 550; color: var(--color-blue); margin: 6px 0 0 0;">${member.title[currentLang]}</p>
       </div>
-      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-member-layout ${layoutClass}">
-        <div class="modal-member-left-col" style="${isEven ? 'order: 2;' : ''}">
-          <div class="modal-member-photo-wrapper">
-            <img src="${member.image || member.photoHover || member.thumb}" alt="${member.name}">
+      
+      <div class="member-modal-content-column">
+        <div class="member-modal-header">
+          <div class="member-modal-title-group">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span class="member-role-badge ${memberRole.toLowerCase().includes('principal') ? 'badge-ip' : 'badge-member'}">
+                ${memberRole}
+              </span>
+            </div>
+            <h3 class="member-modal-name">${memberName}</h3>
+            <p class="member-modal-subtitle">${memberTitle}</p>
           </div>
-          <div class="modal-member-contacts-row">
-            <a href="mailto:${member.email}" class="member-contact-link email-btn" title="Email">
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </a>
-            <a href="https://orcid.org/${member.orcid}" target="_blank" class="member-contact-link orcid-btn" title="ORCID">
-              <svg viewBox="0 0 24 24" width="22" height="22" class="orcid-svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-4.631 4.378a.95.95 0 1 0 0 1.9.95.95 0 0 0 0-1.9zm-.722 3.038h1.444v7.441H6.647V9.416zm3.562 0h3.9c2.812 0 4.1 1.703 4.1 3.722 0 1.66-.769 3.722-4.041 3.722h-2.303V9.416h-1.656zm1.444 1.303v4.838h2.241c2.253 0 2.819-1.372 2.819-2.422 0-1.372-.872-2.416-2.819-2.416h-2.241z"/>
-              </svg>
-            </a>
-            <a href="${member.researchgate}" target="_blank" class="member-contact-link rg-btn" title="ResearchGate">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M19.5 0h-15C2.015 0 0 2.015 0 4.5v15C0 21.985 2.015 24 4.5 24h15c2.485 0 4.5-2.015 4.5-4.5v-15C24 2.015 21.985 0 19.5 0zM8.76 16.24c-1.34 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42c.46 0 .89.13 1.25.35V9.45c-.36-.12-.74-.18-1.25-.18-2.61 0-4.73 2.12-4.73 4.73s2.12 4.73 4.73 4.73c.96 0 1.83-.29 2.56-.8v-3.05c-.65.71-1.57 1.3-2.56 1.3zm7.84-6.97c-.96 0-1.83.29-2.56.8v3.05c.65-.71 1.57-1.3 2.56-1.3 1.34 0 2.42 1.08 2.42 2.42s-1.08 2.42-2.42 2.42c-.46 0-.89-.13-1.25-.35v2.3c.36.12.74.18 1.25.18 2.61 0 4.73-2.12 4.73-4.73s-2.12-4.73-4.73-4.73z"/>
-              </svg>
-            </a>
-          </div>
+          <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
         </div>
-        <div class="modal-member-right-col">
-          <p class="modal-bio-text" style="font-size: 15.5px; line-height: 1.7; margin-top: 0; margin-bottom: 24px; color: var(--color-text-muted-light);">${member.bio[currentLang]}</p>
-          <div class="modal-member-details-box" style="background: rgba(0,0,0,0.02); border: 1px solid var(--color-border-light); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; font-size: 14.5px;">
-            <div><strong>Email:</strong> <a href="mailto:${member.email}" style="color: var(--color-blue); text-decoration: none; font-weight: 600;">${member.email}</a></div>
-            <div><strong>ORCID:</strong> <a href="https://orcid.org/${member.orcid}" target="_blank" style="color: var(--color-blue); text-decoration: none; font-weight: 600; font-family: monospace; letter-spacing: 0.02em;">${member.orcid}</a></div>
+
+        <div class="member-modal-body-scroll">
+          <p class="modal-bio-text">${memberBio}</p>
+          
+          <!-- Interactive contact icons -->
+          <div class="modal-member-contacts-row">
+            ${member.email ? `
+              <a href="mailto:${member.email}" class="member-contact-link email-btn" title="Email: ${member.email}">
+                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="email-svg">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.orcid ? `
+              <a href="https://orcid.org/${member.orcid.replace(/^https?:\/\/orcid\.org\//, '')}" target="_blank" class="member-contact-link orcid-btn" title="ORCID: ${member.orcid}">
+                <svg viewBox="0 0 24 24" width="22" height="22" class="orcid-svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-4.631 4.378a.95.95 0 1 0 0 1.9.95.95 0 0 0 0-1.9zm-.722 3.038h1.444v7.441H6.647V9.416zm3.562 0h3.9c2.812 0 4.1 1.703 4.1 3.722 0 1.66-.769 3.722-4.041 3.722h-2.303V9.416h-1.656zm1.444 1.303v4.838h2.241c2.253 0 2.819-1.372 2.819-2.422 0-1.372-.872-2.416-2.819-2.416h-2.241z"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.researchgate ? `
+              <a href="${member.researchgate}" target="_blank" class="member-contact-link rg-btn" title="ResearchGate: ${member.researchgate}">
+                <svg viewBox="0 0 24 24" width="24" height="24" class="rg-svg">
+                  <text x="2.5" y="18" font-size="16.5" font-weight="900" font-family="Georgia, serif" fill="currentColor">R</text>
+                  <text x="14" y="12" font-size="12" font-weight="800" font-family="Georgia, serif" style="font-style: italic;" fill="currentColor">g</text>
+                </svg>
+              </a>
+            ` : ''}
           </div>
+
           <div class="modal-publications-section" style="${(member.pubIds && member.pubIds.length > 0) ? 'border-top: 1px solid var(--color-border-light); padding-top: 20px; margin-top: 4px;' : 'display:none;'}">
-            <h4 style="margin-top: 0; margin-bottom: 10px; font-family: var(--font-primary); font-size: 13px; font-weight: 700; color: var(--color-text-light);">${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}</h4>
-            <ul style="padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 4px;">
+            <h4 style="margin-top: 0; margin-bottom: 12px; font-family: var(--font-primary); font-size: 14px; font-weight: 800; color: #0f172a;">
+              ${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}
+            </h4>
+            <ul style="padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;">
               ${
                 (member.pubIds || []).map(pid => {
                   const pub = publications.find(p => p.id === pid);
                   if (!pub) return '';
-                  const year = pub.citation.match(/(\d{4})/)?.[0] || '';
+                  const year = (pub.citation && pub.citation.match(/(\d{4})/)?.[0]) || pub.year || '';
                   const url = pub.doi ? `https://doi.org/${pub.doi}` : pub.zoteroUrl;
-                  return `<li><a
-                    href="${url}"
-                    target="_blank"
-                    class="member-pub-link"
-                    style="
-                      display: inline-flex;
-                      align-items: baseline;
-                      gap: 6px;
-                      font-size: 13px;
-                      line-height: 1.5;
-                      color: var(--color-text-muted-light);
-                      text-decoration: none;
-                      border-radius: 6px;
-                      padding: 3px 7px 3px 5px;
-                      margin: -3px -7px -3px -5px;
-                      transition: background 0.18s ease, color 0.18s ease;
-                      cursor: pointer;
-                    "
-                    onmouseover="this.style.background='#a78bfa'; this.style.color='#ffffff';"
-                    onmouseout="this.style.background='transparent'; this.style.color='var(--color-text-muted-light)';"
-                  ><span style="font-weight: 700; flex-shrink: 0; font-family: monospace; color: inherit;">(${year})</span><span style="color: inherit;">${pub.title[currentLang]}</span></a></li>`;
+                  return `<li>
+                    <a href="${url}" target="_blank" class="member-post-box box-type-article" style="text-decoration:none; display:flex; align-items:center; gap:8px;">
+                      <span class="member-post-type-badge">${year ? `(${year})` : 'Publicación'}</span>
+                      <span class="member-post-title-text">${getI18nText(pub.title)}</span>
+                    </a>
+                  </li>`;
                 }).join('')
               }
             </ul>
@@ -1840,10 +1855,18 @@ function openMemberModal(id) {
       </div>
     </div>
   `;
-  
-  adaptModalColors(modalContent);
+
   modal.showModal();
   setupModalClose(modal);
+
+  const imgEl = modalContent.querySelector('.member-fullheight-photo');
+  if (imgEl) {
+    if (imgEl.complete && imgEl.naturalWidth > 0) {
+      handleImgLoad(imgEl);
+    } else {
+      imgEl.addEventListener('load', () => handleImgLoad(imgEl));
+    }
+  }
 }
 
 function openPubModal(id) {
@@ -2389,9 +2412,16 @@ function handleRouting() {
   const views = document.querySelectorAll('.spa-view');
   views.forEach(v => v.classList.remove('active'));
   
-  if (path.startsWith('actividad/')) {
-    detailId = path.substring('actividad/'.length);
+  const normPath = path.replace(/\/+$/, '');
+  if (normPath.startsWith('actividad/') || normPath.startsWith('actividades/') || normPath.startsWith('post/') || normPath.startsWith('entrada/')) {
+    detailId = normPath.replace(/^(actividad|actividades|post|entrada)\//, '').trim();
     path = 'actividad-detalle';
+  } else if (normPath.startsWith('miembro/') || normPath.startsWith('equipo/')) {
+    const memberId = normPath.replace(/^(miembro|equipo)\//, '').trim();
+    path = 'proyecto';
+    setTimeout(() => {
+      openMemberModal(memberId);
+    }, 150);
   }
   
   // Redirect old routes to unified #/impacto with anchors
