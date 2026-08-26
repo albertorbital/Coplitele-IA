@@ -4197,7 +4197,12 @@ body.dark-mode .member-modal-subtitle {
   text-align: left !important;
   color: var(--color-text-muted-light);
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 18px !important;
+  white-space: pre-line;
+}
+
+.member-modal-body-scroll .modal-bio-text:last-of-type {
+  margin-bottom: 24px !important;
 }
 
 body.dark-mode .member-modal-body-scroll .modal-bio-text {

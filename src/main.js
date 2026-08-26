@@ -75,9 +75,9 @@ const teamMembers = [
       en: "Associate Professor of Educational Technology, UIB"
     },
     bio: {
-      es: "Doctora en Filosofía y Ciencias de la Educación. Profesora titular en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Codirectora del Grupo de Tecnología Educativa (GTE). Su investigación se centra en el codiseño educativo, entornos virtuales y la innovación docente.",
-      ca: "Doctora en Filosofia i Ciències de l'Educació. Professora titular al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Codirectora del Grup de Tecnologia Educativa (GTE). La seva recerca se centra en el codisseny educatiu, entorns virtuals i la innovació docent.",
-      en: "PhD in Philosophy and Educational Sciences. Associate Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Co-director of the Educational Technology Group (GTE). Her research focuses on educational co-design, virtual environments, and teaching innovation."
+      es: "Doctora en Filosofía y Ciencias de la Educación. Profesora titular en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Codirectora del Grupo de Tecnología Educativa (GTE).\n\nSu investigación se centra en el codiseño educativo, entornos virtuales y la innovación docente.",
+      ca: "Doctora en Filosofia i Ciències de l'Educació. Professora titular al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Codirectora del Grup de Tecnologia Educativa (GTE).\n\nLa seva recerca se centra en el codisseny educatiu, entorns virtuals i la innovació docent.",
+      en: "PhD in Philosophy and Educational Sciences. Associate Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Co-director of the Educational Technology Group (GTE).\n\nHer research focuses on educational co-design, virtual environments, and teaching innovation."
     },
     email: "adolfina.perez@uib.es",
     orcid: "0000-0001-9721-6548",
@@ -100,9 +100,9 @@ const teamMembers = [
       en: "Professor of Educational Technology, UIB"
     },
     bio: {
-      es: "Doctora en Tecnología Educativa y profesora en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Miembro activo del Grupo de Tecnología Educativa (GTE). Especializada en el diseño de recursos virtuales, integración de TIC y metodologías activas.",
-      ca: "Doctora en Tecnologia Educativa i professora al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Membre actiu del Grup de Tecnologia Educativa (GTE). Especialitzada en el disseny de recursos virtuals, integració de TIC i metodologies actives.",
-      en: "PhD in Educational Technology and Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Active member of the Educational Technology Group (GTE). Specialized in the design of virtual resources, ICT integration, and active methodologies."
+      es: "Doctora en Tecnología Educativa y profesora en el Departamento de Pedagogía Aplicada y Psicología de la Educación de la UIB. Miembro activo del Grupo de Tecnología Educativa (GTE).\n\nEspecializada en el diseño de recursos virtuales, integración de TIC y metodologías activas.",
+      ca: "Doctora en Tecnologia Educativa i professora al Departament de Pedagogia Aplicada i Psicologia de l'Educació de la UIB. Membre actiu del Grup de Tecnologia Educativa (GTE).\n\nEspecialitzada en el disseny de recursos virtuals, integració de TIC i metodologies actives.",
+      en: "PhD in Educational Technology and Professor in the Department of Applied Pedagogy and Educational Psychology at UIB. Active member of the Educational Technology Group (GTE).\n\nSpecialized in the design of virtual resources, ICT integration, and active methodologies."
     },
     email: "barbara.debenito@uib.es",
     orcid: "0000-0002-4589-9812",
@@ -125,9 +125,9 @@ const teamMembers = [
       en: "Full Professor, UIB"
     },
     bio: {
-      es: "Catedrático del Área de Didáctica y Organización Escolar de la UIB. Fundador del Grupo de Tecnología Educativa (GTE). Amplia trayectoria en el diseño de entornos virtuales de aprendizaje, formación del profesorado en TIC y educación flexible y a distancia.",
-      ca: "Catedràtic de l'Àrea de Didàctica i Organització Escolar de la UIB. Fundador del Grup de Tecnologia Educativa (GTE). Àmplia trajectòria en el disseny d'entorns virtuals d'aprenentatge, formació del professorat en TIC i educació flexible i a distància.",
-      en: "Full Professor in Didactics and School Organization at UIB. Founder of the Educational Technology Group (GTE). Extensive career in designing virtual learning environments, teacher training in ICT, and flexible and distance education."
+      es: "Catedrático del Área de Didáctica y Organización Escolar de la UIB. Fundador del Grupo de Tecnología Educativa (GTE).\n\nAmplia trayectoria en el diseño de entornos virtuales de aprendizaje, formación del profesorado en TIC y educación flexible y a distancia.",
+      ca: "Catedràtic de l'Àrea de Didàctica i Organització Escolar de la UIB. Fundador del Grup de Tecnologia Educativa (GTE).\n\nÀmplia trajectòria en el disseny d'entorns virtuals d'aprenentatge, formació del professorat en TIC i educació flexible i a distància.",
+      en: "Full Professor in Didactics and School Organization at UIB. Founder of the Educational Technology Group (GTE).\n\nExtensive career in designing virtual learning environments, teacher training in ICT, and flexible and distance education."
     },
     email: "jesus.salinas@uib.es",
     orcid: "0000-0003-2415-8822",
@@ -1775,6 +1775,19 @@ function openMemberModal(id) {
   const isPhotoRight = memberIndex !== -1 ? (memberIndex % 2 === 1) : (member.id.charCodeAt(0) % 2 === 1);
   const layoutClass = isPhotoRight ? 'photo-on-right' : 'photo-on-left';
 
+  function formatBioHTML(bioContent) {
+    if (!bioContent) return '';
+    const text = getI18nText(bioContent).trim();
+    if (text.includes('<p>') || text.includes('<p ')) {
+      return text.replace(/<p(\s+[^>]*)?>/gi, '<p class="modal-bio-text">');
+    }
+    const paragraphs = text.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+    if (paragraphs.length > 1) {
+      return paragraphs.map(p => `<p class="modal-bio-text">${p.replace(/\n/g, '<br>')}</p>`).join('');
+    }
+    return `<p class="modal-bio-text">${text.replace(/\n/g, '<br>')}</p>`;
+  }
+
   modalContent.innerHTML = `
     <div class="member-modal-wrapper ${layoutClass}">
       <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">
@@ -1810,7 +1823,7 @@ function openMemberModal(id) {
         </div>
 
         <div class="member-modal-body-scroll">
-          <p class="modal-bio-text">${memberBio}</p>
+          ${formatBioHTML(member.bio)}
           
           <!-- Interactive contact icons -->
           <div class="modal-member-contacts-row">
