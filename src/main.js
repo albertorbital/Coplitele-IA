@@ -1771,9 +1771,12 @@ function openMemberModal(id) {
   const memberRole = member.role ? (getI18nText(member.role)) : 'Investigador/a';
   const memberTitle = member.title ? (getI18nText(member.title)) : '';
   const memberBio = member.bio ? getI18nText(member.bio) : '';
+  const memberIndex = teamMembers.findIndex(m => m.id === id);
+  const isPhotoRight = memberIndex !== -1 ? (memberIndex % 2 === 1) : (member.id.charCodeAt(0) % 2 === 1);
+  const layoutClass = isPhotoRight ? 'photo-on-right' : 'photo-on-left';
 
   modalContent.innerHTML = `
-    <div class="member-modal-wrapper">
+    <div class="member-modal-wrapper ${layoutClass}">
       <div class="member-modal-photo-column">
         <div class="modal-member-photo-wrapper img-loader-wrapper">
           <div class="img-skeleton-spinner">
