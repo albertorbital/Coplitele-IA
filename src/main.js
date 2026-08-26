@@ -1,4 +1,13 @@
 // Browser & WordPress Compatible Initialization
+const getI18nText = (val) => {
+  if (!val) return '';
+  if (typeof val === 'object') {
+    const lang = (typeof currentLang !== 'undefined') ? currentLang : 'es';
+    return val[lang] || val.es || val.ca || val.en || Object.values(val)[0] || '';
+  }
+  return String(val);
+};
+
 const getAssetUrl = (path) => {
   if (!path) return '';
   const base = (typeof window !== 'undefined' && window.CopliteleData && window.CopliteleData.assetsUrl) 
@@ -486,6 +495,58 @@ const newsFeedItems = [
 ];
 
 const transferActivities = [
+  {
+    id: "formacion-prueba",
+    section: "actividades",
+    filterType: "formacion",
+    type: "formacion",
+    tag: { es: "Formación", ca: "Formació", en: "Training" },
+    title: {
+      es: "Formación Prueba",
+      ca: "Formación Prueba",
+      en: "Formación Prueba"
+    },
+    desc: {
+      es: "Negre, Xisca Urbina, Santos Castañeda, Linda",
+      ca: "Negre, Xisca Urbina, Santos Castañeda, Linda",
+      en: "Negre, Xisca Urbina, Santos Castañeda, Linda"
+    },
+    pills: ["Formación"],
+    date: "22 de July de 2026",
+    location: "UIB, Palma, Spain",
+    image: "./images/3.png",
+    loremIpsum: {
+      es: "<p>Descripción Prueba</p>",
+      ca: "<p>Descripción Prueba</p>",
+      en: "<p>Descripción Prueba</p>"
+    }
+  },
+  {
+    id: "taller-sobre-codiseno-de-juegos",
+    section: "transferencia",
+    filterType: "taller",
+    type: "taller",
+    tag: { es: "Taller", ca: "Taller", en: "Workshop" },
+    title: {
+      es: "Taller sobre codiseño de juegos",
+      ca: "Taller sobre codiseño de juegos",
+      en: "Workshop on game co-design"
+    },
+    desc: {
+      es: "De Benito, Bàrbara Tur, Gemma Tatiana Velarde",
+      ca: "De Benito, Bàrbara Tur, Gemma Tatiana Velarde",
+      en: "De Benito, Bàrbara Tur, Gemma Tatiana Velarde"
+    },
+    pills: ["Taller"],
+    date: "23 de April de 2026",
+    location: "UIB, Palma, Spain",
+    image: "./images/4.png",
+    loremIpsum: {
+      es: "<p>Taller en el marco del proyecto europeo Lecture dirigido a los docentes</p>",
+      ca: "<p>Taller en el marco del proyecto europeo Lecture dirigido a los docentes</p>",
+      en: "<p>Workshop within the framework of the European Lecture project aimed at teachers</p>"
+    }
+  },
   {
     id: "act-iag-multianalisis",
     section: "actividades",
@@ -2778,13 +2839,18 @@ function renderActivityDetail(id) {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, 50);
 
+  const actTitle = getI18nText(activity.title) || getI18nText(activity.name) || '';
+  const actTag = activity.tag ? getI18nText(activity.tag) : 'Actividad';
+
   // Featured media: full-width borderless image (doubled size)
-  const featuredMedia = `<img src="${activity.image}" alt="${activity.title[currentLang]}" style="width:100%; height:540px; object-fit:cover; border-radius:0; border:none; outline:none; display:block;">`;
+  const featuredMedia = `<img src="${activity.image}" alt="${actTitle}" style="width:100%; height:540px; object-fit:cover; border-radius:0; border:none; outline:none; display:block;">`;
 
   const isTransferencia = activity.section === 'transferencia';
   const buttonClass = isTransferencia ? 'btn-outline-turquoise' : 'btn-outline-blue';
   const backAnchor = isTransferencia ? '#/impacto#transferencia' : '#/impacto#actividades';
   const typeColor = isTransferencia ? '#14b8a6' : '#1d5bfe';
+
+  const bodyContent = getI18nText(activity.loremIpsum) || getI18nText(activity.desc) || '';
 
   detailContainer.innerHTML = `
     <div class="section-container" style="max-width: 960px; padding: 40px 20px;">
@@ -2800,18 +2866,18 @@ function renderActivityDetail(id) {
         <div class="detail-inner-panel" style="padding: 0 36px;">
           <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap;">
             <span style="font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: ${typeColor}; padding: 4px 12px; border-radius: 20px; border: 1.5px solid ${typeColor};">
-              ${activity.tag[currentLang]}
+              ${actTag}
             </span>
-            <span style="font-size: 13px; color: var(--color-text-muted-light);">${activity.date}</span>
-            <span style="font-size: 13px; color: var(--color-text-muted-light);">· ${activity.location}</span>
+            <span style="font-size: 13px; color: var(--color-text-muted-light);">${activity.date || ''}</span>
+            ${activity.location ? `<span style="font-size: 13px; color: var(--color-text-muted-light);">· ${activity.location}</span>` : ''}
           </div>
           
           <h1 style="font-size: clamp(22px, 4vw, 34px); margin-bottom: 28px; font-family: var(--font-primary); font-weight: 800; line-height: 1.25;">
-            ${activity.title[currentLang]}
+            ${actTitle}
           </h1>
           
           <div class="activity-detail-lorem" style="font-size: 15.5px; line-height: 1.8; text-align: justify;">
-            ${activity.loremIpsum[currentLang]}
+            ${bodyContent}
           </div>
         </div>
       </div>
