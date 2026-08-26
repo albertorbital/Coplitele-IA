@@ -1797,7 +1797,12 @@ function openMemberModal(id) {
             <h3 class="member-modal-name">${memberName}</h3>
             <p class="member-modal-subtitle">${memberTitle}</p>
           </div>
-          <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
+          <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">
+            <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
 
         <div class="member-modal-body-scroll">
@@ -1979,16 +1984,42 @@ function adaptModalColors(placeholder) {
   }
 }
 
+function closeModalWithAnimation(modal) {
+  if (!modal || !modal.open) return;
+  if (modal.classList.contains('is-closing')) return;
+  modal.classList.add('is-closing');
+  setTimeout(() => {
+    modal.close();
+    modal.classList.remove('is-closing', 'modal-large', 'modal-member-popup', 'green-tint-modal');
+  }, 240);
+}
+
 function setupModalClose(modal) {
   const closeBtn = modal.querySelector('#modal-close-btn');
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.close();
-    });
+    closeBtn.onclick = (e) => {
+      e.stopPropagation();
+      closeModalWithAnimation(modal);
+    };
   }
   
-  // Close when clicking backdrop
-  modal.addEventListener('click', (e) => {
+  modal.onclick = (e) => {
+    // If it's a member popup, clicking ANYWHERE that is not the social icons or publication links closes the modal
+    if (modal.classList.contains('modal-member-popup')) {
+      const interactiveEl = e.target.closest('a, button, .member-contact-link, .member-post-box, .member-pub-link');
+      if (interactiveEl) {
+        if (interactiveEl.id === 'modal-close-btn' || interactiveEl.classList.contains('modal-close')) {
+          e.stopPropagation();
+          closeModalWithAnimation(modal);
+        }
+        return; // Let user interact with email, ORCID, ResearchGate or publications
+      }
+      // Clicked anywhere else in the modal (background, image, text, white area)
+      closeModalWithAnimation(modal);
+      return;
+    }
+    
+    // Close standard dialogs when clicking backdrop
     const dialogDimensions = modal.getBoundingClientRect();
     if (
       e.clientX < dialogDimensions.left ||
@@ -1996,9 +2027,9 @@ function setupModalClose(modal) {
       e.clientY < dialogDimensions.top ||
       e.clientY > dialogDimensions.bottom
     ) {
-      modal.close();
+      closeModalWithAnimation(modal);
     }
-  });
+  };
 }
 
 // ----------------------------------------------------
