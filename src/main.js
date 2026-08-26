@@ -1777,6 +1777,13 @@ function openMemberModal(id) {
 
   modalContent.innerHTML = `
     <div class="member-modal-wrapper ${layoutClass}">
+      <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">
+        <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
       <div class="member-modal-photo-column">
         <div class="modal-member-photo-wrapper img-loader-wrapper">
           <div class="img-skeleton-spinner">
@@ -1800,12 +1807,6 @@ function openMemberModal(id) {
             <h3 class="member-modal-name">${memberName}</h3>
             <p class="member-modal-subtitle">${memberTitle}</p>
           </div>
-          <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">
-            <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
         </div>
 
         <div class="member-modal-body-scroll">
