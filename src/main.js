@@ -1824,8 +1824,8 @@ function openMemberModal(id) {
             ` : ''}
             ${member.orcid ? `
               <a href="https://orcid.org/${member.orcid.replace(/^https?:\/\/orcid\.org\//, '')}" target="_blank" class="member-contact-link orcid-btn" title="ORCID: ${member.orcid}">
-                <svg viewBox="0 0 24 24" width="22" height="22" class="orcid-svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-4.631 4.378a.95.95 0 1 0 0 1.9.95.95 0 0 0 0-1.9zm-.722 3.038h1.444v7.441H6.647V9.416zm3.562 0h3.9c2.812 0 4.1 1.703 4.1 3.722 0 1.66-.769 3.722-4.041 3.722h-2.303V9.416h-1.656zm1.444 1.303v4.838h2.241c2.253 0 2.819-1.372 2.819-2.422 0-1.372-.872-2.416-2.819-2.416h-2.241z"/>
+                <svg viewBox="0 0 24 24" width="22" height="22" class="orcid-svg" fill="currentColor">
+                  <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.041-2.063 4.041-3.722 0-2.019-1.288-3.722-4.1-3.722h-2.238z"/>
                 </svg>
               </a>
             ` : ''}

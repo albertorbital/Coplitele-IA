@@ -4325,47 +4325,71 @@ body.dark-mode .member-modal-close-btn:hover {
 }
 
 .member-contact-link {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.05);
-  color: var(--color-text-muted-light);
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.03);
+  color: #94a3b8;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.member-contact-link svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
 body.dark-mode .member-contact-link {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.08);
-  color: var(--color-text-muted-dark);
+  background: rgba(255, 255, 255, 0.04);
+  color: #64748b;
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .member-contact-link:hover {
   transform: translateY(-3px);
+  border-color: transparent !important;
+  color: #ffffff !important;
 }
 
+.member-contact-link:hover svg {
+  color: #ffffff !important;
+}
+.member-contact-link:hover svg path {
+  fill: #ffffff !important;
+}
+.member-contact-link:hover svg text {
+  fill: #ffffff !important;
+}
+
+/* 1. EMAIL BUTTON */
 .member-contact-link.email-btn:hover {
-  background: rgba(29, 91, 254, 0.1);
-  color: var(--color-blue);
-  border-color: rgba(29, 91, 254, 0.2);
-  box-shadow: 0 4px 12px rgba(29, 91, 254, 0.15);
+  background: var(--color-blue);
+  box-shadow: 0 4px 14px rgba(29, 91, 254, 0.35);
+}
+.member-contact-link.email-btn:hover svg {
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+.member-contact-link.email-btn:hover svg path,
+.member-contact-link.email-btn:hover svg polyline {
+  fill: none !important;
+  stroke: #ffffff !important;
 }
 
+/* 2. ORCID BUTTON */
 .member-contact-link.orcid-btn:hover {
-  background: rgba(166, 206, 57, 0.1);
-  color: #a6ce39;
-  border-color: rgba(166, 206, 57, 0.2);
-  box-shadow: 0 4px 12px rgba(166, 206, 57, 0.15);
+  background: #a6ce39;
+  box-shadow: 0 4px 14px rgba(166, 206, 57, 0.35);
 }
 
+/* 3. RESEARCHGATE BUTTON */
 .member-contact-link.rg-btn:hover {
-  background: rgba(0, 204, 153, 0.1);
-  color: #00cc99;
-  border-color: rgba(0, 204, 153, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 204, 153, 0.15);
+  background: #00cc99;
+  box-shadow: 0 4px 14px rgba(0, 204, 153, 0.35);
 }
 
 /* Description Text & Meta box upgrades in Proyecto page */
