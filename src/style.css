@@ -4067,11 +4067,13 @@ dialog.modal-large .modal-body::-webkit-scrollbar-thumb:hover,
   background: rgba(0, 0, 0, 0.32);
 }
 
-.pub-modal-poster-card {
+.pub-modal-poster-card,
+.rec-modal-poster-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.pub-modal-poster-card:hover {
+.pub-modal-poster-card:hover,
+.rec-modal-poster-card:hover {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22) !important;
 }
 
