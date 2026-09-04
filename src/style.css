@@ -7230,8 +7230,24 @@ body.dark-mode .post-collaboration-with-showcase {
   font-weight: 500 !important;
 }
 
+.collab-with-content a {
+  color: var(--color-blue, #1d5bfe) !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease, opacity 0.2s ease !important;
+}
+
+.collab-with-content a:hover {
+  color: #1447d1 !important;
+  opacity: 0.85 !important;
+}
+
 body.dark-mode .collab-with-content {
   color: #f1f5f9 !important;
+}
+
+body.dark-mode .collab-with-content a {
+  color: #60a5fa !important;
 }
 
 .post-collaborators-showcase {
