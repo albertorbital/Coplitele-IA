@@ -1,6 +1,41 @@
-// Browser & WordPress Compatible Initialization
+// WordPress Browser-Compatible Initialization
+const getAssetUrl = (path) => {
+  if (!path) return '';
+  let strPath = String(path).trim();
+
+  // If it's a data URI
+  if (strPath.startsWith('data:')) return strPath;
+
+  const currentOrigin = (typeof window !== 'undefined' && window.location && window.location.origin) ? window.location.origin : '';
+  const base = (typeof window !== 'undefined' && window.CopliteleData && window.CopliteleData.assetsUrl) 
+    ? window.CopliteleData.assetsUrl 
+    : 'assets/';
+
+  // If it contains /wp-content/uploads/
+  if (strPath.includes('/wp-content/uploads/')) {
+    const uploadPath = strPath.substring(strPath.indexOf('/wp-content/uploads/'));
+    return currentOrigin ? (currentOrigin + uploadPath) : uploadPath;
+  }
+
+  // If it contains /wp-content/themes/
+  if (strPath.includes('/wp-content/themes/')) {
+    const themePath = strPath.substring(strPath.indexOf('/wp-content/themes/'));
+    return currentOrigin ? (currentOrigin + themePath) : themePath;
+  }
+
+  if (strPath.startsWith('http://') || strPath.startsWith('https://')) {
+    return strPath;
+  }
+  
+  let clean = strPath.replace(/^\.\//, '');
+  if (clean.startsWith('assets/')) clean = clean.slice(7);
+  const finalUrl = base + clean;
+  return finalUrl.includes('?') ? finalUrl : finalUrl + '?v=2';
+};
+
 const getI18nText = (val) => {
   if (!val) return '';
+  if (typeof val === 'string') return val;
   if (typeof val === 'object') {
     const lang = (typeof currentLang !== 'undefined') ? currentLang : 'es';
     return val[lang] || val.es || val.ca || val.en || Object.values(val)[0] || '';
@@ -11,22 +46,380 @@ const getI18nText = (val) => {
 window.handleImgLoad = function(img) {
   if (!img) return;
   img.classList.add('is-loaded');
-  const wrapper = img.closest('.img-loader-wrapper');
-  if (wrapper) wrapper.classList.add('is-loaded');
+  const parent = img.closest('.img-loader-wrapper, .modal-member-photo-wrapper, .team-photo, .collab-avatar-wrapper');
+  if (parent) {
+    parent.classList.add('is-loaded');
+  }
 };
 
-const getAssetUrl = (path) => {
-  if (!path) return '';
-  let strPath = String(path).trim();
-  if (strPath.startsWith('http://') || strPath.startsWith('https://') || strPath.startsWith('data:')) return strPath;
-  if (strPath.startsWith('./')) strPath = strPath.substring(2);
-  if (strPath.startsWith('/')) strPath = strPath.substring(1);
-  if (typeof window !== 'undefined' && window.CopliteleData && window.CopliteleData.assetsUrl) {
-    return window.CopliteleData.assetsUrl + (strPath.startsWith('assets/') ? strPath.slice(7) : strPath);
+const ALL_TEAM_MEMBERS_MAP = [
+  {
+    id: "adolfina-perez",
+    displayName: "Dra. Adolfina Pérez Garcías",
+    name: "Adolfina Pérez",
+    thumb: "miembros/color/adolfina_perez.png",
+    image: "miembros/color/adolfina_perez.png",
+    color: "miembros/color/adolfina_perez.png",
+    keys: ["Pérez, Fina", "Perez, Fina", "Pérez Garcias, Adolfina", "Perez Garcias, Adolfina", "Pérez, Adolfina", "Perez, Adolfina", "Adolfina Pérez", "Adolfina Perez", "Fina Pérez", "Fina Perez", "Adolfina", "Fina"]
+  },
+  {
+    id: "barbara-de-benito",
+    displayName: "Dra. Bàrbara de Benito Crosetti",
+    name: "Bàrbara de Benito",
+    thumb: "miembros/color/barbara_de_benito.png",
+    image: "miembros/color/barbara_de_benito.png",
+    color: "miembros/color/barbara_de_benito.png",
+    keys: ["de Benito, Bárbara", "de Benito, Barbara", "de Benito, Bàrbara", "Bàrbara de Benito", "Bárbara de Benito", "Barbara de Benito", "de Benito Crosetti, Bàrbara", "de Benito Crosetti, Barbara", "de Benito Crosetti, Bárbara", "de Benito Crosetti", "de Benito", "Benito", "Bàrbara", "Bárbara", "Barbara"]
+  },
+  {
+    id: "jesus-salinas",
+    displayName: "Dr. Jesús Salinas Ibáñez",
+    name: "Jesús Salinas",
+    thumb: "miembros/color/jesus_salinas.png",
+    image: "miembros/color/jesus_salinas.png",
+    color: "miembros/color/jesus_salinas.png",
+    keys: ["Salinas, Jesús", "Salinas, Jesus", "Salinas Ibáñez, Jesús", "Salinas Ibanez, Jesus", "Jesús Salinas", "Jesus Salinas", "Jesús María Salinas", "Jesus Maria Salinas", "Salinas", "Jesús", "Jesus"]
+  },
+  {
+    id: "santos-urbina",
+    displayName: "Dr. Santos Urbina Ramírez",
+    name: "Santos Urbina",
+    thumb: "miembros/color/santos_urbina.png",
+    image: "miembros/color/santos_urbina.png",
+    color: "miembros/color/santos_urbina.png",
+    keys: ["Urbina, Santos", "Urbina Ramírez, Santos", "Urbina Ramirez, Santos", "Santos Urbina", "Santos Urbina Ramírez", "Urbina", "Santos"]
+  },
+  {
+    id: "francisca-negre",
+    displayName: "Dra. Francisca Negre Bennasar",
+    name: "Francisca Negre",
+    thumb: "miembros/color/francisca_negre.png",
+    image: "miembros/color/francisca_negre.png",
+    color: "miembros/color/francisca_negre.png",
+    keys: ["Negre, Xisca", "Negre, Francisca", "Negre Bennásar, Francisca", "Negre Bennasar, Francisca", "Francisca Negre", "Xisca Negre", "Negre", "Xisca", "Francisca"]
+  },
+  {
+    id: "gemma-tur",
+    displayName: "Dra. Gemma Tur Ferrer",
+    name: "Gemma Tur",
+    thumb: "miembros/color/gemma_tur.png",
+    image: "miembros/color/gemma_tur.png",
+    color: "miembros/color/gemma_tur.png",
+    keys: ["Tur, Gemma", "Tur Ferrer, Gemma", "Gemma Tur", "Gemma Tur Ferrer", "Tur", "Gemma"]
+  },
+  {
+    id: "francisco-lirola",
+    displayName: "Dr. Francisco Lirola",
+    name: "Francisco Lirola",
+    thumb: "miembros/color/francisco_lirola.png",
+    image: "miembros/color/francisco_lirola.png",
+    color: "miembros/color/francisco_lirola.png",
+    keys: ["Lirola, Xisco", "Lirola, Francisco", "Francisco Lirola", "Xisco Lirola", "Lirola", "Xisco", "Francisco"]
+  },
+  {
+    id: "linda-castaneda",
+    displayName: "Dra. Linda Castañeda",
+    name: "Linda Castañeda",
+    thumb: "miembros/color/linda_castaneda.png",
+    image: "miembros/color/linda_castaneda.png",
+    color: "miembros/color/linda_castaneda.png",
+    keys: ["Castañeda, Linda", "Castaneda, Linda", "Linda Castañeda", "Linda Castaneda", "Castañeda", "Castaneda", "Linda"]
+  },
+  {
+    id: "enric-bresco",
+    displayName: "Dr. Enric Brescó",
+    name: "Enric Brescó",
+    thumb: "miembros/color/enric_bresco.png",
+    image: "miembros/color/enric_bresco.png",
+    color: "miembros/color/enric_bresco.png",
+    keys: ["Brescó, Enric", "Bresco, Enric", "Brescó Baiges, Enric", "Bresco Baiges, Enric", "Enric Brescó", "Enric Bresco", "Brescó", "Bresco", "Enric"]
+  },
+  {
+    id: "antonia-darder",
+    displayName: "Dra. Antonia Darder",
+    name: "Antonia Darder",
+    thumb: "miembros/color/antonia_darder.png",
+    image: "miembros/color/antonia_darder.png",
+    color: "miembros/color/antonia_darder.png",
+    keys: ["Darder, Antònia", "Darder, Antonia", "Darder Mesquida, Antònia", "Darder Mesquida, Antonia", "Antònia Darder", "Antonia Darder", "Darder", "Antònia", "Antonia"]
+  },
+  {
+    id: "gustavo-angulo",
+    displayName: "Dr. Gustavo Angulo",
+    name: "Gustavo Angulo",
+    thumb: "miembros/color/gustavo_angulo.png",
+    image: "miembros/color/gustavo_angulo.png",
+    color: "miembros/color/gustavo_angulo.png",
+    keys: ["Angulo, Gustavo", "Angulo Mendoza, Gustavo", "Gustavo Angulo", "Gustavo Adolfo Angulo", "Angulo", "Gustavo"]
+  },
+  {
+    id: "virginia-larraz",
+    displayName: "Dra. Virginia Larraz Rada",
+    name: "Virginia Larraz",
+    thumb: "miembros/color/virginia_larraz.png",
+    image: "miembros/color/virginia_larraz.png",
+    color: "miembros/color/virginia_larraz.png",
+    keys: ["Larraz, Virginia", "Larraz Rada, Virginia", "Virginia Larraz", "Larraz", "Virginia"]
   }
-  const base = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : '/';
-  return base + strPath;
-};
+];
+
+function normalizeTextForMatching(str) {
+  if (!str) return '';
+  return String(str)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+}
+
+function formatUnmatchedName(str) {
+  if (!str) return '';
+  let clean = String(str).trim().replace(/^[\s,;.-]+|[\s,;.-]+$/g, '');
+  if (clean.includes(',')) {
+    const parts = clean.split(',').map(p => p.trim()).filter(Boolean);
+    if (parts.length === 2) {
+      return `${parts[1]} ${parts[0]}`.trim();
+    }
+  }
+  return clean;
+}
+
+function parseAuthorNamesList(rawStr, team) {
+  if (!rawStr) return [];
+  let str = String(rawStr)
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, ' ')
+    .replace(/\r?\n/g, ', ')
+    .replace(/;/g, ', ')
+    .replace(/\s+y\s+|\s+and\s+|\s+&\s+/gi, ', ');
+
+  const rawSegments = str.split(',').map(s => s.trim()).filter(Boolean);
+  const result = [];
+
+  const isTeamKey = (namePart) => {
+    if (!namePart) return false;
+    const n = normalizeTextForMatching(namePart);
+    if (n.length < 3) return false;
+    return team.some(m => {
+      const keys = (m.keys || [m.displayName, m.name]).map(k => normalizeTextForMatching(k));
+      return keys.some(k => k === n || (k.length >= 4 && (n.includes(k) || k.includes(n))));
+    });
+  };
+
+  const prepositions = ['de', 'del', 'de la', 'de los', 'de las', 'da', 'dos', 'von', 'van', 'di'];
+
+  let i = 0;
+  while (i < rawSegments.length) {
+    const seg = rawSegments[i];
+    const nextSeg = rawSegments[i + 1];
+
+    // Ignore segments that are clearly dates, years, URLs, DOI, ISBN, or long sentences (> 4 words)
+    if (seg.length > 45 || seg.split(/\s+/).length > 4 || seg.match(/^(https?:\/\/|\d{4}|doi:|isbn:|vol\.|pp\.)/i)) {
+      i++;
+      continue;
+    }
+
+    // Check if seg + nextSeg forms a compound name (e.g. "de Benito, Bárbara" or "Moreno, Juan" or "Ruth, Alba")
+    if (nextSeg && nextSeg.split(/\s+/).length <= 2 && nextSeg.length <= 25 && !nextSeg.match(/^(https?:\/\/|\d{4})/i)) {
+      const combined = `${seg}, ${nextSeg}`;
+      const segWords = seg.split(/\s+/);
+      const isSegPrefix = prepositions.some(p => seg.toLowerCase().startsWith(p));
+
+      if (isTeamKey(combined) || isTeamKey(seg)) {
+        result.push(combined);
+        i += 2;
+        continue;
+      } else if (segWords.length === 1 || isSegPrefix) {
+        result.push(combined);
+        i += 2;
+        continue;
+      }
+    }
+
+    result.push(seg);
+    i++;
+  }
+
+  return result;
+}
+
+function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAuthorsStr) {
+  if (!text && !explicitAuthorsStr && (!extraCollabs || extraCollabs.length === 0)) return '';
+  const searchStr = String(text || '');
+  const rawLower = searchStr.toLowerCase();
+  const normalizedSearch = normalizeTextForMatching(searchStr);
+
+  const team = (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP))
+    ? ALL_TEAM_MEMBERS_MAP
+    : ((typeof teamMembers !== 'undefined' && Array.isArray(teamMembers)) ? teamMembers : []);
+
+  const matchedWithOrder = [];
+  const matchedMemberIds = new Set();
+  const matchedTokens = [];
+
+  if (rawLower.trim().length > 0) {
+    team.forEach(m => {
+      if (!m) return;
+      const keys = Array.isArray(m.keys) && m.keys.length > 0 
+        ? m.keys 
+        : [m.displayName, m.name, m.id].filter(Boolean);
+
+      let isMatched = false;
+      let foundOrder = 999999;
+
+      for (const key of keys) {
+        if (!key) continue;
+        const keyLower = String(key).toLowerCase();
+        const keyNormalized = normalizeTextForMatching(key);
+
+        // Exact substring check
+        const idxRaw = rawLower.indexOf(keyLower);
+        if (idxRaw !== -1) {
+          isMatched = true;
+          if (idxRaw < foundOrder) foundOrder = idxRaw;
+          matchedTokens.push(keyNormalized);
+          break;
+        }
+
+        // Normalized squashed check (handles "BárbaraDarder" or "Pérez, FinaUrbina")
+        if (keyNormalized.length >= 4) {
+          const idxNorm = normalizedSearch.indexOf(keyNormalized);
+          if (idxNorm !== -1) {
+            isMatched = true;
+            if (idxNorm < foundOrder) foundOrder = idxNorm;
+            matchedTokens.push(keyNormalized);
+            break;
+          }
+        }
+      }
+
+      if (isMatched && !matchedMemberIds.has(m.id)) {
+        matchedMemberIds.add(m.id);
+        matchedWithOrder.push({ member: m, order: foundOrder });
+      }
+    });
+  }
+
+  matchedWithOrder.sort((a, b) => a.order - b.order);
+  const matched = matchedWithOrder.map(item => item.member);
+
+  // Extract any unmatched named researchers from explicitAuthorsStr or searchStr
+  const sourceToParse = explicitAuthorsStr || searchStr;
+  const parsedCandidateNames = parseAuthorNamesList(sourceToParse, team);
+  const unmatchedResearchers = [];
+
+  parsedCandidateNames.forEach(cand => {
+    const normCand = normalizeTextForMatching(cand);
+    if (!normCand || normCand.length < 3) return;
+
+    // Check if candidate matches an already identified team member
+    const isAlreadyMatched = matchedTokens.some(tok => tok.length >= 4 && (normCand.includes(tok) || tok.includes(normCand)));
+    const matchesAnyTeam = team.some(m => {
+      const keys = (m.keys || [m.displayName, m.name]).map(k => normalizeTextForMatching(k));
+      return keys.some(k => k.length >= 4 && (normCand.includes(k) || k.includes(normCand)));
+    });
+
+    if (!isAlreadyMatched && !matchesAnyTeam) {
+      const formattedName = formatUnmatchedName(cand);
+      if (formattedName && formattedName.length >= 3 && !unmatchedResearchers.some(u => normalizeTextForMatching(u.name) === normCand)) {
+        unmatchedResearchers.push({
+          name: formattedName,
+          image: ''
+        });
+      }
+    }
+  });
+
+  const extras = (Array.isArray(extraCollabs) ? extraCollabs : []).filter(e => e && (e.name || e.image));
+
+  // Merge unmatched researchers into extras without duplication
+  const allExtras = [...extras];
+  unmatchedResearchers.forEach(u => {
+    const uNorm = normalizeTextForMatching(u.name);
+    if (!allExtras.some(e => normalizeTextForMatching(e.name) === uNorm)) {
+      allExtras.push(u);
+    }
+  });
+
+  if (matched.length === 0 && allExtras.length === 0) return '';
+
+  const totalCount = matched.length + allExtras.length;
+  const countClass = `collaborators-count-${totalCount}`;
+
+  const defaultTitle = currentLang === 'en' 
+    ? 'Participating Researchers' 
+    : (currentLang === 'ca' ? 'Investigadors Participants' : 'Investigadores Participantes');
+  const headingTitle = customTitle || defaultTitle;
+
+  return `
+    <div class="post-collaborators-showcase" style="margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08);">
+      <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--color-text-light); opacity: 0.85;">${headingTitle}</h4>
+      <div class="collaborators-grid ${countClass}">
+        ${matched.map(m => `
+          <div class="collab-member-card" onclick="openMemberModal('${m.id}')" style="cursor: pointer;">
+            <div class="collab-avatar-wrapper img-loader-wrapper is-loaded">
+              <img src="${getAssetUrl(m.thumb || m.color || m.image)}" alt="${m.displayName || m.name}" class="collab-avatar-img fade-in-img is-loaded" onload="handleImgLoad(this)" onerror="this.closest('.collab-avatar-wrapper').classList.add('is-loaded')">
+            </div>
+            <div class="collab-member-name">${m.displayName || m.name}</div>
+          </div>
+        `).join('')}
+        ${allExtras.map(e => `
+          <div class="collab-member-card">
+            <div class="collab-avatar-wrapper img-loader-wrapper is-loaded">
+              ${e.image ? `
+                <img src="${getAssetUrl(e.image)}" alt="${e.name || 'Investigador'}" class="collab-avatar-img fade-in-img is-loaded" onload="handleImgLoad(this)" onerror="this.closest('.collab-avatar-wrapper').classList.add('is-loaded')">
+              ` : `
+                <div class="collab-avatar-neutral-icon" style="width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); display: flex; align-items: center; justify-content: center; color: #475569;">
+                  <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </div>
+              `}
+            </div>
+            <div class="collab-member-name">${e.name || (currentLang === 'en' ? 'Collaborator' : (currentLang === 'ca' ? 'Col·laborador' : 'Colaborador'))}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function getCollaborationWithHTML(collabWithText, customTitle) {
+  if (!collabWithText || !String(collabWithText).trim()) return '';
+  let cleanText = String(collabWithText).trim();
+  
+  // Convert Markdown links [Text](https://...) to HTML <a href="..." target="_blank" rel="noopener noreferrer">Text</a>
+  cleanText = cleanText.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  // Convert bare URLs (https?://...) that are not already inside href="..." to clickable links
+  cleanText = cleanText.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, (match, prefix, url) => {
+    return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+  });
+
+  // Ensure any existing <a> tags have target="_blank" rel="noopener noreferrer"
+  cleanText = cleanText.replace(/<a\s+(?![^>]*\btarget=)([^>]*href=["'][^"']+["'][^>]*)>/gi, '<a $1 target="_blank" rel="noopener noreferrer">');
+
+  const defaultTitle = currentLang === 'en'
+    ? 'Collaboration with:'
+    : (currentLang === 'ca' ? 'Col·laboració amb:' : 'Colaboración con:');
+  const headingTitle = (customTitle && String(customTitle).trim()) ? customTitle : defaultTitle;
+
+  return `
+    <div class="post-collaboration-with-showcase">
+      <h4 class="collab-with-heading">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-right:4px;">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        ${headingTitle}
+      </h4>
+      <div class="collab-with-content">${cleanText}</div>
+    </div>
+  `;
+}
 
 const getLogoConfig = () => {
   if (typeof window !== 'undefined' && typeof window.generateLogoConfig === 'function') {
@@ -57,7 +450,58 @@ const posidonia4Img = getAssetUrl('images/posidonia_4.png');
 // 1. DATA DEFINITIONS (Mock databases in 3 languages)
 // ----------------------------------------------------
 
-let currentLang = 'es'; // 'es', 'ca', 'en'
+let currentLang = (typeof CopliteleData !== 'undefined' && CopliteleData.currentLang) ? CopliteleData.currentLang : 'es'; // 'es', 'ca', 'en'
+
+const getRoleI18n = (role, lang = currentLang) => {
+  if (!role) return lang === 'en' ? 'Researcher' : (lang === 'ca' ? 'Investigador' : 'Investigador');
+  
+  if (typeof role === 'object') {
+    const text = role[lang] || role.es || role.ca || role.en || Object.values(role)[0] || '';
+    if (text) {
+      if (lang === 'en' && text === role.es) {
+        // Fallthrough to string translation if object had untranslated Spanish string
+      } else {
+        return text;
+      }
+    }
+  }
+  
+  const r = String(typeof role === 'object' ? (role.es || Object.values(role)[0] || '') : role).trim();
+  const rLower = r.toLowerCase();
+  
+  if (rLower.includes('principal') || rLower.includes(' ip') || rLower === 'ip') {
+    const isFem = rLower.includes('investigadora') || rLower.includes('directora');
+    if (lang === 'en') return 'Principal Investigator';
+    if (lang === 'ca') return isFem ? 'Investigadora Principal' : 'Investigador Principal';
+    return isFem ? 'Investigadora Principal' : 'Investigador Principal';
+  }
+  if (rLower.includes('formación') || rLower.includes('formació') || rLower.includes('predoctoral') || rLower.includes('doctorand')) {
+    const isFem = rLower.includes('investigadora') || rLower.includes('doctoranda');
+    if (lang === 'en') return 'Doctoral Researcher';
+    if (lang === 'ca') return isFem ? 'Investigadora en formació' : 'Investigador en formació';
+    return isFem ? 'Investigadora en formación' : 'Investigador en formación';
+  }
+  if (rLower.includes('colaborador') || rLower.includes('col·laborador')) {
+    const isFem = rLower.includes('colaboradora') || rLower.includes('col·laboradora');
+    if (lang === 'en') return 'Collaborating Researcher';
+    if (lang === 'ca') return isFem ? 'Investigadora Col·laboradora' : 'Investigador Col·laborador';
+    return isFem ? 'Investigadora Colaboradora' : 'Investigador Colaborador';
+  }
+  if (rLower.includes('técnic') || rLower.includes('tecnic')) {
+    const isFem = rLower.includes('técnica') || rLower.includes('tecnica');
+    if (lang === 'en') return 'Research Technician';
+    if (lang === 'ca') return isFem ? 'Tècnica d\'Investigació' : 'Tècnic d\'Investigació';
+    return isFem ? 'Técnica de Investigación' : 'Técnico de Investigación';
+  }
+  if (rLower.includes('investigador')) {
+    const isFem = rLower.includes('investigadora');
+    if (lang === 'en') return 'Researcher';
+    if (lang === 'ca') return isFem ? 'Investigadora' : 'Investigador';
+    return isFem ? 'Investigadora' : 'Investigador';
+  }
+  
+  return r;
+};
 
 const teamMembers = [
   {
@@ -309,6 +753,56 @@ const teamMembers = [
     researchgate: "https://www.researchgate.net/profile/Gustavo-Angulo-Mendoza",
     photo: "miembros/Hover/gustavo_angulo.png",
     photoHover: "miembros/color/gustavo_angulo.png"
+  },
+  {
+    id: "virginia-larraz",
+    name: "Dra. Virginia Larraz Rada",
+    pubIds: [],
+    role: {
+      es: "Investigadora",
+      ca: "Investigadora",
+      en: "Researcher"
+    },
+    title: {
+      es: "Profesora Titular y Vicerrectora, Universitat d'Andorra",
+      ca: "Professora Titular i Vicerectora, Universitat d'Andorra",
+      en: "Associate Professor & Vice-Rector, University of Andorra"
+    },
+    bio: {
+      es: "Doctora en Educación y Tecnología por la UIB. Professora titular y Vicerrectora de la Universitat d'Andorra. Su ámbito de investigación se enfoca en las competencias digitales docentes, la integración pedagógica de las tecnologías emergentes y el codiseño en educación superior.",
+      ca: "Doctora en Educació i Tecnologia per la UIB. Professora titular i Vicerectora de la Universitat d'Andorra. El seu àmbit de recerca s'enfoca en les competències digitals docents, la integració pedagògica de les tecnologies emergents i el codisseny en educació superior.",
+      en: "PhD in Education and Technology from UIB. Associate Professor and Vice-Rector at the University of Andorra. Her research focus centers on teacher digital competencies, pedagogical integration of emerging technologies, and co-design in higher education."
+    },
+    email: "vlarraz@uda.ad",
+    orcid: "0000-0002-8877-3344",
+    researchgate: "https://www.researchgate.net/profile/Virginia-Larraz-Rada",
+    photo: "miembros/Hover/virginia_larraz.png",
+    photoHover: "miembros/color/virginia_larraz.png"
+  },
+  {
+    id: "antonia-darder",
+    name: "Dra. Antonia Darder",
+    pubIds: [],
+    role: {
+      es: "Investigadora",
+      ca: "Investigadora",
+      en: "Researcher"
+    },
+    title: {
+      es: "Catedrática Emérita, Loyola Marymount University",
+      ca: "Catedràtica Emèrita, Loyola Marymount University",
+      en: "Professor Emerita, Loyola Marymount University"
+    },
+    bio: {
+      es: "Reconocida investigadora internacional y profesora emérita en Loyola Marymount University. Especialista en pedagogía crítica, justicia social, diseño de entornos formativos inclusivos y tecnología educativa.",
+      ca: "Reconeguda investigadora internacional i professora emèrita a Loyola Marymount University. Especialista en pedagogia crítica, justícia social, disseny d'entorns formatius inclusius i tecnologia educativa.",
+      en: "Internationally recognized researcher and Professor Emerita at Loyola Marymount University. Specialist in critical pedagogy, social justice, inclusive learning environment design, and educational technology."
+    },
+    email: "antonia.darder@lmu.edu",
+    orcid: "0000-0002-9988-7766",
+    researchgate: "https://www.researchgate.net/profile/Antonia-Darder",
+    photo: "miembros/Hover/antonia_darder.png",
+    photoHover: "miembros/color/antonia_darder.png"
   }
 ];
 
@@ -459,7 +953,7 @@ const publications = [
   }
 ];
 
-const newsFeedItems = [
+let newsFeedItems = [
   {
     id: "news-new",
     type: "actividad",
@@ -506,59 +1000,9 @@ const newsFeedItems = [
   }
 ];
 
+
+
 const transferActivities = [
-  {
-    id: "formacion-prueba",
-    section: "actividades",
-    filterType: "formacion",
-    type: "formacion",
-    tag: { es: "Formación", ca: "Formació", en: "Training" },
-    title: {
-      es: "Formación Prueba",
-      ca: "Formación Prueba",
-      en: "Formación Prueba"
-    },
-    desc: {
-      es: "Negre, Xisca Urbina, Santos Castañeda, Linda",
-      ca: "Negre, Xisca Urbina, Santos Castañeda, Linda",
-      en: "Negre, Xisca Urbina, Santos Castañeda, Linda"
-    },
-    pills: ["Formación"],
-    date: "22 de July de 2026",
-    location: "UIB, Palma, Spain",
-    image: "./images/3.png",
-    loremIpsum: {
-      es: "<p>Descripción Prueba</p>",
-      ca: "<p>Descripción Prueba</p>",
-      en: "<p>Descripción Prueba</p>"
-    }
-  },
-  {
-    id: "taller-sobre-codiseno-de-juegos",
-    section: "transferencia",
-    filterType: "taller",
-    type: "taller",
-    tag: { es: "Taller", ca: "Taller", en: "Workshop" },
-    title: {
-      es: "Taller sobre codiseño de juegos",
-      ca: "Taller sobre codiseño de juegos",
-      en: "Workshop on game co-design"
-    },
-    desc: {
-      es: "De Benito, Bàrbara Tur, Gemma Tatiana Velarde",
-      ca: "De Benito, Bàrbara Tur, Gemma Tatiana Velarde",
-      en: "De Benito, Bàrbara Tur, Gemma Tatiana Velarde"
-    },
-    pills: ["Taller"],
-    date: "23 de April de 2026",
-    location: "UIB, Palma, Spain",
-    image: "./images/4.png",
-    loremIpsum: {
-      es: "<p>Taller en el marco del proyecto europeo Lecture dirigido a los docentes</p>",
-      ca: "<p>Taller en el marco del proyecto europeo Lecture dirigido a los docentes</p>",
-      en: "<p>Workshop within the framework of the European Lecture project aimed at teachers</p>"
-    }
-  },
   {
     id: "act-iag-multianalisis",
     section: "actividades",
@@ -896,6 +1340,10 @@ const translations = {
     menu_proyecto: "Proyecto",
     menu_impacto: "Impacto y Difusión",
     hero_tag: "Proyecto de Investigación activo",
+    hero_tagline_default: "<span class=\"word-highlight blue\">Codiseño</span>, <span class=\"word-highlight teal\">Personalización</span> y <span class=\"word-highlight green\">Tecnología</span>",
+    hero_tagline_blue: "<span class=\"word-highlight blue\">Codiseño</span><span class=\"word-rest\"> de aprendizaje flexible</span>",
+    hero_tagline_teal: "<span class=\"word-rest\">Itinerarios </span><span class=\"word-highlight teal\">personalizados</span><span class=\"word-rest\"> y agénticos</span>",
+    hero_tagline_green: "<span class=\"word-rest\">Ambientes enriquecidos con </span><span class=\"word-highlight green\">Tecnología</span>",
     hero_main_title: "Rediseñamos el futuro de la educación con <span class=\"blue-highlight\">Codiseño</span> e <span class=\"green-highlight\">IA</span>",
     hero_desc: "COPLITELE-IA es un proyecto de investigación que transforma la educación superior integrando la Inteligencia Artificial Generativa (IAG) desde un enfoque pedagógico innovador. A través del codiseño educativo entre docentes y estudiantes, impulsamos la personalización del aprendizaje mediante itinerarios flexibles, promoviendo entornos virtuales conectados que garantizan la equidad, la inclusión y la calidad educativa.",
     btn_conocer: "Conoce el Proyecto",
@@ -916,6 +1364,7 @@ const translations = {
     submenu_publicaciones: "Producción científica",
     submenu_recursos: "Recursos",
     obj_title: "Objetivos del Proyecto",
+    obj_pretitle: "Proyecto",
     obj_1_title: "Agencia Profesional y Académica",
     obj_1_desc: "Disminuir la incertidumbre pedagógica al potenciar la capacidad de decisión de docentes y estudiantes en entornos digitales.",
     obj_2_title: "Personalización y codiseño",
@@ -928,6 +1377,7 @@ const translations = {
     project_title: "El Proyecto",
     tab_desc: "Descripción",
     tab_equipo: "Equipo",
+    team_pretitle: "Investigadores",
     project_what_is: "¿Qué es COPLITELE-IA?",
     project_what_is_p1: "COPLITELE-IA es un proyecto de investigación científica orientado a la transformación digital y la innovación metodológica en el ámbito de la educación superior. Su eje central consiste en estudiar, diseñar y validar escenarios y estrategias flexibles de aprendizaje que aprovechen el potencial dialógico y adaptativo de la Inteligencia Artificial Generativa (IAG). A diferencia de otros enfoques centrados únicamente en la automatización, esta propuesta sitúa la pedagogía en el centro, utilizando la tecnología como un socio estratégico para potenciar los procesos formativos en entornos virtuales conectados.",
     project_what_is_p2: "El proyecto introduce el concepto de \"codiseño educativo\", implicando activamente a docentes y estudiantes en la toma de decisiones y en la co-construcción de itinerarios de aprendizaje personalizados y adaptados a los intereses y metas individuales. De este modo, la IAG se implementa no solo para enriquecer el aprendizaje del alumnado, sino también como una herramienta de apoyo didáctico para el profesorado. El objetivo último de COPLITELE-IA es empoderar y fortalecer tanto la agencia académica de los estudiantes como la agencia profesional de los docentes, garantizando entornos educativos inclusivos, equitativos y de alta calidad.",
@@ -938,6 +1388,26 @@ const translations = {
     meta_financiacion: "Financiación",
     framework_header: "COPLITELE-IA",
     framework_subtitle: "Framework de investigación",
+    phase_1_badge: "Fase 1",
+    phase_1_title: "Cimentación",
+    phase_1_subtitle: "Análisis y Consenso",
+    phase_1_desc: "Revisión documental, construcción del marco teórico y establecimiento de protocolos para analizar diseños educativos agénticos potenciados por IAG.",
+    phase_2_badge: "Fase 2",
+    phase_2_title: "Exploración",
+    phase_2_subtitle: "Diagnóstico de Resiliencia",
+    phase_2_desc: "Investigación sobre los usos docentes, la percepción del profesorado, los entornos inclusivos, la agencia estudiantil y el papel de la IAG como agente participante en el codiseño.",
+    phase_3_badge: "Fase 3",
+    phase_3_title: "Diseño",
+    phase_3_subtitle: "Escenarios y Tecnología",
+    phase_3_desc: "Desarrollo de estrategias, guías, recursos educativos abiertos, análisis de viabilidad técnica y parámetros de sistemas de IAG para la personalización y el codiseño, etc.",
+    phase_4_badge: "Fase 4",
+    phase_4_title: "Validación",
+    phase_4_subtitle: "Impacto en Aula",
+    phase_4_desc: "Validación empírica en aulas universitarias, evaluación de la agencia docente y discente y generación de recursos educativos abiertos.",
+    phase_5_badge: "Fase 5",
+    phase_5_title: "Impacto",
+    phase_5_subtitle: "Transferencia Social",
+    phase_5_desc: "Transferencia institucional vía SmartUIB, OTRI e IRIE, difusión científica, publicación de resultados y seminarios internacionales.",
     trans_pretitle: "Impacto y difusión",
     trans_title: "Actividades de Transferencia",
     trans_subtitle: "",
@@ -946,6 +1416,11 @@ const translations = {
     pub_title: "Producción Científica",
     pub_subtitle: "",
     search_placeholder: "Buscar por título, autor o tag...",
+    filter_todos: "Todos",
+    filter_articulos: "Artículos",
+    filter_congresos: "Congresos",
+    filter_libros: "Libros",
+    filter_poster: "Póster",
     tab_all: "Todas",
     tab_revistas: "Revistas (Zotero)",
     tab_libros: "Libros (Zotero)",
@@ -963,7 +1438,13 @@ const translations = {
     stats_actividades: "Actividades",
     menu_actividades: "Actividades",
     colab_title: "Con la colaboración y financiación de:",
-    footer_copy: "&copy; 2026 COPLITELE-IA. Proyecto financiado por el Ministerio español de Ciencia e Innovación, desarrollado por el GTE de la UIB y el IRIE."
+    footer_copy: "&copy; 2026 COPLITELE-IA. Proyecto financiado por el Ministerio español de Ciencia e Innovación, desarrollado por el GTE de la UIB y el IRIE.",
+    cookie_banner_title: "Uso de Cookies",
+    cookie_banner_text: "Utilizamos cookies propias y de terceros para garantizar el correcto funcionamiento técnico de la plataforma, analizar el uso del sitio web y mejorar tu experiencia de navegación en el proyecto COPLITELE-IA, de acuerdo con nuestra Política de Cookies.",
+    cookie_accept_all: "Aceptar todas",
+    cookie_essential_only: "Solo necesarias",
+    cookie_more_info: "Más información",
+    cookie_manage: "Configurar Cookies"
   },
   ca: {
     menu_inicio: "Inici",
@@ -971,6 +1452,10 @@ const translations = {
     menu_impacto: "Impacte i Difusió",
     menu_actividades: "Activitats",
     hero_tag: "Projecte d’Investigació actiu",
+    hero_tagline_default: "<span class=\"word-highlight blue\">Codisseny</span>, <span class=\"word-highlight teal\">Personalització</span> i <span class=\"word-highlight green\">Tecnologia</span>",
+    hero_tagline_blue: "<span class=\"word-highlight blue\">Codisseny</span><span class=\"word-rest\"> d'aprenentatge flexible</span>",
+    hero_tagline_teal: "<span class=\"word-rest\">Itineraris </span><span class=\"word-highlight teal\">personalitzats</span><span class=\"word-rest\"> i agèntics</span>",
+    hero_tagline_green: "<span class=\"word-rest\">Ambients enriquits amb </span><span class=\"word-highlight green\">Tecnologia</span>",
     hero_main_title: "Redissenyam el futur de l'educació amb <span class=\"blue-highlight\">Codisseny</span> i <span class=\"green-highlight\">Intel·ligència Artificial</span>",
     hero_desc: "COPLITELE-IA és un projecte d'investigació que transforma l'educació superior integrant la Intel·ligència Artificial Generativa (IAG) des d'un enfocament pedagògic innovador. A través del codissenyi educatiu entre docents i estudiants, impulsem la personalització de l'aprenentatge mitjançant itineraris flexibles, promovent entorns virtuals connectats que garanteixen l'equitat, la inclusió i la qualitat educativa.",
     btn_conocer: "Conèix el Projecte",
@@ -978,10 +1463,10 @@ const translations = {
     news_title: "Últimes notícies",
     news_pretitle: "Actualitat",
     stats_years: "Anys d’investigació",
-    stats_investigadores: "Investigadors",
+    stats_investigadors: "Investigadors",
     stats_publicaciones: "Publicacions",
     stats_actividades: "Activitats",
-    stats_experiencias: "Experiències",
+    stats_experiències: "Experiències",
     progress_label: "Progrés del Projecte",
     submenu_desc: "Descripció",
     submenu_obj: "Objectius",
@@ -1063,7 +1548,13 @@ const translations = {
     rec_btn_zip: "Descarregar Plantilles (Zip, 12 MB)",
     rec_btn_git: "Veure Repositori GitHub",
     colab_title: "Amb la col·laboració i finançament de:",
-    footer_copy: "&copy; 2026 COPLITELE-IA. Projecte finançat pel Ministeri espanyol de Ciència i Innovació, desenvolupat pel GTE de la UIB i l'IRIE."
+    footer_copy: "&copy; 2026 COPLITELE-IA. Projecte finançat pel Ministeri espanyol de Ciència i Innovació, desenvolupat pel GTE de la UIB i l'IRIE.",
+    cookie_banner_title: "Ús de Cookies",
+    cookie_banner_text: "Utilitzem cookies pròpies i de tercers per garantir el correcte funcionament tècnic de la plataforma, analitzar l'ús del lloc web i millorar la teva experiència de navegació en el projecte COPLITELE-IA, d'acord amb la nostra Política de Cookies.",
+    cookie_accept_all: "Acceptar tot",
+    cookie_essential_only: "Només necessàries",
+    cookie_more_info: "Més informació",
+    cookie_manage: "Configurar Cookies"
   },
   en: {
     menu_inicio: "Home",
@@ -1071,6 +1562,10 @@ const translations = {
     menu_impacto: "Impact & Communication",
     menu_actividades: "Activities",
     hero_tag: "Active Investigation Project",
+    hero_tagline_default: "<span class=\"word-highlight blue\">Co-design</span>, <span class=\"word-highlight teal\">Personalization</span> and <span class=\"word-highlight green\">Technology</span>",
+    hero_tagline_blue: "<span class=\"word-highlight blue\">Co-design</span><span class=\"word-rest\"> of flexible learning</span>",
+    hero_tagline_teal: "<span class=\"word-rest\">Personalized and </span><span class=\"word-highlight teal\">agentic</span><span class=\"word-rest\"> pathways</span>",
+    hero_tagline_green: "<span class=\"word-rest\">Environments enriched with </span><span class=\"word-highlight green\">Technology</span>",
     hero_main_title: "Redesigning the Future of Education with <span class=\"blue-highlight\">Codesign</span> & <span class=\"green-highlight\">Artificial Intelligence</span>",
     hero_desc: "COPLITELE-IA is a research project transforming higher education by integrating Generative Artificial Intelligence (GAI) through an innovative pedagogical lens. Through educational co-design between faculty and students, we champion personalized learning using flexible itineraries, fostering connected virtual environments that ensure equity, inclusion, and educational quality.",
     btn_conocer: "Explore the Project",
@@ -1163,10 +1658,15 @@ const translations = {
     rec_btn_zip: "Download Templates (Zip, 12 MB)",
     rec_btn_git: "View GitHub Repository",
     colab_title: "With the collaboration and funding of:",
-    footer_copy: "&copy; 2026 COPLITELE-IA. Project funded by the Spanish Ministry of Science and Innovation, developed by the UIB GTE and IRIE."
+    footer_copy: "&copy; 2026 COPLITELE-IA. Project funded by the Spanish Ministry of Science and Innovation, developed by the UIB GTE and IRIE.",
+    cookie_banner_title: "Cookie Policy & Preferences",
+    cookie_banner_text: "We use first-party and third-party cookies to ensure technical functionality, analyze website usage, and improve your browsing experience within the COPLITELE-IA project, in accordance with our Cookie Policy.",
+    cookie_accept_all: "Accept all",
+    cookie_essential_only: "Essential only",
+    cookie_more_info: "Learn more",
+    cookie_manage: "Cookie Settings"
   }
 };
-
 
 // ----------------------------------------------------
 // 2. DYNAMIC LOGO RENDER CONTROLLER
@@ -1218,6 +1718,53 @@ function startRotationLoop() {
   }
 }
 
+function formatTaglineHtml(color, rawText) {
+  if (!rawText) return '';
+  if (rawText.includes('<span')) return rawText;
+
+  if (color === 'default') {
+    const parts = rawText.split(/,\s*|\s+(?:y|i|and)\s+/i).filter(Boolean);
+    if (parts.length >= 3) {
+      const m = rawText.match(/\s+(y|i|and)\s+/i);
+      const conj = m ? m[1] : 'y';
+      return `<span class="word-highlight blue">${parts[0]}</span>, <span class="word-highlight teal">${parts[1]}</span> ${conj} <span class="word-highlight green">${parts[2]}</span>`;
+    }
+    return rawText;
+  }
+  if (color === 'blue') {
+    const match = rawText.match(/^([a-zA-ZÀ-ÿ-]+)(\s.*)?$/);
+    if (match) {
+      return `<span class="word-highlight blue">${match[1]}</span><span class="word-rest">${match[2] || ''}</span>`;
+    }
+    return `<span class="word-highlight blue">${rawText}</span>`;
+  }
+  if (color === 'teal') {
+    const re = /(personalizad\w+|personalitzat\w+|personalized|agéntic\w+|agèntic\w+|agentic)/i;
+    const match = rawText.match(re);
+    if (match) {
+      const idx = rawText.indexOf(match[0]);
+      const before = rawText.substring(0, idx);
+      const highlighted = match[0];
+      const after = rawText.substring(idx + match[0].length);
+      return `<span class="word-rest">${before}</span><span class="word-highlight teal">${highlighted}</span><span class="word-rest">${after}</span>`;
+    }
+    return `<span class="word-highlight teal">${rawText}</span>`;
+  }
+  if (color === 'green') {
+    const re = /(tecnolog\w+|technology)/i;
+    const match = rawText.match(re);
+    if (match) {
+      const idx = rawText.indexOf(match[0]);
+      const before = rawText.substring(0, idx);
+      const highlighted = match[0];
+      const after = rawText.substring(idx + match[0].length);
+      return `<span class="word-rest">${before}</span><span class="word-highlight green">${highlighted}</span><span class="word-rest">${after}</span>`;
+    }
+    return `<span class="word-highlight green">${rawText}</span>`;
+  }
+  return rawText;
+}
+
 function updateHeroSubtitle(color) {
   const tagline = document.querySelector('.hero-intro-tagline');
   if (!tagline) return;
@@ -1225,12 +1772,26 @@ function updateHeroSubtitle(color) {
   tagline.classList.add('fade-out');
   
   setTimeout(() => {
+    const lang = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'es';
+    const dict = translations[lang] || translations.es;
+    let html = '';
+
     if (color === 'blue') {
-      tagline.innerHTML = `<span class="word-highlight blue">Codiseño</span><span class="word-rest"> de aprendizaje flexible</span>`;
+      const raw = dict.hero_tagline_blue || translations.es.hero_tagline_blue || 'Codiseño de aprendizaje flexible';
+      html = formatTaglineHtml('blue', raw);
     } else if (color === 'teal') {
-      tagline.innerHTML = `<span class="word-rest">Itinerarios </span><span class="word-highlight teal">personalizados</span><span class="word-rest"> y agénticos</span>`;
+      const raw = dict.hero_tagline_teal || translations.es.hero_tagline_teal || 'Itinerarios personalizados y agénticos';
+      html = formatTaglineHtml('teal', raw);
     } else if (color === 'green') {
-      tagline.innerHTML = `<span class="word-rest">Ambientes enriquecidos con </span><span class="word-highlight green">Tecnología</span>`;
+      const raw = dict.hero_tagline_green || translations.es.hero_tagline_green || 'Ambientes enriquecidos con Tecnología';
+      html = formatTaglineHtml('green', raw);
+    } else if (color === 'default') {
+      const raw = dict.hero_tagline_default || translations.es.hero_tagline_default || 'Codiseño, Personalización y Tecnología';
+      html = formatTaglineHtml('default', raw);
+    }
+
+    if (html) {
+      tagline.innerHTML = html;
     }
     tagline.classList.remove('fade-out');
   }, 200);
@@ -1330,14 +1891,7 @@ function runLogoPulseLoop() {
   
   // Reset tagline to initial neutral highlight state at 10.5s
   logoPulseTimeouts.push(setTimeout(() => {
-    const tagline = document.querySelector('.hero-intro-tagline');
-    if (tagline) {
-      tagline.classList.add('fade-out');
-      setTimeout(() => {
-        tagline.innerHTML = `<span class="word-highlight blue">Codiseño</span>, <span class="word-highlight teal">Personalización</span> y <span class="word-highlight green">Tecnología</span>`;
-        tagline.classList.remove('fade-out');
-      }, 200);
-    }
+    updateHeroSubtitle('default');
   }, 10500));
   
   // Schedule next cycle to reset and start over
@@ -1424,46 +1978,72 @@ function triggerLogoDrawAnimation() {
   });
 }
 
-// ----------------------------------------------------
-// 3. UI RENDERING & TRANSLATION FUNCTIONS
-// ----------------------------------------------------
+document.addEventListener('click', (e) => {
+  const langLink = e.target.closest('.lang-switcher-link');
+  if (langLink) {
+    e.preventDefault();
+    let href = langLink.getAttribute('href') || langLink.href;
+    if (href.startsWith('http://')) {
+      href = 'https://' + href.slice(7);
+    }
+    const hash = window.location.hash || '';
+    if (hash && !href.includes('#')) {
+      href += hash;
+    }
+    window.location.href = href;
+  }
+});
 
 function translatePage(lang) {
   currentLang = lang;
   
-  // Translate menus
-  const menuLinks = document.querySelectorAll('.nav-link, .mobile-menu-link');
-  const idsMap = [
-    { key: 'menu_inicio', hash: '#/inicio' },
-    { key: 'menu_proyecto', hash: '#/proyecto' },
-    { key: 'menu_impacto', hash: '#/impacto' }
-  ];
-  
-  menuLinks.forEach(link => {
-    const hash = link.getAttribute('href');
-    const mapping = idsMap.find(m => m.hash === hash);
-    if (mapping) {
-      link.textContent = translations[lang][mapping.key];
+  // 0. Ensure WordPress dynamic page translations are merged before applying to DOM
+  syncWPDataIntoTranslations();
+
+  // 1. Translate all DOM elements with [data-i18n]
+  if (translations[lang]) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key] !== undefined && translations[lang][key] !== '') {
+        const val = translations[lang][key];
+        if (key === 'hero_tagline_default') {
+          el.innerHTML = formatTaglineHtml('default', val);
+        } else {
+          el.innerHTML = val;
+        }
+      }
+    });
+  }
+
+  // Also ensure hero-intro-tagline is updated immediately
+  const heroTaglineEl = document.querySelector('.hero-intro-tagline');
+  if (heroTaglineEl && translations[lang]) {
+    const rawTagline = translations[lang].hero_tagline_default || translations.es.hero_tagline_default;
+    if (rawTagline) {
+      heroTaglineEl.innerHTML = formatTaglineHtml('default', rawTagline);
     }
-  });
-  
-  // Translate static text elements using data-i18n attributes
-  const i18nElements = document.querySelectorAll('[data-i18n]');
-  i18nElements.forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (translations[lang][key]) {
-      // Allow HTML tags for strong and highlights
-      el.innerHTML = translations[lang][key];
+  }
+
+  // 2. Update search input placeholder
+  const searchInput = document.getElementById('search-input');
+  if (searchInput && translations[lang] && translations[lang].search_placeholder) {
+    searchInput.placeholder = translations[lang].search_placeholder;
+  }
+
+  // 3. Update dropdown UI active flag and text
+  const currentLangText = document.getElementById('current-lang-text');
+  if (currentLangText) currentLangText.textContent = lang.toUpperCase();
+  const currentLangFlag = document.getElementById('current-lang-flag');
+  if (currentLangFlag) {
+    const flagImg = currentLangFlag.querySelector('img');
+    if (flagImg) {
+      const base = (typeof CopliteleData !== 'undefined' && CopliteleData.assetsUrl) ? CopliteleData.assetsUrl : 'assets/';
+      flagImg.src = lang === 'ca' ? (base + 'icons/Cat_icon.png') : (lang === 'en' ? (base + 'icons/Eng_icon.png') : (base + 'icons/Spa_icon.png'));
     }
-  });
-  
-  // Translate input placeholders
-  const searchInputs = document.querySelectorAll('#publications-search, #header-search-input');
-  searchInputs.forEach(input => {
-    input.placeholder = translations[lang]['search_placeholder'];
-  });
-  
-  // Re-render dynamic components
+  }
+
+  // 4. Re-render dynamic components from current WordPress page/post data
+  ingestWPPageContent();
   renderNewsFeed();
   renderTeam();
   renderPublications();
@@ -1473,6 +2053,206 @@ function translatePage(lang) {
   if (rawHash.includes('actividad/')) {
     const detailId = rawHash.replace(/^#\/?actividad\//, '') || '';
     renderActivityDetail(detailId);
+  }
+  
+  window.dispatchEvent(new CustomEvent('content-updated'));
+}
+
+function extractTextBlocks(container) {
+  if (!container) return [];
+  const ps = Array.from(container.querySelectorAll('p')).map(el => el.innerHTML.trim()).filter(Boolean);
+  if (ps.length > 0) return ps;
+
+  // Fallback: split container text/HTML by double breaks or newlines
+  const html = container.innerHTML || container.textContent || '';
+  return html.split(/<br\s*\/?>\s*<br\s*\/?>|\n\n+/i)
+    .map(str => str.replace(/^<[^>]+>|<[^>]+>$/g, '').trim())
+    .filter(Boolean);
+}
+
+function syncWPDataIntoTranslations() {
+  if (typeof window === 'undefined' || !window.CopliteleWPData || !window.CopliteleWPData.pages) return;
+  const pages = window.CopliteleWPData.pages;
+
+  // 1. Page: inicio
+  if (pages['inicio']) {
+    const ini = pages['inicio'];
+    if (ini.hero_tag) translations.es.hero_tag = ini.hero_tag;
+    if (ini.hero_title) translations.es.hero_main_title = ini.hero_title;
+    if (ini.hero_desc) translations.es.hero_desc = ini.hero_desc;
+    if (ini.tagline_default) translations.es.hero_tagline_default = ini.tagline_default;
+    if (ini.tagline_blue) translations.es.hero_tagline_blue = ini.tagline_blue;
+    if (ini.tagline_teal) translations.es.hero_tagline_teal = ini.tagline_teal;
+    if (ini.tagline_green) translations.es.hero_tagline_green = ini.tagline_green;
+
+    if (ini.translations_ca && typeof ini.translations_ca === 'object') Object.assign(translations.ca, ini.translations_ca);
+    if (ini.translations_en && typeof ini.translations_en === 'object') Object.assign(translations.en, ini.translations_en);
+  }
+
+  // 2. Page: proyecto
+  if (pages['proyecto']) {
+    const proj = pages['proyecto'];
+    if (proj.what_is_title) translations.es.project_what_is = proj.what_is_title;
+    if (Array.isArray(proj.what_is_paragraphs)) {
+      proj.what_is_paragraphs.forEach((p, idx) => {
+        translations.es[`project_what_is_p${idx + 1}`] = p;
+      });
+    }
+
+    if (Array.isArray(proj.phases)) {
+      proj.phases.forEach((ph, idx) => {
+        const num = idx + 1;
+        if (ph.badge) translations.es[`phase_${num}_badge`] = ph.badge;
+        if (ph.title) translations.es[`phase_${num}_title`] = ph.title;
+        if (ph.subtitle !== undefined) translations.es[`phase_${num}_subtitle`] = ph.subtitle;
+        if (ph.desc) translations.es[`phase_${num}_desc`] = ph.desc;
+      });
+    }
+
+    if (Array.isArray(proj.objectives)) {
+      proj.objectives.forEach((obj, idx) => {
+        const num = idx + 1;
+        if (obj.title) translations.es[`obj_${num}_title`] = obj.title;
+        if (obj.desc) translations.es[`obj_${num}_desc`] = obj.desc;
+      });
+    }
+
+    if (proj.translations_ca && typeof proj.translations_ca === 'object') Object.assign(translations.ca, proj.translations_ca);
+    if (proj.translations_en && typeof proj.translations_en === 'object') Object.assign(translations.en, proj.translations_en);
+  }
+}
+
+function ingestWPPageContent() {
+  if (typeof window === 'undefined' || !window.CopliteleWPData || !window.CopliteleWPData.pages) return;
+  const pages = window.CopliteleWPData.pages;
+
+  // Sync into translations dictionary
+  syncWPDataIntoTranslations();
+
+  // El Proyecto Page Metadata & Dynamic Content
+  if (pages['proyecto']) {
+    const proj = pages['proyecto'];
+
+    // Progress bar
+    if (proj.meta_progreso) {
+      const progEls = document.querySelectorAll('.progress-percentage');
+      progEls.forEach(el => el.textContent = proj.meta_progreso);
+      const progBars = document.querySelectorAll('.progress-bar-fill');
+      progBars.forEach(el => el.style.width = proj.meta_progreso.includes('%') ? proj.meta_progreso : (proj.meta_progreso + '%'));
+    }
+
+    // Project Metadata Grid
+    const metaBoxes = document.querySelectorAll('#proyecto .project-meta-grid .meta-box');
+    if (metaBoxes.length >= 4) {
+      if (proj.meta_ref && metaBoxes[0].querySelector('.meta-value')) {
+        metaBoxes[0].querySelector('.meta-value').textContent = proj.meta_ref;
+      }
+      if (proj.meta_duracion && metaBoxes[1].querySelector('.meta-value')) {
+        metaBoxes[1].querySelector('.meta-value').textContent = proj.meta_duracion;
+      }
+      if (proj.meta_lider && metaBoxes[2].querySelector('.meta-value')) {
+        metaBoxes[2].querySelector('.meta-value').textContent = proj.meta_lider;
+      }
+      if (proj.meta_financiacion && metaBoxes[3].querySelector('.meta-value')) {
+        metaBoxes[3].querySelector('.meta-value').textContent = proj.meta_financiacion;
+      }
+    }
+
+    // Dynamic Phases Rendering
+    if (Array.isArray(proj.phases) && proj.phases.length > 0) {
+      const phasesRow = document.querySelector('.project-phases-row');
+      if (phasesRow) {
+        phasesRow.innerHTML = proj.phases.map((ph, idx) => {
+          const num = idx + 1;
+          const langDict = translations[currentLang] || translations.es;
+          const badge = langDict[`phase_${num}_badge`] || ph.badge || `Fase ${num}`;
+          const title = langDict[`phase_${num}_title`] || ph.title || '';
+          const subtitle = langDict[`phase_${num}_subtitle`] !== undefined ? langDict[`phase_${num}_subtitle`] : (ph.subtitle || '');
+          const desc = langDict[`phase_${num}_desc`] || ph.desc || '';
+          return `
+            <div class="phase-card phase-${num}">
+              <span class="phase-badge" data-i18n="phase_${num}_badge">${badge}</span>
+              <h4 class="phase-title" data-i18n="phase_${num}_title">${title}</h4>
+              ${subtitle ? `<p class="phase-subtitle" data-i18n="phase_${num}_subtitle">${subtitle}</p>` : ''}
+              <div class="phase-hover-text" data-i18n="phase_${num}_desc">${desc}</div>
+            </div>
+          `;
+        }).join('');
+
+        // Re-attach card hover & click handlers
+        phasesRow.querySelectorAll('.phase-card').forEach(card => {
+          card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
+          card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
+          card.addEventListener('click', () => {
+            phasesRow.querySelectorAll('.phase-card').forEach(c => { if (c !== card) c.classList.remove('is-hovered'); });
+            card.classList.toggle('is-hovered');
+          });
+        });
+      }
+    }
+
+    // Dynamic Objectives Rendering
+    if (Array.isArray(proj.objectives) && proj.objectives.length > 0) {
+      const objGrid = document.querySelector('.objectives-grid');
+      if (objGrid) {
+        const objIcons = [
+          'https://cdn.lordicon.com/gqdnbnwt.json?v=4',
+          'https://cdn.lordicon.com/jvucoldz.json?v=4',
+          'https://cdn.lordicon.com/zpxybbhl.json?v=4',
+          'https://cdn.lordicon.com/rjzlnunf.json?v=6'
+        ];
+        objGrid.innerHTML = proj.objectives.map((obj, idx) => {
+          const num = idx + 1;
+          const langDict = translations[currentLang] || translations.es;
+          const icon = objIcons[idx] || objIcons[0];
+          const title = langDict[`obj_${num}_title`] || obj.title || '';
+          const desc = langDict[`obj_${num}_desc`] || obj.desc || '';
+          return `
+            <article class="objective-card">
+              <div class="objective-card-icon">
+                <lord-icon
+                    src="${icon}"
+                    trigger="loop"
+                    delay="${1000 + idx * 200}"
+                    colors="primary:#1D5BFE,secondary:#7ce4e0"
+                    style="width:90px;height:90px">
+                </lord-icon>
+              </div>
+              <h3 data-i18n="obj_${num}_title">${title}</h3>
+              <p data-i18n="obj_${num}_desc">${desc}</p>
+            </article>
+          `;
+        }).join('');
+      }
+    }
+
+    // Dynamic What is Paragraphs Rendering
+    if (Array.isArray(proj.what_is_paragraphs) && proj.what_is_paragraphs.length > 0) {
+      const projectTextBlock = document.querySelector('.project-text-block');
+      if (projectTextBlock) {
+        const whatTitleEl = projectTextBlock.querySelector('h3');
+        const langDict = translations[currentLang] || translations.es;
+        if (whatTitleEl && proj.what_is_title) {
+          const wTitle = langDict.project_what_is || proj.what_is_title;
+          whatTitleEl.textContent = wTitle;
+        }
+        // Remove existing paragraphs
+        projectTextBlock.querySelectorAll('p').forEach(p => p.remove());
+        // Insert new paragraphs before project-meta-grid
+        const metaGrid = projectTextBlock.querySelector('.project-meta-grid');
+        proj.what_is_paragraphs.forEach((pText, idx) => {
+          const num = idx + 1;
+          const pEl = document.createElement('p');
+          pEl.setAttribute('data-i18n', `project_what_is_p${num}`);
+          pEl.innerHTML = langDict[`project_what_is_p${num}`] || pText;
+          if (metaGrid) {
+            projectTextBlock.insertBefore(pEl, metaGrid);
+          } else {
+            projectTextBlock.appendChild(pEl);
+          }
+        });
+      }
+    }
   }
 }
 
@@ -1492,16 +2272,17 @@ function renderNewsFeed() {
   if (newsListImpact) newsListImpact.innerHTML = impactContent;
   
   function generateNewsHTML(item, i, images) {
-    const text = item.text[currentLang];
+    if (!item) return '';
+    const text = getI18nText(item.text) || getI18nText(item.title);
     
     // Find linked activity/publication to synchronize images, video, tag and date
-    const linkedAct = transferActivities.find(act => act.id === item.activityId);
-    const linkedPub = publications.find(pub => pub.id === item.pubId);
+    const linkedAct = transferActivities.find(act => act && act.id === item.activityId);
+    const linkedPub = publications.find(pub => pub && pub.id === item.pubId);
     
     const section = linkedAct ? linkedAct.section : (linkedPub ? 'publicaciones' : 'actividades');
-    const tagText = linkedAct ? linkedAct.tag[currentLang] : (linkedPub ? linkedPub.extraLabel[currentLang] : (item.tag ? item.tag[currentLang] : 'Seminario'));
+    const tagText = linkedAct ? getI18nText(linkedAct.tag) : (linkedPub ? (linkedPub.extraLabel ? getI18nText(linkedPub.extraLabel) : getI18nText(linkedPub.tag)) : (item.tag ? getI18nText(item.tag) : 'Noticia'));
     const dateText = linkedAct ? linkedAct.date : (linkedPub ? linkedPub.event : '');
-    const cleanDate = dateText ? dateText.split('·')[0].split('de 10:30')[0].trim() : '';
+    const cleanDate = dateText ? String(dateText).split('·')[0].split('de 10:30')[0].trim() : '';
 
     // Synchronize media
     let mediaHTML = '';
@@ -1513,7 +2294,7 @@ function renderNewsFeed() {
       `;
     } else {
       const fallbackSrc = linkedAct ? linkedAct.image : (linkedPub ? images[2] : images[i % images.length]);
-      mediaHTML = `<img src="${fallbackSrc}" alt="${text}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;">`;
+      mediaHTML = `<img src="${getAssetUrl(fallbackSrc)}" alt="${text}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;">`;
     }
     
     // Determine type colors — match section palette
@@ -1531,32 +2312,29 @@ function renderNewsFeed() {
       colorAttr = 'purple';
     }
 
-    // Set designated aspect ratios for asymmetric masonry sizes
-    const aspectRatios = ['16/10', '4/3', '1/1', '4/5', '16/9'];
-    const cardAspect = aspectRatios[i % aspectRatios.length];
-
     return `
       <article class="news-card news-card-redesign idx-${i}" data-id="${item.id}" data-type="${section}" data-cursor-color="${colorAttr}"
-               role="button" tabindex="0" style="break-inside: avoid; margin-bottom: 24px; position: relative; overflow: hidden; border-radius: 20px;">
-        <div class="news-image-wrapper" style="width: 100%; aspect-ratio: ${cardAspect}; overflow: hidden; position: relative;">
+               role="button" tabindex="0">
+        <div class="news-image-wrapper" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
           ${mediaHTML}
           
-          <!-- Hover overlay: tag/date centered, z-index 2 -->
+          <!-- Hover overlay: tag/date centred, z-index 2 -->
           <div class="act-hover-overlay" style="position:absolute;inset:0;z-index:2;
                background:${hoverBg} !important;display:flex;flex-direction:column;align-items:center;justify-content:center;
-               opacity:0;transition:opacity 0.35s ease, visibility 0.35s ease;text-align:center;padding:24px 16px 80px;">
+               opacity:0;transition:opacity 0.35s ease;text-align:center;padding:24px 16px 80px;">
             <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">
               ${tagText}
             </span>
             ${cleanDate ? `<span style="font-size:14px;color:rgba(255,255,255,0.85);font-weight:500;margin-top:8px;">${cleanDate}</span>` : ''}
           </div>
           
-          <!-- Idle bottom gradient: shadow for text, z-index 3 -->
+          <!-- Idle bottom gradient for text legibility, z-index 3 -->
           <div class="act-idle-gradient act-idle-bottom" style="z-index:3;"></div>
           
-          <!-- Singleton Title: Always visible at bottom, z-index 4, pointer-events none -->
-          <div class="news-card-title-container" style="position:absolute;bottom:20px;left:18px;right:18px;z-index:4;pointer-events:none;text-align:center;">
-            <h3 style="font-size:18px !important;color:#fff !important;font-weight:700 !important;margin:0 !important;line-height:1.35 !important;
+          <!-- Title: always visible at bottom, z-index 4 -->
+          <div style="position:absolute;bottom:20px;left:18px;right:18px;z-index:4;pointer-events:none;text-align:center;">
+            <h3 style="font-size:17px !important;color:#fff !important;font-weight:700 !important;margin:0 !important;line-height:1.35 !important;
+                       text-shadow:0 2px 8px rgba(0,0,0,0.5);
                        display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
               ${text}
             </h3>
@@ -1598,7 +2376,7 @@ function renderTeam() {
     teal:  'rgba(20, 184, 166, 0.7)'
   };
   
-  // Shuffle array once on initial page load (does not change order on language change)
+  // Shuffle array once on initial page load / initial data load (does not change order on language change)
   if (!teamDisplayOrder || teamDisplayOrder.length !== teamMembers.length || !teamDisplayOrder.every(m => teamMembers.some(curr => curr.id === m.id))) {
     teamDisplayOrder = [...teamMembers].sort(() => Math.random() - 0.5);
   }
@@ -1610,26 +2388,32 @@ function renderTeam() {
   teamGrid.innerHTML = displayTeam.map((member, i) => {
     const colorClass = colors[i % colors.length];
     const accent = colorAccents[colorClass];
-    const roleText = member.role[currentLang];
+    const roleText = getRoleI18n(member.role, currentLang);
     
     // Assign random aspect ratios for dynamic sizing (mostly vertical)
     const aspectRatios = ['4/5', '3/4', '1/1', '16/10'];
     const randomAspect = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
     
     return `
-      <article class="team-card color-variation-${colorClass}" id="card-${member.id}" style="cursor:pointer;">
-        <div class="team-photo" style="aspect-ratio: ${randomAspect};">
+      <article class="team-card color-variation-${colorClass}" id="card-${member.id}" data-id="${member.id}" style="cursor:pointer;">
+        <div class="team-photo img-loader-wrapper" style="aspect-ratio: ${randomAspect};">
+          <div class="img-skeleton-spinner">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+              <path d="M12 2a10 10 0 0 1 10 10"/>
+            </svg>
+          </div>
           <!-- Original image shown by default -->
-          <img src="${member.image || member.photoHover || member.thumb}" class="photo-original" alt="${member.name}" loading="lazy">
+          <img src="${getAssetUrl(member.image || member.photoHover || member.thumb)}" class="photo-original fade-in-img" alt="${getI18nText(member.name)}" loading="lazy" onload="handleImgLoad(this)">
           <!-- Tinted photo fades in on hover -->
-          <img src="${member.photoHover || member.image || member.thumb}" class="photo-color-overlay" alt="${member.name}" loading="lazy">
+          <img src="${getAssetUrl(member.photoHover || member.image || member.thumb)}" class="photo-color-overlay" alt="${getI18nText(member.name)}" loading="lazy">
           <!-- Dark gradient for text readability -->
           <div class="photo-overlay"></div>
           <!-- Info anchored to bottom of photo -->
           <div class="team-photo-info">
             <span class="team-role-badge">${roleText}</span>
             <button class="team-name-btn view-member-btn" data-id="${member.id}" style="border-color:${accent};background:rgba(255,255,255,0.08);">
-              <span>${member.name}</span>
+              <span>${getI18nText(member.name)}</span>
               <span class="btn-arrow">→</span>
             </button>
           </div>
@@ -1672,33 +2456,168 @@ function getPubIcon(type) {
   }
 }
 
+function getFormattedPubAuthorsAndCitation(pub) {
+  if (!pub) return { authors: '', apaAuthors: '', apaCitation: '', zoteroLink: '#', collabHTML: '' };
+
+  const pubTitle = getI18nText(pub.title);
+  const rawBody = getI18nText(pub.loremIpsum) || getI18nText(pub.abstract) || getI18nText(pub.desc);
+  const excerptText = getI18nText(pub.desc) + ' ' + (pub.colaboradores || pub.collaborators || pub.authors || '');
+  const fullTextToScan = (pub.colaboradores || pub.collaborators || pub.authors || '') + ' ' + excerptText + ' ' + rawBody + ' ' + pubTitle;
+
+  // 1. Extract link from <a href="..."> inside post content/meta for "Abrir en Biblioteca Zotero" button
+  let extractedUrl = null;
+  const hrefMatch = fullTextToScan.match(/<a\s+(?:[^>]*?\s+)?href=(?:["']([^"']+)["']|([^\s>]+))/i);
+  if (hrefMatch) {
+    const matchedUrl = hrefMatch[1] || hrefMatch[2];
+    if (matchedUrl && matchedUrl !== '#') {
+      extractedUrl = matchedUrl;
+    }
+  }
+
+  const zoteroLink = extractedUrl 
+    ? extractedUrl 
+    : ((pub.zoteroUrl && pub.zoteroUrl !== '#') 
+      ? pub.zoteroUrl 
+      : (pub.link ? pub.link : (pub.doi ? `https://doi.org/${pub.doi}` : (pub.slug ? `/publicaciones/${pub.slug}` : (pub.wp_id ? `/?p=${pub.wp_id}` : '#')))));
+
+  // 2. Extract and format team members from Excerpt / colaboradores
+  const matchedMembers = [];
+  if (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP)) {
+    ALL_TEAM_MEMBERS_MAP.forEach(m => {
+      if (!m) return;
+      const keys = Array.isArray(m.keys) && m.keys.length > 0 
+        ? m.keys 
+        : [m.displayName, m.name, m.id].filter(Boolean);
+      const isMatched = keys.some(key => key && fullTextToScan.toLowerCase().includes(String(key).toLowerCase()));
+      if (isMatched && !matchedMembers.some(item => item.id === m.id)) {
+        let firstIdx = 999999;
+        keys.forEach(k => {
+          if (!k) return;
+          const idx = fullTextToScan.toLowerCase().indexOf(String(k).toLowerCase());
+          if (idx !== -1 && idx < firstIdx) firstIdx = idx;
+        });
+        matchedMembers.push({ member: m, order: firstIdx });
+      }
+    });
+  }
+
+  matchedMembers.sort((a, b) => a.order - b.order);
+
+  let formattedAuthorsStr = '';
+  let fullAuthorsStr = '';
+
+  if (matchedMembers.length > 0) {
+    // Format in APA style: "Salinas Ibáñez, J. M., Castañeda, L., & Brescó Baiges, E."
+    const apaNames = matchedMembers.map(item => {
+      const m = item.member;
+      const parts = m.displayName.trim().split(/\s+/);
+      if (parts.length >= 3) {
+        const firsts = parts.slice(0, parts.length - 2).map(n => n[0] + '.').join(' ');
+        const lasts = parts.slice(parts.length - 2).join(' ');
+        return `${lasts}, ${firsts}`;
+      } else if (parts.length === 2) {
+        return `${parts[1]}, ${parts[0][0]}.`;
+      }
+      return m.displayName;
+    });
+
+    if (apaNames.length === 1) {
+      formattedAuthorsStr = apaNames[0];
+    } else if (apaNames.length === 2) {
+      formattedAuthorsStr = `${apaNames[0]} & ${apaNames[1]}`;
+    } else {
+      formattedAuthorsStr = apaNames.slice(0, -1).join(', ') + ', & ' + apaNames[apaNames.length - 1];
+    }
+
+    fullAuthorsStr = matchedMembers.map(item => item.member.displayName).join(', ');
+  } else {
+    // Clean excerpt if no matched team members
+    let cleaned = excerptText
+      .replace(/<!--\s*\/?wp:[^>]*-->/gi, '')
+      .replace(/<[^>]*>/g, '')
+      .replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '')
+      .replace(/sdfasfasf/gi, '')
+      .trim();
+    formattedAuthorsStr = cleaned || (pub.authors ? getI18nText(pub.authors) : 'Proyecto COPLITELE-IA');
+    fullAuthorsStr = formattedAuthorsStr;
+  }
+
+  const year = pub.year || (pub.date ? String(pub.date).slice(-4) : '2026');
+  const journalOrEvent = pub.event || pub.journal || 'Proyecto COPLITELE-IA';
+
+  // Format clean APA citation: Authors (Year). Title. Journal/Event. DOI
+  let apaCitation = `${formattedAuthorsStr} (${year}). ${pubTitle}. ${journalOrEvent}.`;
+  if (pub.doi) {
+    apaCitation += ` https://doi.org/${pub.doi}`;
+  }
+
+  const authorStr = pub.colaboradores || pub.collaborators || pub.authors || '';
+  const collabHTML = (typeof getMatchedCollaboratorsHTML === 'function') 
+    ? getMatchedCollaboratorsHTML(fullTextToScan, pub.collabTitle, pub.extraCollabs, authorStr) 
+    : '';
+
+  return {
+    authors: fullAuthorsStr || formattedAuthorsStr,
+    apaAuthors: formattedAuthorsStr,
+    apaCitation: apaCitation,
+    zoteroLink: zoteroLink,
+    collabHTML: collabHTML
+  };
+}
+
 function renderPublications() {
   const pubGrid = document.getElementById('publications-grid');
   const homePubGrid = document.getElementById('home-publications-grid');
+  if (!pubGrid && !homePubGrid) return;
   
   const filtered = publications.filter(pub => {
-    const titleText = pub.title[currentLang].toLowerCase();
-    const citationText = pub.citation.toLowerCase();
-    const abstractText = pub.abstract[currentLang].toLowerCase();
+    if (!pub) return false;
+    const titleText = getI18nText(pub.title).toLowerCase();
+    const citationText = (pub.citation || '').toLowerCase();
+    const abstractText = (getI18nText(pub.abstract) || getI18nText(pub.desc) || getI18nText(pub.loremIpsum)).toLowerCase();
     
+    const tagsList = Array.isArray(pub.tags) ? pub.tags : [];
     const matchesSearch = searchQuery === '' || 
       titleText.includes(searchQuery) ||
       citationText.includes(searchQuery) ||
       abstractText.includes(searchQuery) ||
-      pub.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+      tagsList.some(tag => String(tag).toLowerCase().includes(searchQuery));
       
-    const matchesType = pubFilterType === 'all' || pub.type === pubFilterType;
+    const tagEs = String(pub.tag?.es || '').toLowerCase();
+    const tagCa = String(pub.tag?.ca || '').toLowerCase();
+    const tagEn = String(pub.tag?.en || '').toLowerCase();
+
+    let matchesType = (pubFilterType === 'all');
+    if (!matchesType) {
+      if (pubFilterType === 'revista' || pubFilterType === 'articulo') {
+        matchesType = pub.type === 'revista' || pub.type === 'articulo' || pub.filterType === 'articulo' ||
+          tagEs.includes('artículo') || tagEs.includes('articulo') || tagCa.includes('article') || tagEn.includes('article');
+      } else if (pubFilterType === 'congreso') {
+        matchesType = pub.type === 'congreso' || pub.filterType === 'congreso' ||
+          tagEs.includes('congreso') || tagCa.includes('congrés') || tagCa.includes('congres') || tagEn.includes('conference');
+      } else if (pubFilterType === 'libro') {
+        matchesType = pub.type === 'libro' || pub.filterType === 'libro' ||
+          tagEs.includes('libro') || tagCa.includes('llibre') || tagEn.includes('book');
+      } else if (pubFilterType === 'poster') {
+        matchesType = pub.type === 'poster' || pub.type === 'posters' || pub.filterType === 'poster' ||
+          tagEs.includes('póster') || tagEs.includes('poster') || tagCa.includes('pòster') || tagEn.includes('poster');
+      } else {
+        matchesType = pub.type === pubFilterType || pub.filterType === pubFilterType;
+      }
+    }
     
     return matchesSearch && matchesType;
   });
   
   const mapPubHTML = pub => {
-    const labelColorClass = pub.type === 'revista' ? 'blue' : (pub.type === 'libro' ? 'green' : 'teal');
-    const extraLabelText = pub.extraLabel[currentLang];
-    const year = pub.citation.match(/\((\d{4})\)/)?.[1] || 'Zotero';
+    if (!pub) return '';
+    const labelColorClass = pub.type === 'revista' ? 'blue' : (pub.type === 'libro' ? 'green' : (pub.type === 'poster' ? 'purple' : 'teal'));
+    const extraLabelText = pub.extraLabel ? getI18nText(pub.extraLabel) : (pub.tag ? getI18nText(pub.tag) : 'Publicación');
+    const citation = pub.citation || getI18nText(pub.title);
+    const year = citation.match(/\((\d{4})\)/)?.[1] || pub.year || '2026';
     
     // Extract authors roughly
-    const authorStr = pub.citation.split(/\(\d{4}\)\./)[0] || pub.citation.split(' (')[0] || pub.citation.substring(0, 50);
+    const authorStr = pub.authors ? getI18nText(pub.authors) : (citation.split(/\(\d{4}\)\./)[0] || citation.split(' (')[0] || citation.substring(0, 50));
     
     return `
       <article class="pub-card-row view-pub-btn" data-id="${pub.id}">
@@ -1706,7 +2625,7 @@ function renderPublications() {
           <span class="pub-year-badge">${year}</span>
         </div>
         <div class="pub-col pub-col-title">
-          <h3 class="pub-title" style="margin-bottom:0;">${pub.title[currentLang]}</h3>
+          <h3 class="pub-title" style="margin-bottom:0;">${getI18nText(pub.title)}</h3>
         </div>
         <div class="pub-col pub-col-authors">
           <p class="pub-authors" style="margin:0;">${authorStr}</p>
@@ -1749,16 +2668,153 @@ function renderPublications() {
   });
 }
 
+window.handleMemberPostClick = function(type, id) {
+  const modal = document.getElementById('details-modal');
+  if (modal && typeof modal.close === 'function') {
+    modal.close();
+  }
+
+  if (type === 'publicacion') {
+    window.location.hash = '#/impacto#publicaciones';
+    setTimeout(() => {
+      openPubModal(id);
+    }, 150);
+  } else if (type === 'actividad' || type === 'transferencia') {
+    window.location.hash = `#/actividad/${id}`;
+  } else if (type === 'recurso') {
+    window.location.hash = '#/impacto#recursos';
+    setTimeout(() => {
+      openRecModal(id);
+    }, 150);
+  }
+};
+
+function getMemberAssociatedPosts(member) {
+  if (!member) return [];
+  const memberName = getI18nText(member.name) || '';
+  const memberMapEntry = (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP))
+    ? ALL_TEAM_MEMBERS_MAP.find(m => m && m.id === member.id)
+    : null;
+
+  let rawKeys = [];
+  if (memberMapEntry && Array.isArray(memberMapEntry.keys) && memberMapEntry.keys.length > 0) {
+    rawKeys = memberMapEntry.keys;
+  } else if (Array.isArray(member.keys) && member.keys.length > 0) {
+    rawKeys = member.keys;
+  } else if (memberName) {
+    const cleanName = memberName.replace(/^(dra?\.?|dr\.?|prof\.?|profesora?)\s*/i, '').trim();
+    const parts = cleanName.split(/\s+/);
+    rawKeys = [cleanName, memberName];
+    if (parts.length >= 2) {
+      rawKeys.push(parts.slice(1).join(' '));
+      rawKeys.push(parts[parts.length - 1]);
+    }
+  }
+  const keys = rawKeys.filter(Boolean);
+  const posts = [];
+
+  // 1. Scientific Publications
+  if (typeof publications !== 'undefined' && Array.isArray(publications)) {
+    publications.forEach(pub => {
+      if (!pub) return;
+      const pubText = (pub.colaboradores || pub.collaborators || pub.authors || '') + ' ' + (pub.citation || '') + ' ' + getI18nText(pub.title) + ' ' + getI18nText(pub.abstract) + ' ' + (pub.authors ? getI18nText(pub.authors) : '');
+      const isDirect = member.pubIds && member.pubIds.includes(pub.id);
+      const isMatched = keys.length > 0 && keys.some(k => k && pubText.toLowerCase().includes(String(k).toLowerCase()));
+      if ((isDirect || isMatched) && !posts.some(p => p.id === pub.id)) {
+        posts.push({
+          id: pub.id,
+          type: 'publicacion',
+          badgeText: currentLang === 'en' ? 'Publication' : (currentLang === 'ca' ? 'Publicació' : 'Publicación'),
+          title: getI18nText(pub.title)
+        });
+      }
+    });
+  }
+
+  // 2. Activities & Transfer
+  if (typeof transferActivities !== 'undefined' && Array.isArray(transferActivities)) {
+    transferActivities.forEach(act => {
+      if (!act) return;
+      const actText = (act.colaboradores || act.collaborators || act.authors || '') + ' ' + getI18nText(act.title) + ' ' + getI18nText(act.desc) + ' ' + getI18nText(act.loremIpsum);
+      const isMatched = keys.length > 0 && keys.some(k => k && actText.toLowerCase().includes(String(k).toLowerCase()));
+      if (isMatched && !posts.some(p => p.id === act.id)) {
+        const isTrans = act.section === 'transferencia';
+        posts.push({
+          id: act.id,
+          type: isTrans ? 'transferencia' : 'actividad',
+          badgeText: isTrans ? (currentLang === 'en' ? 'Transfer' : (currentLang === 'ca' ? 'Transferència' : 'Transferencia')) : (currentLang === 'en' ? 'Activity' : (currentLang === 'ca' ? 'Activitat' : 'Actividad')),
+          title: getI18nText(act.title)
+        });
+      }
+    });
+  }
+
+  // 3. Resources
+  const targetResources = (typeof projectResources !== 'undefined' && Array.isArray(projectResources)) 
+    ? projectResources 
+    : ((typeof resources !== 'undefined' && Array.isArray(resources)) ? resources : []);
+
+  targetResources.forEach(res => {
+    if (!res) return;
+    const resText = (res.colaboradores || res.collaborators || res.authors || '') + ' ' + getI18nText(res.title) + ' ' + getI18nText(res.desc) + ' ' + getI18nText(res.description) + ' ' + getI18nText(res.loremIpsum);
+    const isMatched = keys.length > 0 && keys.some(k => k && resText.toLowerCase().includes(String(k).toLowerCase()));
+    if (isMatched && !posts.some(p => p.id === res.id)) {
+      posts.push({
+        id: res.id,
+        type: 'recurso',
+        badgeText: currentLang === 'en' ? 'Resource' : (currentLang === 'ca' ? 'Recurs' : 'Recurso'),
+        title: getI18nText(res.title)
+      });
+    }
+  });
+
+  return posts;
+}
+
 function openMemberModal(id) {
-  const member = teamMembers.find(m => m.id === id);
-  if (!member) return;
+  if (!id) return;
+  const cleanId = decodeURIComponent(String(id || '')).toLowerCase().trim();
+  const normCleanId = cleanId.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+
+  let member = teamMembers.find(m => {
+    if (!m) return false;
+    if (m.id === id || String(m.id).toLowerCase() === cleanId) return true;
+    if (m.wp_id && String(m.wp_id) === cleanId) return true;
+    if (m.slug && String(m.slug).toLowerCase() === cleanId) return true;
+    const mIdNorm = String(m.id || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+    if (mIdNorm && mIdNorm === normCleanId) return true;
+    const mNameNorm = String(getI18nText(m.name) || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+    if (mNameNorm && normCleanId && (mNameNorm.includes(normCleanId) || normCleanId.includes(mNameNorm))) return true;
+    return false;
+  });
+
+  if (!member && typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP)) {
+    const mapEntry = ALL_TEAM_MEMBERS_MAP.find(m => m && (m.id === id || String(m.id).toLowerCase() === cleanId || String(m.name).toLowerCase().includes(cleanId)));
+    if (mapEntry) member = mapEntry;
+  }
+
+  if (!member) {
+    console.warn('Member not found for modal ID:', id);
+    return;
+  }
   
   const modal = document.getElementById('details-modal');
   if (!modal) return;
-  
+
   const modalContent = modal.querySelector('.modal-content-placeholder');
   if (!modalContent) return;
   
+  // If a modal is currently open (e.g. Recurso or Publication modal), close it first and clean classes
+  // If a modal is currently open (e.g. Recurso or Publication modal), close it first and clean classes
+  if (typeof modal.close === 'function' && modal.open) {
+    modal.close();
+    modal.classList.remove('green-tint-modal', 'modal-large', 'modal-member-popup');
+    setTimeout(() => {
+      openMemberModal(id);
+    }, 60);
+    return;
+  }
+
   modal.classList.remove('green-tint-modal');
   modal.classList.add('modal-large', 'modal-member-popup');
   
@@ -1767,13 +2823,10 @@ function openMemberModal(id) {
     modal.classList.remove('modal-large', 'modal-member-popup', 'green-tint-modal');
   }, { once: true });
   
-  const memberName = getI18nText(member.name);
-  const memberRole = member.role ? (getI18nText(member.role)) : 'Investigador/a';
-  const memberTitle = member.title ? (getI18nText(member.title)) : '';
-  const memberBio = member.bio ? getI18nText(member.bio) : '';
   const memberIndex = teamMembers.findIndex(m => m.id === id);
   const isPhotoRight = memberIndex !== -1 ? (memberIndex % 2 === 1) : (member.id.charCodeAt(0) % 2 === 1);
   const layoutClass = isPhotoRight ? 'photo-on-right' : 'photo-on-left';
+  const associatedPosts = getMemberAssociatedPosts(member);
 
   function formatBioHTML(bioContent) {
     if (!bioContent) return '';
@@ -1787,7 +2840,7 @@ function openMemberModal(id) {
     }
     return `<p class="modal-bio-text">${text.replace(/\n/g, '<br>')}</p>`;
   }
-
+  
   modalContent.innerHTML = `
     <div class="member-modal-wrapper ${layoutClass}">
       <button class="modal-close member-modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">
@@ -1805,7 +2858,7 @@ function openMemberModal(id) {
               <path d="M12 2a10 10 0 0 1 10 10"/>
             </svg>
           </div>
-          <img src="${getAssetUrl(member.photoHover || member.photo || member.image || member.thumb || member.photoDefault)}" alt="${memberName}" class="fade-in-img member-fullheight-photo" onload="handleImgLoad(this)">
+          <img src="${getAssetUrl(member.photoHover || member.photo || member.image || member.thumb || member.photoDefault)}" alt="${getI18nText(member.name)}" class="fade-in-img member-fullheight-photo" onload="handleImgLoad(this)">
         </div>
       </div>
       
@@ -1813,12 +2866,12 @@ function openMemberModal(id) {
         <div class="member-modal-header">
           <div class="member-modal-title-group">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-              <span class="member-role-badge ${memberRole.toLowerCase().includes('principal') ? 'badge-ip' : 'badge-member'}">
-                ${memberRole}
+              <span class="member-role-badge ${getRoleI18n(member.role, currentLang).toLowerCase().includes('principal') ? 'badge-ip' : 'badge-member'}">
+                ${getRoleI18n(member.role, currentLang)}
               </span>
             </div>
-            <h3 class="member-modal-name">${memberName}</h3>
-            <p class="member-modal-subtitle">${memberTitle}</p>
+            <h3 class="member-modal-name">${getI18nText(member.name)}</h3>
+            <p class="member-modal-subtitle">${getI18nText(member.title)}</p>
           </div>
         </div>
 
@@ -1842,42 +2895,94 @@ function openMemberModal(id) {
                 </svg>
               </a>
             ` : ''}
-            ${member.researchgate ? `
-              <a href="${member.researchgate}" target="_blank" class="member-contact-link rg-btn" title="ResearchGate: ${member.researchgate}">
+            ${(member.researchgate || member.rg) ? `
+              <a href="${member.researchgate || member.rg}" target="_blank" class="member-contact-link rg-btn" title="ResearchGate: ${member.researchgate || member.rg}">
                 <svg viewBox="0 0 24 24" width="24" height="24" class="rg-svg">
                   <text x="2.5" y="18" font-size="16.5" font-weight="900" font-family="Georgia, serif" fill="currentColor">R</text>
                   <text x="14" y="12" font-size="12" font-weight="800" font-family="Georgia, serif" style="font-style: italic;" fill="currentColor">g</text>
                 </svg>
               </a>
             ` : ''}
+            ${(member.googlescholar || member.scholar || member.google_scholar) ? `
+              <a href="${member.googlescholar || member.scholar || member.google_scholar}" target="_blank" class="member-contact-link scholar-btn" title="Google Scholar: ${member.googlescholar || member.scholar || member.google_scholar}">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="scholar-svg">
+                  <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5 12 0z"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.dialnet ? `
+              <a href="${member.dialnet}" target="_blank" class="member-contact-link dialnet-btn" title="Dialnet: ${member.dialnet}">
+                <svg viewBox="0 0 24 24" width="24" height="24" class="dialnet-svg">
+                  <text x="4.5" y="18.5" font-size="19" font-weight="900" font-family="Arial, sans-serif" fill="currentColor">D</text>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.mendeley ? `
+              <a href="${member.mendeley}" target="_blank" class="member-contact-link mendeley-btn" title="Mendeley: ${member.mendeley}">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="mendeley-svg">
+                  <path d="M12 6.5a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zm-5 5.5a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm10 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm-10.5 5.5h11c-.6 2.4-2.5 4.2-5.5 4.2s-4.9-1.8-5.5-4.2z"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.linkedin ? `
+              <a href="${member.linkedin}" target="_blank" class="member-contact-link linkedin-btn" title="LinkedIn: ${member.linkedin}">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="linkedin-svg">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.6a1.56 1.56 0 1 0 0 3.12 1.56 1.56 0 0 0 0-3.12z"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.bluesky ? `
+              <a href="${member.bluesky}" target="_blank" class="member-contact-link bluesky-btn" title="Bluesky: ${member.bluesky}">
+                <svg viewBox="0 0 568 501" width="24" height="24" class="bluesky-svg">
+                  <path d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.209 46.866-35.185 111.57-55.801 111.57 23.364 0 15.8-9.014 132.884-14.309 151.848-18.411 65.952-85.496 82.781-144.978 72.846 103.882 17.659 130.344 76.516 73.18 135.086-108.629 111.31-160.916-27.917-183.178-77.944-22.263 50.027-74.55 189.254-183.179 77.944-57.164-58.57-30.702-117.427 73.18-135.086-59.482 9.935-126.567-6.894-144.978-72.846C23.07 208.71 14.056 91.627 14.056 75.827c0-79.165 64.704-58.549 111.565-22.163z" fill="currentColor"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.instagram ? `
+              <a href="${member.instagram}" target="_blank" class="member-contact-link instagram-btn" title="Instagram: ${member.instagram}">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="instagram-svg">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0 3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${member.facebook ? `
+              <a href="${member.facebook}" target="_blank" class="member-contact-link facebook-btn" title="Facebook: ${member.facebook}">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="facebook-svg">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+            ` : ''}
+            ${(member.website || member.web || member.personal_website || member.url) ? `
+              <a href="${member.website || member.web || member.personal_website || member.url}" target="_blank" rel="noopener noreferrer" class="member-contact-link website-btn" title="Web: ${member.website || member.web || member.personal_website || member.url}">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="website-svg">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </a>
+            ` : ''}
           </div>
 
-          <div class="modal-publications-section" style="${(member.pubIds && member.pubIds.length > 0) ? 'border-top: 1px solid var(--color-border-light); padding-top: 20px; margin-top: 4px;' : 'display:none;'}">
+          <div class="modal-publications-section" style="${associatedPosts.length > 0 ? 'border-top: 1px solid var(--color-border-light); padding-top: 20px; margin-top: 4px;' : 'display:none;'}">
             <h4 style="margin-top: 0; margin-bottom: 12px; font-family: var(--font-primary); font-size: 14px; font-weight: 800; color: #0f172a;">
-              ${currentLang === 'en' ? 'Publications in this project:' : (currentLang === 'ca' ? 'Publicacions en aquest projecte:' : 'Publicaciones en este proyecto:')}
+              ${currentLang === 'en' ? 'Publications & Activities in this project:' : (currentLang === 'ca' ? 'Publicacions i Activitats en aquest projecte:' : 'Publicaciones en este proyecto:')}
             </h4>
-            <ul style="padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;">
-              ${
-                (member.pubIds || []).map(pid => {
-                  const pub = publications.find(p => p.id === pid);
-                  if (!pub) return '';
-                  const year = (pub.citation && pub.citation.match(/(\d{4})/)?.[0]) || pub.year || '';
-                  const url = pub.doi ? `https://doi.org/${pub.doi}` : pub.zoteroUrl;
-                  return `<li>
-                    <a href="${url}" target="_blank" class="member-post-box box-type-article" style="text-decoration:none; display:flex; align-items:center; gap:8px;">
-                      <span class="member-post-type-badge">${year ? `(${year})` : 'Publicación'}</span>
-                      <span class="member-post-title-text">${getI18nText(pub.title)}</span>
-                    </a>
-                  </li>`;
-                }).join('')
-              }
-            </ul>
+            <div class="member-associated-posts-list">
+              ${associatedPosts.map(p => `
+                <div class="member-post-box box-type-${p.type}" onclick="handleMemberPostClick('${p.type}', '${p.id}')">
+                  <span class="member-post-type-badge">${p.badgeText}</span>
+                  <span class="member-post-title-text">${p.title}</span>
+                </div>
+              `).join('')}
+            </div>
           </div>
         </div>
       </div>
     </div>
   `;
-
+  
+  adaptModalColors(modalContent);
+  modal.classList.add('modal-large', 'modal-member-popup');
   modal.showModal();
   setupModalClose(modal);
 
@@ -1889,6 +2994,8 @@ function openMemberModal(id) {
       imgEl.addEventListener('load', () => handleImgLoad(imgEl));
     }
   }
+
+  window.dispatchEvent(new CustomEvent('content-updated'));
 }
 
 function openPubModal(id) {
@@ -1898,61 +3005,109 @@ function openPubModal(id) {
   const modal = document.getElementById('details-modal');
   if (!modal) return;
   
+  modal.classList.add('modal-large', 'modal-pub-popup');
+
   const modalContent = modal.querySelector('.modal-content-placeholder');
   if (!modalContent) return;
+  
+  const pubLabel = pub.extraLabel ? getI18nText(pub.extraLabel) : (pub.tag ? getI18nText(pub.tag) : 'Publicación');
+  const pubTitle = getI18nText(pub.title);
+  const rawAbstract = getI18nText(pub.abstract) || getI18nText(pub.desc) || '';
+  const { authors, apaCitation, zoteroLink, collabHTML } = getFormattedPubAuthorsAndCitation(pub);
+  const collabWithHTML = (typeof getCollaborationWithHTML === 'function')
+    ? getCollaborationWithHTML(pub.collaborationWith || pub.colaboracionCon, pub.collabWithTitle)
+    : '';
+
+  // Clean abstract if it only contains author names or empty tags
+  let cleanAbstract = rawAbstract
+    .replace(/<!--\s*\/?wp:[^>]*-->/gi, '')
+    .replace(/<p[^>]*>\s*<\/p>/gi, '')
+    .trim();
+
+  const squashedAuthors = (pub.colaboradores || pub.collaborators || pub.authors || '').replace(/[^a-zA-Z]/g, '').toLowerCase();
+  const squashedAbstract = cleanAbstract.replace(/<[^>]*>/g, '').replace(/[^a-zA-Z]/g, '').toLowerCase();
+  if (squashedAuthors && squashedAbstract && (squashedAuthors === squashedAbstract || squashedAuthors.includes(squashedAbstract) || squashedAbstract.includes(squashedAuthors))) {
+    cleanAbstract = '';
+  }
+
+  // Detect poster / featured image
+  const posterUrl = (pub.poster && !pub.poster.includes('default.png') && !pub.poster.includes('images/1.png'))
+    ? pub.poster
+    : ((pub.image && !pub.image.includes('default.png') && !pub.image.includes('images/1.png')) 
+      ? pub.image 
+      : ((pub.featured_image && !pub.featured_image.includes('default.png')) ? pub.featured_image : ''));
+
+  let posterHTML = '';
+  if (posterUrl) {
+    const assetUrl = getAssetUrl(posterUrl);
+    posterHTML = `
+      <div class="pub-modal-poster-card" style="margin-bottom: 24px; border-radius: 14px; overflow: hidden; background: transparent; text-align: center;">
+        <img src="${assetUrl}" alt="${pubTitle}" class="lightbox-img" style="max-height: 380px; width: auto; max-width: 100%; object-fit: contain; display: block; margin: 0 auto; cursor: zoom-in; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08);" onclick="openImageLightbox('${assetUrl}', '${pubTitle.replace(/'/g, "\\'")}')">
+      </div>
+    `;
+  }
   
   modalContent.innerHTML = `
     <div class="modal-header">
       <div>
-        <span class="modal-meta-label">${pub.extraLabel[currentLang]}</span>
-        <h3>${currentLang === 'en' ? 'Zotero Reference Sheet' : (currentLang === 'ca' ? 'Fitxa Bibliogràfica Zotero' : 'Ficha Bibliográfica Zotero')}</h3>
+        <span class="modal-meta-label" style="color: var(--color-purple, #8b5cf6); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800;">${pubLabel}</span>
       </div>
       <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
     </div>
-    <div class="modal-body">
-      <h4 style="font-size: 18px; line-height: 1.4; margin-bottom: 16px; font-weight: 700; color: var(--color-text-light);">${pub.title[currentLang]}</h4>
+    <div class="modal-body" style="padding: 4px 8px 36px;">
+      <h4 style="font-size: 22px; line-height: 1.35; margin-bottom: 22px; font-weight: 800; color: var(--color-text-light);">${pubTitle}</h4>
       
-      <div style="background: rgba(0,0,0,0.02); border-radius: 16px; padding: 16px; border: 1px solid var(--color-border-light); margin-bottom: 24px;">
-        <span class="modal-meta-label" style="font-size: 9px; margin-bottom: 2px;">Cita Formato APA</span>
-        <p style="font-size: 14px; font-style: italic; margin-bottom: 0; color: var(--color-text-light);">${pub.citation}</p>
+      ${posterHTML}
+
+      <div style="background: rgba(139, 92, 246, 0.04); border-radius: 16px; padding: 20px 22px; border: 1.5px solid rgba(139, 92, 246, 0.18); margin-bottom: 24px;">
+        <span class="modal-meta-label" style="font-size: 10px; font-weight: 700; color: #8b5cf6; margin-bottom: 4px; display: block;">${currentLang === 'en' ? 'APA Format Citation' : (currentLang === 'ca' ? 'Cita Format APA' : 'Cita Formato APA')}</span>
+        <p style="font-size: 15px; font-style: italic; line-height: 1.6; margin-bottom: 0; color: var(--color-text-light);">${apaCitation}</p>
       </div>
       
-      <div style="margin-bottom: 24px;">
-        <span class="modal-meta-label" style="font-size: 9px; margin-bottom: 2px;">Resumen / Abstract</span>
-        <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-muted-light);">${pub.abstract[currentLang]}</p>
-      </div>
-      
-      <div class="modal-details-grid" style="border-top: 1px solid var(--color-border-light); padding-top: 20px;">
-        <div class="modal-detail-item">
-          <span class="modal-meta-label" style="font-size: 9px;">Clave Zotero</span>
-          <span class="modal-detail-val" style="font-family: monospace;">${pub.zoteroKey}</span>
+      ${cleanAbstract ? `
+        <div style="margin-bottom: 26px;">
+          <span class="modal-meta-label" style="font-size: 10px; font-weight: 700; margin-bottom: 6px; display: block;">${currentLang === 'en' ? 'Summary / Abstract' : (currentLang === 'ca' ? 'Resum / Abstract' : 'Resumen / Abstract')}</span>
+          <p style="font-size: 15px; line-height: 1.7; color: var(--color-text-muted-light);">${cleanAbstract}</p>
         </div>
+      ` : ''}
+      
+      <div class="modal-details-grid" style="border-top: 1px solid var(--color-border-light); padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
         ${pub.doi ? `
           <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9px;">DOI</span>
-            <span class="modal-detail-val"><a href="https://doi.org/${pub.doi}" target="_blank" style="color: var(--color-blue); text-decoration: none;">${pub.doi}</a></span>
+            <span class="modal-meta-label" style="font-size: 9.5px;">DOI</span>
+            <span class="modal-detail-val"><a href="https://doi.org/${pub.doi}" target="_blank" style="color: var(--color-blue); text-decoration: underline; font-weight: 600;">${pub.doi}</a></span>
           </div>
         ` : ''}
         ${pub.isbn ? `
           <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9px;">ISBN</span>
-            <span class="modal-detail-val">${pub.isbn}</span>
+            <span class="modal-meta-label" style="font-size: 9.5px;">ISBN</span>
+            <span class="modal-detail-val" style="font-weight: 600;">${pub.isbn}</span>
           </div>
         ` : ''}
         ${pub.event ? `
           <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9px;">Congreso</span>
-            <span class="modal-detail-val">${pub.event}</span>
+            <span class="modal-meta-label" style="font-size: 9.5px;">${currentLang === 'en' ? 'Conference / Journal' : (currentLang === 'ca' ? 'Congrés / Revista' : 'Congreso / Revista')}</span>
+            <span class="modal-detail-val" style="font-weight: 600;">${pub.event}</span>
+          </div>
+        ` : ''}
+        ${pub.zoteroKey ? `
+          <div class="modal-detail-item">
+            <span class="modal-meta-label" style="font-size: 9.5px;">Clave Zotero</span>
+            <span class="modal-detail-val" style="font-family: monospace;">${pub.zoteroKey}</span>
           </div>
         ` : ''}
       </div>
       
-      <div style="display: flex; gap: 12px; margin-top: 30px; justify-content: flex-end;">
-        <a href="${pub.zoteroUrl}" target="_blank" class="btn-primary" style="padding: 10px 20px; font-size: 13px; box-shadow: none; background: #c00;">
-          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: white; margin-right: 6px;"><path d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
-          Abrir en Biblioteca Zotero
-        </a>
+      <div style="display: flex; gap: 14px; margin-top: 32px; justify-content: flex-end; flex-wrap: wrap;">
+        ${(zoteroLink && zoteroLink !== '#') ? `
+          <a href="${zoteroLink}" target="_blank" class="btn-primary" style="padding: 12px 24px; font-size: 13.5px; box-shadow: none; background: #c00; border-color: #c00;">
+            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: white; margin-right: 6px;"><path d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
+            ${currentLang === 'en' ? 'Open in Zotero Library' : (currentLang === 'ca' ? 'Obrir a la Biblioteca Zotero' : 'Abrir en Biblioteca Zotero')}
+          </a>
+        ` : ''}
       </div>
+      ${collabWithHTML}
+      ${collabHTML}
     </div>
   `;
   
@@ -1970,18 +3125,21 @@ function openNewsModal(newsItem) {
   if (!modalContent) return;
   
   const labelColorClass = newsItem.type === 'news' ? 'var(--color-green)' : 'var(--color-blue)';
+  const newsTag = newsItem.tag ? getI18nText(newsItem.tag) : 'Noticia';
+  const newsTitle = getI18nText(newsItem.text) || getI18nText(newsItem.title);
+  const newsDetails = getI18nText(newsItem.details) || getI18nText(newsItem.desc);
   
   modalContent.innerHTML = `
     <div class="modal-header">
       <div>
-        <span class="modal-meta-label" style="color: ${labelColorClass}">${newsItem.tag[currentLang]}</span>
+        <span class="modal-meta-label" style="color: ${labelColorClass}">${newsTag}</span>
         <h3>Últimas Noticias</h3>
       </div>
       <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
     </div>
     <div class="modal-body">
-      <h4 style="font-size: 18px; line-height: 1.4; margin-bottom: 20px; font-weight: 700; color: var(--color-text-light);">${newsItem.text[currentLang]}</h4>
-      <p style="font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted-light);">${newsItem.details[currentLang]}</p>
+      <h4 style="font-size: 18px; line-height: 1.4; margin-bottom: 20px; font-weight: 700; color: var(--color-text-light);">${newsTitle}</h4>
+      <p style="font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted-light);">${newsDetails}</p>
     </div>
   `;
   
@@ -2007,7 +3165,7 @@ function closeModalWithAnimation(modal) {
   modal.classList.add('is-closing');
   setTimeout(() => {
     modal.close();
-    modal.classList.remove('is-closing', 'modal-large', 'modal-member-popup', 'green-tint-modal');
+    modal.classList.remove('is-closing', 'modal-large', 'modal-member-popup', 'modal-pub-popup', 'modal-rec-popup', 'green-tint-modal');
   }, 240);
 }
 
@@ -2049,18 +3207,199 @@ function setupModalClose(modal) {
   };
 }
 
+function updateImpactoSectionsVisibility() {
+  const allActs = (typeof transferActivities !== 'undefined' && Array.isArray(transferActivities)) ? transferActivities : [];
+  const actCount = allActs.filter(a => a && a.section !== 'transferencia').length;
+  const transCount = allActs.filter(a => a && a.section === 'transferencia').length;
+  const pubCount = (typeof publications !== 'undefined' && Array.isArray(publications)) ? publications.length : 0;
+  const recCount = (typeof projectResources !== 'undefined' && Array.isArray(projectResources)) ? projectResources.length : 0;
+
+  const sectionsConfig = [
+    { key: 'actividades', count: actCount },
+    { key: 'transferencia', count: transCount },
+    { key: 'publicaciones', count: pubCount },
+    { key: 'recursos', count: recCount }
+  ];
+
+  sectionsConfig.forEach(({ key, count }) => {
+    const isVisible = count > 0;
+
+    // 1. Toggle Cards on Home and Impacto
+    document.querySelectorAll(`.card-${key}`).forEach(el => {
+      if (isVisible) {
+        el.style.removeProperty('display');
+      } else {
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+
+    // 2. Toggle Submenu Links and their parent <li>
+    document.querySelectorAll(`.link-${key}`).forEach(el => {
+      const parentLi = el.closest('li') || el.parentElement;
+      if (isVisible) {
+        el.style.removeProperty('display');
+        if (parentLi) parentLi.style.removeProperty('display');
+      } else {
+        el.style.setProperty('display', 'none', 'important');
+        if (parentLi) parentLi.style.setProperty('display', 'none', 'important');
+      }
+    });
+
+    // 3. Toggle Section Container on Impacto Page
+    const secEl = document.getElementById(key);
+    if (secEl) {
+      if (isVisible) {
+        secEl.style.removeProperty('display');
+      } else {
+        secEl.style.setProperty('display', 'none', 'important');
+      }
+    }
+  });
+
+  // Center remaining cards
+  document.querySelectorAll('.section-nav-grid').forEach(grid => {
+    grid.style.setProperty('display', 'flex', 'important');
+    grid.style.setProperty('flex-wrap', 'wrap', 'important');
+    grid.style.setProperty('justify-content', 'center', 'important');
+  });
+
+  // Re-adjust active submenu link if the active one is hidden
+  const activeSubmenu = document.querySelector('.page-submenu .submenu-link.active');
+  if (activeSubmenu) {
+    const parentLi = activeSubmenu.closest('li');
+    if (activeSubmenu.style.display === 'none' || (parentLi && parentLi.style.display === 'none')) {
+      const firstVisible = Array.from(document.querySelectorAll('.page-submenu .submenu-link')).find(l => {
+        const pLi = l.closest('li');
+        return l.style.display !== 'none' && (!pLi || pLi.style.display !== 'none');
+      });
+      if (firstVisible) {
+        document.querySelectorAll('.page-submenu .submenu-link').forEach(l => l.classList.remove('active'));
+        firstVisible.classList.add('active');
+      }
+    }
+  }
+}
+
+function setupLordIconHoverColors() {
+  document.querySelectorAll('.card-publicaciones').forEach(card => {
+    const icon = card.querySelector('lord-icon');
+    if (!icon) return;
+    card.addEventListener('mouseenter', () => {
+      icon.setAttribute('colors', 'primary:#8b5cf6,secondary:#c4b5fd');
+    });
+    card.addEventListener('mouseleave', () => {
+      icon.setAttribute('colors', 'primary:#ffffff,secondary:#ddd6fe');
+    });
+  });
+
+  document.querySelectorAll('.card-recursos').forEach(card => {
+    const icon = card.querySelector('lord-icon');
+    if (!icon) return;
+    card.addEventListener('mouseenter', () => {
+      icon.setAttribute('colors', 'primary:#10b981,secondary:#6ee7b7');
+    });
+    card.addEventListener('mouseleave', () => {
+      icon.setAttribute('colors', 'primary:#ffffff,secondary:#a7f3d0');
+    });
+  });
+}
+
 // ----------------------------------------------------
 // 5. GLOBAL INTERACTIVE CONTROLLER INITIALIZATION
 // ----------------------------------------------------
 
-document.addEventListener('DOMContentLoaded', () => {
+function initializeApp() {
+  // Merge live WordPress DB Posts & Pages if available (edited from WP Admin or created by Make.com)
+  if (typeof window !== 'undefined' && window.CopliteleWPData) {
+    ingestWPPageContent();
+    const wpAct = Array.isArray(window.CopliteleWPData.actividades) ? window.CopliteleWPData.actividades : [];
+    const wpTrans = Array.isArray(window.CopliteleWPData.transferencia) ? window.CopliteleWPData.transferencia : [];
+    const wpPubs = Array.isArray(window.CopliteleWPData.publicaciones) ? window.CopliteleWPData.publicaciones : [];
+    const wpRecs = Array.isArray(window.CopliteleWPData.recursos) ? window.CopliteleWPData.recursos : [];
+    const nonMemberTags = ['taller', 'formacion', 'formacio', 'seminario', 'seminari', 'articulo', 'article', 'libro', 'llibre', 'congreso', 'congres', 'poster', 'guia', 'informe', 'protocolo', 'protocol', 'agente', 'agent', 'transferencia', 'divulgacion', 'divulgacio', 'jornada'];
+    const wpMembers = (Array.isArray(window.CopliteleWPData.miembros) ? window.CopliteleWPData.miembros : [])
+      .filter(m => {
+        if (!m) return false;
+        if (m.section && m.section !== 'miembros') return false;
+        const tagText = (String(m.tag?.es || '') + ' ' + String(m.type || '') + ' ' + String(m.filterType || '')).toLowerCase();
+        if (nonMemberTags.some(kw => tagText.includes(kw))) return false;
+        return true;
+      });
+
+    // Always replace with live WP data (if 0 posts published in WP, arrays will be empty as expected)
+    transferActivities.length = 0;
+    transferActivities.push(...wpAct, ...wpTrans);
+
+    newsFeedItems = transferActivities.map((act, index) => ({
+      id: 'news-' + (act.id || index),
+      type: act.section || 'actividades',
+      tag: act.tag || { es: 'Seminario', ca: 'Seminari', en: 'Seminar' },
+      text: act.title || { es: '', ca: '', en: '' },
+      activityId: act.id
+    }));
+
+    publications.length = 0;
+    publications.push(...wpPubs);
+
+    projectResources.length = 0;
+    projectResources.push(...wpRecs);
+
+    if (wpMembers.length > 0) {
+      teamMembers.length = 0;
+      teamMembers.push(...wpMembers);
+
+      ALL_TEAM_MEMBERS_MAP.length = 0;
+      wpMembers.forEach(wpM => {
+        const displayName = getI18nText(wpM.name) || '';
+        const cleanName = displayName.replace(/^(dra?\.?|dr\.?|prof\.?|profesora?)\s*/i, '').trim();
+        const nameParts = cleanName.split(/\s+/).filter(Boolean);
+        const generatedKeys = [displayName, cleanName, wpM.id];
+        if (nameParts.length >= 2) {
+          generatedKeys.push(nameParts.slice(1).join(' '));
+          generatedKeys.push(nameParts[nameParts.length - 1]);
+          generatedKeys.push(nameParts[0] + ', ' + nameParts.slice(1).join(' '));
+          generatedKeys.push(nameParts.slice(1).join(' ') + ', ' + nameParts[0]);
+          generatedKeys.push(nameParts[nameParts.length - 1] + ', ' + nameParts[0]);
+          generatedKeys.push(nameParts[0]);
+        }
+
+        const entry = {
+          id: wpM.id,
+          name: displayName,
+          displayName: displayName,
+          role: getI18nText(wpM.role),
+          affiliation: getI18nText(wpM.title),
+          thumb: wpM.image || wpM.photoHover,
+          image: wpM.image || wpM.photoHover,
+          photoHover: wpM.photoHover || wpM.image,
+          email: wpM.email || '',
+          orcid: wpM.orcid || '',
+          researchgate: wpM.researchgate || '',
+          googlescholar: wpM.googlescholar || '',
+          dialnet: wpM.dialnet || '',
+          mendeley: wpM.mendeley || '',
+          linkedin: wpM.linkedin || '',
+          bluesky: wpM.bluesky || '',
+          instagram: wpM.instagram || '',
+          facebook: wpM.facebook || '',
+          website: wpM.website || '',
+          bio: getI18nText(wpM.bio || wpM.desc),
+          keys: Array.from(new Set(generatedKeys.filter(Boolean)))
+        };
+        ALL_TEAM_MEMBERS_MAP.push(entry);
+      });
+    }
+  }
+
   // 5.1 Render dynamic content components
-  updateAllLogos();
-  renderNewsFeed();
-  renderTeam();
-  renderPublications();
-  renderTransferActivities();
-  renderResources();
+  try { updateAllLogos(); } catch(e) { console.error('Logo update error:', e); }
+  try { renderNewsFeed(); } catch(e) { console.error('NewsFeed error:', e); }
+  try { renderTeam(); } catch(e) { console.error('Team error:', e); }
+  try { renderPublications(); } catch(e) { console.error('Pubs error:', e); }
+  try { renderTransferActivities(); } catch(e) { console.error('Activities error:', e); }
+  try { renderResources(); } catch(e) { console.error('Resources error:', e); }
+  try { updateImpactoSectionsVisibility(); } catch(e) { console.error('Visibility error:', e); }
+  try { setupLordIconHoverColors(); } catch(e) { console.error('Icon hover error:', e); }
   
   // 5.1.1 Hero brand title letter-by-letter entrance animation
   // Use rAF + small timeout so CSS is settled before we add the class
@@ -2402,6 +3741,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 5.11 Phase Cards Hover and Touch handler
+  document.querySelectorAll('.phase-card').forEach(card => {
+    card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
+    card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.phase-card').forEach(c => { if (c !== card) c.classList.remove('is-hovered'); });
+      card.classList.toggle('is-hovered');
+    });
+  });
+
+  // Run initial translation
+  translatePage(currentLang);
+
   // 5.12 Dynamic Stat Counts Injection & Redirection Routing
   const updateStatCounts = () => {
     const invEl = document.getElementById('stat-count-investigadores');
@@ -2432,7 +3784,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5.13 Initialize SPA routing
+  // 5.13 Initialize Cookies Banner
+  initCookieBanner();
+
+  // 5.14 Initialize SPA routing
   window.addEventListener('hashchange', handleRouting);
   window.addEventListener('load', () => {
     handleRouting();
@@ -2441,7 +3796,61 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
   });
   handleRouting();
-});
+}
+
+function initCookieBanner() {
+  const banner = document.getElementById('coplitele-cookie-banner');
+  if (!banner) return;
+
+  const acceptAllBtn = document.getElementById('cookie-accept-all');
+  const acceptEssentialBtn = document.getElementById('cookie-accept-essential');
+  const openSettingsBtn = document.getElementById('open-cookie-settings-btn');
+
+  const showBanner = () => {
+    banner.classList.remove('cookie-banner-hidden');
+  };
+
+  const hideBanner = () => {
+    banner.classList.add('cookie-banner-hidden');
+  };
+
+  const savedConsent = localStorage.getItem('coplitele_cookie_consent');
+
+  if (!savedConsent) {
+    // Show banner after brief delay for smooth entrance
+    setTimeout(showBanner, 600);
+  }
+
+  if (acceptAllBtn) {
+    acceptAllBtn.addEventListener('click', () => {
+      localStorage.setItem('coplitele_cookie_consent', 'all');
+      localStorage.setItem('coplitele_cookie_consent_date', new Date().toISOString());
+      hideBanner();
+    });
+  }
+
+  if (acceptEssentialBtn) {
+    acceptEssentialBtn.addEventListener('click', () => {
+      localStorage.setItem('coplitele_cookie_consent', 'essential');
+      localStorage.setItem('coplitele_cookie_consent_date', new Date().toISOString());
+      hideBanner();
+    });
+  }
+
+  if (openSettingsBtn) {
+    openSettingsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showBanner();
+      banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
 
 // ----------------------------------------------------
 // 6. SPA ROUTING RENDERING FUNCTIONS
@@ -2489,6 +3898,7 @@ function handleRouting() {
   }
   
   updateBackgroundLines(path);
+  try { updateImpactoSectionsVisibility(); } catch(e) {}
   
   // Update body data-page for CSS targeting
   document.body.setAttribute('data-page', path);
@@ -2572,7 +3982,6 @@ function getSpinningIsotypeSVG() {
     </div>
   `;
 }
-
 function renderTransferActivities(filterType = 'all') {
   const activitiesGrid = document.getElementById('activities-grid');
   const transferenciaGrid = document.getElementById('transferencia-grid');
@@ -2581,18 +3990,24 @@ function renderTransferActivities(filterType = 'all') {
   // ─── ACTIVIDADES ─── image/video card, title at bottom, tag/date on hover
   if (activitiesGrid) {
     const activities = transferActivities.filter(act => 
-      act.section === 'actividades' && (filterType === 'all' || act.type === filterType)
+      act && act.section === 'actividades' && (filterType === 'all' || act.type === filterType)
     );
     activitiesGrid.innerHTML = activities.map(act => {
+      if (!act) return '';
+      const actTitle = getI18nText(act.title);
+      const actTag = act.tag ? getI18nText(act.tag) : 'Actividad';
+
       // Simplified date format dd/mm/yyyy
-      const shortDate = act.date ? act.date.replace(/(\d+)\s+(\w+)\s+(\d{4})/, (_, d, m, y) => {
+      const shortDate = act.date ? String(act.date).replace(/(\d+)\s+(\w+)\s+(\d{4})/, (_, d, m, y) => {
         const months = {enero:'01',febrero:'02',marzo:'03',abril:'04',mayo:'05',junio:'06',julio:'07',agosto:'08',septiembre:'09',octubre:'10',noviembre:'11',diciembre:'12'};
-        return `${d.padStart(2,'0')}/${months[m.toLowerCase()] || '01'}/${y}`;
+        return d.padStart(2, '0') + '/' + (months[m.toLowerCase()] || '01') + '/' + y;
       }) : '';
 
+      const shortDateHTML = shortDate ? '<span style="font-size:14px; color:rgba(255,255,255,0.8); font-weight:500; margin-top:8px;">' + shortDate + '</span>' : '';
+
       const mediaHTML = act.videoSrc 
-        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="${getAssetUrl(act.videoSrc)}" type="video/mp4"></video>`
-        : `<img src="${getAssetUrl(act.image)}" alt="${act.title[currentLang]}" loading="lazy">`;
+        ? '<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="' + getAssetUrl(act.videoSrc) + '" type="video/mp4"></video>'
+        : '<img src="' + getAssetUrl(act.image) + '" alt="' + actTitle + '" loading="lazy">';
 
       return `
       <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center; position:relative;">
@@ -2600,46 +4015,56 @@ function renderTransferActivities(filterType = 'all') {
           ${mediaHTML}
           <!-- Hover overlay: tag/date centered, title remains underneath (z-index 4) -->
           <div class="act-hover-overlay act-hover-blue" style="background: rgba(29, 91, 254, 0.96) !important; padding: 24px 16px 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; width: 100%; z-index: 2;">
-            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${act.tag[currentLang]}</span>
-            ${shortDate ? `<span style="font-size:14px; color:rgba(255,255,255,0.8); font-weight:500; margin-top:8px;">${shortDate}</span>` : ''}
+            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${actTag}</span>
+            ${shortDateHTML}
           </div>
           <!-- Idle gradient: shadow behind text -->
           <div class="act-idle-gradient act-idle-bottom" style="z-index: 3;"></div>
           <!-- Singleton Title: Always at the bottom, z-index 4, pointer-events none -->
           <div class="act-card-title-container" style="position: absolute; bottom: 20px; left: 16px; right: 16px; z-index: 4; text-align: center; pointer-events: none;">
-            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${act.title[currentLang]}</h3>
+            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${actTitle}</h3>
           </div>
         </div>
       </article>
     `}).join('');
   }
   
-  // ─── TRANSFERENCIA ─── title outside image in black (no date), desc on hover over image, title turns turquoise on hover
+  // ─── TRANSFERENCIA ─── title outside image, tag + date on hover in white text
   if (transferenciaGrid) {
-    const transferences = transferActivities.filter(act => act.section === 'transferencia');
+    const transferences = transferActivities.filter(act => act && act.section === 'transferencia');
     transferenciaGrid.innerHTML = transferences.map(act => {
+      if (!act) return '';
+      const actTitle = getI18nText(act.title);
+      const actTag = act.tag ? getI18nText(act.tag) : 'Transferencia';
+      
+      // Calculate shortDate format dd/mm/yyyy
+      const shortDate = act.date ? String(act.date).replace(/(\d+)\s+(\w+)\s+(\d{4})/, (_, d, m, y) => {
+        const months = {enero:'01',febrero:'02',marzo:'03',abril:'04',mayo:'05',junio:'06',julio:'07',agosto:'08',septiembre:'09',octubre:'10',noviembre:'11',diciembre:'12'};
+        return d.padStart(2, '0') + '/' + (months[m.toLowerCase()] || '01') + '/' + y;
+      }) : (act.date || act.event || '');
+
+      const shortDateHTML = shortDate 
+        ? '<span class="act-hover-date" style="font-size:14.5px; color:#ffffff !important; font-weight:600; margin-top:6px; display:block;">' + shortDate + '</span>' 
+        : '';
+
       const mediaHTML = act.videoSrc 
-        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="${getAssetUrl(act.videoSrc)}" type="video/mp4"></video>`
-        : `<img src="${getAssetUrl(act.image)}" alt="${act.title[currentLang]}" loading="lazy">`;
+        ? '<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="' + getAssetUrl(act.videoSrc) + '" type="video/mp4"></video>'
+        : '<img src="' + getAssetUrl(act.image) + '" alt="' + actTitle + '" loading="lazy">';
 
       return `
       <article class="activity-card act-card-transferencia trans-card" data-id="${act.id}" data-type="${act.type}" data-cursor-color="turquoise" style="overflow:visible !important; display:flex; flex-direction:column; text-align:center;">
         <div class="activity-image-wrapper" style="position:relative; border-radius:16px; overflow:hidden;">
           ${mediaHTML}
-          <!-- Hover overlay: turquoise overlay displaying the tag and DESCRIPTION -->
-          <div class="act-hover-overlay act-hover-turquoise" style="background: rgba(13, 148, 136, 0.96) !important;">
-            <div class="act-hover-inner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 20px; gap:8px; height:100%; width:100%;">
-              <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:12px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${act.tag[currentLang]}</span>
-              <p style="font-size: 14.5px; line-height: 1.4; color: #ffffff; font-weight: 600; margin: 0; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;">
-                ${act.desc[currentLang]}
-              </p>
-            </div>
+          <!-- Hover overlay: turquoise overlay displaying the tag and DATE (instead of Excerpt) in white text -->
+          <div class="act-hover-overlay act-hover-turquoise" style="background: rgba(20, 184, 166, 0.96) !important; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; width: 100%; z-index: 2;">
+            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.95; letter-spacing:1.5px; color:#ffffff !important; font-weight:800; text-transform:uppercase;">${actTag}</span>
+            ${shortDateHTML}
           </div>
         </div>
         <!-- Card text content below image - padded and text centered -->
         <div class="trans-card-text-container" style="padding: 20px 12px 16px; flex-grow: 1; display:flex; align-items:center; justify-content:center; text-align:center;">
           <h3 class="trans-card-title-dynamic" style="font-size: 18px !important; font-weight: 700 !important; color: #0f172a; margin: 0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color 0.3s ease;">
-            ${act.title[currentLang]}
+            ${actTitle}
           </h3>
         </div>
       </article>
@@ -2649,9 +4074,12 @@ function renderTransferActivities(filterType = 'all') {
   // ─── HOME ACTIVITIES GRID ─── same style as Actividades
   if (homeActivitiesGrid) {
     homeActivitiesGrid.innerHTML = transferActivities.slice(0, 3).map(act => {
+      if (!act) return '';
+      const actTitle = getI18nText(act.title);
+      const actTag = act.tag ? getI18nText(act.tag) : 'Actividad';
       const mediaHTML = act.videoSrc 
-        ? `<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="${getAssetUrl(act.videoSrc)}" type="video/mp4"></video>`
-        : `<img src="${getAssetUrl(act.image)}" alt="${act.title[currentLang]}" loading="lazy">`;
+        ? '<video autoplay loop muted playsinline class="card-video" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"><source src="' + getAssetUrl(act.videoSrc) + '" type="video/mp4"></video>'
+        : '<img src="' + getAssetUrl(act.image) + '" alt="' + actTitle + '" loading="lazy">';
 
       return `
       <article class="activity-card act-card-actividades" data-id="${act.id}" data-type="${act.type}" data-cursor-color="blue" style="text-align:center; position:relative;">
@@ -2659,13 +4087,13 @@ function renderTransferActivities(filterType = 'all') {
           ${mediaHTML}
           <!-- Hover overlay: tag/date centered, title remains underneath (z-index 4) -->
           <div class="act-hover-overlay act-hover-blue" style="background: rgba(29, 91, 254, 0.96) !important; padding: 24px 16px 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; width: 100%; z-index: 2;">
-            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${act.tag[currentLang]}</span>
+            <span class="act-hover-tag" style="background:transparent !important; border:none !important; padding:0 !important; font-size:13px; opacity:0.9; letter-spacing:1.5px; color:#fff !important; font-weight:800; text-transform:uppercase;">${actTag}</span>
           </div>
           <!-- Idle gradient: shadow behind text -->
           <div class="act-idle-gradient act-idle-bottom" style="z-index: 3;"></div>
           <!-- Singleton Title: Always at the bottom, z-index 4, pointer-events none -->
           <div class="act-card-title-container" style="position: absolute; bottom: 20px; left: 16px; right: 16px; z-index: 4; text-align: center; pointer-events: none;">
-            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${act.title[currentLang]}</h3>
+            <h3 style="font-size:18px !important; font-weight:700 !important; color:#fff !important; margin:0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${actTitle}</h3>
           </div>
         </div>
       </article>
@@ -2809,14 +4237,49 @@ function renderResources(filter = 'all') {
 
   const filtered = filter === 'all' 
     ? projectResources 
-    : projectResources.filter(r => r.type === filter);
+    : projectResources.filter(r => {
+        if (!r) return false;
+        const tagEs = String(r.tag?.es || '').toLowerCase();
+        const tagCa = String(r.tag?.ca || '').toLowerCase();
+        const tagEn = String(r.tag?.en || '').toLowerCase();
+        const rType = String(r.type || r.filterType || '').toLowerCase();
 
-  grid.innerHTML = filtered.map(res => `
+        if (filter === 'guias' || filter === 'guia') {
+          return rType.includes('guia') || tagEs.includes('guía') || tagEs.includes('guia') || tagCa.includes('guia') || tagEn.includes('guide');
+        }
+        if (filter === 'informes' || filter === 'informe') {
+          return rType.includes('informe') || tagEs.includes('informe') || tagCa.includes('informe') || tagEn.includes('report');
+        }
+        if (filter === 'protocolos' || filter === 'protocolo') {
+          return rType.includes('protocol') || tagEs.includes('protocolo') || tagCa.includes('protocol') || tagEn.includes('protocol');
+        }
+        if (filter === 'agentes' || filter === 'agente') {
+          return rType.includes('agent') || tagEs.includes('agente') || tagCa.includes('agent') || tagEn.includes('agent');
+        }
+        return r.type === filter || r.filterType === filter;
+      });
+
+  grid.innerHTML = filtered.map(res => {
+    if (!res) return '';
+    const tagText = res.tag ? getI18nText(res.tag) : (res.filterType || 'Recurso');
+    const titleText = getI18nText(res.title);
+    
+    // Prioritize post content / description over excerpt (which contains member names for Make.com)
+    let rawContent = getI18nText(res.loremIpsum) || getI18nText(res.description);
+    if (!rawContent || rawContent.trim() === '') {
+      rawContent = getI18nText(res.desc);
+    }
+    const descText = rawContent
+      .replace(/<!--\s*\/?wp:[^>]*-->/gi, '')
+      .replace(/<[^>]*>/g, '')
+      .trim();
+
+    return `
     <article class="rec-card rec-card-redesign" data-id="${res.id}" data-cursor-color="green">
       <!-- Top header: category pill + doc icon -->
       <div class="rec-card-top" style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:12px;">
         <span class="rec-card-tag-pill" style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; background:rgba(16, 185, 129, 0.1); color:#10b981; padding:4px 10px; border-radius:12px; transition: all 0.3s ease;">
-          ${res.tag[currentLang]}
+          ${tagText}
         </span>
         <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; opacity:0.3; transition: all 0.3s ease; color:#10b981;" class="rec-card-file-icon">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -2826,14 +4289,14 @@ function renderResources(filter = 'all') {
       <!-- Body: title + description snippet -->
       <div class="rec-card-body" style="text-align:left; width:100%; flex-grow:1; display:flex; flex-direction:column; justify-content:flex-start; gap:8px;">
         <h3 class="rec-card-title" style="font-size:17px; font-weight:700; color:#0f172a; margin:0; line-height:1.35; transition: color 0.3s ease;">
-          ${res.title[currentLang]}
+          ${titleText}
         </h3>
         <p class="rec-card-desc" style="font-size:13.5px; color:#475569; margin:0; line-height:1.45; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color 0.3s ease;">
-          ${res.description[currentLang]}
+          ${descText}
         </p>
       </div>
     </article>
-  `).join('');
+  `}).join('');
 
   // Bind clicks to open modal
   grid.querySelectorAll('.rec-card').forEach(card => {
@@ -2848,35 +4311,96 @@ function renderResources(filter = 'all') {
 }
 
 function openRecModal(id) {
-  const res = projectResources.find(r => r.id === id);
+  const res = projectResources.find(r => r && r.id === id);
   if (!res) return;
 
   const modal = document.getElementById('details-modal');
   if (!modal) return;
 
-  modal.classList.add('green-tint-modal');
+  modal.classList.add('modal-large', 'modal-rec-popup', 'green-tint-modal');
 
   const modalContent = modal.querySelector('.modal-content-placeholder');
   if (!modalContent) return;
 
+  const resTag = res.tag ? getI18nText(res.tag) : 'Recurso';
+  const resTitle = getI18nText(res.title);
+  const excerptText = getI18nText(res.desc);
+  const contentText = getI18nText(res.loremIpsum) || getI18nText(res.description);
+  const rawBody = contentText || '';
+
+  // Extract link from <a href="..."> or <a href=...> (quoted or unquoted) inside post content or excerpt
+  const fullTextToScan = (res.colaboradores || res.collaborators || res.authors || '') + ' ' + excerptText + ' ' + rawBody + ' ' + resTitle;
+  let extractedUrl = null;
+  const hrefMatch = fullTextToScan.match(/<a\s+(?:[^>]*?\s+)?href=(?:["']([^"']+)["']|([^\s>]+))/i);
+  if (hrefMatch) {
+    const matchedUrl = hrefMatch[1] || hrefMatch[2];
+    if (matchedUrl && matchedUrl !== '#') {
+      extractedUrl = matchedUrl;
+    }
+  }
+
+  const downloadUrl = extractedUrl 
+    ? extractedUrl 
+    : ((res.downloadUrl && res.downloadUrl !== '#') 
+      ? res.downloadUrl 
+      : (res.attachment_url ? res.attachment_url : (res.slug ? `/recursos/${res.slug}` : (res.wp_id ? `/?p=${res.wp_id}` : '#'))));
+
+  let resBody = processShortcodesAndBlocks(rawBody);
+  // Remove empty or raw unclosed <a> tags from body to prevent empty blue pills/circles rendering in description
+  resBody = resBody.replace(/<a\s+(?:[^>]*?\s+)?href=(?:["'][^"']+["']|[^\s>]+)[^>]*>\s*<\/a>/gi, '');
+  resBody = resBody.replace(/<a\s+(?:[^>]*?\s+)?href=(?:["'][^"']+["']|[^\s>]+)[^>]*>(.*?)<\/a>/gi, (match, text) => {
+    const cleanText = text.replace(/<[^>]*>/g, '').trim();
+    if (!cleanText) return '';
+    return `<a href="${downloadUrl}" target="_blank" download style="color: #10b981 !important; font-weight: 700; text-decoration: underline;">${cleanText}</a>`;
+  });
+  // Strip any leftover unclosed raw <a href=...> tags that have no inner text
+  resBody = resBody.replace(/<a\s+[^>]*>/gi, '');
+
+  const authorStr = res.colaboradores || res.collaborators || res.authors || '';
+  const collabHTML = getMatchedCollaboratorsHTML(fullTextToScan, res.collabTitle, res.extraCollabs, authorStr);
+  const collabWithHTML = (typeof getCollaborationWithHTML === 'function')
+    ? getCollaborationWithHTML(res.collaborationWith || res.colaboracionCon, res.collabWithTitle)
+    : '';
+
+  // Detect poster / featured image
+  const posterUrl = (res.poster && !res.poster.includes('default.png') && !res.poster.includes('images/1.png'))
+    ? res.poster
+    : ((res.image && !res.image.includes('default.png') && !res.image.includes('images/1.png')) 
+      ? res.image 
+      : ((res.featured_image && !res.featured_image.includes('default.png')) ? res.featured_image : ''));
+
+  let posterHTML = '';
+  if (posterUrl) {
+    const assetUrl = getAssetUrl(posterUrl);
+    posterHTML = `
+      <div class="rec-modal-poster-card" style="margin: 24px 0 28px; border-radius: 14px; overflow: hidden; background: transparent; text-align: center;">
+        <img src="${assetUrl}" alt="${resTitle}" class="lightbox-img" style="max-height: 380px; width: auto; max-width: 100%; object-fit: contain; display: block; margin: 0 auto; cursor: zoom-in; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08);" onclick="openImageLightbox('${assetUrl}', '${resTitle.replace(/'/g, "\\'")}')">
+      </div>
+    `;
+  }
+
   modalContent.innerHTML = `
     <div class="modal-header">
       <div>
-        <span class="modal-meta-label" style="color: var(--color-green) !important;">${res.tag[currentLang]}</span>
-        <h3 style="color: var(--color-green) !important;">${currentLang === 'en' ? 'Project Resource Details' : (currentLang === 'ca' ? 'Detall del Recurs del Projecte' : 'Detalle del Recurso del Proyecto')}</h3>
+        <span class="modal-meta-label" style="color: var(--color-green) !important; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800;">${resTag}</span>
+        <h3 style="color: var(--color-green) !important; margin-top: 4px;">${currentLang === 'en' ? 'Project Resource Details' : (currentLang === 'ca' ? 'Detall del Recurs del Projecte' : 'Detalle del Recurso del Proyecto')}</h3>
       </div>
       <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
     </div>
-    <div class="modal-body">
-      <h4 style="font-size: 20px; line-height: 1.4; margin-bottom: 20px; font-weight: 800; color: var(--color-green) !important;">${res.title[currentLang]}</h4>
-      <div class="activity-detail-lorem" style="font-size: 15.5px; line-height: 1.8; text-align: justify;">
-        ${res.loremIpsum[currentLang]}
+    <div class="modal-body" style="padding: 4px 8px 36px;">
+      <h4 style="font-size: 22px; line-height: 1.35; margin-bottom: 24px; font-weight: 800; color: var(--color-green) !important;">${resTitle}</h4>
+      <div class="activity-detail-lorem" style="font-size: 16px; line-height: 1.85; text-align: justify; margin-bottom: 28px;">
+        ${resBody}
       </div>
-      <div style="margin-top: 30px; display: flex; gap: 16px; flex-wrap: wrap;">
-        <a href="${res.downloadUrl}" class="btn-primary" style="background: var(--color-green) !important; border-color: var(--color-green) !important;">
+      ${posterHTML}
+      <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="${downloadUrl}" target="_blank" download class="btn-primary" style="background: var(--color-green) !important; border-color: var(--color-green) !important; padding: 12px 26px; font-size: 14px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5; margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           ${currentLang === 'en' ? 'Download Resource' : (currentLang === 'ca' ? 'Descarregar Recurs' : 'Descargar Recurso')}
         </a>
       </div>
+      ${collabWithHTML}
+      ${collabHTML}
     </div>
   `;
 
@@ -2884,10 +4408,66 @@ function openRecModal(id) {
   setupModalClose(modal);
 
   const handleClose = () => {
-    modal.classList.remove('green-tint-modal');
+    modal.classList.remove('modal-large', 'modal-rec-popup', 'green-tint-modal');
     modal.removeEventListener('close', handleClose);
   };
   modal.addEventListener('close', handleClose);
+}
+
+function processShortcodesAndBlocks(text) {
+  if (!text) return '';
+  let str = String(text);
+
+  // Clean Gutenberg block wrapper comments <!-- wp:shortcode --> and <!-- /wp:shortcode -->
+  str = str.replace(/<!--\s*\/?wp:[^>]*-->/gi, '');
+
+  // Strip empty gallery shortcodes
+  str = str.replace(/\[gallery[^\]]*ids=["']\s*["'][^\]]*\]/gi, '');
+  str = str.replace(/\[gallery[^\]]*ids=\s*\]/gi, '');
+
+  // Fallback client-side gallery shortcode parser if raw [gallery ids="..."] reaches JS
+  str = str.replace(/\[gallery[^\]]*ids=["']([^"']+)["'][^\]]*\]/gi, (match, idsStr) => {
+    const ids = idsStr.split(',').map(id => id.trim()).filter(Boolean);
+    if (ids.length === 0) return '';
+    return `
+      <div class="custom-wp-gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 24px 0;">
+        ${ids.map(id => `
+          <div class="gallery-item-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.08);">
+            <img src="/wp-content/uploads/${id}.jpg" onError="this.style.display='none'" alt="Galeria ${id}" style="width: 100%; height: 260px; object-fit: cover; display: block;">
+          </div>
+        `).join('')}
+      </div>
+    `;
+  });
+
+  // Strip remaining standalone [gallery] shortcodes with no ids
+  str = str.replace(/\[gallery[^\]]*\]/gi, '');
+
+  return str;
+}
+
+function enhancePostVideos(container) {
+  if (!container) return;
+  const videos = container.querySelectorAll('video');
+  videos.forEach(video => {
+    const handleVideoMeta = () => {
+      if (video.videoHeight && video.videoWidth) {
+        if (video.videoHeight > video.videoWidth) {
+          video.classList.add('is-portrait-video');
+          const wrapper = video.closest('.wp-inline-video, .wp-block-video, .activity-video-wrapper, figure, div');
+          if (wrapper && !wrapper.classList.contains('detail-inner-panel') && !wrapper.classList.contains('section-inner-panel') && !wrapper.classList.contains('view-actividad-detalle')) {
+            wrapper.classList.add('is-portrait-video');
+          }
+        }
+      }
+    };
+
+    if (video.readyState >= 1) {
+      handleVideoMeta();
+    } else {
+      video.addEventListener('loadedmetadata', handleVideoMeta, { once: true });
+    }
+  });
 }
 
 function renderActivityDetail(id) {
@@ -2895,21 +4475,54 @@ function renderActivityDetail(id) {
   if (typeof transferActivities !== 'undefined' && Array.isArray(transferActivities)) {
     allActivities.push(...transferActivities);
   }
-  if (typeof window !== 'undefined' && window.CopliteleWPData) {
+  if (typeof publications !== 'undefined' && Array.isArray(publications)) {
+    allActivities.push(...publications);
+  }
+  if (typeof projectResources !== 'undefined' && Array.isArray(projectResources)) {
+    allActivities.push(...projectResources);
+  }
+  if (window.CopliteleWPData) {
     if (Array.isArray(window.CopliteleWPData.actividades)) allActivities.push(...window.CopliteleWPData.actividades);
     if (Array.isArray(window.CopliteleWPData.transferencia)) allActivities.push(...window.CopliteleWPData.transferencia);
+    if (Array.isArray(window.CopliteleWPData.publicaciones)) allActivities.push(...window.CopliteleWPData.publicaciones);
+    if (Array.isArray(window.CopliteleWPData.recursos)) allActivities.push(...window.CopliteleWPData.recursos);
   }
-  const cleanId = decodeURIComponent(String(id || '')).toLowerCase().trim();
-  const activity = allActivities.find(a => a && (
-    String(a.id || '').toLowerCase() === cleanId ||
-    String(a.wp_id || '') === cleanId ||
-    String(a.slug || '').toLowerCase() === cleanId ||
-    String(a.id || '').replace(/^wp-post-/, '') === cleanId ||
-    (a.name && typeof a.name === 'string' && a.name.toLowerCase().includes(cleanId)) ||
-    (getI18nText(a.title) && getI18nText(a.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(cleanId))
-  ));
+  const cleanId = decodeURIComponent(String(id || '')).toLowerCase().replace(/\/+$/, '').trim();
+  const cleanSlug = cleanId.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+  const activity = allActivities.find(a => {
+    if (!a) return false;
+    const aId = String(a.id || '').toLowerCase().trim();
+    const aWpId = String(a.wp_id || '').toLowerCase().trim();
+    const aSlug = String(a.slug || '').toLowerCase().trim();
+    const aTitleEs = getI18nText(a.title) ? getI18nText(a.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : '';
+    const aNameEs = getI18nText(a.name) ? getI18nText(a.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : '';
+
+    return (
+      (aId && aId === cleanId) ||
+      (aWpId && aWpId === cleanId) ||
+      (aSlug && aSlug === cleanId) ||
+      (aId && aId.replace(/^wp-post-/, '') === cleanId) ||
+      (aTitleEs && aTitleEs === cleanSlug) ||
+      (aNameEs && aNameEs === cleanSlug)
+    );
+  }) || allActivities.find(a => {
+    if (!a) return false;
+    const aTitle = (getI18nText(a.title) || getI18nText(a.name) || '').toLowerCase();
+    return cleanId.length >= 4 && aTitle.includes(cleanId);
+  });
   const detailContainer = document.getElementById('view-actividad-detalle');
-  if (!detailContainer || !activity) return;
+  if (!detailContainer) return;
+  
+  if (!activity) {
+    detailContainer.innerHTML = `
+      <div class="section-container" style="max-width: 960px; padding: 60px 20px; text-align: center;">
+        <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 700;">${currentLang === 'en' ? 'Activity not found' : (currentLang === 'ca' ? 'Activitat no trobada' : 'Actividad no encontrada')}</h2>
+        <a href="#/impacto" class="btn-primary">&larr; ${currentLang === 'en' ? 'Back to Impact & Communication' : (currentLang === 'ca' ? 'Tornar a Impacte i Difusió' : 'Volver a Impacto y Difusión')}</a>
+      </div>
+    `;
+    return;
+  }
 
   // Enforce scroll to top immediately on post selection
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -2921,14 +4534,30 @@ function renderActivityDetail(id) {
   const actTag = activity.tag ? getI18nText(activity.tag) : 'Actividad';
 
   // Featured media: full-width borderless image (doubled size)
-  const featuredMedia = `<img src="${activity.image}" alt="${actTitle}" style="width:100%; height:540px; object-fit:cover; border-radius:0; border:none; outline:none; display:block;">`;
+  const featuredMedia = `<img src="${getAssetUrl(activity.image)}" alt="${actTitle}" style="width:100%; height:540px; object-fit:cover; border-radius:0; border:none; outline:none; display:block;">`;
 
   const isTransferencia = activity.section === 'transferencia';
   const buttonClass = isTransferencia ? 'btn-outline-turquoise' : 'btn-outline-blue';
   const backAnchor = isTransferencia ? '#/impacto#transferencia' : '#/impacto#actividades';
   const typeColor = isTransferencia ? '#14b8a6' : '#1d5bfe';
 
-  const bodyContent = getI18nText(activity.loremIpsum) || getI18nText(activity.desc) || '';
+  const actBodyObj = activity.loremIpsum || activity.desc || activity.description || '';
+  const rawBodyText = getI18nText(actBodyObj) || '';
+  const processedBody = processShortcodesAndBlocks(rawBodyText)
+    .replace(/src=["'](\.?\/?images\/[^"']+)["']/g, (match, path) => `src="${getAssetUrl(path)}"`)
+    .replace(/<p[^>]*>\s*<strong[^>]*>\s*EQUIPO E INVESTIGADORES PARTICIPANTES\s*<\/strong>\s*<\/p>/gi, '')
+    .replace(/<h[1-6][^>]*>\s*EQUIPO E INVESTIGADORES PARTICIPANTES\s*<\/h[1-6]>/gi, '');
+
+  let collabHTML = '';
+  let collabWithHTML = '';
+  try {
+    const rawAuthors = activity.colaboradores || activity.collaborators || activity.authors || '';
+    const fullSearchText = rawAuthors + ' ' + rawBodyText + ' ' + getI18nText(activity.desc) + ' ' + actTitle;
+    collabHTML = getMatchedCollaboratorsHTML(fullSearchText, activity.collabTitle, activity.extraCollabs, rawAuthors);
+    collabWithHTML = getCollaborationWithHTML(activity.collaborationWith || activity.colaboracionCon, activity.collabWithTitle);
+  } catch(e) {
+    console.error('Error generating collaborators:', e);
+  }
 
   detailContainer.innerHTML = `
     <div class="section-container" style="max-width: 960px; padding: 40px 20px;">
@@ -2946,7 +4575,7 @@ function renderActivityDetail(id) {
             <span style="font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: ${typeColor}; padding: 4px 12px; border-radius: 20px; border: 1.5px solid ${typeColor};">
               ${actTag}
             </span>
-            <span style="font-size: 13px; color: var(--color-text-muted-light);">${activity.date || ''}</span>
+            ${activity.date ? `<span style="font-size: 13px; color: var(--color-text-muted-light);">${activity.date}</span>` : ''}
             ${activity.location ? `<span style="font-size: 13px; color: var(--color-text-muted-light);">· ${activity.location}</span>` : ''}
           </div>
           
@@ -2955,8 +4584,22 @@ function renderActivityDetail(id) {
           </h1>
           
           <div class="activity-detail-lorem" style="font-size: 15.5px; line-height: 1.8; text-align: justify;">
-            ${bodyContent}
+            ${processedBody}
           </div>
+
+          ${(activity.videoSrc && !processedBody.includes(activity.videoSrc)) ? `
+            <div class="activity-video-wrapper" style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--color-border-light);">
+              <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--color-text-light); display: flex; align-items: center; gap: 8px;">
+                🎥 ${currentLang === 'en' ? 'Session Video' : (currentLang === 'ca' ? 'Vídeo de la Sessió' : 'Video de la Sesión')}
+              </h4>
+              <div style="border-radius: 16px; overflow: hidden; background: #000; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+                <video controls playsinline preload="metadata" style="width: 100%; max-height: 480px; display: block;" src="${getAssetUrl(activity.videoSrc)}"></video>
+              </div>
+            </div>
+          ` : ''}
+
+          ${collabWithHTML}
+          ${collabHTML}
         </div>
       </div>
     </div>
@@ -2967,6 +4610,9 @@ function renderActivityDetail(id) {
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => openImageLightbox(img.src, img.alt));
   });
+
+  // Auto-detect portrait videos and style them with drop-shadows & constrained width
+  enhancePostVideos(detailContainer);
 
   // PDF overlay global
   window.openPdfOverlay = (url) => {
@@ -2987,69 +4633,102 @@ function renderActivityDetail(id) {
 }
 
 function openImageLightbox(src, alt) {
-  const existing = document.querySelector('.img-lightbox-overlay');
+  if (!src) return;
+  const existing = document.getElementById('image-lightbox-modal') || document.querySelector('.img-lightbox-overlay');
   if (existing) existing.remove();
-  const overlay = document.createElement('div');
-  overlay.className = 'img-lightbox-overlay';
-  overlay.innerHTML = `
+
+  const dialog = document.createElement('dialog');
+  dialog.id = 'image-lightbox-modal';
+  dialog.className = 'img-lightbox-dialog';
+  dialog.innerHTML = `
     <div class="img-lightbox-inner">
       <button class="img-lb-close" aria-label="Cerrar">✕</button>
       <img src="${src}" alt="${alt || ''}">
     </div>
   `;
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay || e.target.classList.contains('img-lb-close')) overlay.remove();
+
+  const closeLightbox = (e) => {
+    if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (dialog.classList.contains('is-closing')) return;
+    dialog.classList.add('is-closing');
+    setTimeout(() => {
+      if (typeof dialog.close === 'function' && dialog.open) {
+        dialog.close();
+      }
+      dialog.remove();
+    }, 220);
+  };
+
+  // Clicking ANYWHERE on the lightbox (the overlay, background, close button or image) closes the lightbox smoothly
+  dialog.addEventListener('click', (e) => {
+    closeLightbox(e);
   });
-  document.body.appendChild(overlay);
-  requestAnimationFrame(() => overlay.classList.add('visible'));
+
+  // Also support escape key or cancel event
+  dialog.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    closeLightbox(e);
+  });
+
+  document.body.appendChild(dialog);
+  if (typeof dialog.showModal === 'function') {
+    dialog.showModal();
+  } else {
+    dialog.setAttribute('open', '');
+  }
+  requestAnimationFrame(() => dialog.classList.add('visible'));
 }
+window.openImageLightbox = openImageLightbox;
 
 
 
 
 function initSubmenuScrollObserver() {
-  const sections = [
-    document.getElementById('proyecto'),
-    document.getElementById('objetivos'),
-    document.getElementById('equipo'),
-    document.getElementById('actividades'),
-    document.getElementById('transferencia'),
-    document.getElementById('publicaciones'),
-    document.getElementById('recursos')
-  ].filter(Boolean);
-
-  if (!sections.length) return;
+  const allSectionIds = ['proyecto', 'objetivos', 'equipo', 'actividades', 'transferencia', 'publicaciones', 'recursos'];
 
   const updateActiveSubmenuLink = () => {
     const activeView = document.querySelector('.spa-view.active');
     if (!activeView) return;
 
-    const links = Array.from(activeView.querySelectorAll('.submenu-link'));
-    if (!links.length) return;
+    const visibleLinks = Array.from(activeView.querySelectorAll('.submenu-link')).filter(l => {
+      const pLi = l.closest('li');
+      return l.style.display !== 'none' && (!pLi || pLi.style.display !== 'none');
+    });
+    if (!visibleLinks.length) return;
 
-    const viewSections = sections.filter(sec => activeView.contains(sec));
-    if (!viewSections.length) return;
+    // Get ONLY visible sections inside the active view
+    const visibleSections = allSectionIds
+      .map(id => document.getElementById(id))
+      .filter(sec => {
+        if (!sec) return false;
+        if (!activeView.contains(sec)) return false;
+        if (sec.style.display === 'none' || sec.offsetParent === null) return false;
+        const rect = sec.getBoundingClientRect();
+        return rect.height > 0 || rect.width > 0;
+      });
 
-    // Line 160px from top of viewport for sticky submenu trigger
-    const triggerY = 160;
-    let currentSection = viewSections[0];
+    if (!visibleSections.length) return;
 
-    for (let i = 0; i < viewSections.length; i++) {
-      const rect = viewSections[i].getBoundingClientRect();
-      if (rect.top <= triggerY) {
-        currentSection = viewSections[i];
+    const triggerY = 200;
+    let currentSection = visibleSections[0];
+
+    for (let i = 0; i < visibleSections.length; i++) {
+      const sec = visibleSections[i];
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= triggerY && rect.bottom > 80) {
+        currentSection = sec;
       }
     }
 
-    if (window.scrollY < 100) {
-      currentSection = viewSections[0];
+    if (window.scrollY < 120) {
+      currentSection = visibleSections[0];
     }
 
     const currentId = currentSection.getAttribute('id');
 
-    links.forEach(link => {
+    visibleLinks.forEach(link => {
       const href = link.getAttribute('href');
-      if (href && href.endsWith(`#${currentId}`)) {
+      if (href && (href.endsWith(`#${currentId}`) || href === `#${currentId}`)) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
@@ -3057,15 +4736,21 @@ function initSubmenuScrollObserver() {
     });
   };
 
+  // Add click handler to submenu links so clicking immediately highlights the clicked item
+  document.querySelectorAll('.page-submenu .submenu-link').forEach(link => {
+    link.addEventListener('click', function() {
+      const activeView = document.querySelector('.spa-view.active');
+      if (activeView) {
+        activeView.querySelectorAll('.submenu-link').forEach(l => l.classList.remove('active'));
+      }
+      this.classList.add('active');
+    });
+  });
+
   window.addEventListener('scroll', updateActiveSubmenuLink, { passive: true });
   window.addEventListener('hashchange', updateActiveSubmenuLink, { passive: true });
   updateActiveSubmenuLink();
 }
-
-
-/* ----------------------------------------------------
-   UPDATED CUSTOM SYSTEMS (Custom Glow Cursor, Scroll Reveals)
-   ---------------------------------------------------- */
 
 function initCustomCursor() {
   if (window.matchMedia('(pointer: coarse)').matches) return;
@@ -3077,16 +4762,27 @@ function initCustomCursor() {
   const follower = document.querySelector('.custom-cursor-follower') || document.createElement('div');
   follower.className = 'custom-cursor-follower';
   if (!follower.parentNode) document.body.appendChild(follower);
+
+  let posX = -100, posY = -100;
+  let mouseX = -100, mouseY = -100;
+  let isFirstMove = true;
   
-  let posX = 0, posY = 0;
-  let mouseX = 0, mouseY = 0;
+  cursor.style.opacity = '0';
+  follower.style.opacity = '0';
   
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    if (isFirstMove) {
+      posX = mouseX;
+      posY = mouseY;
+      cursor.style.opacity = '1';
+      follower.style.opacity = '1';
+      isFirstMove = false;
+    }
     cursor.style.left = `${mouseX}px`;
     cursor.style.top = `${mouseY}px`;
-  });
+  }, { passive: true });
   
   let animationId = null;
   function animateFollower() {
@@ -3102,7 +4798,8 @@ function initCustomCursor() {
   }
   
   const getCursorIsotypeSVG = (colorClass) => {
-    const config = generateLogoConfig();
+    const config = getLogoConfig() || (typeof generateLogoConfig === 'function' ? generateLogoConfig() : null);
+    if (!config) return '';
     const textLabel = currentLang === 'en' ? 'View' : (currentLang === 'ca' ? 'Veure' : 'Ver');
     
     const center = 50;
@@ -3146,6 +4843,7 @@ function initCustomCursor() {
       `;
 
       const d = localDescribeArc(center, center, outerRadius, arc.start, arc.end);
+      // White arcs on solid-color background circle
       pathsMarkup += `
         <path d="${d}" fill="none" stroke="#ffffff" stroke-width="${strokeWidth}" stroke-linecap="round" mask="url(#${maskId})"/>
       `;
@@ -3172,9 +4870,17 @@ function initCustomCursor() {
     `;
   };
 
-  // Same as above but without the text label — used for button hover
-  const getCursorIsotypeSVGNoText = (strokeColor = '#a78bfa') => {
-    const config = generateLogoConfig();
+  // Button hover: 3 generated logo colors (#1D5BFE blue, #14B8A6 turquoise, #10B981 green)
+  const getCursorIsotypeSVGNoText = () => {
+    const config = getLogoConfig() || (typeof generateLogoConfig === 'function' ? generateLogoConfig() : null);
+    if (!config) return '';
+
+    const colorMap = {
+      blue: '#1D5BFE',
+      teal: '#14B8A6',
+      green: '#10B981'
+    };
+
     const center = 50;
     const outerRadius = 37;
     const strokeWidth = 5;
@@ -3193,15 +4899,16 @@ function initCustomCursor() {
     const rs = Math.floor(Math.random() * 1000000);
     let masks = '<defs>', paths = '', dots = '';
     config.arcs.forEach(arc => {
+      const arcColor = colorMap[arc.id] || '#1D5BFE';
       const dp = localPolarToCartesian(center, center, outerRadius, arc.dotPos);
       const mid = `btn-mask-${arc.id}-${rs}`;
       masks += `<mask id="${mid}" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="100" height="100" fill="white"/><circle cx="${dp.x}" cy="${dp.y}" r="${perimNotchRadius}" fill="black"/></mask>`;
-      paths += `<path d="${localDescribeArc(center, center, outerRadius, arc.start, arc.end)}" fill="none" stroke="${strokeColor}" stroke-width="${strokeWidth}" stroke-linecap="round" mask="url(#${mid})"/>`;
-      dots  += `<circle cx="${dp.x}" cy="${dp.y}" r="${perimDotRadius}" fill="${strokeColor}"/>`;
+      paths += `<path d="${localDescribeArc(center, center, outerRadius, arc.start, arc.end)}" fill="none" stroke="${arcColor}" stroke-width="${strokeWidth}" stroke-linecap="round" mask="url(#${mid})"/>`;
+      dots  += `<circle cx="${dp.x}" cy="${dp.y}" r="${perimDotRadius}" fill="${arcColor}"/>`;
     });
     masks += '</defs>';
     return `
-      <div style="position:relative; width:80px; height:80px; display:flex; align-items:center; justify-content:center;">
+      <div style="position:relative; width:60px; height:60px; display:flex; align-items:center; justify-content:center;">
         <svg class="spinning-arcs-cursor" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
              style="width:100%; height:100%; fill:none; overflow:visible; position:absolute; top:0; left:0;">
           ${masks}${paths}${dots}
@@ -3258,11 +4965,8 @@ function initCustomCursor() {
     document.body.classList.remove('custom-cursor-hover');
   };
 
-
-
   const handleButtonEnter = () => {
     cursor.classList.add('hover-button');
-    cursor.innerHTML = getCursorIsotypeSVGNoText('#a78bfa');
     document.body.classList.add('custom-cursor-hover');
   };
 
@@ -3281,8 +4985,8 @@ function initCustomCursor() {
       el.addEventListener('mouseleave', handleCardLeave);
     });
 
-    // 2. Regular interactive buttons and links (exclude pub links inside member modal — they handle their own hover)
-    document.querySelectorAll('a:not(.section-nav-card):not(.activity-card):not(.news-card):not(.member-pub-link), button:not(.rec-card), [role="button"]:not(.news-card), #hero-logo-container, .logo-wrapper, .custom-lang-btn, .modal-close').forEach(el => {
+    // 2. Regular interactive buttons and links (including modal contact icons, close buttons, and post boxes)
+    document.querySelectorAll('a:not(.section-nav-card):not(.activity-card):not(.news-card), button:not(.rec-card), [role="button"]:not(.news-card), #hero-logo-container, .logo-wrapper, .custom-lang-btn, .modal-close, .member-contact-link, .member-post-box').forEach(el => {
       el.removeEventListener('mouseenter', handleButtonEnter);
       el.removeEventListener('mouseleave', handleButtonLeave);
       el.addEventListener('mouseenter', handleButtonEnter);
@@ -3293,16 +4997,24 @@ function initCustomCursor() {
   updateHoverEvents();
   window.addEventListener('content-updated', updateHoverEvents);
 
-  // Monitor details-modal events to toggle class on body
+  // Monitor details-modal events
   const modal = document.getElementById('details-modal');
   if (modal) {
     modal.addEventListener('close', () => {
       document.body.classList.remove('modal-open');
+      document.body.classList.remove('custom-cursor-hover');
+      cursor.classList.remove('hover-button', 'hover-post');
+      cursor.innerHTML = '';
+      if (cursor.parentNode !== document.body) document.body.appendChild(cursor);
+      if (follower.parentNode !== document.body) document.body.appendChild(follower);
     });
     const origShowModal = modal.showModal;
     modal.showModal = function() {
       document.body.classList.add('modal-open');
-      origShowModal.apply(this, arguments);
+      document.body.classList.remove('custom-cursor-hover');
+      cursor.classList.remove('hover-button', 'hover-post');
+      cursor.innerHTML = '';
+      return origShowModal.apply(this, arguments);
     };
   }
 }
@@ -3346,7 +5058,7 @@ function initScrollReveal() {
   const setupReveals = () => {
     // Target typography elements to keep scroll animation smooth
     document.querySelectorAll('h1, h2, h3, h4, p, .hero-stats-row, .section-nav-grid').forEach(el => {
-      if (el.closest('header') || el.closest('#details-modal') || el.closest('.custom-cursor') || el.closest('.custom-cursor-follower') || el.closest('.custom-lang-dropdown')) return;
+      if (el.closest('header') || el.closest('#details-modal') || el.closest('.project-phases-row') || el.closest('.custom-cursor') || el.closest('.custom-cursor-follower') || el.closest('.custom-lang-dropdown')) return;
       
       el.classList.add('scroll-reveal');
       revealObserver.observe(el);
@@ -3465,5 +5177,3 @@ function updateBackgroundLines(route) {
 
   svgBg.innerHTML = circlesHTML;
 }
-
-document.addEventListener('DOMContentLoaded', initLordIconHovers);
