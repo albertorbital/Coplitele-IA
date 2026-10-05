@@ -2394,8 +2394,14 @@ function renderTeam() {
     const aspectRatios = ['4/5', '3/4', '1/1', '16/10'];
     const randomAspect = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
     
+    // Support personalized ID (member_id), fallback to member.id or slug
+    const personalizedId = member.member_id || member.id;
+    
     return `
-      <article class="team-card color-variation-${colorClass}" id="card-${member.id}" data-id="${member.id}" style="cursor:pointer;">
+      <article class="team-card color-variation-${colorClass}" id="card-${personalizedId}" data-id="${personalizedId}" style="cursor:pointer; position:relative;">
+        <span id="${personalizedId}" class="member-anchor-spy" style="position:absolute; top:-90px; left:0; width:1px; height:1px; opacity:0; pointer-events:none;"></span>
+        ${(member.slug && member.slug !== personalizedId) ? `<span id="${member.slug}" class="member-anchor-spy" style="position:absolute; top:-90px; left:0; width:1px; height:1px; opacity:0; pointer-events:none;"></span>` : ''}
+        ${(member.id && member.id !== personalizedId && member.id !== member.slug) ? `<span id="${member.id}" class="member-anchor-spy" style="position:absolute; top:-90px; left:0; width:1px; height:1px; opacity:0; pointer-events:none;"></span>` : ''}
         <div class="team-photo img-loader-wrapper" style="aspect-ratio: ${randomAspect};">
           <div class="img-skeleton-spinner">
             <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2412,7 +2418,7 @@ function renderTeam() {
           <!-- Info anchored to bottom of photo -->
           <div class="team-photo-info">
             <span class="team-role-badge">${roleText}</span>
-            <button class="team-name-btn view-member-btn" data-id="${member.id}" style="border-color:${accent};background:rgba(255,255,255,0.08);">
+            <button class="team-name-btn view-member-btn" data-id="${personalizedId}" style="border-color:${accent};background:rgba(255,255,255,0.08);">
               <span>${getI18nText(member.name)}</span>
               <span class="btn-arrow">→</span>
             </button>
@@ -2771,27 +2777,50 @@ function getMemberAssociatedPosts(member) {
   return posts;
 }
 
-function openMemberModal(id) {
-  if (!id) return;
-  const cleanId = decodeURIComponent(String(id || '')).toLowerCase().trim();
+function findMemberByIdOrSlug(idOrSlug) {
+  if (!idOrSlug) return null;
+  const raw = String(idOrSlug).trim();
+  const cleanId = decodeURIComponent(raw).toLowerCase().trim();
   const normCleanId = cleanId.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
 
-  let member = teamMembers.find(m => {
-    if (!m) return false;
-    if (m.id === id || String(m.id).toLowerCase() === cleanId) return true;
-    if (m.wp_id && String(m.wp_id) === cleanId) return true;
-    if (m.slug && String(m.slug).toLowerCase() === cleanId) return true;
-    const mIdNorm = String(m.id || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
-    if (mIdNorm && mIdNorm === normCleanId) return true;
-    const mNameNorm = String(getI18nText(m.name) || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
-    if (mNameNorm && normCleanId && (mNameNorm.includes(normCleanId) || normCleanId.includes(mNameNorm))) return true;
-    return false;
-  });
-
-  if (!member && typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP)) {
-    const mapEntry = ALL_TEAM_MEMBERS_MAP.find(m => m && (m.id === id || String(m.id).toLowerCase() === cleanId || String(m.name).toLowerCase().includes(cleanId)));
-    if (mapEntry) member = mapEntry;
+  if (typeof teamMembers !== 'undefined' && Array.isArray(teamMembers)) {
+    let member = teamMembers.find(m => {
+      if (!m) return false;
+      if (m.id === raw || String(m.id).toLowerCase() === cleanId) return true;
+      if (m.member_id && (m.member_id === raw || String(m.member_id).toLowerCase() === cleanId)) return true;
+      if (m.wp_id && String(m.wp_id) === cleanId) return true;
+      if (m.slug && (m.slug === raw || String(m.slug).toLowerCase() === cleanId)) return true;
+      const mIdNorm = String(m.id || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+      if (mIdNorm && mIdNorm === normCleanId) return true;
+      const memIdNorm = String(m.member_id || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+      if (memIdNorm && memIdNorm === normCleanId) return true;
+      const slugNorm = String(m.slug || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+      if (slugNorm && slugNorm === normCleanId) return true;
+      const mNameNorm = String(getI18nText(m.name) || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+      if (mNameNorm && normCleanId && (mNameNorm.includes(normCleanId) || normCleanId.includes(mNameNorm))) return true;
+      return false;
+    });
+    if (member) return member;
   }
+
+  if (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP)) {
+    const mapEntry = ALL_TEAM_MEMBERS_MAP.find(m => {
+      if (!m) return false;
+      if (m.id === raw || String(m.id).toLowerCase() === cleanId) return true;
+      if (m.member_id && (m.member_id === raw || String(m.member_id).toLowerCase() === cleanId)) return true;
+      if (m.slug && (m.slug === raw || String(m.slug).toLowerCase() === cleanId)) return true;
+      if (String(m.name).toLowerCase().includes(cleanId)) return true;
+      return false;
+    });
+    if (mapEntry) return mapEntry;
+  }
+
+  return null;
+}
+
+function openMemberModal(id) {
+  if (!id) return;
+  const member = findMemberByIdOrSlug(id);
 
   if (!member) {
     console.warn('Member not found for modal ID:', id);
@@ -2805,7 +2834,6 @@ function openMemberModal(id) {
   if (!modalContent) return;
   
   // If a modal is currently open (e.g. Recurso or Publication modal), close it first and clean classes
-  // If a modal is currently open (e.g. Recurso or Publication modal), close it first and clean classes
   if (typeof modal.close === 'function' && modal.open) {
     modal.close();
     modal.classList.remove('green-tint-modal', 'modal-large', 'modal-member-popup');
@@ -2818,10 +2846,32 @@ function openMemberModal(id) {
   modal.classList.remove('green-tint-modal');
   modal.classList.add('modal-large', 'modal-member-popup');
   
-  // Make sure we clean up the class on modal close
+  // Make sure we clean up the class on modal close and restore URL hash
   modal.addEventListener('close', () => {
     modal.classList.remove('modal-large', 'modal-member-popup', 'green-tint-modal');
+    try {
+      const rawHash = window.location.hash || '';
+      const onProyecto = window.location.pathname.includes('/proyecto') || rawHash.includes('#/proyecto') || document.body.getAttribute('data-page') === 'proyecto';
+      if (onProyecto) {
+        const isCleanPath = window.location.pathname.includes('/proyecto') && !rawHash.startsWith('#/');
+        const revertHash = isCleanPath ? '#equipo' : '#/proyecto#equipo';
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', revertHash);
+        }
+      }
+    } catch(e) {}
   }, { once: true });
+  
+  // Update address bar so user and colleagues can see and share the personalized member ID
+  const memberTargetId = member.member_id || member.id || member.slug;
+  if (memberTargetId && window.history && window.history.replaceState) {
+    try {
+      const rawHash = window.location.hash || '';
+      const isCleanPath = window.location.pathname.includes('/proyecto') && !rawHash.startsWith('#/');
+      const newHash = isCleanPath ? ('#' + memberTargetId) : ('#/proyecto#' + memberTargetId);
+      window.history.replaceState({ memberModalOpen: true, memberId: memberTargetId }, '', newHash);
+    } catch(e) {}
+  }
   
   const memberIndex = teamMembers.findIndex(m => m.id === id);
   const isPhotoRight = memberIndex !== -1 ? (memberIndex % 2 === 1) : (member.id.charCodeAt(0) % 2 === 1);
@@ -3179,22 +3229,15 @@ function setupModalClose(modal) {
   }
   
   modal.onclick = (e) => {
-    // If it's a member popup, clicking ANYWHERE that is not the social icons or publication links closes the modal
-    if (modal.classList.contains('modal-member-popup')) {
-      const interactiveEl = e.target.closest('a, button, .member-contact-link, .member-post-box, .member-pub-link');
-      if (interactiveEl) {
-        if (interactiveEl.id === 'modal-close-btn' || interactiveEl.classList.contains('modal-close')) {
-          e.stopPropagation();
-          closeModalWithAnimation(modal);
-        }
-        return; // Let user interact with email, ORCID, ResearchGate or publications
-      }
-      // Clicked anywhere else in the modal (background, image, text, white area)
+    // Close when clicking the X close button or any element marked as .modal-close
+    const closeTrigger = e.target.closest('#modal-close-btn, .modal-close');
+    if (closeTrigger) {
+      e.stopPropagation();
       closeModalWithAnimation(modal);
       return;
     }
     
-    // Close standard dialogs when clicking backdrop
+    // Only close when clicking on the backdrop outside the dialog window
     const dialogDimensions = modal.getBoundingClientRect();
     if (
       e.clientX < dialogDimensions.left ||
@@ -3354,6 +3397,8 @@ function initializeApp() {
         const cleanName = displayName.replace(/^(dra?\.?|dr\.?|prof\.?|profesora?)\s*/i, '').trim();
         const nameParts = cleanName.split(/\s+/).filter(Boolean);
         const generatedKeys = [displayName, cleanName, wpM.id];
+        if (wpM.member_id) generatedKeys.push(wpM.member_id);
+        if (wpM.slug) generatedKeys.push(wpM.slug);
         if (nameParts.length >= 2) {
           generatedKeys.push(nameParts.slice(1).join(' '));
           generatedKeys.push(nameParts[nameParts.length - 1]);
@@ -3365,6 +3410,8 @@ function initializeApp() {
 
         const entry = {
           id: wpM.id,
+          member_id: wpM.member_id || '',
+          slug: wpM.slug || '',
           name: displayName,
           displayName: displayName,
           role: getI18nText(wpM.role),
@@ -3789,6 +3836,28 @@ function initializeApp() {
 
   // 5.14 Initialize SPA routing
   window.addEventListener('hashchange', handleRouting);
+  window.addEventListener('popstate', handleRouting);
+
+  // Support clean URL transitions on nav links and imagotype
+  document.querySelectorAll('.nav-link, .mobile-menu-link, .imagotype-container').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && (href.startsWith('#/') || href.includes('#/'))) {
+        const hashPart = href.split('#/')[1];
+        if (hashPart && ['inicio', 'proyecto', 'impacto'].includes(hashPart)) {
+          e.preventDefault();
+          const targetUrl = hashPart === 'inicio' ? '/' : ('/' + hashPart);
+          if (window.history && window.history.pushState) {
+            window.history.pushState(null, '', targetUrl);
+            handleRouting();
+          } else {
+            window.location.hash = '#/' + hashPart;
+          }
+        }
+      }
+    });
+  });
+
   window.addEventListener('load', () => {
     handleRouting();
     initSubmenuScrollObserver();
@@ -3857,34 +3926,86 @@ if (document.readyState === 'loading') {
 // ----------------------------------------------------
 
 function handleRouting() {
-  const rawHash = window.location.hash || '#/';
+  const rawHash = window.location.hash || '';
+  const pathname = window.location.pathname.replace(/^\/(?:es|ca|en)\/?/, '/');
+  const cleanPathname = pathname.replace(/^\/+|\/+$/g, '');
   
-  // Clean hash to extract route name and anchor
-  const cleanHash = rawHash.replace(/^#\/?/, '');
-  const [routePart, anchorPart] = cleanHash.split('#');
-  let path = routePart || 'inicio';
-  
+  let path = 'inicio';
+  let anchorPart = null;
+  let memberToOpen = null;
   let detailId = null;
+
   // Hide all simulated views
   const views = document.querySelectorAll('.spa-view');
   views.forEach(v => v.classList.remove('active'));
-  
-  const normPath = path.replace(/\/+$/, '');
-  if (normPath.startsWith('actividad/') || normPath.startsWith('actividades/') || normPath.startsWith('post/') || normPath.startsWith('entrada/')) {
-    detailId = normPath.replace(/^(actividad|actividades|post|entrada)\//, '').trim();
-    path = 'actividad-detalle';
-  } else if (normPath.startsWith('miembro/') || normPath.startsWith('equipo/')) {
-    const memberId = normPath.replace(/^(miembro|equipo)\//, '').trim();
-    path = 'proyecto';
-    setTimeout(() => {
-      openMemberModal(memberId);
-    }, 150);
+
+  // 1. Analyze Hash
+  if (rawHash && rawHash !== '#' && rawHash !== '#/') {
+    // Split all hash segments, e.g. "#/proyecto#equipo#alberto-rodriguez"
+    const hashSegments = rawHash.split('#').map(s => s.trim().replace(/^\/+|\/+$/g, '')).filter(Boolean);
+    
+    if (hashSegments.length > 0) {
+      const first = hashSegments[0];
+      
+      if (first.startsWith('actividad/') || first.startsWith('actividades/') || first.startsWith('post/') || first.startsWith('entrada/')) {
+        detailId = first.replace(/^(actividad|actividades|post|entrada)\//, '').trim();
+        path = 'actividad-detalle';
+      } else if (first.startsWith('miembro/') || first.startsWith('equipo/')) {
+        memberToOpen = first.replace(/^(miembro|equipo)\//, '').trim();
+        path = 'proyecto';
+        anchorPart = 'equipo';
+      } else if (first === 'proyecto' || first === 'impacto' || first === 'inicio') {
+        path = first;
+        if (hashSegments.length > 1) {
+          for (let i = 1; i < hashSegments.length; i++) {
+            const seg = hashSegments[i];
+            const foundMember = findMemberByIdOrSlug(seg);
+            if (foundMember) {
+              memberToOpen = seg;
+              anchorPart = 'equipo';
+            } else if (!anchorPart) {
+              anchorPart = seg;
+            }
+          }
+        }
+      } else if (first === 'transferencia' || first === 'publicaciones' || first === 'recursos' || first === 'actividades') {
+        path = 'impacto';
+        anchorPart = first;
+      } else {
+        // Direct member ID or anchor
+        const directMember = findMemberByIdOrSlug(first);
+        if (directMember) {
+          path = 'proyecto';
+          anchorPart = 'equipo';
+          memberToOpen = first;
+        } else if (cleanPathname === 'proyecto' || cleanPathname === 'impacto') {
+          path = cleanPathname;
+          anchorPart = first;
+        } else {
+          anchorPart = first;
+        }
+      }
+    }
+  } else {
+    // 2. No hash present, determine route from pathname
+    if (cleanPathname === 'proyecto' || cleanPathname === 'impacto' || cleanPathname === 'inicio') {
+      path = cleanPathname;
+    } else if (cleanPathname.startsWith('actividad/') || cleanPathname.startsWith('actividades/')) {
+      detailId = cleanPathname.replace(/^(actividad|actividades)\//, '').trim();
+      path = 'actividad-detalle';
+    } else if (cleanPathname.startsWith('miembro/') || cleanPathname.startsWith('equipo/')) {
+      memberToOpen = cleanPathname.replace(/^(miembro|equipo)\//, '').trim();
+      path = 'proyecto';
+      anchorPart = 'equipo';
+    } else {
+      path = 'inicio';
+    }
   }
-  
+
   // Redirect old routes to unified #/impacto with anchors
   if (path === 'transferencia' || path === 'publicaciones' || path === 'recursos') {
-    window.location.hash = `#/impacto#${path}`;
-    return;
+    path = 'impacto';
+    anchorPart = path;
   }
   
   // Show target SPA view
@@ -3909,15 +4030,32 @@ function handleRouting() {
     link.classList.remove('active');
     const href = link.getAttribute('href');
     if (href) {
-      const linkPath = href.replace(/^#\/?/, '');
+      const linkPath = href.replace(/^#\/?/, '').split('#')[0];
       if (path === linkPath || (path === 'inicio' && linkPath === 'inicio') || (path === 'actividad-detalle' && linkPath === 'impacto')) {
         link.classList.add('active');
       }
     }
   });
   
-  // Handle scrolling to anchor or top
-  if (anchorPart) {
+  // Handle member modal opening and scrolling
+  if (memberToOpen) {
+    setTimeout(() => {
+      openMemberModal(memberToOpen);
+    }, 180);
+
+    setTimeout(() => {
+      const memberCard = document.getElementById(memberToOpen) || document.getElementById('card-' + memberToOpen);
+      const targetElement = memberCard || document.getElementById('equipo');
+      if (targetElement) {
+        const headerOffset = 90;
+        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - headerOffset,
+          behavior: 'smooth'
+        });
+      }
+    }, 120);
+  } else if (anchorPart) {
     setTimeout(() => {
       const targetElement = document.getElementById(anchorPart);
       if (targetElement) {
@@ -4736,19 +4874,45 @@ function initSubmenuScrollObserver() {
     });
   };
 
-  // Add click handler to submenu links so clicking immediately highlights the clicked item
+  // Add click handler to submenu links so clicking immediately highlights the clicked item and maintains clean URLs
   document.querySelectorAll('.page-submenu .submenu-link').forEach(link => {
-    link.addEventListener('click', function() {
+    link.addEventListener('click', function(e) {
       const activeView = document.querySelector('.spa-view.active');
       if (activeView) {
         activeView.querySelectorAll('.submenu-link').forEach(l => l.classList.remove('active'));
       }
       this.classList.add('active');
+
+      const href = this.getAttribute('href') || '';
+      if (href.includes('#')) {
+        const parts = href.split('#').filter(Boolean);
+        const lastAnchor = parts[parts.length - 1];
+        if (lastAnchor) {
+          const rawHash = window.location.hash || '';
+          const isCleanPath = (window.location.pathname.includes('/proyecto') || window.location.pathname.includes('/impacto')) && !rawHash.startsWith('#/');
+          if (isCleanPath) {
+            e.preventDefault();
+            const targetEl = document.getElementById(lastAnchor);
+            if (targetEl) {
+              const headerOffset = 85;
+              const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+              window.scrollTo({
+                top: elementPosition - headerOffset,
+                behavior: 'smooth'
+              });
+            }
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', '#' + lastAnchor);
+            }
+          }
+        }
+      }
     });
   });
 
   window.addEventListener('scroll', updateActiveSubmenuLink, { passive: true });
   window.addEventListener('hashchange', updateActiveSubmenuLink, { passive: true });
+  window.addEventListener('popstate', updateActiveSubmenuLink, { passive: true });
   updateActiveSubmenuLink();
 }
 
