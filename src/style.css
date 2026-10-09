@@ -3113,6 +3113,65 @@ body.dark-mode .card-publicaciones h3, body.dark-mode .card-publicaciones p { co
 body.dark-mode .card-recursos { background: var(--color-green); border: none; }
 body.dark-mode .card-recursos h3, body.dark-mode .card-recursos p { color: #ffffff; }
 
+.card-nueva-difusion {
+  background: #00997d !important;
+  border: none !important;
+  outline: none !important;
+}
+.card-nueva-difusion h3,
+.card-nueva-difusion p {
+  color: #ffffff !important;
+}
+.card-nueva-difusion .nav-card-arrow {
+  color: #ffffff !important;
+}
+.card-nueva-difusion .diff-svg-icon {
+  color: #ffffff !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease !important;
+}
+.card-nueva-difusion:hover {
+  background: #ffffff !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow: 0 15px 35px rgba(0, 153, 125, 0.3) !important;
+}
+.card-nueva-difusion:hover h3 {
+  color: #00997d !important;
+}
+.card-nueva-difusion:hover p {
+  color: var(--color-text-light) !important;
+}
+.card-nueva-difusion:hover .nav-card-arrow {
+  color: #00997d !important;
+  transform: translateX(4px) !important;
+}
+.card-nueva-difusion:hover .diff-svg-icon {
+  color: #00997d !important;
+  transform: scale(1.08) rotate(3deg) !important;
+}
+body.dark-mode .card-nueva-difusion {
+  background: #00997d !important;
+  border: none !important;
+  outline: none !important;
+}
+body.dark-mode .card-nueva-difusion h3,
+body.dark-mode .card-nueva-difusion p {
+  color: #ffffff !important;
+}
+body.dark-mode .card-nueva-difusion:hover {
+  background: #ffffff !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+body.dark-mode .card-nueva-difusion:hover h3 {
+  color: #00997d !important;
+}
+body.dark-mode .card-nueva-difusion:hover p {
+  color: #374151 !important;
+}
+
 .section-nav-card:hover {
   transform: translateY(-4px);
 }
@@ -7389,9 +7448,9 @@ body.dark-mode .section-inner-panel {
   padding-top: 15px !important;
 }
 
-/* Actividades – first section of Impacto, already fine */
+/* Actividades – first section of Impacto, tightly nested under submenu */
 #view-impacto #actividades {
-  padding-top: 20px !important;
+  padding-top: 0 !important;
 }
 
 #view-impacto, #view-proyecto {
@@ -7399,10 +7458,21 @@ body.dark-mode .section-inner-panel {
   overflow: visible !important;
 }
 
-#view-impacto .page-submenu-wrapper,
+#view-impacto .page-submenu-wrapper {
+  margin-top: 14px !important;
+  margin-bottom: 8px !important;
+  position: sticky !important;
+  top: 86px !important;
+  z-index: 900 !important;
+}
+
+#view-impacto #actividades .section-inner-panel {
+  margin-top: 8px !important;
+}
+
 #view-proyecto .page-submenu-wrapper {
   margin-top: 10px !important;
-  margin-bottom: 40px !important;
+  margin-bottom: 24px !important;
   position: sticky !important;
   top: 86px !important;
   z-index: 900 !important;
