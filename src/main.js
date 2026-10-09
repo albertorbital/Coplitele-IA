@@ -464,7 +464,7 @@ function parseAuthorNamesList(rawStr, team) {
   return result;
 }
 
-function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAuthorsStr, isPublicationModal = false) {
+function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAuthorsStr, postType = 'general') {
   const team = (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP))
     ? ALL_TEAM_MEMBERS_MAP
     : ((typeof teamMembers !== 'undefined' && Array.isArray(teamMembers)) ? teamMembers : []);
@@ -514,41 +514,35 @@ function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAu
 
   if (matchedWithOrder.length === 0 && allExtras.length === 0) return '';
 
-  const defaultTitle = currentLang === 'en' 
-    ? 'Participating Researchers' 
-    : (currentLang === 'ca' ? 'Investigadors Participants' : 'Investigadores Participantes');
-  const headingTitle = customTitle || defaultTitle;
+  // Determine title based on post type:
+  // Actividad or Transferencia -> Coordinadores
+  // Producción Científica or Recursos -> Autores
+  const isActOrTrans = (postType === 'actividad' || postType === 'transferencia' || postType === 'activities' || postType === 'transfer');
+  const isPubOrRec = (postType === 'publicacion' || postType === 'recurso' || postType === 'publicaciones' || postType === 'recursos' || postType === 'publication' || postType === 'resource');
 
-  if (isPublicationModal) {
-    return `
-      <div class="pub-modal-collabs-section">
-        <div class="pub-modal-collabs-title">${headingTitle}</div>
-        <div class="pub-modal-collabs-grid">
-          ${matchedWithOrder.map(m => {
-            const thumbSrc = m.thumb || m.color || m.image || m.photoHover || getAssetUrl('images/investigadores.png');
-            return `
-              <div class="pub-collab-chip" onclick="openMemberModal('${m.id}')" title="${m.displayName || m.name}">
-                <img src="${getAssetUrl(thumbSrc)}" alt="${m.displayName || m.name}" class="pub-collab-chip-avatar" onerror="this.src='${getAssetUrl('images/investigadores.png')}';">
-                <span class="pub-collab-chip-name">${m.displayName || m.name}</span>
-              </div>
-            `;
-          }).join('')}
-          ${allExtras.map(e => `
-            <div class="pub-collab-chip" style="cursor: default;" title="${e.name}">
-              <img src="${e.image ? getAssetUrl(e.image) : getAssetUrl('images/investigadores.png')}" alt="${e.name}" class="pub-collab-chip-avatar">
-              <span class="pub-collab-chip-name">${e.name}</span>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `;
+  let defaultTitle = '';
+  if (isActOrTrans) {
+    defaultTitle = currentLang === 'en' ? 'Coordinators' : (currentLang === 'ca' ? 'Coordinadors' : 'Coordinadores');
+  } else if (isPubOrRec) {
+    defaultTitle = currentLang === 'en' ? 'Authors' : (currentLang === 'ca' ? 'Autors' : 'Autores');
+  } else {
+    defaultTitle = currentLang === 'en' ? 'Participating Researchers' : (currentLang === 'ca' ? 'Investigadors Participants' : 'Investigadores Participantes');
+  }
+
+  let headingTitle = defaultTitle;
+  if (customTitle && typeof customTitle === 'string' && customTitle.trim().length > 0) {
+    const lowerCustom = customTitle.toLowerCase();
+    // If custom title was just the generic default "investigador...", override with our role-based title
+    if (!lowerCustom.includes('investigador')) {
+      headingTitle = customTitle;
+    }
   }
 
   const totalCount = matchedWithOrder.length + allExtras.length;
   const countClass = `collaborators-count-${totalCount}`;
 
   return `
-    <div class="post-collaborators-showcase" style="margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08);">
+    <div class="post-collaborators-showcase" style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.08);">
       <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--color-text-light); opacity: 0.85;">${headingTitle}</h4>
       <div class="collaborators-grid ${countClass}">
         ${matchedWithOrder.map(m => `
@@ -2782,7 +2776,7 @@ function getFormattedPubAuthorsAndCitation(pub) {
 
   const fullTextToScan = explicitAuthorsStr || descText;
   const collabHTML = (typeof getMatchedCollaboratorsHTML === 'function')
-    ? getMatchedCollaboratorsHTML(fullTextToScan, pub.collabTitle, pub.extraCollabs, explicitAuthorsStr, true)
+    ? getMatchedCollaboratorsHTML(fullTextToScan, pub.collabTitle, pub.extraCollabs, explicitAuthorsStr, 'publicacion')
     : '';
 
   return {
@@ -3234,6 +3228,13 @@ function openMemberModal(id) {
   // Make sure we clean up the class on modal close and restore URL hash
   modal.addEventListener('close', () => {
     modal.classList.remove('modal-large', 'modal-member-popup', 'green-tint-modal', 'modal-pub-popup', 'modal-rec-popup');
+    modal.style.opacity = '';
+    modal.style.transform = '';
+    modal.style.transition = '';
+    modal.style.animation = '';
+    modalContent.style.opacity = '';
+    modalContent.style.transform = '';
+    modalContent.style.transition = '';
     try {
       const rawHash = window.location.hash || '';
       const onProyecto = window.location.pathname.includes('/proyecto') || rawHash.includes('#/proyecto') || document.body.getAttribute('data-page') === 'proyecto';
@@ -3258,27 +3259,49 @@ function openMemberModal(id) {
     } catch(e) {}
   }
   
-  // If a modal is currently open (e.g. from publication popup), perform smooth cross-fade without closing dialog
-  if (typeof modal.close === 'function' && modal.open) {
-    modalContent.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
-    modalContent.style.opacity = '0';
-    modalContent.style.transform = 'scale(0.98)';
+  // Check if transition is happening from an open publication or resource popup
+  const isFromPubOrRec = modal.open && (modal.classList.contains('modal-pub-popup') || modal.classList.contains('modal-rec-popup'));
+  if (isFromPubOrRec) {
+    // Fade out the entire modal box smoothly so there is no white empty box left behind
+    modal.style.transition = 'opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1)';
+    modal.style.opacity = '0';
+    modal.style.transform = 'scale(0.97)';
     setTimeout(() => {
       modal.classList.remove('green-tint-modal', 'modal-pub-popup', 'modal-rec-popup');
       modal.classList.add('modal-large', 'modal-member-popup');
-      renderMemberModalContent(member, modalContent);
       modalContent.style.opacity = '1';
-      modalContent.style.transform = 'scale(1)';
+      modalContent.style.transform = 'none';
+      modalContent.style.transition = 'none';
+      renderMemberModalContent(member, modalContent);
+      
+      // Force layout reflow and smoothly fade in with slightly longer duration
+      void modal.offsetHeight;
+      modal.style.transition = 'opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.16, 1, 0.3, 1)';
+      modal.style.opacity = '1';
+      modal.style.transform = 'scale(1)';
+      setTimeout(() => {
+        modal.style.transition = '';
+        modal.style.transform = '';
+      }, 400);
     }, 220);
     return;
   }
 
+  // From Actividad, Transferencia and other posts: no transition animation, simply appear directly
+  modal.style.transition = 'none';
+  modal.style.animation = 'none';
+  modal.style.opacity = '1';
+  modal.style.transform = 'none';
+  modalContent.style.transition = 'none';
+  modalContent.style.opacity = '1';
+  modalContent.style.transform = 'none';
+
   modal.classList.remove('green-tint-modal', 'modal-pub-popup', 'modal-rec-popup');
   modal.classList.add('modal-large', 'modal-member-popup');
-  modalContent.style.opacity = '1';
-  modalContent.style.transform = 'scale(1)';
   renderMemberModalContent(member, modalContent);
-  modal.showModal();
+  if (!modal.open) {
+    modal.showModal();
+  }
 }
 
 function openPubModal(id) {
@@ -3326,8 +3349,9 @@ function openPubModal(id) {
 
   const assetPosterUrl = posterUrl ? getAssetUrl(posterUrl) : '';
 
-  // 1. Sidebar HTML (Featured Cover, Prominent Button if link exists, and metadata)
-  const sidebarHTML = `
+  // 1. Sidebar HTML: Featured Cover and prominent "Ver Publicación" button
+  const hasSidebar = !!(assetPosterUrl || externalLink);
+  const sidebarHTML = hasSidebar ? `
     <div class="pub-modal-sidebar">
       ${assetPosterUrl ? `
         <div class="pub-modal-poster-card-redesigned" onclick="openImageLightbox('${assetPosterUrl}', '${pubTitle.replace(/'/g, "\\'")}')" title="${currentLang === 'en' ? 'Click to zoom' : (currentLang === 'ca' ? 'Clica per ampliar' : 'Clic para ampliar')}">
@@ -3349,51 +3373,26 @@ function openPubModal(id) {
           ${currentLang === 'en' ? 'View Publication' : (currentLang === 'ca' ? 'Veure Publicació' : 'Ver Publicación')}
         </a>
       ` : ''}
-
-      <div class="pub-modal-meta-box">
-        ${pub.date ? `
-          <div class="pub-modal-meta-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            <div>
-              <span class="meta-label">${currentLang === 'en' ? 'Date' : (currentLang === 'ca' ? 'Data' : 'Fecha')}</span>
-              <span>${pub.date}</span>
-            </div>
-          </div>
-        ` : ''}
-        ${(pub.event || pub.journal) ? `
-          <div class="pub-modal-meta-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            <div>
-              <span class="meta-label">${currentLang === 'en' ? 'Conference / Journal' : (currentLang === 'ca' ? 'Congrés / Revista' : 'Congreso / Revista')}</span>
-              <span>${pub.event || pub.journal}</span>
-            </div>
-          </div>
-        ` : ''}
-        ${pub.doi ? `
-          <div class="pub-modal-meta-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-            <div>
-              <span class="meta-label">DOI</span>
-              <a href="https://doi.org/${pub.doi}" target="_blank" rel="noopener noreferrer" style="color: var(--color-blue, #2563eb); text-decoration: underline;">${pub.doi}</a>
-            </div>
-          </div>
-        ` : ''}
-        ${pub.isbn ? `
-          <div class="pub-modal-meta-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
-            <div>
-              <span class="meta-label">ISBN</span>
-              <span>${pub.isbn}</span>
-            </div>
-          </div>
-        ` : ''}
-      </div>
     </div>
-  `;
+  ` : '';
 
-  // 2. Main Content HTML (APA Citation Card, Abstract Card, Collaborators Chips)
+  // 2. Main Content HTML: Clean Fecha row, APA Citation Card, and Abstract Card
   const mainContentHTML = `
     <div class="pub-modal-main-content">
+      ${pub.date ? `
+        <div class="pub-modal-date-row">
+          <span class="pub-modal-date-badge">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <strong>${currentLang === 'en' ? 'Date' : (currentLang === 'ca' ? 'Data' : 'Fecha')}:</strong> ${pub.date}
+          </span>
+          ${pub.doi ? `
+            <span class="pub-modal-doi-badge">
+              <strong>DOI:</strong> <a href="https://doi.org/${pub.doi}" target="_blank" rel="noopener noreferrer">${pub.doi}</a>
+            </span>
+          ` : ''}
+        </div>
+      ` : ''}
+
       <div class="pub-modal-apa-card">
         <span class="pub-modal-apa-label">${currentLang === 'en' ? 'APA Format Citation' : (currentLang === 'ca' ? 'Cita Format APA' : 'Cita Formato APA')}</span>
         <p class="pub-modal-apa-text">${apaCitation}</p>
@@ -3405,11 +3404,16 @@ function openPubModal(id) {
           <p class="pub-modal-abstract-text">${cleanAbstract}</p>
         </div>
       ` : ''}
+    </div>
+  `;
 
+  // 3. Full-width Collaborators / Authors section (standard thumbnails, using entire popup width)
+  const fullWidthCollabsHTML = (collabHTML || collabWithHTML) ? `
+    <div class="pub-modal-fullwidth-collabs">
       ${collabWithHTML}
       ${collabHTML}
     </div>
-  `;
+  ` : '';
 
   modalContent.innerHTML = `
     <div class="pub-modal-header-top">
@@ -3420,10 +3424,12 @@ function openPubModal(id) {
       <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
     </div>
 
-    <div class="pub-modal-split-layout">
+    <div class="pub-modal-split-layout ${!hasSidebar ? 'pub-modal-no-sidebar' : ''}">
       ${sidebarHTML}
       ${mainContentHTML}
     </div>
+
+    ${fullWidthCollabsHTML}
   `;
 
   adaptModalColors(modalContent);
@@ -4754,7 +4760,7 @@ function openRecModal(id) {
   resBody = resBody.replace(/<a\s+[^>]*>/gi, '');
 
   const authorStr = res.colaboradores || res.collaborators || res.authors || '';
-  const collabHTML = getMatchedCollaboratorsHTML(fullTextToScan, res.collabTitle, res.extraCollabs, authorStr);
+  const collabHTML = getMatchedCollaboratorsHTML(fullTextToScan, res.collabTitle, res.extraCollabs, authorStr, 'recurso');
   const collabWithHTML = (typeof getCollaborationWithHTML === 'function')
     ? getCollaborationWithHTML(res.collaborationWith || res.colaboracionCon, res.collabWithTitle)
     : '';
@@ -4950,7 +4956,7 @@ function renderActivityDetail(id) {
   try {
     const rawAuthors = activity.colaboradores || activity.collaborators || activity.authors || '';
     const fullSearchText = rawAuthors + ' ' + rawBodyText + ' ' + getI18nText(activity.desc) + ' ' + actTitle;
-    collabHTML = getMatchedCollaboratorsHTML(fullSearchText, activity.collabTitle, activity.extraCollabs, rawAuthors);
+    collabHTML = getMatchedCollaboratorsHTML(fullSearchText, activity.collabTitle, activity.extraCollabs, rawAuthors, activity.section || 'actividad');
     collabWithHTML = getCollaborationWithHTML(activity.collaborationWith || activity.colaboracionCon, activity.collabWithTitle);
   } catch(e) {
     console.error('Error generating collaborators:', e);
