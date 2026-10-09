@@ -1553,6 +1553,8 @@ const translations = {
     submenu_transferencia: "Transferencia",
     submenu_publicaciones: "Producción científica",
     submenu_recursos: "Recursos",
+    impacto_banner_title: "¿Eres Investigador y tienes noticias nuevas?",
+    impacto_banner_desc: "Crea una nueva difusión con la Actividad, Transferencia, Publicación o Recurso que has realizado.",
     obj_title: "Objetivos del Proyecto",
     obj_pretitle: "Proyecto",
     obj_1_title: "Agencia Profesional y Académica",
@@ -1665,6 +1667,8 @@ const translations = {
     submenu_transferencia: "Transferència",
     submenu_publicaciones: "Producció científica",
     submenu_recursos: "Recursos",
+    impacto_banner_title: "Ets Investigador i tens noves notícies?",
+    impacto_banner_desc: "Crea una nova difusió amb l'Activitat, Transferència, Publicació o Recurs que has realitzat.",
     home_card_act_desc: "Demos, tallers, seminaris i programes de formació.",
     home_card_trans_desc: "Experiències aplicant les estratègies del projecte",
     home_card_pubs_desc: "Articles en revistes, llibres, ponències i actes de congrés.",
@@ -1775,6 +1779,8 @@ const translations = {
     submenu_transferencia: "Transfer",
     submenu_publicaciones: "Scientific production",
     submenu_recursos: "Resources",
+    impacto_banner_title: "Are you a Researcher and have new updates?",
+    impacto_banner_desc: "Create a new dissemination with the Activity, Transfer, Publication or Resource you have carried out.",
     home_card_act_desc: "Demos, workshops, seminars, and training programs.",
     home_card_trans_desc: "Experiences applying the project strategies",
     home_card_pubs_desc: "Journal articles, books, papers, and conference proceedings.",
@@ -5370,7 +5376,9 @@ function initCustomCursor() {
   const handleCardEnter = (e) => {
     const el = e.currentTarget;
     let color = 'blue';
-    if (el.classList.contains('card-transferencia') || el.getAttribute('data-cursor-color') === 'turquoise' || (el.classList.contains('activity-card') && el.closest('#transferencia')) || el.classList.contains('trans-card')) {
+    if (el.classList.contains('impacto-new-diffusion-banner') || el.getAttribute('data-cursor-color') === 'teal-dark') {
+      color = 'teal-dark';
+    } else if (el.classList.contains('card-transferencia') || el.getAttribute('data-cursor-color') === 'turquoise' || (el.classList.contains('activity-card') && el.closest('#transferencia')) || el.classList.contains('trans-card')) {
       color = 'turquoise';
     } else if (el.classList.contains('card-publicaciones') || el.getAttribute('data-cursor-color') === 'purple') {
       color = 'purple';
@@ -5393,7 +5401,7 @@ function initCustomCursor() {
     }
 
     cursor.setAttribute('data-color', color);
-    if (el.classList.contains('section-nav-card')) {
+    if (el.classList.contains('section-nav-card') || el.classList.contains('impacto-new-diffusion-banner')) {
       cursor.classList.add('hover-nav-button');
       cursor.textContent = currentLang === 'en' ? 'View' : (currentLang === 'ca' ? 'Veure' : 'Ver');
     } else if (el.classList.contains('team-card')) {
@@ -5428,7 +5436,7 @@ function initCustomCursor() {
   
   const updateHoverEvents = () => {
     // 1. Post cards, news cards, navigation shortcut cards, and team member cards
-    document.querySelectorAll('.section-nav-card, .activity-card, .rec-card, .news-card, .team-card').forEach(el => {
+    document.querySelectorAll('.section-nav-card, .activity-card, .rec-card, .news-card, .team-card, .impacto-new-diffusion-banner').forEach(el => {
       el.removeEventListener('mouseenter', handleCardEnter);
       el.removeEventListener('mouseleave', handleCardLeave);
       el.addEventListener('mouseenter', handleCardEnter);
@@ -5436,7 +5444,7 @@ function initCustomCursor() {
     });
 
     // 2. Regular interactive buttons and links (including modal contact icons, close buttons, and post boxes)
-    document.querySelectorAll('a:not(.section-nav-card):not(.activity-card):not(.news-card), button:not(.rec-card), [role="button"]:not(.news-card), #hero-logo-container, .logo-wrapper, .custom-lang-btn, .modal-close, .member-contact-link, .member-post-box').forEach(el => {
+    document.querySelectorAll('a:not(.section-nav-card):not(.activity-card):not(.news-card):not(.impacto-new-diffusion-banner), button:not(.rec-card), [role="button"]:not(.news-card), #hero-logo-container, .logo-wrapper, .custom-lang-btn, .modal-close, .member-contact-link, .member-post-box').forEach(el => {
       el.removeEventListener('mouseenter', handleButtonEnter);
       el.removeEventListener('mouseleave', handleButtonLeave);
       el.addEventListener('mouseenter', handleButtonEnter);
