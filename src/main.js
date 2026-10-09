@@ -3769,7 +3769,8 @@ function initializeApp() {
         const headerLogo = document.getElementById('header-logo-container');
         
         const currentPath = (window.location.hash || '#/').replace(/^#\/?/, '').split('#')[0] || 'inicio';
-        const isInicioPg = (currentPath === 'inicio' || currentPath === '');
+        const pageAttr = document.body.getAttribute('data-page') || '';
+        const isInicioPg = (currentPath === 'inicio' || currentPath === '') && pageAttr !== 'proyecto' && pageAttr !== 'impacto' && pageAttr !== 'actividad-detalle';
         
         if (isInicioPg) {
           const maxScroll = 250;
@@ -4314,7 +4315,29 @@ function handleRouting() {
   
   // Update body data-page for CSS targeting
   document.body.setAttribute('data-page', path);
-  
+
+  // Logo visibility: On non-inicio pages (proyecto, impacto, etc.) logo is ALWAYS visible from scroll 0
+  const heroLogoEl = document.getElementById('hero-logo-container');
+  const headerLogoEl = document.getElementById('header-logo-container');
+  if (path !== 'inicio') {
+    if (heroLogoEl) { heroLogoEl.style.transform = 'scale(0)'; heroLogoEl.style.opacity = '0'; }
+    if (headerLogoEl) {
+      headerLogoEl.style.transform = 'scale(1)';
+      headerLogoEl.style.opacity = '1';
+      headerLogoEl.style.pointerEvents = 'auto';
+    }
+  } else {
+    const sy = window.scrollY;
+    const maxScroll = 250;
+    const progress = Math.min(1, Math.max(0, sy / maxScroll));
+    if (heroLogoEl) { heroLogoEl.style.transform = `scale(${1 - progress})`; heroLogoEl.style.opacity = `${1 - progress}`; }
+    if (headerLogoEl) {
+      headerLogoEl.style.transform = `scale(${progress})`;
+      headerLogoEl.style.opacity = `${progress}`;
+      headerLogoEl.style.pointerEvents = progress > 0.15 ? 'auto' : 'none';
+    }
+  }
+
   // Update nav-menu links active states
   const navLinks = document.querySelectorAll('.nav-link, .mobile-menu-link');
   navLinks.forEach(link => {
