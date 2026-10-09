@@ -2064,6 +2064,71 @@ body.dark-mode .modal-body p {
   transform: scale(1.05);
 }
 
+/* Mobile Navigation Language Switcher */
+.mobile-nav-lang-section {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-lang-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-lang-pill .flag-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-lang-pill .lang-flag-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mobile-lang-pill.active,
+.mobile-lang-pill[aria-selected="true"] {
+  background: var(--color-blue, #1d5bfe) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(29, 91, 254, 0.45);
+}
+
+.mobile-lang-pill:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* Common Section padding */
 section.page-section {
   padding: 110px 4% 90px 4%;
@@ -2802,11 +2867,19 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .nav-menu, .header-search, .header-socials {
-    display: none;
+  .nav-menu, .header-search, .header-socials, header .header-controls .custom-lang-dropdown {
+    display: none !important;
   }
   .menu-toggle {
     display: flex;
+  }
+  .header-logo-text {
+    white-space: nowrap !important;
+    font-size: 15px !important;
+  }
+  .imagotype-container {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
   }
   .hero-stats-row {
     display: grid;
@@ -2820,7 +2893,65 @@ footer {
     grid-template-columns: 1fr;
   }
   .team-grid {
-    column-count: 2;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px 12px !important;
+    column-count: auto !important;
+    width: 100% !important;
+  }
+  .team-card {
+    margin-bottom: 0 !important;
+    border-radius: 16px !important;
+  }
+  /* Impact and Access Cards in 2 Columns on Mobile */
+  .section-nav-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 24px !important;
+  }
+  .section-nav-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+    padding: 16px 10px !important;
+    min-height: 155px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+  .section-nav-card .nav-card-icon {
+    margin-bottom: 2px !important;
+  }
+  .section-nav-card .nav-card-icon lord-icon,
+  .section-nav-card .nav-card-icon svg,
+  .section-nav-card .trans-svg-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .section-nav-card .nav-card-content h3 {
+    font-size: 13.5px !important;
+    font-weight: 750 !important;
+    line-height: 1.25 !important;
+    margin: 4px 0 2px !important;
+  }
+  .section-nav-card .nav-card-content p {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .section-nav-card .nav-card-arrow {
+    display: none !important;
   }
   .publications-grid {
     grid-template-columns: 1fr;
@@ -2829,7 +2960,22 @@ footer {
 
 @media (max-width: 480px) {
   .team-grid {
-    column-count: 1;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px 10px !important;
+    column-count: auto !important;
+    width: 100% !important;
+  }
+  .team-card-info {
+    padding: 10px 8px !important;
+  }
+  .team-card-name {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+  .team-card-role {
+    font-size: 10.5px !important;
+    line-height: 1.2 !important;
   }
   .btn-group {
     flex-direction: column;
@@ -3013,8 +3159,9 @@ body.dark-mode .nav-card-content p {
 
 @media (max-width: 900px) {
   .section-nav-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
   }
 }
 
@@ -3813,6 +3960,7 @@ body.dark-mode .text-blur-bg::before {
   margin-left: 10px;
   display: inline-block;
   vertical-align: middle;
+  white-space: nowrap !important;
 }
 
 header.scrolled .header-logo-text {
@@ -4799,7 +4947,7 @@ body.dark-mode .member-modal-close-btn:hover {
   .member-modal-content-column,
   .member-modal-wrapper.photo-on-right .member-modal-content-column {
     order: 2 !important;
-    padding: 28px 20px;
+    padding: 28px 20px 52px 20px !important;
     height: auto;
     overflow-y: visible;
   }
@@ -4827,8 +4975,9 @@ body.dark-mode .member-modal-close-btn:hover {
   gap: 14px;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 4px;
-  margin-bottom: 24px;
+  margin-top: 6px;
+  margin-bottom: 44px !important;
+  padding-bottom: 8px;
 }
 
 .member-contact-link {
@@ -8499,8 +8648,14 @@ body.dark-mode .phase-title {
 }
 
 @media (max-width: 650px) {
-  .news-cards-grid, #activities-grid, .activities-grid, .team-grid {
+  .news-cards-grid, #activities-grid, .activities-grid {
     grid-template-columns: 1fr !important;
+  }
+  .team-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px 10px !important;
+    column-count: auto !important;
   }
 }
 

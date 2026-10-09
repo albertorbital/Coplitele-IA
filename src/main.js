@@ -3843,38 +3843,12 @@ function initializeApp() {
   const langDropdownList = document.getElementById('lang-dropdown-list');
   const langOptions = document.querySelectorAll('.lang-option');
   
-  if (langDropdownBtn && langDropdownContainer && langDropdownList) {
+  if (langDropdownBtn && langDropdownContainer) {
     langDropdownBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       langDropdownContainer.classList.toggle('open');
       const isOpen = langDropdownContainer.classList.contains('open');
       langDropdownBtn.setAttribute('aria-expanded', isOpen);
-    });
-    
-    langOptions.forEach(option => {
-      option.addEventListener('click', (e) => {
-        const selectedLang = option.getAttribute('data-value');
-        
-        // Update selection states
-        langOptions.forEach(opt => {
-          opt.setAttribute('aria-selected', opt === option);
-        });
-        
-        // Update active flag & text in button
-        const flag = option.querySelector('.flag-icon').innerHTML;
-        const text = option.querySelector('.lang-name').textContent;
-        const shortText = selectedLang.toUpperCase();
-        
-        document.getElementById('current-lang-flag').innerHTML = flag;
-        document.getElementById('current-lang-text').textContent = shortText;
-        
-        // Run translation
-        translatePage(selectedLang);
-        
-        // Close dropdown
-        langDropdownContainer.classList.remove('open');
-        langDropdownBtn.setAttribute('aria-expanded', 'false');
-      });
     });
     
     // Close dropdown on outside clicks
@@ -3885,6 +3859,53 @@ function initializeApp() {
       }
     });
   }
+
+  // Handle all language switcher options (both desktop dropdown and mobile pills)
+  langOptions.forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const selectedLang = option.getAttribute('data-value');
+      if (!selectedLang) return;
+      
+      // Update selection states on all language options
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        const isSelected = opt.getAttribute('data-value') === selectedLang;
+        opt.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        if (opt.classList.contains('mobile-lang-pill')) {
+          opt.classList.toggle('active', isSelected);
+        }
+      });
+      
+      // Update active flag & text in desktop button if available
+      const flagEl = option.querySelector('.flag-icon');
+      const shortText = selectedLang.toUpperCase();
+      const currFlag = document.getElementById('current-lang-flag');
+      const currText = document.getElementById('current-lang-text');
+      if (currFlag && flagEl) currFlag.innerHTML = flagEl.innerHTML;
+      if (currText) currText.textContent = shortText;
+      
+      // Run translation
+      translatePage(selectedLang);
+      
+      // Close desktop dropdown if open
+      if (langDropdownContainer) {
+        langDropdownContainer.classList.remove('open');
+      }
+      if (langDropdownBtn) {
+        langDropdownBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      // Close mobile overlay if open so user sees page translated
+      const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+      const menuToggle = document.getElementById('menu-toggle');
+      if (mobileNavOverlay && mobileNavOverlay.classList.contains('open')) {
+        setTimeout(() => {
+          mobileNavOverlay.classList.remove('open');
+          if (menuToggle) menuToggle.classList.remove('open');
+        }, 120);
+      }
+    });
+  });
   
   // 5.6 Mobile Menu Overlay Toggle
   const menuToggle = document.getElementById('menu-toggle');
