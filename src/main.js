@@ -4475,8 +4475,8 @@ function renderTransferActivities(filterType = 'all') {
         : '<img src="' + getAssetUrl(act.image) + '" alt="' + actTitle + '" loading="lazy">';
 
       return `
-      <article class="activity-card act-card-transferencia trans-card" data-id="${act.id}" data-type="${act.type}" data-cursor-color="turquoise" style="overflow:visible !important; display:flex; flex-direction:column; text-align:center;">
-        <div class="activity-image-wrapper" style="position:relative; border-radius:16px; overflow:hidden;">
+      <article class="activity-card act-card-transferencia trans-card" data-id="${act.id}" data-type="${act.type}" data-cursor-color="turquoise" style="overflow:hidden !important; border-radius:20px; display:flex; flex-direction:column; text-align:center; width:100%; max-width:100%; box-sizing:border-box;">
+        <div class="activity-image-wrapper" style="position:relative; border-radius:16px; overflow:hidden; width:100%; box-sizing:border-box;">
           ${mediaHTML}
           <!-- Hover overlay: turquoise overlay displaying the tag and DATE (instead of Excerpt) in white text -->
           <div class="act-hover-overlay act-hover-turquoise" style="background: rgba(20, 184, 166, 0.96) !important; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; width: 100%; z-index: 2;">
@@ -4485,8 +4485,8 @@ function renderTransferActivities(filterType = 'all') {
           </div>
         </div>
         <!-- Card text content below image - padded and text centered -->
-        <div class="trans-card-text-container" style="padding: 20px 12px 16px; flex-grow: 1; display:flex; align-items:center; justify-content:center; text-align:center;">
-          <h3 class="trans-card-title-dynamic" style="font-size: 18px !important; font-weight: 700 !important; color: #0f172a; margin: 0 !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color 0.3s ease;">
+        <div class="trans-card-text-container" style="padding: 20px 16px 16px; flex-grow: 1; display:flex; align-items:center; justify-content:center; text-align:center; width:100%; box-sizing:border-box;">
+          <h3 class="trans-card-title-dynamic" style="font-size: 18px !important; font-weight: 700 !important; color: #0f172a; margin: 0 auto !important; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color 0.3s ease; text-align:center; width:100%; box-sizing:border-box;">
             ${actTitle}
           </h3>
         </div>

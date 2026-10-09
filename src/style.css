@@ -2889,8 +2889,9 @@ footer {
   .objectives-grid {
     grid-template-columns: 1fr;
   }
-  .activities-grid {
-    grid-template-columns: 1fr;
+  .activities-grid, .transferencia-grid {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
   }
   .team-grid {
     display: grid !important;
@@ -6437,9 +6438,22 @@ dialog .member-post-box {
 
 .transferencia-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 28px;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .transferencia-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
 }
 
 
@@ -7237,10 +7251,33 @@ body.dark-mode .section-title .black-text { color: #f1f5f9 !important; }
   padding: 48px 48px 52px 48px;
   margin: 40px 0;
   box-shadow: 0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 body.dark-mode .section-inner-panel {
   background: rgba(15, 23, 42, 0.45);
   box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+  .section-inner-panel {
+    padding: 32px 18px 36px 18px !important;
+    border-radius: 22px !important;
+    margin: 24px 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-inner-panel {
+    padding: 24px 14px 28px 14px !important;
+    border-radius: 18px !important;
+    margin: 18px 0 !important;
+  }
 }
 
 /* ─── 5. TITLE SPACING — tighter underline gap + filters margin ─── */
@@ -8136,6 +8173,11 @@ main,
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
   background: var(--color-bg-card-light) !important;
   border: 1px solid var(--color-border-light) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 body.dark-mode .act-card-transferencia {
   background: var(--color-bg-card-dark) !important;
@@ -8166,6 +8208,52 @@ body.dark-mode .act-card-transferencia:hover .trans-card-title-dynamic {
 }
 body.dark-mode .trans-card-title-dynamic {
   color: #f1f5f9 !important;
+}
+
+@media (max-width: 768px) {
+  .act-card-transferencia {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .act-card-transferencia .activity-image-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .act-card-transferencia .activity-image-wrapper img,
+  .act-card-transferencia .activity-image-wrapper video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .act-card-transferencia .trans-card-text-container {
+    padding: 16px 10px 12px 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+  .act-card-transferencia .trans-card-title-dynamic {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
 }
 
 /* Force footer typography text to be always visible and sized nicely */
@@ -8648,7 +8736,7 @@ body.dark-mode .phase-title {
 }
 
 @media (max-width: 650px) {
-  .news-cards-grid, #activities-grid, .activities-grid {
+  .news-cards-grid, #activities-grid, .activities-grid, .transferencia-grid {
     grid-template-columns: 1fr !important;
   }
   .team-grid {
