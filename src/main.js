@@ -52,6 +52,117 @@ window.handleImgLoad = function(img) {
   }
 };
 
+const MEMBER_KNOWN_ALIASES = {
+  'adolfina-perez': [
+    'Adolfina Pérez Garcías', 'Adolfina Pérez Garcias', 'Adolfina Pérez', 'Adolfina Perez',
+    'Dra. Adolfina Pérez Garcías', 'Dra. Adolfina Pérez', 'Dra. Adolfina Pérez Garcias',
+    'Pérez Garcias, Adolfina', 'Perez Garcias, Adolfina', 'Pérez Garcias, A.', 'Perez Garcias, A.',
+    'Pérez, Adolfina', 'Perez, Adolfina',
+    'Pérez, Fina', 'Perez, Fina', 'Fina Pérez', 'Fina Perez', 'Fina', 'Adolfina'
+  ],
+  'barbara-de-benito': [
+    'Bárbara de Benito Crosetti', 'Bàrbara de Benito Crosetti', 'Barbara de Benito Crosetti',
+    'Bárbara de Benito', 'Bàrbara de Benito', 'Barbara de Benito',
+    'de Benito Crosetti, Bárbara', 'de Benito Crosetti, Bàrbara', 'de Benito Crosetti, Barbara', 'de Benito Crosetti, B.',
+    'de Benito, Bárbara', 'de Benito, Bàrbara', 'de Benito, Barbara', 'de Benito, B.',
+    'de Benito', 'Bárbara', 'Bàrbara', 'Barbara'
+  ],
+  'antonia-darder': [
+    'Antonia Darder', 'Antònia Darder', 'Antonia Darder Mesquida', 'Antònia Darder Mesquida',
+    'Darder Mesquida, Antonia', 'Darder Mesquida, Antònia', 'Darder Mesquida, A.',
+    'Darder, Antonia', 'Darder, Antònia', 'Darder, A.',
+    'Darder', 'Antònia', 'Antonia'
+  ],
+  'gemma-tur': [
+    'Gemma Tur Ferrer', 'Gemma Tur',
+    'Tur Ferrer, Gemma', 'Tur Ferrer, G.',
+    'Tur, Gemma', 'Tur, G.', 'Gemma'
+  ],
+  'jesus-salinas': [
+    'Jesús Salinas Ibáñez', 'Jesus Salinas Ibanez', 'Jesús Salinas', 'Jesus Salinas', 'Jesús María Salinas',
+    'Salinas Ibáñez, Jesús', 'Salinas Ibanez, Jesus', 'Salinas Ibáñez, J. M.', 'Salinas Ibanez, J. M.', 'Salinas, Jesús', 'Salinas, Jesus'
+  ],
+  'santos-urbina': [
+    'Santos Urbina Ramírez', 'Santos Urbina Ramirez', 'Santos Urbina',
+    'Urbina Ramírez, Santos', 'Urbina Ramirez, Santos', 'Urbina Ramírez, S.', 'Urbina Ramirez, S.',
+    'Urbina, Santos', 'Urbina, S.'
+  ],
+  'francisca-negre': [
+    'Francisca Negre Bennasar', 'Francisca Negre Bennásar', 'Francisca Negre', 'Xisca Negre',
+    'Negre Bennasar, Francisca', 'Negre Bennásar, Francisca', 'Negre Bennasar, F.', 'Negre Bennásar, X.',
+    'Negre, Francisca', 'Negre, Xisca'
+  ],
+  'francisco-lirola': [
+    'Francisco Ramon Lirola Sabater', 'Francisco Lirola', 'Xisco Lirola',
+    'Lirola Sabater, Francisco', 'Lirola Sabater, F. R.', 'Lirola, Francisco', 'Lirola, Xisco'
+  ],
+  'linda-castaneda': [
+    'Linda Castañeda', 'Linda Castaneda',
+    'Castañeda, Linda', 'Castaneda, Linda', 'Castañeda, L.', 'Castaneda, L.', 'Linda'
+  ],
+  'enric-bresco': [
+    'Enric Brescó Baiges', 'Enric Bresco Baiges', 'Enric Brescó', 'Enric Bresco',
+    'Brescó Baiges, Enric', 'Bresco Baiges, Enric', 'Brescó Baiges, E.', 'Bresco Baiges, E.',
+    'Brescó, Enric', 'Bresco, Enric'
+  ],
+  'gustavo-angulo': [
+    'Gustavo Angulo', 'Gustavo Adolfo Angulo Mendoza', 'Gustavo Angulo Mendoza',
+    'Angulo Mendoza, Gustavo', 'Angulo Mendoza, G. A.', 'Angulo, Gustavo'
+  ],
+  'virginia-larraz': [
+    'Virginia Larraz Rada', 'Virginia Larraz',
+    'Larraz Rada, Virginia', 'Larraz Rada, V.', 'Larraz, Virginia', 'Virginia'
+  ],
+  'dra-sofia-villatoro-moral': [
+    'Sofia Villatoro Moral', 'Sofía Villatoro Moral', 'Sofia Villatoro', 'Sofía Villatoro',
+    'Villatoro Moral, Sofia', 'Villatoro Moral, Sofía', 'Villatoro Moral, S. F.', 'Villatoro Moral, S.',
+    'Villatoro, Sofia', 'Villatoro, Sofía'
+  ],
+  'dr-juan-moreno-garcia': [
+    'Juan Moreno García', 'Juan Moreno Garcia', 'Juan Moreno',
+    'Moreno García, Juan', 'Moreno Garcia, Juan', 'Moreno García, J.', 'Moreno Garcia, J.',
+    'Moreno, Juan'
+  ],
+  'alberto-rodriguez': [
+    'Alberto Rodriguez Garcia', 'Alberto Rodríguez García', 'Alberto Rodriguez', 'Alberto Rodríguez',
+    'Rodriguez Garcia, Alberto', 'Rodríguez García, Alberto', 'Rodriguez Garcia, A.', 'Rodríguez García, A.',
+    'Rodriguez, Alberto', 'Rodríguez, Alberto'
+  ],
+  'dr-juan-silva-quiroz': [
+    'Juan Silva Quiroz', 'Juan Silva',
+    'Silva Quiroz, Juan', 'Silva Quiroz, J.', 'Silva, Juan'
+  ],
+  'jacoba-munar-garau': [
+    'Jacoba Munar Garau', 'Jacoba Munar',
+    'Munar Garau, Jacoba', 'Munar Garau, J.', 'Munar, Jacoba'
+  ],
+  'olga-lucia-agudelo-velasquez': [
+    'Olga Lucía Agudelo Velásquez', 'Olga Lucia Agudelo Velasquez', 'Olga Agudelo',
+    'Agudelo Velásquez, Olga', 'Agudelo Velasquez, Olga', 'Agudelo, Olga'
+  ],
+  'jennifer-saray-santana-martel': [
+    'Jennifer Saray Santana Martel', 'Jennifer Santana',
+    'Santana Martel, Jennifer', 'Santana Martel, J.', 'Santana, Jennifer'
+  ],
+  'dra-alba-r-pinto': [
+    'Alba R. Pinto', 'Alba Pinto', 'Pinto, Alba'
+  ],
+  'laia-riera-negre': [
+    'Laia Riera Negre', 'Laia Riera',
+    'Riera Negre, Laia', 'Riera Negre, L.', 'Riera, Laia'
+  ],
+  'dra-maria-dolores-forteza-forteza': [
+    'María Dolores Forteza Forteza', 'Maria Dolores Forteza Forteza', 'Lola Forteza',
+    'Forteza Forteza, María Dolores', 'Forteza Forteza, Maria Dolores', 'Forteza, María Dolores', 'Forteza, Maria Dolores'
+  ],
+  'dra-vanessa-esteve': [
+    'Vanessa Esteve', 'Esteve, Vanessa', 'Esteve, V.'
+  ],
+  'dra-alexandra-lizana': [
+    'Alexandra Lizana', 'Lizana, Alexandra', 'Lizana, A.'
+  ]
+};
+
 const ALL_TEAM_MEMBERS_MAP = [
   {
     id: "adolfina-perez",
@@ -60,7 +171,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/adolfina_perez.png",
     image: "miembros/color/adolfina_perez.png",
     color: "miembros/color/adolfina_perez.png",
-    keys: ["Pérez, Fina", "Perez, Fina", "Pérez Garcias, Adolfina", "Perez Garcias, Adolfina", "Pérez, Adolfina", "Perez, Adolfina", "Adolfina Pérez", "Adolfina Perez", "Fina Pérez", "Fina Perez", "Adolfina", "Fina"]
+    keys: MEMBER_KNOWN_ALIASES['adolfina-perez']
   },
   {
     id: "barbara-de-benito",
@@ -69,7 +180,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/barbara_de_benito.png",
     image: "miembros/color/barbara_de_benito.png",
     color: "miembros/color/barbara_de_benito.png",
-    keys: ["de Benito, Bárbara", "de Benito, Barbara", "de Benito, Bàrbara", "Bàrbara de Benito", "Bárbara de Benito", "Barbara de Benito", "de Benito Crosetti, Bàrbara", "de Benito Crosetti, Barbara", "de Benito Crosetti, Bárbara", "de Benito Crosetti", "de Benito", "Benito", "Bàrbara", "Bárbara", "Barbara"]
+    keys: MEMBER_KNOWN_ALIASES['barbara-de-benito']
   },
   {
     id: "jesus-salinas",
@@ -78,7 +189,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/jesus_salinas.png",
     image: "miembros/color/jesus_salinas.png",
     color: "miembros/color/jesus_salinas.png",
-    keys: ["Salinas, Jesús", "Salinas, Jesus", "Salinas Ibáñez, Jesús", "Salinas Ibanez, Jesus", "Jesús Salinas", "Jesus Salinas", "Jesús María Salinas", "Jesus Maria Salinas", "Salinas", "Jesús", "Jesus"]
+    keys: MEMBER_KNOWN_ALIASES['jesus-salinas']
   },
   {
     id: "santos-urbina",
@@ -87,7 +198,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/santos_urbina.png",
     image: "miembros/color/santos_urbina.png",
     color: "miembros/color/santos_urbina.png",
-    keys: ["Urbina, Santos", "Urbina Ramírez, Santos", "Urbina Ramirez, Santos", "Santos Urbina", "Santos Urbina Ramírez", "Urbina", "Santos"]
+    keys: MEMBER_KNOWN_ALIASES['santos-urbina']
   },
   {
     id: "francisca-negre",
@@ -96,7 +207,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/francisca_negre.png",
     image: "miembros/color/francisca_negre.png",
     color: "miembros/color/francisca_negre.png",
-    keys: ["Negre, Xisca", "Negre, Francisca", "Negre Bennásar, Francisca", "Negre Bennasar, Francisca", "Francisca Negre", "Xisca Negre", "Negre", "Xisca", "Francisca"]
+    keys: MEMBER_KNOWN_ALIASES['francisca-negre']
   },
   {
     id: "gemma-tur",
@@ -105,7 +216,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/gemma_tur.png",
     image: "miembros/color/gemma_tur.png",
     color: "miembros/color/gemma_tur.png",
-    keys: ["Tur, Gemma", "Tur Ferrer, Gemma", "Gemma Tur", "Gemma Tur Ferrer", "Tur", "Gemma"]
+    keys: MEMBER_KNOWN_ALIASES['gemma-tur']
   },
   {
     id: "francisco-lirola",
@@ -114,7 +225,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/francisco_lirola.png",
     image: "miembros/color/francisco_lirola.png",
     color: "miembros/color/francisco_lirola.png",
-    keys: ["Lirola, Xisco", "Lirola, Francisco", "Francisco Lirola", "Xisco Lirola", "Lirola", "Xisco", "Francisco"]
+    keys: MEMBER_KNOWN_ALIASES['francisco-lirola']
   },
   {
     id: "linda-castaneda",
@@ -123,7 +234,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/linda_castaneda.png",
     image: "miembros/color/linda_castaneda.png",
     color: "miembros/color/linda_castaneda.png",
-    keys: ["Castañeda, Linda", "Castaneda, Linda", "Linda Castañeda", "Linda Castaneda", "Castañeda", "Castaneda", "Linda"]
+    keys: MEMBER_KNOWN_ALIASES['linda-castaneda']
   },
   {
     id: "enric-bresco",
@@ -132,7 +243,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/enric_bresco.png",
     image: "miembros/color/enric_bresco.png",
     color: "miembros/color/enric_bresco.png",
-    keys: ["Brescó, Enric", "Bresco, Enric", "Brescó Baiges, Enric", "Bresco Baiges, Enric", "Enric Brescó", "Enric Bresco", "Brescó", "Bresco", "Enric"]
+    keys: MEMBER_KNOWN_ALIASES['enric-bresco']
   },
   {
     id: "antonia-darder",
@@ -141,7 +252,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/antonia_darder.png",
     image: "miembros/color/antonia_darder.png",
     color: "miembros/color/antonia_darder.png",
-    keys: ["Darder, Antònia", "Darder, Antonia", "Darder Mesquida, Antònia", "Darder Mesquida, Antonia", "Antònia Darder", "Antonia Darder", "Darder", "Antònia", "Antonia"]
+    keys: MEMBER_KNOWN_ALIASES['antonia-darder']
   },
   {
     id: "gustavo-angulo",
@@ -150,7 +261,7 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/gustavo_angulo.png",
     image: "miembros/color/gustavo_angulo.png",
     color: "miembros/color/gustavo_angulo.png",
-    keys: ["Angulo, Gustavo", "Angulo Mendoza, Gustavo", "Gustavo Angulo", "Gustavo Adolfo Angulo", "Angulo", "Gustavo"]
+    keys: MEMBER_KNOWN_ALIASES['gustavo-angulo']
   },
   {
     id: "virginia-larraz",
@@ -159,7 +270,115 @@ const ALL_TEAM_MEMBERS_MAP = [
     thumb: "miembros/color/virginia_larraz.png",
     image: "miembros/color/virginia_larraz.png",
     color: "miembros/color/virginia_larraz.png",
-    keys: ["Larraz, Virginia", "Larraz Rada, Virginia", "Virginia Larraz", "Larraz", "Virginia"]
+    keys: MEMBER_KNOWN_ALIASES['virginia-larraz']
+  },
+  {
+    id: "dra-sofia-villatoro-moral",
+    displayName: "Dra. Sofia Villatoro Moral",
+    name: "Sofia Villatoro",
+    thumb: "miembros/color/sofia_villatoro.png",
+    image: "miembros/color/sofia_villatoro.png",
+    color: "miembros/color/sofia_villatoro.png",
+    keys: MEMBER_KNOWN_ALIASES['dra-sofia-villatoro-moral']
+  },
+  {
+    id: "dr-juan-moreno-garcia",
+    displayName: "Dr. Juan Moreno García",
+    name: "Juan Moreno",
+    thumb: "miembros/color/juan_moreno.png",
+    image: "miembros/color/juan_moreno.png",
+    color: "miembros/color/juan_moreno.png",
+    keys: MEMBER_KNOWN_ALIASES['dr-juan-moreno-garcia']
+  },
+  {
+    id: "alberto-rodriguez",
+    displayName: "Alberto Rodriguez Garcia",
+    name: "Alberto Rodriguez",
+    thumb: "miembros/color/alberto_rodriguez.png",
+    image: "miembros/color/alberto_rodriguez.png",
+    color: "miembros/color/alberto_rodriguez.png",
+    keys: MEMBER_KNOWN_ALIASES['alberto-rodriguez']
+  },
+  {
+    id: "dr-juan-silva-quiroz",
+    displayName: "Dr. Juan Silva Quiroz",
+    name: "Juan Silva",
+    thumb: "miembros/color/juan_silva.png",
+    image: "miembros/color/juan_silva.png",
+    color: "miembros/color/juan_silva.png",
+    keys: MEMBER_KNOWN_ALIASES['dr-juan-silva-quiroz']
+  },
+  {
+    id: "jacoba-munar-garau",
+    displayName: "Jacoba Munar Garau",
+    name: "Jacoba Munar",
+    thumb: "miembros/color/jacoba_munar.png",
+    image: "miembros/color/jacoba_munar.png",
+    color: "miembros/color/jacoba_munar.png",
+    keys: MEMBER_KNOWN_ALIASES['jacoba-munar-garau']
+  },
+  {
+    id: "olga-lucia-agudelo-velasquez",
+    displayName: "Dra. Olga Lucía Agudelo Velásquez",
+    name: "Olga Agudelo",
+    thumb: "miembros/color/olga_agudelo.png",
+    image: "miembros/color/olga_agudelo.png",
+    color: "miembros/color/olga_agudelo.png",
+    keys: MEMBER_KNOWN_ALIASES['olga-lucia-agudelo-velasquez']
+  },
+  {
+    id: "jennifer-saray-santana-martel",
+    displayName: "Dra. Jennifer Saray Santana Martel",
+    name: "Jennifer Santana",
+    thumb: "miembros/color/jennifer_santana.png",
+    image: "miembros/color/jennifer_santana.png",
+    color: "miembros/color/jennifer_santana.png",
+    keys: MEMBER_KNOWN_ALIASES['jennifer-saray-santana-martel']
+  },
+  {
+    id: "dra-alba-r-pinto",
+    displayName: "Dra. Alba R. Pinto",
+    name: "Alba Pinto",
+    thumb: "miembros/color/alba_pinto.png",
+    image: "miembros/color/alba_pinto.png",
+    color: "miembros/color/alba_pinto.png",
+    keys: MEMBER_KNOWN_ALIASES['dra-alba-r-pinto']
+  },
+  {
+    id: "laia-riera-negre",
+    displayName: "Dra. Laia Riera Negre",
+    name: "Laia Riera",
+    thumb: "miembros/color/laia_riera.png",
+    image: "miembros/color/laia_riera.png",
+    color: "miembros/color/laia_riera.png",
+    keys: MEMBER_KNOWN_ALIASES['laia-riera-negre']
+  },
+  {
+    id: "dra-maria-dolores-forteza-forteza",
+    displayName: "Dra. María Dolores Forteza Forteza",
+    name: "María Dolores Forteza",
+    thumb: "miembros/color/maria_dolores_forteza.png",
+    image: "miembros/color/maria_dolores_forteza.png",
+    color: "miembros/color/maria_dolores_forteza.png",
+    keys: MEMBER_KNOWN_ALIASES['dra-maria-dolores-forteza-forteza']
+  },
+  {
+    id: "dra-vanessa-esteve",
+    displayName: "Dra. Vanessa Esteve",
+    name: "Vanessa Esteve",
+    thumb: "miembros/color/vanessa_esteve.png",
+    image: "miembros/color/vanessa_esteve.png",
+    color: "miembros/color/vanessa_esteve.png",
+    keys: MEMBER_KNOWN_ALIASES['dra-vanessa-esteve']
+  },
+  {
+    id: "dra-alexandra-lizana",
+    displayName: "Dra. Alexandra Lizana",
+    name: "Alexandra Lizana",
+    thumb: "miembros/color/alexandra_lizana.png",
+    image: "miembros/color/alexandra_lizana.png",
+    color: "miembros/color/alexandra_lizana.png",
+    keys: MEMBER_KNOWN_ALIASES['dra-alexandra-lizana']
   }
 ];
 
@@ -184,6 +403,28 @@ function formatUnmatchedName(str) {
   return clean;
 }
 
+function matchCandidateToTeamMember(candidateStr, team) {
+  if (!candidateStr) return null;
+  const normCand = normalizeTextForMatching(candidateStr);
+  if (!normCand || normCand.length < 3) return null;
+
+  for (const m of team) {
+    if (!m) continue;
+    const aliases = (typeof MEMBER_KNOWN_ALIASES !== 'undefined' && (MEMBER_KNOWN_ALIASES[m.id] || MEMBER_KNOWN_ALIASES[m.slug] || MEMBER_KNOWN_ALIASES[m.member_id])) || [];
+    const keysToCheck = Array.from(new Set([...(m.keys || []), ...aliases, m.displayName, m.name].filter(Boolean)));
+    
+    for (const k of keysToCheck) {
+      if (!k) continue;
+      const normK = normalizeTextForMatching(k);
+      if (normK === normCand) return m;
+      if (normK.length >= 6 && normCand.length >= 6) {
+        if (normK.includes(normCand) || normCand.includes(normK)) return m;
+      }
+    }
+  }
+  return null;
+}
+
 function parseAuthorNamesList(rawStr, team) {
   if (!rawStr) return [];
   let str = String(rawStr)
@@ -195,17 +436,6 @@ function parseAuthorNamesList(rawStr, team) {
 
   const rawSegments = str.split(',').map(s => s.trim()).filter(Boolean);
   const result = [];
-
-  const isTeamKey = (namePart) => {
-    if (!namePart) return false;
-    const n = normalizeTextForMatching(namePart);
-    if (n.length < 3) return false;
-    return team.some(m => {
-      const keys = (m.keys || [m.displayName, m.name]).map(k => normalizeTextForMatching(k));
-      return keys.some(k => k === n || (k.length >= 4 && (n.includes(k) || k.includes(n))));
-    });
-  };
-
   const prepositions = ['de', 'del', 'de la', 'de los', 'de las', 'da', 'dos', 'von', 'van', 'di'];
 
   let i = 0;
@@ -213,27 +443,18 @@ function parseAuthorNamesList(rawStr, team) {
     const seg = rawSegments[i];
     const nextSeg = rawSegments[i + 1];
 
-    // Ignore segments that are clearly dates, years, URLs, DOI, ISBN, or long sentences (> 4 words)
-    if (seg.length > 45 || seg.split(/\s+/).length > 4 || seg.match(/^(https?:\/\/|\d{4}|doi:|isbn:|vol\.|pp\.)/i)) {
+    // Ignore segments that are clearly dates, years, URLs, DOI, ISBN, numbers, links or long sentences (> 4 words)
+    if (!seg || seg.length > 45 || seg.split(/\s+/).length > 4 || /^(https?:\/\/|www\.|\d{4}|doi:|isbn:|vol\.|pp\.|\d+)/i.test(seg) || seg.includes('http') || seg.includes('www.')) {
       i++;
       continue;
     }
 
-    // Check if seg + nextSeg forms a compound name (e.g. "de Benito, Bárbara" or "Moreno, Juan" or "Ruth, Alba")
-    if (nextSeg && nextSeg.split(/\s+/).length <= 2 && nextSeg.length <= 25 && !nextSeg.match(/^(https?:\/\/|\d{4})/i)) {
+    // Check if seg + nextSeg forms a compound name (e.g. "de Benito, Bárbara" or "Moreno, Juan" or "Darder, Antonia")
+    if (nextSeg && nextSeg.split(/\s+/).length <= 2 && nextSeg.length <= 25 && !/^(https?:\/\/|www\.|\d{4}|\d+)/i.test(nextSeg) && !nextSeg.includes('http')) {
       const combined = `${seg}, ${nextSeg}`;
-      const segWords = seg.split(/\s+/);
-      const isSegPrefix = prepositions.some(p => seg.toLowerCase().startsWith(p));
-
-      if (isTeamKey(combined) || isTeamKey(seg)) {
-        result.push(combined);
-        i += 2;
-        continue;
-      } else if (segWords.length === 1 || isSegPrefix) {
-        result.push(combined);
-        i += 2;
-        continue;
-      }
+      result.push(combined);
+      i += 2;
+      continue;
     }
 
     result.push(seg);
@@ -243,96 +464,46 @@ function parseAuthorNamesList(rawStr, team) {
   return result;
 }
 
-function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAuthorsStr) {
-  if (!text && !explicitAuthorsStr && (!extraCollabs || extraCollabs.length === 0)) return '';
-  const searchStr = String(text || '');
-  const rawLower = searchStr.toLowerCase();
-  const normalizedSearch = normalizeTextForMatching(searchStr);
-
+function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAuthorsStr, isPublicationModal = false) {
   const team = (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP))
     ? ALL_TEAM_MEMBERS_MAP
     : ((typeof teamMembers !== 'undefined' && Array.isArray(teamMembers)) ? teamMembers : []);
 
   const matchedWithOrder = [];
   const matchedMemberIds = new Set();
-  const matchedTokens = [];
+  const unmatchedResearchers = [];
 
-  if (rawLower.trim().length > 0) {
-    team.forEach(m => {
-      if (!m) return;
-      const keys = Array.isArray(m.keys) && m.keys.length > 0 
-        ? m.keys 
-        : [m.displayName, m.name, m.id].filter(Boolean);
+  // 1. If explicitAuthorsStr is provided, parse explicit candidates
+  const explicitCandidates = explicitAuthorsStr ? parseAuthorNamesList(explicitAuthorsStr, team) : [];
 
-      let isMatched = false;
-      let foundOrder = 999999;
-
-      for (const key of keys) {
-        if (!key) continue;
-        const keyLower = String(key).toLowerCase();
-        const keyNormalized = normalizeTextForMatching(key);
-
-        // Exact substring check
-        const idxRaw = rawLower.indexOf(keyLower);
-        if (idxRaw !== -1) {
-          isMatched = true;
-          if (idxRaw < foundOrder) foundOrder = idxRaw;
-          matchedTokens.push(keyNormalized);
-          break;
+  if (explicitCandidates.length > 0) {
+    explicitCandidates.forEach(cand => {
+      const mem = matchCandidateToTeamMember(cand, team);
+      if (mem) {
+        if (!matchedMemberIds.has(mem.id)) {
+          matchedMemberIds.add(mem.id);
+          matchedWithOrder.push(mem);
         }
-
-        // Normalized squashed check (handles "BárbaraDarder" or "Pérez, FinaUrbina")
-        if (keyNormalized.length >= 4) {
-          const idxNorm = normalizedSearch.indexOf(keyNormalized);
-          if (idxNorm !== -1) {
-            isMatched = true;
-            if (idxNorm < foundOrder) foundOrder = idxNorm;
-            matchedTokens.push(keyNormalized);
-            break;
-          }
+      } else {
+        const formatted = formatUnmatchedName(cand);
+        if (formatted && formatted.length >= 3 && !unmatchedResearchers.some(u => normalizeTextForMatching(u.name) === normalizeTextForMatching(formatted))) {
+          unmatchedResearchers.push({ name: formatted, image: '' });
         }
       }
-
-      if (isMatched && !matchedMemberIds.has(m.id)) {
-        matchedMemberIds.add(m.id);
-        matchedWithOrder.push({ member: m, order: foundOrder });
+    });
+  } else if (text && String(text).trim().length > 0) {
+    // If no explicit author string, parse from text
+    const textCandidates = parseAuthorNamesList(text, team);
+    textCandidates.forEach(cand => {
+      const mem = matchCandidateToTeamMember(cand, team);
+      if (mem && !matchedMemberIds.has(mem.id)) {
+        matchedMemberIds.add(mem.id);
+        matchedWithOrder.push(mem);
       }
     });
   }
 
-  matchedWithOrder.sort((a, b) => a.order - b.order);
-  const matched = matchedWithOrder.map(item => item.member);
-
-  // Extract any unmatched named researchers from explicitAuthorsStr or searchStr
-  const sourceToParse = explicitAuthorsStr || searchStr;
-  const parsedCandidateNames = parseAuthorNamesList(sourceToParse, team);
-  const unmatchedResearchers = [];
-
-  parsedCandidateNames.forEach(cand => {
-    const normCand = normalizeTextForMatching(cand);
-    if (!normCand || normCand.length < 3) return;
-
-    // Check if candidate matches an already identified team member
-    const isAlreadyMatched = matchedTokens.some(tok => tok.length >= 4 && (normCand.includes(tok) || tok.includes(normCand)));
-    const matchesAnyTeam = team.some(m => {
-      const keys = (m.keys || [m.displayName, m.name]).map(k => normalizeTextForMatching(k));
-      return keys.some(k => k.length >= 4 && (normCand.includes(k) || k.includes(normCand)));
-    });
-
-    if (!isAlreadyMatched && !matchesAnyTeam) {
-      const formattedName = formatUnmatchedName(cand);
-      if (formattedName && formattedName.length >= 3 && !unmatchedResearchers.some(u => normalizeTextForMatching(u.name) === normCand)) {
-        unmatchedResearchers.push({
-          name: formattedName,
-          image: ''
-        });
-      }
-    }
-  });
-
   const extras = (Array.isArray(extraCollabs) ? extraCollabs : []).filter(e => e && (e.name || e.image));
-
-  // Merge unmatched researchers into extras without duplication
   const allExtras = [...extras];
   unmatchedResearchers.forEach(u => {
     const uNorm = normalizeTextForMatching(u.name);
@@ -341,21 +512,46 @@ function getMatchedCollaboratorsHTML(text, customTitle, extraCollabs, explicitAu
     }
   });
 
-  if (matched.length === 0 && allExtras.length === 0) return '';
-
-  const totalCount = matched.length + allExtras.length;
-  const countClass = `collaborators-count-${totalCount}`;
+  if (matchedWithOrder.length === 0 && allExtras.length === 0) return '';
 
   const defaultTitle = currentLang === 'en' 
     ? 'Participating Researchers' 
     : (currentLang === 'ca' ? 'Investigadors Participants' : 'Investigadores Participantes');
   const headingTitle = customTitle || defaultTitle;
 
+  if (isPublicationModal) {
+    return `
+      <div class="pub-modal-collabs-section">
+        <div class="pub-modal-collabs-title">${headingTitle}</div>
+        <div class="pub-modal-collabs-grid">
+          ${matchedWithOrder.map(m => {
+            const thumbSrc = m.thumb || m.color || m.image || m.photoHover || getAssetUrl('images/investigadores.png');
+            return `
+              <div class="pub-collab-chip" onclick="openMemberModal('${m.id}')" title="${m.displayName || m.name}">
+                <img src="${getAssetUrl(thumbSrc)}" alt="${m.displayName || m.name}" class="pub-collab-chip-avatar" onerror="this.src='${getAssetUrl('images/investigadores.png')}';">
+                <span class="pub-collab-chip-name">${m.displayName || m.name}</span>
+              </div>
+            `;
+          }).join('')}
+          ${allExtras.map(e => `
+            <div class="pub-collab-chip" style="cursor: default;" title="${e.name}">
+              <img src="${e.image ? getAssetUrl(e.image) : getAssetUrl('images/investigadores.png')}" alt="${e.name}" class="pub-collab-chip-avatar">
+              <span class="pub-collab-chip-name">${e.name}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  const totalCount = matchedWithOrder.length + allExtras.length;
+  const countClass = `collaborators-count-${totalCount}`;
+
   return `
     <div class="post-collaborators-showcase" style="margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08);">
       <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--color-text-light); opacity: 0.85;">${headingTitle}</h4>
       <div class="collaborators-grid ${countClass}">
-        ${matched.map(m => `
+        ${matchedWithOrder.map(m => `
           <div class="collab-member-card" onclick="openMemberModal('${m.id}')" style="cursor: pointer;">
             <div class="collab-avatar-wrapper img-loader-wrapper is-loaded">
               <img src="${getAssetUrl(m.thumb || m.color || m.image)}" alt="${m.displayName || m.name}" class="collab-avatar-img fade-in-img is-loaded" onload="handleImgLoad(this)" onerror="this.closest('.collab-avatar-wrapper').classList.add('is-loaded')">
@@ -2462,111 +2658,139 @@ function getPubIcon(type) {
   }
 }
 
+function getPublicationExternalLink(pub) {
+  if (!pub) return null;
+  const descText = getI18nText(pub.desc) || '';
+  const rawContent = pub.rawContent || '';
+  const loremText = getI18nText(pub.loremIpsum) || '';
+  const combined = descText + ' ' + rawContent + ' ' + loremText;
+
+  // 1. Search for <a href="..."> inside post description / content
+  const hrefMatch = combined.match(/<a\s+(?:[^>]*?\s+)?href=["'](https?:\/\/[^"']+)["']/i);
+  if (hrefMatch && hrefMatch[1] && !hrefMatch[1].includes('coplitele-ia.uib.es/wp-content/uploads')) {
+    return hrefMatch[1];
+  }
+
+  // 2. Search for plain https?:// in description
+  const plainMatch = descText.match(/(https?:\/\/[^\s<>"']+)/i);
+  if (plainMatch && plainMatch[1]) {
+    return plainMatch[1].replace(/[.,;)]+$/, '');
+  }
+
+  // 3. pub.zoteroUrl if explicitly provided and external
+  if (pub.zoteroUrl && /^https?:\/\//i.test(pub.zoteroUrl) && !pub.zoteroUrl.includes('coplitele-ia.uib.es/wp-content/uploads')) {
+    return pub.zoteroUrl;
+  }
+
+  // 4. pub.link if explicitly provided (external URL only)
+  if (pub.link && /^https?:\/\//i.test(pub.link) && !pub.link.includes('/?p=') && !pub.link.includes('/publicaciones/') && !pub.link.includes('coplitele-ia.uib.es/wp-content/uploads')) {
+    return pub.link;
+  }
+
+  return null;
+}
+
+function formatAuthorToApa(member, origCandStr) {
+  if (origCandStr && origCandStr.includes(',')) {
+    const parts = origCandStr.split(',').map(s => s.trim()).filter(Boolean);
+    if (parts.length === 2 && parts[1]) {
+      const initial = parts[1].charAt(0).toUpperCase() + '.';
+      return `${parts[0]}, ${initial}`;
+    }
+  }
+  if (!member) {
+    return (typeof formatUnmatchedName === 'function' ? formatUnmatchedName(origCandStr) : origCandStr) || origCandStr || '';
+  }
+  const clean = (member.displayName || member.name || '').replace(/^(dra?\.?|dr\.?|prof\.?|profesora?)\s*/i, '').trim();
+  const words = clean.split(/\s+/);
+  if (words.length >= 3) {
+    const initial = words[0].charAt(0).toUpperCase() + '.';
+    const surnames = words.slice(1).join(' ');
+    return `${surnames}, ${initial}`;
+  } else if (words.length === 2) {
+    return `${words[1]}, ${words[0].charAt(0).toUpperCase()}.`;
+  }
+  return clean;
+}
+
 function getFormattedPubAuthorsAndCitation(pub) {
-  if (!pub) return { authors: '', apaAuthors: '', apaCitation: '', zoteroLink: '#', collabHTML: '' };
+  if (!pub) return { authors: '', apaAuthors: '', apaCitation: '', externalLink: null, zoteroLink: '#', collabHTML: '' };
 
   const pubTitle = getI18nText(pub.title);
-  const rawBody = getI18nText(pub.loremIpsum) || getI18nText(pub.abstract) || getI18nText(pub.desc);
-  const excerptText = getI18nText(pub.desc) + ' ' + (pub.colaboradores || pub.collaborators || pub.authors || '');
-  const fullTextToScan = (pub.colaboradores || pub.collaborators || pub.authors || '') + ' ' + excerptText + ' ' + rawBody + ' ' + pubTitle;
+  const explicitAuthorsStr = pub.colaboradores || pub.collaborators || pub.authors || '';
+  const descText = getI18nText(pub.desc) || '';
+  const externalLink = getPublicationExternalLink(pub);
 
-  // 1. Extract link from <a href="..."> inside post content/meta for "Abrir en Biblioteca Zotero" button
-  let extractedUrl = null;
-  const hrefMatch = fullTextToScan.match(/<a\s+(?:[^>]*?\s+)?href=(?:["']([^"']+)["']|([^\s>]+))/i);
-  if (hrefMatch) {
-    const matchedUrl = hrefMatch[1] || hrefMatch[2];
-    if (matchedUrl && matchedUrl !== '#') {
-      extractedUrl = matchedUrl;
-    }
-  }
+  const team = (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP))
+    ? ALL_TEAM_MEMBERS_MAP
+    : ((typeof teamMembers !== 'undefined' && Array.isArray(teamMembers)) ? teamMembers : []);
 
-  const zoteroLink = extractedUrl 
-    ? extractedUrl 
-    : ((pub.zoteroUrl && pub.zoteroUrl !== '#') 
-      ? pub.zoteroUrl 
-      : (pub.link ? pub.link : (pub.doi ? `https://doi.org/${pub.doi}` : (pub.slug ? `/publicaciones/${pub.slug}` : (pub.wp_id ? `/?p=${pub.wp_id}` : '#')))));
+  // Parse candidate authors strictly from explicitAuthorsStr (or fallback to descText)
+  const candidateList = explicitAuthorsStr 
+    ? parseAuthorNamesList(explicitAuthorsStr, team)
+    : parseAuthorNamesList(descText, team);
 
-  // 2. Extract and format team members from Excerpt / colaboradores
   const matchedMembers = [];
-  if (typeof ALL_TEAM_MEMBERS_MAP !== 'undefined' && Array.isArray(ALL_TEAM_MEMBERS_MAP)) {
-    ALL_TEAM_MEMBERS_MAP.forEach(m => {
-      if (!m) return;
-      const keys = Array.isArray(m.keys) && m.keys.length > 0 
-        ? m.keys 
-        : [m.displayName, m.name, m.id].filter(Boolean);
-      const isMatched = keys.some(key => key && fullTextToScan.toLowerCase().includes(String(key).toLowerCase()));
-      if (isMatched && !matchedMembers.some(item => item.id === m.id)) {
-        let firstIdx = 999999;
-        keys.forEach(k => {
-          if (!k) return;
-          const idx = fullTextToScan.toLowerCase().indexOf(String(k).toLowerCase());
-          if (idx !== -1 && idx < firstIdx) firstIdx = idx;
-        });
-        matchedMembers.push({ member: m, order: firstIdx });
-      }
-    });
-  }
+  const apaAuthorNames = [];
+  const fullAuthorNames = [];
+  const seenMemberIds = new Set();
 
-  matchedMembers.sort((a, b) => a.order - b.order);
+  candidateList.forEach(cand => {
+    const m = matchCandidateToTeamMember(cand, team);
+    if (m) {
+      if (!seenMemberIds.has(m.id)) {
+        seenMemberIds.add(m.id);
+        matchedMembers.push(m);
+        apaAuthorNames.push(formatAuthorToApa(m, cand));
+        fullAuthorNames.push(m.displayName || m.name);
+      }
+    } else {
+      const formatted = (typeof formatUnmatchedName === 'function') ? formatUnmatchedName(cand) : cand;
+      if (formatted && formatted.length >= 3 && !seenMemberIds.has(formatted.toLowerCase())) {
+        seenMemberIds.add(formatted.toLowerCase());
+        apaAuthorNames.push(formatAuthorToApa(null, cand));
+        fullAuthorNames.push(formatted);
+      }
+    }
+  });
 
   let formattedAuthorsStr = '';
-  let fullAuthorsStr = '';
-
-  if (matchedMembers.length > 0) {
-    // Format in APA style: "Salinas Ibáñez, J. M., Castañeda, L., & Brescó Baiges, E."
-    const apaNames = matchedMembers.map(item => {
-      const m = item.member;
-      const parts = m.displayName.trim().split(/\s+/);
-      if (parts.length >= 3) {
-        const firsts = parts.slice(0, parts.length - 2).map(n => n[0] + '.').join(' ');
-        const lasts = parts.slice(parts.length - 2).join(' ');
-        return `${lasts}, ${firsts}`;
-      } else if (parts.length === 2) {
-        return `${parts[1]}, ${parts[0][0]}.`;
-      }
-      return m.displayName;
-    });
-
-    if (apaNames.length === 1) {
-      formattedAuthorsStr = apaNames[0];
-    } else if (apaNames.length === 2) {
-      formattedAuthorsStr = `${apaNames[0]} & ${apaNames[1]}`;
-    } else {
-      formattedAuthorsStr = apaNames.slice(0, -1).join(', ') + ', & ' + apaNames[apaNames.length - 1];
-    }
-
-    fullAuthorsStr = matchedMembers.map(item => item.member.displayName).join(', ');
+  if (apaAuthorNames.length === 1) {
+    formattedAuthorsStr = apaAuthorNames[0];
+  } else if (apaAuthorNames.length === 2) {
+    formattedAuthorsStr = `${apaAuthorNames[0]} & ${apaAuthorNames[1]}`;
+  } else if (apaAuthorNames.length > 2) {
+    formattedAuthorsStr = apaAuthorNames.slice(0, -1).join(', ') + ', & ' + apaAuthorNames[apaAuthorNames.length - 1];
   } else {
-    // Clean excerpt if no matched team members
-    let cleaned = excerptText
+    // Fallback if no authors extracted
+    let cleaned = descText
       .replace(/<!--\s*\/?wp:[^>]*-->/gi, '')
       .replace(/<[^>]*>/g, '')
       .replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '')
-      .replace(/sdfasfasf/gi, '')
+      .replace(/https?:\/\/\S+/g, '')
       .trim();
     formattedAuthorsStr = cleaned || (pub.authors ? getI18nText(pub.authors) : 'Proyecto COPLITELE-IA');
-    fullAuthorsStr = formattedAuthorsStr;
   }
 
   const year = pub.year || (pub.date ? String(pub.date).slice(-4) : '2026');
   const journalOrEvent = pub.event || pub.journal || 'Proyecto COPLITELE-IA';
 
-  // Format clean APA citation: Authors (Year). Title. Journal/Event. DOI
   let apaCitation = `${formattedAuthorsStr} (${year}). ${pubTitle}. ${journalOrEvent}.`;
   if (pub.doi) {
     apaCitation += ` https://doi.org/${pub.doi}`;
   }
 
-  const authorStr = pub.colaboradores || pub.collaborators || pub.authors || '';
-  const collabHTML = (typeof getMatchedCollaboratorsHTML === 'function') 
-    ? getMatchedCollaboratorsHTML(fullTextToScan, pub.collabTitle, pub.extraCollabs, authorStr) 
+  const fullTextToScan = explicitAuthorsStr || descText;
+  const collabHTML = (typeof getMatchedCollaboratorsHTML === 'function')
+    ? getMatchedCollaboratorsHTML(fullTextToScan, pub.collabTitle, pub.extraCollabs, explicitAuthorsStr, true)
     : '';
 
   return {
-    authors: fullAuthorsStr || formattedAuthorsStr,
+    authors: fullAuthorNames.join(', ') || formattedAuthorsStr,
     apaAuthors: formattedAuthorsStr,
     apaCitation: apaCitation,
-    zoteroLink: zoteroLink,
+    externalLink: externalLink,
+    zoteroLink: externalLink || '#',
     collabHTML: collabHTML
   };
 }
@@ -2818,62 +3042,8 @@ function findMemberByIdOrSlug(idOrSlug) {
   return null;
 }
 
-function openMemberModal(id) {
-  if (!id) return;
-  const member = findMemberByIdOrSlug(id);
-
-  if (!member) {
-    console.warn('Member not found for modal ID:', id);
-    return;
-  }
-  
-  const modal = document.getElementById('details-modal');
-  if (!modal) return;
-
-  const modalContent = modal.querySelector('.modal-content-placeholder');
-  if (!modalContent) return;
-  
-  // If a modal is currently open (e.g. Recurso or Publication modal), close it first and clean classes
-  if (typeof modal.close === 'function' && modal.open) {
-    modal.close();
-    modal.classList.remove('green-tint-modal', 'modal-large', 'modal-member-popup');
-    setTimeout(() => {
-      openMemberModal(id);
-    }, 60);
-    return;
-  }
-
-  modal.classList.remove('green-tint-modal');
-  modal.classList.add('modal-large', 'modal-member-popup');
-  
-  // Make sure we clean up the class on modal close and restore URL hash
-  modal.addEventListener('close', () => {
-    modal.classList.remove('modal-large', 'modal-member-popup', 'green-tint-modal');
-    try {
-      const rawHash = window.location.hash || '';
-      const onProyecto = window.location.pathname.includes('/proyecto') || rawHash.includes('#/proyecto') || document.body.getAttribute('data-page') === 'proyecto';
-      if (onProyecto) {
-        const isCleanPath = window.location.pathname.includes('/proyecto') && !rawHash.startsWith('#/');
-        const revertHash = isCleanPath ? '#equipo' : '#/proyecto#equipo';
-        if (window.history && window.history.replaceState) {
-          window.history.replaceState(null, '', revertHash);
-        }
-      }
-    } catch(e) {}
-  }, { once: true });
-  
-  // Update address bar so user and colleagues can see and share the personalized member ID
-  const memberTargetId = member.member_id || member.id || member.slug;
-  if (memberTargetId && window.history && window.history.replaceState) {
-    try {
-      const rawHash = window.location.hash || '';
-      const isCleanPath = window.location.pathname.includes('/proyecto') && !rawHash.startsWith('#/');
-      const newHash = isCleanPath ? ('#' + memberTargetId) : ('#/proyecto#' + memberTargetId);
-      window.history.replaceState({ memberModalOpen: true, memberId: memberTargetId }, '', newHash);
-    } catch(e) {}
-  }
-  
-  const memberIndex = teamMembers.findIndex(m => m.id === id);
+function renderMemberModalContent(member, modalContent) {
+  const memberIndex = teamMembers.findIndex(m => m.id === member.id);
   const isPhotoRight = memberIndex !== -1 ? (memberIndex % 2 === 1) : (member.id.charCodeAt(0) % 2 === 1);
   const layoutClass = isPhotoRight ? 'photo-on-right' : 'photo-on-left';
   const associatedPosts = getMemberAssociatedPosts(member);
@@ -3032,9 +3202,7 @@ function openMemberModal(id) {
   `;
   
   adaptModalColors(modalContent);
-  modal.classList.add('modal-large', 'modal-member-popup');
-  modal.showModal();
-  setupModalClose(modal);
+  setupModalClose(document.getElementById('details-modal'));
 
   const imgEl = modalContent.querySelector('.member-fullheight-photo');
   if (imgEl) {
@@ -3048,6 +3216,71 @@ function openMemberModal(id) {
   window.dispatchEvent(new CustomEvent('content-updated'));
 }
 
+function openMemberModal(id) {
+  if (!id) return;
+  const member = findMemberByIdOrSlug(id);
+
+  if (!member) {
+    console.warn('Member not found for modal ID:', id);
+    return;
+  }
+  
+  const modal = document.getElementById('details-modal');
+  if (!modal) return;
+
+  const modalContent = modal.querySelector('.modal-content-placeholder');
+  if (!modalContent) return;
+
+  // Make sure we clean up the class on modal close and restore URL hash
+  modal.addEventListener('close', () => {
+    modal.classList.remove('modal-large', 'modal-member-popup', 'green-tint-modal', 'modal-pub-popup', 'modal-rec-popup');
+    try {
+      const rawHash = window.location.hash || '';
+      const onProyecto = window.location.pathname.includes('/proyecto') || rawHash.includes('#/proyecto') || document.body.getAttribute('data-page') === 'proyecto';
+      if (onProyecto) {
+        const isCleanPath = window.location.pathname.includes('/proyecto') && !rawHash.startsWith('#/');
+        const revertHash = isCleanPath ? '#equipo' : '#/proyecto#equipo';
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', revertHash);
+        }
+      }
+    } catch(e) {}
+  }, { once: true });
+  
+  // Update address bar so user and colleagues can see and share the personalized member ID
+  const memberTargetId = member.member_id || member.id || member.slug;
+  if (memberTargetId && window.history && window.history.replaceState) {
+    try {
+      const rawHash = window.location.hash || '';
+      const isCleanPath = window.location.pathname.includes('/proyecto') && !rawHash.startsWith('#/');
+      const newHash = isCleanPath ? ('#' + memberTargetId) : ('#/proyecto#' + memberTargetId);
+      window.history.replaceState({ memberModalOpen: true, memberId: memberTargetId }, '', newHash);
+    } catch(e) {}
+  }
+  
+  // If a modal is currently open (e.g. from publication popup), perform smooth cross-fade without closing dialog
+  if (typeof modal.close === 'function' && modal.open) {
+    modalContent.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+    modalContent.style.opacity = '0';
+    modalContent.style.transform = 'scale(0.98)';
+    setTimeout(() => {
+      modal.classList.remove('green-tint-modal', 'modal-pub-popup', 'modal-rec-popup');
+      modal.classList.add('modal-large', 'modal-member-popup');
+      renderMemberModalContent(member, modalContent);
+      modalContent.style.opacity = '1';
+      modalContent.style.transform = 'scale(1)';
+    }, 220);
+    return;
+  }
+
+  modal.classList.remove('green-tint-modal', 'modal-pub-popup', 'modal-rec-popup');
+  modal.classList.add('modal-large', 'modal-member-popup');
+  modalContent.style.opacity = '1';
+  modalContent.style.transform = 'scale(1)';
+  renderMemberModalContent(member, modalContent);
+  modal.showModal();
+}
+
 function openPubModal(id) {
   const pub = publications.find(p => p.id === id);
   if (!pub) return;
@@ -3055,25 +3288,29 @@ function openPubModal(id) {
   const modal = document.getElementById('details-modal');
   if (!modal) return;
   
+  modal.classList.remove('green-tint-modal', 'modal-member-popup', 'modal-rec-popup');
   modal.classList.add('modal-large', 'modal-pub-popup');
 
   const modalContent = modal.querySelector('.modal-content-placeholder');
   if (!modalContent) return;
   
-  const pubLabel = pub.extraLabel ? getI18nText(pub.extraLabel) : (pub.tag ? getI18nText(pub.tag) : 'Publicación');
+  const pubLabel = pub.extraLabel ? getI18nText(pub.extraLabel) : (pub.tag ? getI18nText(pub.tag) : (currentLang === 'en' ? 'Publication' : (currentLang === 'ca' ? 'Publicació' : 'Publicación')));
   const pubTitle = getI18nText(pub.title);
   const rawAbstract = getI18nText(pub.abstract) || getI18nText(pub.desc) || '';
-  const { authors, apaCitation, zoteroLink, collabHTML } = getFormattedPubAuthorsAndCitation(pub);
+  const { authors, apaCitation, externalLink, collabHTML } = getFormattedPubAuthorsAndCitation(pub);
   const collabWithHTML = (typeof getCollaborationWithHTML === 'function')
     ? getCollaborationWithHTML(pub.collaborationWith || pub.colaboracionCon, pub.collabWithTitle)
     : '';
 
-  // Clean abstract if it only contains author names or empty tags
+  // Clean abstract if it only contains author names, URLs or empty tags
   let cleanAbstract = rawAbstract
     .replace(/<!--\s*\/?wp:[^>]*-->/gi, '')
     .replace(/<p[^>]*>\s*<\/p>/gi, '')
+    .replace(/<a\s+[^>]*>.*?<\/a>/gi, '')
+    .replace(/https?:\/\/\S+/gi, '')
     .trim();
 
+  // If abstract is redundant with authors, suppress it so it does not duplicate
   const squashedAuthors = (pub.colaboradores || pub.collaborators || pub.authors || '').replace(/[^a-zA-Z]/g, '').toLowerCase();
   const squashedAbstract = cleanAbstract.replace(/<[^>]*>/g, '').replace(/[^a-zA-Z]/g, '').toLowerCase();
   if (squashedAuthors && squashedAbstract && (squashedAuthors === squashedAbstract || squashedAuthors.includes(squashedAbstract) || squashedAbstract.includes(squashedAuthors))) {
@@ -3087,84 +3324,112 @@ function openPubModal(id) {
       ? pub.image 
       : ((pub.featured_image && !pub.featured_image.includes('default.png')) ? pub.featured_image : ''));
 
-  let posterHTML = '';
-  if (posterUrl) {
-    const assetUrl = getAssetUrl(posterUrl);
-    posterHTML = `
-      <div class="pub-modal-poster-card" style="margin-bottom: 24px; border-radius: 14px; overflow: hidden; background: transparent; text-align: center;">
-        <img src="${assetUrl}" alt="${pubTitle}" class="lightbox-img" style="max-height: 380px; width: auto; max-width: 100%; object-fit: contain; display: block; margin: 0 auto; cursor: zoom-in; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08);" onclick="openImageLightbox('${assetUrl}', '${pubTitle.replace(/'/g, "\\'")}')">
-      </div>
-    `;
-  }
-  
-  modalContent.innerHTML = `
-    <div class="modal-header">
-      <div>
-        <span class="modal-meta-label" style="color: var(--color-purple, #8b5cf6); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800;">${pubLabel}</span>
-      </div>
-      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
-    </div>
-    <div class="modal-body" style="padding: 4px 8px 36px;">
-      <h4 style="font-size: 22px; line-height: 1.35; margin-bottom: 22px; font-weight: 800; color: var(--color-text-light);">${pubTitle}</h4>
-      
-      ${posterHTML}
+  const assetPosterUrl = posterUrl ? getAssetUrl(posterUrl) : '';
 
-      <div style="background: rgba(139, 92, 246, 0.04); border-radius: 16px; padding: 20px 22px; border: 1.5px solid rgba(139, 92, 246, 0.18); margin-bottom: 24px;">
-        <span class="modal-meta-label" style="font-size: 10px; font-weight: 700; color: #8b5cf6; margin-bottom: 4px; display: block;">${currentLang === 'en' ? 'APA Format Citation' : (currentLang === 'ca' ? 'Cita Format APA' : 'Cita Formato APA')}</span>
-        <p style="font-size: 15px; font-style: italic; line-height: 1.6; margin-bottom: 0; color: var(--color-text-light);">${apaCitation}</p>
-      </div>
-      
-      ${cleanAbstract ? `
-        <div style="margin-bottom: 26px;">
-          <span class="modal-meta-label" style="font-size: 10px; font-weight: 700; margin-bottom: 6px; display: block;">${currentLang === 'en' ? 'Summary / Abstract' : (currentLang === 'ca' ? 'Resum / Abstract' : 'Resumen / Abstract')}</span>
-          <p style="font-size: 15px; line-height: 1.7; color: var(--color-text-muted-light);">${cleanAbstract}</p>
+  // 1. Sidebar HTML (Featured Cover, Prominent Button if link exists, and metadata)
+  const sidebarHTML = `
+    <div class="pub-modal-sidebar">
+      ${assetPosterUrl ? `
+        <div class="pub-modal-poster-card-redesigned" onclick="openImageLightbox('${assetPosterUrl}', '${pubTitle.replace(/'/g, "\\'")}')" title="${currentLang === 'en' ? 'Click to zoom' : (currentLang === 'ca' ? 'Clica per ampliar' : 'Clic para ampliar')}">
+          <img src="${assetPosterUrl}" alt="${pubTitle}">
+          <div class="pub-modal-poster-zoom-hint">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            ${currentLang === 'en' ? 'Zoom' : 'Ampliar'}
+          </div>
         </div>
       ` : ''}
-      
-      <div class="modal-details-grid" style="border-top: 1px solid var(--color-border-light); padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+
+      ${externalLink ? `
+        <a href="${externalLink}" target="_blank" rel="noopener noreferrer" class="pub-modal-btn-view-prominent">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          ${currentLang === 'en' ? 'View Publication' : (currentLang === 'ca' ? 'Veure Publicació' : 'Ver Publicación')}
+        </a>
+      ` : ''}
+
+      <div class="pub-modal-meta-box">
+        ${pub.date ? `
+          <div class="pub-modal-meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <div>
+              <span class="meta-label">${currentLang === 'en' ? 'Date' : (currentLang === 'ca' ? 'Data' : 'Fecha')}</span>
+              <span>${pub.date}</span>
+            </div>
+          </div>
+        ` : ''}
+        ${(pub.event || pub.journal) ? `
+          <div class="pub-modal-meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <div>
+              <span class="meta-label">${currentLang === 'en' ? 'Conference / Journal' : (currentLang === 'ca' ? 'Congrés / Revista' : 'Congreso / Revista')}</span>
+              <span>${pub.event || pub.journal}</span>
+            </div>
+          </div>
+        ` : ''}
         ${pub.doi ? `
-          <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9.5px;">DOI</span>
-            <span class="modal-detail-val"><a href="https://doi.org/${pub.doi}" target="_blank" style="color: var(--color-blue); text-decoration: underline; font-weight: 600;">${pub.doi}</a></span>
+          <div class="pub-modal-meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <div>
+              <span class="meta-label">DOI</span>
+              <a href="https://doi.org/${pub.doi}" target="_blank" rel="noopener noreferrer" style="color: var(--color-blue, #2563eb); text-decoration: underline;">${pub.doi}</a>
+            </div>
           </div>
         ` : ''}
         ${pub.isbn ? `
-          <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9.5px;">ISBN</span>
-            <span class="modal-detail-val" style="font-weight: 600;">${pub.isbn}</span>
-          </div>
-        ` : ''}
-        ${pub.event ? `
-          <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9.5px;">${currentLang === 'en' ? 'Conference / Journal' : (currentLang === 'ca' ? 'Congrés / Revista' : 'Congreso / Revista')}</span>
-            <span class="modal-detail-val" style="font-weight: 600;">${pub.event}</span>
-          </div>
-        ` : ''}
-        ${pub.zoteroKey ? `
-          <div class="modal-detail-item">
-            <span class="modal-meta-label" style="font-size: 9.5px;">Clave Zotero</span>
-            <span class="modal-detail-val" style="font-family: monospace;">${pub.zoteroKey}</span>
+          <div class="pub-modal-meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+            <div>
+              <span class="meta-label">ISBN</span>
+              <span>${pub.isbn}</span>
+            </div>
           </div>
         ` : ''}
       </div>
-      
-      <div style="display: flex; gap: 14px; margin-top: 32px; justify-content: flex-end; flex-wrap: wrap;">
-        ${(zoteroLink && zoteroLink !== '#') ? `
-          <a href="${zoteroLink}" target="_blank" class="btn-primary" style="padding: 12px 24px; font-size: 13.5px; box-shadow: none; background: #c00; border-color: #c00;">
-            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: white; margin-right: 6px;"><path d="M22 2H2v20h20V2zM12 18H8v-2.5l4-5.5H8V8h6v2.5L10 16h4v2z"/></svg>
-            ${currentLang === 'en' ? 'Open in Zotero Library' : (currentLang === 'ca' ? 'Obrir a la Biblioteca Zotero' : 'Abrir en Biblioteca Zotero')}
-          </a>
-        ` : ''}
+    </div>
+  `;
+
+  // 2. Main Content HTML (APA Citation Card, Abstract Card, Collaborators Chips)
+  const mainContentHTML = `
+    <div class="pub-modal-main-content">
+      <div class="pub-modal-apa-card">
+        <span class="pub-modal-apa-label">${currentLang === 'en' ? 'APA Format Citation' : (currentLang === 'ca' ? 'Cita Format APA' : 'Cita Formato APA')}</span>
+        <p class="pub-modal-apa-text">${apaCitation}</p>
       </div>
+
+      ${cleanAbstract ? `
+        <div class="pub-modal-abstract-card">
+          <span class="pub-modal-abstract-label">${currentLang === 'en' ? 'Summary / Abstract' : (currentLang === 'ca' ? 'Resum / Abstract' : 'Resumen / Abstract')}</span>
+          <p class="pub-modal-abstract-text">${cleanAbstract}</p>
+        </div>
+      ` : ''}
+
       ${collabWithHTML}
       ${collabHTML}
     </div>
   `;
-  
+
+  modalContent.innerHTML = `
+    <div class="pub-modal-header-top">
+      <div class="pub-modal-title-wrapper">
+        <span class="pub-modal-category-badge">${pubLabel}</span>
+        <h3 class="pub-modal-hero-title">${pubTitle}</h3>
+      </div>
+      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">&times;</button>
+    </div>
+
+    <div class="pub-modal-split-layout">
+      ${sidebarHTML}
+      ${mainContentHTML}
+    </div>
+  `;
+
   adaptModalColors(modalContent);
-  
   modal.showModal();
   setupModalClose(modal);
+  window.dispatchEvent(new CustomEvent('content-updated'));
 }
 
 function openNewsModal(newsItem) {
@@ -3395,18 +3660,11 @@ function initializeApp() {
       wpMembers.forEach(wpM => {
         const displayName = getI18nText(wpM.name) || '';
         const cleanName = displayName.replace(/^(dra?\.?|dr\.?|prof\.?|profesora?)\s*/i, '').trim();
-        const nameParts = cleanName.split(/\s+/).filter(Boolean);
-        const generatedKeys = [displayName, cleanName, wpM.id];
-        if (wpM.member_id) generatedKeys.push(wpM.member_id);
-        if (wpM.slug) generatedKeys.push(wpM.slug);
-        if (nameParts.length >= 2) {
-          generatedKeys.push(nameParts.slice(1).join(' '));
-          generatedKeys.push(nameParts[nameParts.length - 1]);
-          generatedKeys.push(nameParts[0] + ', ' + nameParts.slice(1).join(' '));
-          generatedKeys.push(nameParts.slice(1).join(' ') + ', ' + nameParts[0]);
-          generatedKeys.push(nameParts[nameParts.length - 1] + ', ' + nameParts[0]);
-          generatedKeys.push(nameParts[0]);
-        }
+        const memberKey = wpM.id || wpM.slug || wpM.member_id;
+        const knownAliases = (typeof MEMBER_KNOWN_ALIASES !== 'undefined')
+          ? (MEMBER_KNOWN_ALIASES[memberKey] || MEMBER_KNOWN_ALIASES[wpM.id] || MEMBER_KNOWN_ALIASES[wpM.slug] || MEMBER_KNOWN_ALIASES[wpM.member_id] || [])
+          : [];
+        const generatedKeys = [displayName, cleanName, wpM.id, wpM.member_id, wpM.slug, ...knownAliases].filter(Boolean);
 
         const entry = {
           id: wpM.id,
@@ -4254,7 +4512,7 @@ function renderTransferActivities(filterType = 'all') {
 
 
 
-const projectResources = [
+var projectResources = [
   {
     id: "rec-guias-codesign",
     type: "guia",
@@ -4373,9 +4631,10 @@ function renderResources(filter = 'all') {
   const grid = document.getElementById('resources-grid');
   if (!grid) return;
 
-  const filtered = filter === 'all' 
-    ? projectResources 
-    : projectResources.filter(r => {
+  const targetRes = (typeof projectResources !== 'undefined' && Array.isArray(projectResources)) ? projectResources : [];
+  const filtered = (filter === 'all' 
+    ? targetRes 
+    : targetRes.filter(r => {
         if (!r) return false;
         const tagEs = String(r.tag?.es || '').toLowerCase();
         const tagCa = String(r.tag?.ca || '').toLowerCase();
@@ -4395,7 +4654,7 @@ function renderResources(filter = 'all') {
           return rType.includes('agent') || tagEs.includes('agente') || tagCa.includes('agent') || tagEn.includes('agent');
         }
         return r.type === filter || r.filterType === filter;
-      });
+      }));
 
   grid.innerHTML = filtered.map(res => {
     if (!res) return '';
